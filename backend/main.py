@@ -30,8 +30,14 @@ import matplotlib
 import os
 from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv('.env.production' if os.getenv('PRODUCTION') else '.env')
+# Load environment variables - Railway compatible
+try:
+    env_file = '.env.production' if os.getenv('PRODUCTION') or os.getenv('RAILWAY_ENVIRONMENT') else '.env'
+    load_dotenv(env_file)
+    print(f"✅ Environment loaded from {env_file}")
+except Exception as e:
+    print(f"⚠️  Could not load .env file: {e} - Using system environment variables")
+    pass  # Continue with system environment variables
 matplotlib.use('Agg')  # Use non-interactive backend
 import matplotlib.pyplot as plt
 import seaborn as sns

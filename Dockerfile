@@ -37,6 +37,7 @@ COPY *.js ./
 COPY *.json ./
 COPY *.txt ./
 COPY *.xml ./
+COPY .env.production ./
 COPY railway_start.py ./
 
 # Create necessary directories
