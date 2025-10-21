@@ -145,16 +145,41 @@ const TRANSLATIONS = {
         
         // Footer
         footer: {
-            description: "Transformamos datos en decisiones inteligentes. Somos tu partner estratégico en la era de la información.",
+            description: "Transformamos datos en decisiones inteligentes. Somos tu socio estratégico en la era de la información.",
             quick_links: "Enlaces Rápidos",
             services_title: "Servicios",
             contact_title: "Contacto",
             copyright: "Todos los derechos reservados.",
             legal: {
                 privacy: "Política de Privacidad",
-                terms: "Términos de Servicio", 
+                terms: "Términos de Servicio",
                 cookies: "Cookies"
             }
+        },
+        
+        // Theme System
+        themes: {
+            title: "Temas",
+            selector: "Selector de Temas", 
+            current: "Tema Actual",
+            applied: "Tema aplicado",
+            dark_matrix: "Dark Matrix",
+            light_code: "Light Code",
+            cyberpunk_2077: "Cyberpunk 2077",
+            forest_code: "Forest Code",
+            sunset_vibes: "Sunset Vibes",
+            deep_ocean: "Deep Ocean"
+        },
+        
+        // PWA System
+        pwa: {
+            install: "Instalar App",
+            installed: "App instalada correctamente",
+            offline: "Modo Offline",
+            update_available: "Nueva versión disponible",
+            update: "Actualizar",
+            share: "Compartir",
+            share_success: "Enlace copiado al portapapeles"
         }
     },
     
@@ -308,6 +333,31 @@ const TRANSLATIONS = {
                 terms: "Terms of Service",
                 cookies: "Cookies"
             }
+        },
+        
+        // Theme System
+        themes: {
+            title: "Themes",
+            selector: "Theme Selector",
+            current: "Current Theme", 
+            applied: "Theme applied",
+            dark_matrix: "Dark Matrix",
+            light_code: "Light Code",
+            cyberpunk_2077: "Cyberpunk 2077",
+            forest_code: "Forest Code",
+            sunset_vibes: "Sunset Vibes",
+            deep_ocean: "Deep Ocean"
+        },
+        
+        // PWA System
+        pwa: {
+            install: "Install App",
+            installed: "App installed successfully",
+            offline: "Offline Mode",
+            update_available: "New version available",
+            update: "Update",
+            share: "Share",
+            share_success: "Link copied to clipboard"
         }
     }
 };

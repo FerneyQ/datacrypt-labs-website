@@ -1077,6 +1077,41 @@ class DataWizardGame {
         this.setupCanvas();
         this.setupEventListeners();
         this.generatePixelField();
+        this.setupThemeIntegration();
+    }
+
+    setupThemeIntegration() {
+        // Escuchar cambios de tema
+        window.addEventListener('themeChanged', (e) => {
+            const themeData = e.detail.themeData;
+            this.updateTheme(themeData);
+        });
+
+        // Aplicar tema inicial si existe
+        if (window.themeSystem) {
+            const currentTheme = window.themeSystem.getCurrentTheme();
+            this.updateTheme(currentTheme.data);
+        }
+    }
+
+    updateTheme(themeData) {
+        // Actualizar colores del juego según el tema
+        this.colors = [
+            '#000000',           // Negro (siempre)
+            themeData.accent,    // Color primario del tema
+            themeData.text,      // Color de texto
+            themeData.secondary, // Color secundario
+            themeData.accentGlow, // Color de glow
+            '#ffffff'            // Blanco (siempre)
+        ];
+
+        // Actualizar color de partículas
+        this.particleColor = themeData.particleColor || themeData.accent;
+        
+        // Redibujar si el juego está activo
+        if (this.isPlaying) {
+            this.draw();
+        }
         
         console.log('🎮 Data Wizard Game initialized');
     }
