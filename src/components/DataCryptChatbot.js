@@ -22,12 +22,17 @@ class DataCryptChatbot {
             typingIndicator: true,
             maxHistory: 100,
             personality: 'commercial-expert',
+            security: true, // Habilitar seguridad
             ...config
         };
 
         this.isOpen = false;
         this.isTyping = false;
         this.chatHistory = [];
+        
+        // Inicializar sistema de seguridad
+        this.security = new ChatbotSecurity();
+        this.rateLimiter = new MessageRateLimit();
         this.currentTheme = 'dark';
         this.knowledgeBase = this.initializeKnowledgeBase();
         
@@ -247,22 +252,55 @@ class DataCryptChatbot {
         const message = text || this.chatInput.value.trim();
         if (!message) return;
 
-        // Agregar mensaje del usuario
-        this.addMessage(message, 'user');
-        this.chatInput.value = '';
-        this.adjustInputHeight();
+        // 🔒 VALIDACIONES DE SEGURIDAD
+        if (this.config.security) {
+            // Verificar rate limiting
+            const rateLimitCheck = this.rateLimiter.checkRateLimit();
+            if (!rateLimitCheck.allowed) {
+                this.addMessage(`🚫 ${rateLimitCheck.reason}`, 'bot');
+                return;
+            }
 
-        // Mostrar typing indicator
-        this.showTyping();
+            // Validar contenido del mensaje
+            const securityCheck = this.security.validateMessage(message);
+            if (!securityCheck.valid) {
+                this.addMessage(`🛡️ ${securityCheck.reason}`, 'bot');
+                return;
+            }
 
-        // Simular delay de respuesta
-        await this.delay(this.config.responseDelay);
+            // Usar mensaje sanitizado
+            const sanitizedMessage = securityCheck.message;
+            
+            // Agregar mensaje del usuario (sanitizado)
+            this.addMessage(sanitizedMessage, 'user');
+            this.chatInput.value = '';
+            this.adjustInputHeight();
 
-        // Generar respuesta
-        const response = this.generateResponse(message);
-        
-        this.hideTyping();
-        this.addMessage(response, 'bot');
+            // Mostrar typing indicator
+            this.showTyping();
+
+            // Simular delay de respuesta
+            await this.delay(this.config.responseDelay);
+
+            // Generar respuesta usando mensaje sanitizado
+            const response = this.generateResponse(sanitizedMessage);
+            
+            this.hideTyping();
+            this.addMessage(response, 'bot');
+        } else {
+            // Comportamiento original sin seguridad
+            this.addMessage(message, 'user');
+            this.chatInput.value = '';
+            this.adjustInputHeight();
+
+            this.showTyping();
+            await this.delay(this.config.responseDelay);
+
+            const response = this.generateResponse(message);
+            
+            this.hideTyping();
+            this.addMessage(response, 'bot');
+        }
         
         // Mostrar quick replies si es apropiado
         this.showQuickReplies();
@@ -567,7 +605,189 @@ class DataCryptChatbot {
 // Auto-inicialización si está configurado
 if (typeof window !== 'undefined') {
     window.DataCryptChatbot = DataCryptChatbot;
+}
+
+// 🔒 CLASES DE SEGURIDAD PARA CHATBOT
+class ChatbotSecurity {
+    constructor() {
+        this.messageHistory = [];
+        this.blockedPatterns = [
+            /(.)\1{10,}/g, // Caracteres repetidos
+            /https?:\/\/[^\s]+/g, // URLs sospechosas
+            /(script|javascript|vbscript|onload|onclick)/gi, // Scripts maliciosos
+            /(union|select|insert|delete|drop|update)/gi, // SQL injection
+            /(viagra|casino|lottery|winner|hack|crack)/gi, // Spam común
+            /[<>\"'&]/g // Caracteres HTML peligrosos
+        ];
+    }
     
+    validateMessage(message) {
+        // Validación básica
+        if (!message || typeof message !== 'string') {
+            return { valid: false, reason: 'Mensaje inválido' };
+        }
+        
+        // Sanitizar mensaje
+        const sanitized = this.sanitizeInput(message);
+        
+        // Validar longitud
+        if (sanitized.length > 500) {
+            this.logSecurityEvent('LONG_MESSAGE', { length: sanitized.length });
+            return { 
+                valid: false, 
+                reason: 'Mensaje demasiado largo. Máximo 500 caracteres.' 
+            };
+        }
+        
+        if (sanitized.length < 1) {
+            return { 
+                valid: false, 
+                reason: 'Mensaje vacío no permitido.' 
+            };
+        }
+        
+        // Detectar patrones maliciosos
+        for (let pattern of this.blockedPatterns) {
+            if (pattern.test(message)) {
+                this.logSecurityEvent('MALICIOUS_PATTERN', { 
+                    pattern: pattern.source,
+                    message: sanitized 
+                });
+                return { 
+                    valid: false, 
+                    reason: 'Mensaje contiene contenido no permitido.' 
+                };
+            }
+        }
+        
+        // Detectar spam repetitivo
+        if (this.isRepetitiveSpam(sanitized)) {
+            this.logSecurityEvent('REPETITIVE_SPAM', { message: sanitized });
+            return { 
+                valid: false, 
+                reason: 'Por favor, evita repetir el mismo mensaje.' 
+            };
+        }
+        
+        return { valid: true, message: sanitized };
+    }
+    
+    sanitizeInput(input) {
+        return input
+            .replace(/[<>\"'&]/g, (match) => {
+                const entityMap = {
+                    '<': '&lt;', '>': '&gt;', '"': '&quot;',
+                    "'": '&#39;', '&': '&amp;'
+                };
+                return entityMap[match];
+            })
+            .trim();
+    }
+    
+    isRepetitiveSpam(message) {
+        this.messageHistory.push({
+            message: message.toLowerCase(),
+            timestamp: Date.now()
+        });
+        
+        // Mantener solo los últimos 10 mensajes
+        if (this.messageHistory.length > 10) {
+            this.messageHistory = this.messageHistory.slice(-10);
+        }
+        
+        // Contar mensajes similares en los últimos 5 minutos
+        const fiveMinutesAgo = Date.now() - 300000;
+        const recentSimilar = this.messageHistory.filter(m => 
+            m.timestamp > fiveMinutesAgo && 
+            m.message === message.toLowerCase()
+        );
+        
+        return recentSimilar.length > 3;
+    }
+    
+    logSecurityEvent(type, data) {
+        const event = {
+            type: `CHATBOT_${type}`,
+            data,
+            timestamp: Date.now(),
+            userAgent: navigator.userAgent
+        };
+        
+        console.warn('🚨 Chatbot Security Event:', event);
+        
+        // Almacenar en logs de seguridad
+        const logs = JSON.parse(localStorage.getItem('datacrypt_security_logs') || '[]');
+        logs.push(event);
+        localStorage.setItem('datacrypt_security_logs', JSON.stringify(logs.slice(-1000)));
+    }
+}
+
+class MessageRateLimit {
+    constructor() {
+        this.messages = [];
+        this.maxMessages = 10; // Máximo 10 mensajes
+        this.timeWindow = 60000; // En 1 minuto
+        this.blockDuration = 30000; // Bloquear por 30 segundos
+        this.blocked = false;
+        this.blockUntil = 0;
+    }
+    
+    checkRateLimit() {
+        const now = Date.now();
+        
+        // Verificar si está bloqueado
+        if (this.blocked && now < this.blockUntil) {
+            const remainingTime = Math.ceil((this.blockUntil - now) / 1000);
+            return {
+                allowed: false,
+                reason: `Demasiados mensajes. Espera ${remainingTime} segundos.`
+            };
+        }
+        
+        // Resetear bloqueo si expiró
+        if (this.blocked && now >= this.blockUntil) {
+            this.blocked = false;
+            this.messages = [];
+        }
+        
+        // Limpiar mensajes antiguos
+        this.messages = this.messages.filter(time => 
+            now - time < this.timeWindow
+        );
+        
+        // Verificar límite
+        if (this.messages.length >= this.maxMessages) {
+            this.blocked = true;
+            this.blockUntil = now + this.blockDuration;
+            
+            // Log del evento de seguridad
+            const event = {
+                type: 'CHATBOT_RATE_LIMIT_EXCEEDED',
+                data: { 
+                    messageCount: this.messages.length,
+                    timeWindow: this.timeWindow 
+                },
+                timestamp: now
+            };
+            
+            const logs = JSON.parse(localStorage.getItem('datacrypt_security_logs') || '[]');
+            logs.push(event);
+            localStorage.setItem('datacrypt_security_logs', JSON.stringify(logs.slice(-1000)));
+            
+            return {
+                allowed: false,
+                reason: `Límite de mensajes excedido. Espera ${Math.ceil(this.blockDuration / 1000)} segundos.`
+            };
+        }
+        
+        // Registrar mensaje
+        this.messages.push(now);
+        return { allowed: true };
+    }
+}
+
+// Auto-inicializar
+if (typeof document !== 'undefined') {
     // Inicializar automáticamente si hay configuración
     document.addEventListener('DOMContentLoaded', () => {
         if (window.ConfigManager) {

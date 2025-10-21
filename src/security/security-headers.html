@@ -1,0 +1,135 @@
+<!-- 🔒 SISTEMA DE SEGURIDAD DATACRYPT_LABS - HEADERS HTML -->
+<!-- Incluir este fragmento en el <head> de todas las páginas HTML -->
+
+<!-- Content Security Policy -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+
+<!-- Prevenir clickjacking -->
+<meta http-equiv="X-Frame-Options" content="DENY">
+
+<!-- Prevenir MIME type sniffing -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+<!-- Protección XSS -->
+<meta http-equiv="X-XSS-Protection" content="1; mode=block">
+
+<!-- Política de referrer -->
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<!-- Permissions Policy -->
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=()">
+
+<!-- Preload del sistema de seguridad -->
+<link rel="preload" href="/src/security/DataCryptSecurity.js" as="script">
+
+<!-- Script de seguridad (debe cargarse antes que otros scripts) -->
+<script src="/src/security/DataCryptSecurity.js" defer></script>
+
+<!-- Configuración de seguridad inline -->
+<script>
+// 🔒 Configuración de seguridad inmediata
+(function() {
+    'use strict';
+    
+    // Prevenir manipulación del console
+    if (typeof console !== 'undefined') {
+        const originalLog = console.log;
+        console.log = function() {
+            if (arguments[0] && typeof arguments[0] === 'string' && 
+                arguments[0].includes('DataCrypt Security')) {
+                originalLog.apply(console, arguments);
+            }
+        };
+    }
+    
+    // Detectar herramientas de desarrollo
+    let devtools = {open: false, orientation: null};
+    const threshold = 160;
+    
+    setInterval(function() {
+        if (window.outerHeight - window.innerHeight > threshold || 
+            window.outerWidth - window.innerWidth > threshold) {
+            if (!devtools.open) {
+                devtools.open = true;
+                console.clear();
+                console.log('%c🔒 DataCrypt Labs Security System', 
+                    'color: red; font-size: 20px; font-weight: bold;');
+                console.log('%cEste sitio está protegido por DataCrypt Security', 
+                    'color: orange; font-size: 14px;');
+            }
+        } else {
+            devtools.open = false;
+        }
+    }, 500);
+    
+    // Protección contra inspección
+    document.addEventListener('keydown', function(e) {
+        // F12, Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+U
+        if (e.keyCode === 123 || 
+            (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 67)) ||
+            (e.ctrlKey && e.keyCode === 85)) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+    });
+    
+    // Protección del menú contextual
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+    });
+    
+    // Protección contra selección de texto (opcional)
+    document.addEventListener('selectstart', function(e) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+            return true;
+        }
+        e.preventDefault();
+        return false;
+    });
+    
+    // Detectar carga anormal de la página
+    let pageLoadTime = Date.now();
+    window.addEventListener('load', function() {
+        let loadDuration = Date.now() - pageLoadTime;
+        if (loadDuration < 100) {
+            console.warn('🚨 Carga de página anormalmente rápida detectada');
+        }
+    });
+    
+    // Proteger contra modificación del DOM
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach(function(node) {
+                    if (node.nodeType === 1 && node.tagName === 'SCRIPT') {
+                        let src = node.src || node.innerHTML;
+                        if (src && !src.includes('DataCrypt') && 
+                            !src.includes('cdnjs') && !src.includes('jsdelivr')) {
+                            console.warn('🚨 Script no autorizado detectado:', src.substring(0, 100));
+                            node.remove();
+                        }
+                    }
+                });
+            }
+        });
+    });
+    
+    observer.observe(document.documentElement, {
+        childList: true,
+        subtree: true
+    });
+    
+})();
+</script>
+
+<!-- 
+INSTRUCCIONES DE IMPLEMENTACIÓN:
+1. Copiar este código completo en la sección <head> de cada página HTML
+2. Asegurarse de que el archivo DataCryptSecurity.js esté en la ruta correcta
+3. Este código debe cargarse ANTES que cualquier otro script personalizado
+4. Los headers HTTP adicionales se configuran via .htaccess o configuración del servidor
+-->
+
+<!-- Fin del Sistema de Seguridad DataCrypt_Labs -->

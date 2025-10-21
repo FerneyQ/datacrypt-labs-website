@@ -1,5 +1,5 @@
-# Robots.txt para DataCrypt_Labs
-# Empresa de Business Intelligence & Data Science
+# 🔒 DataCrypt Labs - Robots.txt con Seguridad Mejorada
+# Empresa de Business Intelligence & Data Science con Seguridad Enterprise
 
 User-agent: *
 Allow: /
@@ -8,6 +8,45 @@ Allow: /
 Allow: /assets/css/
 Allow: /assets/js/
 Allow: /Material visual/Identidad.JPG
+
+# 🛡️ BLOQUEAR ACCESO A DIRECTORIOS SENSIBLES
+Disallow: /src/security/
+Disallow: /scripts/
+Disallow: /admin/
+Disallow: /config/
+Disallow: /logs/
+Disallow: /backup/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# 🚫 BLOQUEAR ARCHIVOS SENSIBLES
+Disallow: /*.log$
+Disallow: /*.json$
+Disallow: /*.env$
+Disallow: /*.config$
+Disallow: /*.backup$
+Disallow: /*.old$
+Disallow: /*.bak$
+Disallow: /*~$
+
+# ⏱️ PREVENIR SCRAPING AGRESIVO
+Crawl-delay: 2
+
+# 🤖 BLOQUEAR BOTS MALICIOSOS CONOCIDOS
+User-agent: BadBot
+Disallow: /
+
+User-agent: Scrapy
+Disallow: /
+
+User-agent: wget
+Disallow: /
+
+User-agent: curl
+Disallow: /
+
+User-agent: HTTrack
+Disallow: /
 Allow: /Material visual/Portafolio/
 
 # Bloquear archivos de desarrollo y configuración
@@ -32,11 +71,26 @@ User-agent: Slurp
 Allow: /
 Crawl-delay: 3
 
-# Sitemap
-Sitemap: https://datacrypt-labs.com/sitemap.xml
+# 🛡️ BOTS MALICIOSOS ADICIONALES
+User-agent: winhttp
+Disallow: /
 
-# Información de contacto
-# Empresa: DataCrypt_Labs
+User-agent: libwww-perl
+Disallow: /
+
+User-agent: python-requests
+Disallow: /
+
+User-agent: nikto
+Disallow: /
+
+# 🗺️ SITEMAP
+Sitemap: https://ferneyq.github.io/datacrypt-labs-website/sitemap.xml
+
+# 📧 INFORMACIÓN DE SEGURIDAD
+# Empresa: DataCrypt_Labs - Seguridad Enterprise
 # Servicios: Business Intelligence, Machine Learning, Data Science
-# Teléfono: 3232066197
+# Contacto seguro: ferneyquiroga101@gmail.com
 # Ubicación: Colombia
+# Sistema de seguridad: DataCrypt Security v2.0 🔒
+# Última actualización: 2025-10-21
