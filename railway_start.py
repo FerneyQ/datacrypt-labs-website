@@ -16,8 +16,11 @@ sys.path.insert(0, str(backend_path))
 def main():
     """Ejecutar servidor optimizado para Railway"""
     
-    # Railway provides PORT environment variable
+    # Railway provides PORT environment variable - CRITICAL for Railway deployment
     port = int(os.environ.get("PORT", 8000))
+    
+    print(f"🔧 Railway Port Configuration: {port}")
+    print(f"🌍 Environment PORT variable: {os.environ.get('PORT', 'Not set - using 8000')}")
     
     # Configuration for Railway deployment
     config = {
