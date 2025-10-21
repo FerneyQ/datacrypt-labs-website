@@ -2873,14 +2873,15 @@ a:hover {
 /* ==========================================
    CHATBOT STYLES
    ========================================== */
-.chatbot {
+.chatbot-legacy {
     position: fixed;
     bottom: var(--space-6);
     right: var(--space-6);
     z-index: var(--z-modal);
+    display: none; /* Desactivado - usando DataCryptChatbot */
 }
 
-.chatbot-toggle {
+.chatbot-toggle-legacy {
     width: 60px;
     height: 60px;
     background: var(--bg-gradient);
@@ -2892,7 +2893,7 @@ a:hover {
     box-shadow: var(--shadow-lg);
     transition: var(--transition-fast);
     position: relative;
-    display: flex;
+    display: none; /* Desactivado - usando DataCryptChatbot */
     align-items: center;
     justify-content: center;
 }
@@ -2901,7 +2902,7 @@ a:hover {
     transform: scale(1.1);
 }
 
-.chatbot-badge {
+.chatbot-badge-legacy {
     position: absolute;
     top: -5px;
     right: -5px;
@@ -2911,12 +2912,12 @@ a:hover {
     width: 20px;
     height: 20px;
     font-size: var(--text-xs);
-    display: flex;
+    display: none; /* Desactivado - usando DataCryptChatbot */
     align-items: center;
     justify-content: center;
 }
 
-.chatbot-container {
+.chatbot-container-legacy {
     position: absolute;
     bottom: 80px;
     right: 0;
@@ -2925,7 +2926,7 @@ a:hover {
     background: var(--bg-primary);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-2xl);
-    display: flex;
+    display: none; /* Desactivado - usando DataCryptChatbot */
     flex-direction: column;
     transform: scale(0);
     transform-origin: bottom right;

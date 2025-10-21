@@ -10,8 +10,12 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 9999;
+    z-index: 10001;
     font-family: 'Courier New', monospace;
+    
+    /* Asegurar que esté siempre visible */
+    pointer-events: auto;
+    isolation: isolate;
     
     /* Variables CSS - integradas con Theme System */
     --chat-primary: var(--primary-color, #00ff41);
@@ -683,6 +687,26 @@
     border-radius: 6px;
     border-left: 3px solid var(--chat-primary);
     margin: 8px 0;
+}
+
+/* ===================
+   PROTECCIÓN CONTRA INTERFERENCIAS
+   =================== */
+
+/* Asegurar que el chatbot esté siempre en la capa superior */
+.datacrypt-chatbot * {
+    position: relative;
+    z-index: inherit;
+}
+
+/* Prevenir interferencias de otros elementos flotantes */
+.datacrypt-chatbot {
+    --chat-z-index: 10001;
+}
+
+.datacrypt-chatbot .chat-button,
+.datacrypt-chatbot .chat-window {
+    z-index: var(--chat-z-index);
 }
 
 /* Animación de entrada mejorada */
