@@ -49,7 +49,7 @@ class DataCryptLabsManager {
         this.config = DATACRYPT_CONFIG;
         this.isInitialized = false;
         this.loadingScreen = null;
-        this.currentTheme = localStorage.getItem('datacrypt-theme') || 'light';
+        this.currentTheme = 'dark'; // Solo modo oscuro permanente
         
         // Performance tracking
         this.performanceMetrics = {
@@ -135,17 +135,15 @@ class DataCryptLabsManager {
     }
 
     /**
-     * Inicializar tema corporativo
+     * Inicializar tema corporativo - Solo Dark Mode
      */
     initializeTheme() {
-        document.documentElement.setAttribute('data-theme', this.currentTheme);
+        // Siempre establecer tema oscuro
+        document.documentElement.setAttribute('data-theme', 'dark');
+        this.currentTheme = 'dark';
         
-        if (this.elements.themeToggle) {
-            const icon = this.elements.themeToggle.querySelector('i');
-            if (icon) {
-                icon.className = this.currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-            }
-        }
+        // No hay toggle de tema, solo modo oscuro permanente
+        console.log('🌙 DataCrypt_Labs - Dark Mode inicializado como tema único');
     }
 
     /**
@@ -1598,16 +1596,65 @@ class TranslationSystem {
         }
         
         // Close dropdown when clicking outside
-        document.addEventListener('click', () => {
-            this.closeLanguageDropdown();
+        document.addEventListener('click', (e) => {
+            const selector = document.querySelector('.language-selector');
+            if (selector && !selector.contains(e.target)) {
+                this.closeLanguageDropdown();
+            }
+        });
+        
+        // Close dropdown on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closeLanguageDropdown();
+            }
         });
     }
     
     toggleLanguageDropdown() {
         const selector = document.querySelector('.language-selector');
         if (selector) {
+            const isActive = selector.classList.contains('active');
+            
+            // Close any other open dropdowns first
+            document.querySelectorAll('.language-selector.active').forEach(el => {
+                if (el !== selector) {
+                    el.classList.remove('active');
+                }
+            });
+            
+            // Toggle current dropdown
             selector.classList.toggle('active');
+            
+            // Add ripple effect
+            if (!isActive) {
+                this.addRippleEffect(this.languageToggle);
+            }
         }
+    }
+    
+    addRippleEffect(element) {
+        const ripple = document.createElement('div');
+        ripple.className = 'ripple-effect';
+        ripple.style.position = 'absolute';
+        ripple.style.borderRadius = '50%';
+        ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+        ripple.style.transform = 'scale(0)';
+        ripple.style.animation = 'ripple 0.6s linear';
+        ripple.style.left = '50%';
+        ripple.style.top = '50%';
+        ripple.style.width = '20px';
+        ripple.style.height = '20px';
+        ripple.style.marginLeft = '-10px';
+        ripple.style.marginTop = '-10px';
+        ripple.style.pointerEvents = 'none';
+        
+        element.style.position = 'relative';
+        element.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
     }
     
     closeLanguageDropdown() {

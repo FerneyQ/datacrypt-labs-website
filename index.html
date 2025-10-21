@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -270,53 +270,79 @@
         <nav class="navbar">
             <div class="container">
                 <div class="nav-brand">
-                    <img src="Material%20visual/Identidad.JPG" alt="DataCrypt_Labs Logo" class="logo critical">
-                    <span class="brand-text">DataCrypt_Labs</span>
+                    <div class="logo-container">
+                        <img src="Material%20visual/Identidad.JPG" alt="DataCrypt_Labs Logo" class="logo critical" loading="eager">
+                    </div>
+                    <div class="brand-info">
+                        <span class="brand-text">DataCrypt_Labs</span>
+                        <span class="brand-tagline">Data Intelligence Solutions</span>
+                    </div>
                 </div>
                 
                 <ul class="nav-menu" id="nav-menu">
-                    <li class="nav-item">
+                    <li class="nav-item nav-page">
                         <a href="#inicio" class="nav-link active" data-translate="nav.home">Inicio</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item nav-page">
                         <a href="#servicios" class="nav-link" data-translate="nav.services">Servicios</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item nav-page">
                         <a href="#data-wizard" class="nav-link" data-translate="nav.game">Juego</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item nav-page">
                         <a href="#portafolio" class="nav-link" data-translate="nav.portfolio">Portafolio</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item nav-page">
                         <a href="#certificaciones" class="nav-link" data-translate="nav.certifications">Certificaciones</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item nav-page">
                         <a href="#contacto" class="nav-link" data-translate="nav.contact">Contacto</a>
                     </li>
-                    <li class="nav-item">
-                        <div class="language-selector">
-                            <button id="language-toggle" class="language-toggle" aria-label="Cambiar idioma">
-                                <i class="fas fa-globe"></i>
+                    <li class="nav-item nav-control">
+                        <div class="language-selector" role="menu" aria-label="Selector de idioma">
+                            <button id="language-toggle" 
+                                    class="language-toggle" 
+                                    aria-label="Cambiar idioma" 
+                                    aria-expanded="false"
+                                    aria-haspopup="true">
+                                <i class="fas fa-globe" aria-hidden="true"></i>
                                 <span id="current-lang">ES</span>
-                                <i class="fas fa-chevron-down"></i>
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
                             </button>
-                            <div class="language-dropdown" id="language-dropdown">
-                                <a href="#" class="lang-option" data-lang="es">
-                                    <img src="https://flagcdn.com/w20/es.png" alt="Español" width="20">
+                            <div class="language-dropdown" 
+                                 id="language-dropdown" 
+                                 role="menu"
+                                 aria-labelledby="language-toggle">
+                                <a href="#" 
+                                   class="lang-option" 
+                                   data-lang="es"
+                                   role="menuitem"
+                                   aria-label="Cambiar a Español">
+                                    <img src="https://flagcdn.com/w20/es.png" 
+                                         alt="Bandera de España" 
+                                         width="24" 
+                                         height="auto"
+                                         loading="lazy">
                                     <span>Español</span>
+                                    <i class="fas fa-check lang-check" aria-hidden="true" style="display: none;"></i>
                                 </a>
-                                <a href="#" class="lang-option" data-lang="en">
-                                    <img src="https://flagcdn.com/w20/us.png" alt="English" width="20">
+                                <a href="#" 
+                                   class="lang-option" 
+                                   data-lang="en"
+                                   role="menuitem"
+                                   aria-label="Change to English">
+                                    <img src="https://flagcdn.com/w20/us.png" 
+                                         alt="United States Flag" 
+                                         width="24" 
+                                         height="auto"
+                                         loading="lazy">
                                     <span>English</span>
+                                    <i class="fas fa-check lang-check" aria-hidden="true" style="display: none;"></i>
                                 </a>
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema" data-translate-attr="aria-label:theme.toggle">
-                            <i class="fas fa-moon"></i>
-                        </button>
-                    </li>
+
                 </ul>
                 
                 <div class="nav-toggle" id="nav-toggle">
@@ -341,15 +367,20 @@
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-text">
-                        <h1 class="hero-title fade-in">
-                            <span class="highlight">DataCrypt_Labs</span>
+                        <div class="hero-badge fade-in">
+                            <i class="fas fa-rocket"></i>
+                            <span>Líder en Data Intelligence</span>
+                        </div>
+                        <h1 class="hero-title fade-in" data-delay="100">
+                            Transformamos <span class="highlight">Datos</span> en
+                            <span class="highlight-secondary">Decisiones</span> Estratégicas
                         </h1>
-                        <p class="hero-subtitle fade-in" data-delay="200">
-                            Automatizamos Soluciones
+                        <p class="hero-subtitle fade-in" data-delay="300">
+                            🚀 Business Intelligence • 🤖 Machine Learning • 📊 Data Science
                         </p>
-                        <p class="hero-description fade-in" data-delay="400">
-                            Transformamos datos en insights estratégicos que impulsan el crecimiento de tu empresa. 
-                            Especialistas en Business Intelligence, Machine Learning y Ciencia de Datos.
+                        <p class="hero-description fade-in" data-delay="500">
+                            Automatizamos soluciones inteligentes que impulsan el crecimiento empresarial. 
+                            <strong>+100 proyectos exitosos</strong> en Colombia.
                         </p>
                         
                         <div class="hero-cta fade-in" data-delay="600">
@@ -397,6 +428,11 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                
+                <div class="scroll-indicator fade-in" data-delay="1200">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>Descubre más</span>
                 </div>
             </div>
         </section>
@@ -642,16 +678,27 @@
                     <div class="portfolio-carousel" id="portfolioCarousel">
                         <div class="portfolio-slide active">
                             <div class="portfolio-item">
-                                <div class="portfolio-image">
-                                    <img src="Material%20visual/Portafolio/1.jpg" alt="Proyecto de Business Intelligence" class="portfolio-image" data-portfolio="1">
+                                <div class="portfolio-image-container">
+                                    <img src="Material%20visual/Portafolio/1.jpg" 
+                                         alt="Dashboard Ejecutivo Business Intelligence - DataCrypt_Labs" 
+                                         class="portfolio-image" 
+                                         data-portfolio="1"
+                                         loading="lazy"
+                                         decoding="async">
                                     <div class="portfolio-overlay">
                                         <div class="portfolio-content">
+                                            <div class="portfolio-icon">
+                                                <i class="fas fa-chart-line"></i>
+                                            </div>
                                             <h3>Dashboard Ejecutivo BI</h3>
-                                            <p>Solución integral de Business Intelligence para empresa multinacional</p>
+                                            <p>Solución integral de Business Intelligence para empresa multinacional con KPIs en tiempo real</p>
                                             <div class="portfolio-tags">
                                                 <span class="tag">Power BI</span>
                                                 <span class="tag">SQL Server</span>
                                                 <span class="tag">Python</span>
+                                            </div>
+                                            <div class="portfolio-cta">
+                                                <button class="btn btn-secondary btn-sm">Ver Detalles</button>
                                             </div>
                                         </div>
                                     </div>
