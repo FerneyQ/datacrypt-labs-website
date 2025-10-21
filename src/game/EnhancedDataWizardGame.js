@@ -110,10 +110,16 @@ class EnhancedDataWizardGame {
             
             console.log('✅ Enhanced Data Wizard Game inicializado');
             
+            // Cargar estadísticas iniciales del backend
+            this.loadGameStats();
+            
+            // Cargar leaderboard inicial
+            this.loadLeaderboard();
+            
             // Notificar al chatbot
             if (window.dataCryptChatbot) {
                 window.dataCryptChatbot.addMessage(
-                    '🎮 Game engine mejorado activado - ¡Efectos visuales listos!',
+                    '🎮 Game engine mejorado activado - ¡Backend integrado y listo!',
                     'assistant'
                 );
             }
@@ -1110,9 +1116,199 @@ class EnhancedDataWizardGame {
     endGame() {
         this.isPlaying = false;
         this.stopGame();
+        
+        // Calcular tiempo total jugado
+        this.timePlayed = 60 - this.timeLeft;
+        
+        // Guardar score en backend
+        this.saveScoreToBackend();
+        
         this.showGameOver();
         
         console.log('🎯 Juego terminado. Score final:', this.score);
+    }
+
+    /**
+     * 💾 GUARDAR SCORE EN BACKEND
+     */
+    async saveScoreToBackend() {
+        try {
+            // Obtener nombre del jugador (por ahora usar 'Anonymous' o generar uno)
+            const playerName = this.getPlayerName();
+            
+            const scoreData = {
+                player_name: playerName,
+                score: this.score,
+                level_reached: this.level,
+                data_points: this.dataPoints,
+                time_played: this.timePlayed || 60
+            };
+
+            console.log('💾 Enviando score al backend...', scoreData);
+
+            const response = await fetch('http://localhost:8000/api/game/score', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(scoreData)
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log('✅ Score guardado exitosamente:', result);
+                
+                // Mostrar ranking si está disponible
+                if (result.rank) {
+                    this.showRankingInfo(result.rank);
+                }
+                
+                // Actualizar leaderboard
+                await this.loadLeaderboard();
+                
+            } else {
+                console.warn('⚠️ Error guardando score:', response.statusText);
+            }
+            
+        } catch (error) {
+            console.error('❌ Error conectando con backend para guardar score:', error);
+            // El juego sigue funcionando sin backend
+        }
+    }
+
+    /**
+     * 👤 OBTENER NOMBRE DEL JUGADOR
+     */
+    getPlayerName() {
+        // Intentar obtener nombre guardado en localStorage
+        let playerName = localStorage.getItem('dataWizardPlayerName');
+        
+        if (!playerName) {
+            // Generar nombre único basado en timestamp
+            const adjectives = ['Cyber', 'Data', 'Neural', 'Quantum', 'Digital', 'Binary'];
+            const nouns = ['Wizard', 'Analyst', 'Hacker', 'Miner', 'Explorer', 'Guru'];
+            
+            const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+            const noun = nouns[Math.floor(Math.random() * nouns.length)];
+            const num = Math.floor(Math.random() * 999) + 1;
+            
+            playerName = `${adj}${noun}${num}`;
+            localStorage.setItem('dataWizardPlayerName', playerName);
+        }
+        
+        return playerName;
+    }
+
+    /**
+     * 🏆 MOSTRAR INFO DE RANKING
+     */
+    showRankingInfo(rank) {
+        const rankingInfo = document.createElement('div');
+        rankingInfo.className = 'ranking-info';
+        rankingInfo.innerHTML = `
+            <div class="rank-badge">
+                <span class="rank-number">#${rank}</span>
+                <span class="rank-text">Tu posición en el ranking</span>
+            </div>
+        `;
+        
+        // Añadir al overlay del juego
+        const gameOverScreen = document.getElementById('gameOverScreen');
+        if (gameOverScreen) {
+            gameOverScreen.appendChild(rankingInfo);
+        }
+        
+        // Remover después de 5 segundos
+        setTimeout(() => {
+            if (rankingInfo.parentElement) {
+                rankingInfo.remove();
+            }
+        }, 5000);
+    }
+
+    /**
+     * 📊 CARGAR LEADERBOARD
+     */
+    async loadLeaderboard() {
+        try {
+            const response = await fetch('http://localhost:8000/api/game/leaderboard?limit=5');
+            
+            if (response.ok) {
+                const data = await response.json();
+                this.displayLeaderboard(data.leaderboard);
+            }
+            
+        } catch (error) {
+            console.error('❌ Error cargando leaderboard:', error);
+        }
+    }
+
+    /**
+     * 🏅 MOSTRAR LEADERBOARD
+     */
+    displayLeaderboard(leaderboard) {
+        let leaderboardHtml = '<div class="leaderboard-section"><h4>🏆 Top Players</h4><ol>';
+        
+        leaderboard.slice(0, 5).forEach(player => {
+            leaderboardHtml += `
+                <li class="leaderboard-item">
+                    <span class="player-name">${player.player_name}</span>
+                    <span class="player-score">${player.score.toLocaleString()}</span>
+                </li>
+            `;
+        });
+        
+        leaderboardHtml += '</ol></div>';
+        
+        // Añadir al overlay del juego
+        const gameOverScreen = document.getElementById('gameOverScreen');
+        if (gameOverScreen) {
+            // Remover leaderboard anterior si existe
+            const existingLeaderboard = gameOverScreen.querySelector('.leaderboard-section');
+            if (existingLeaderboard) {
+                existingLeaderboard.remove();
+            }
+            
+            gameOverScreen.insertAdjacentHTML('beforeend', leaderboardHtml);
+        }
+    }
+
+    /**
+     * 📈 CARGAR ESTADÍSTICAS INICIALES
+     */
+    async loadGameStats() {
+        try {
+            const response = await fetch('http://localhost:8000/api/game/stats');
+            
+            if (response.ok) {
+                const data = await response.json();
+                console.log('📊 Estadísticas del juego cargadas:', data.stats);
+                
+                // Mostrar estadísticas en la pantalla de inicio si se desea
+                this.displayGameStats(data.stats);
+            }
+            
+        } catch (error) {
+            console.error('❌ Error cargando estadísticas:', error);
+        }
+    }
+
+    /**
+     * 📊 MOSTRAR ESTADÍSTICAS GENERALES
+     */
+    displayGameStats(stats) {
+        // Mostrar estadísticas en consola por ahora
+        console.log('🎮 Estadísticas globales del juego:', {
+            'Total de partidas': stats.total_games,
+            'Jugadores únicos': stats.unique_players,
+            'Score promedio': stats.average_score,
+            'Record mundial': stats.high_score,
+            'Nivel máximo': stats.max_level_reached,
+            'Horas jugadas': stats.total_hours_played
+        });
+        
+        // Opcional: mostrar en UI si queremos
+        // this.updateStatsUI(stats);
     }
 
     stopGame() {

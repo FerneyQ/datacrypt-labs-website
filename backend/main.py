@@ -27,6 +27,11 @@ from pathlib import Path
 import io
 import base64
 import matplotlib
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv('.env.production' if os.getenv('PRODUCTION') else '.env')
 matplotlib.use('Agg')  # Use non-interactive backend
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -38,26 +43,40 @@ import joblib
 import warnings
 warnings.filterwarnings('ignore')
 
+# Configuration
+IS_PRODUCTION = os.getenv('PRODUCTION', 'false').lower() == 'true'
+API_HOST = os.getenv('API_HOST', '127.0.0.1')
+API_PORT = int(os.getenv('API_PORT', '8000'))
+ALLOWED_ORIGINS = json.loads(os.getenv('ALLOWED_ORIGINS', '["*"]'))
+
 # Configurar logging
-logging.basicConfig(level=logging.INFO)
+log_level = os.getenv('LOG_LEVEL', 'INFO')
+logging.basicConfig(
+    level=getattr(logging, log_level.upper()),
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(os.getenv('LOG_FILE', './logs/datacrypt_api.log')),
+        logging.StreamHandler()
+    ] if IS_PRODUCTION else [logging.StreamHandler()]
+)
 logger = logging.getLogger(__name__)
 
 # Inicializar FastAPI
 app = FastAPI(
-    title="DataCrypt Labs API",
-    description="Backend Python con análisis de datos, ML y crypto integration",
-    version="2.2.0",
-    docs_url="/api/docs",
-    redoc_url="/api/redoc"
+    title=os.getenv('API_TITLE', 'DataCrypt Labs API'),
+    description=os.getenv('API_DESCRIPTION', 'Backend Python con análisis de datos, ML y crypto integration'),
+    version=os.getenv('API_VERSION', '2.2.0'),
+    docs_url="/docs" if os.getenv('ENABLE_DOCS', 'true').lower() == 'true' else None,
+    redoc_url="/redoc" if os.getenv('ENABLE_REDOC', 'true').lower() == 'true' else None
 )
 
-# Configurar CORS para permitir requests desde el frontend
+# Configurar CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # En producción, especificar dominios exactos
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=json.loads(os.getenv('ALLOWED_METHODS', '["GET", "POST", "PUT", "DELETE", "OPTIONS"]')),
+    allow_headers=json.loads(os.getenv('ALLOWED_HEADERS', '["*"]')),
 )
 
 # Modelos Pydantic
@@ -123,6 +142,20 @@ def init_database():
         )
     """)
     
+    # Tabla para scores del juego
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS game_scores (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            player_name TEXT NOT NULL,
+            score INTEGER NOT NULL,
+            level INTEGER NOT NULL,
+            data_points INTEGER NOT NULL,
+            time_played INTEGER NOT NULL,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+            ip_address TEXT
+        )
+    """)
+    
     conn.commit()
     conn.close()
     logger.info("📊 Base de datos inicializada correctamente")
@@ -152,19 +185,37 @@ async def root():
         }
     }
 
-@app.get("/api/health")
+@app.get("/health")
 async def health_check():
-    """Health check endpoint"""
+    """Health check endpoint for production monitoring"""
+    try:
+        # Check database connectivity
+        conn = sqlite3.connect(DATABASE_PATH)
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1")
+        cursor.fetchone()
+        conn.close()
+        db_status = "healthy"
+    except Exception as e:
+        logger.error(f"Database health check failed: {e}")
+        db_status = "unhealthy"
+
     return {
-        "status": "healthy",
+        "status": "healthy" if db_status == "healthy" else "degraded",
         "timestamp": datetime.now().isoformat(),
-        "python_version": "3.11+",
+        "environment": "production" if IS_PRODUCTION else "development",
+        "version": os.getenv('API_VERSION', '2.2.0'),
         "services": {
-            "database": "operational",
-            "ml_models": "loaded",
-            "crypto_api": "connected"
+            "database": db_status,
+            "logging": "operational",
+            "cors": "configured"
         }
     }
+
+@app.get("/api/health")
+async def api_health_check():
+    """Legacy API health check endpoint"""
+    return await health_check()
 
 # ==========================================
 # 📊 PORTFOLIO & CONTACT ENDPOINTS
@@ -737,6 +788,234 @@ async def execute_python_code(request: PythonCodeRequest):
             "error": str(e),
             "timestamp": datetime.now().isoformat()
         }
+
+# ==========================================
+# 🎮 GAME ENDPOINTS
+# ==========================================
+
+class GameScore(BaseModel):
+    player_name: str
+    score: int
+    level: int
+    data_points: int = 0
+    time_played: int
+    timestamp: Optional[datetime] = None
+
+class GameScoreSubmission(BaseModel):
+    player_name: str
+    score: int
+    level_reached: int
+    time_played: int
+    data_points: int = 0
+
+@app.post("/api/game/score")
+async def submit_game_score(score_data: GameScoreSubmission):
+    """Enviar score del juego Data Wizard"""
+    
+    try:
+        timestamp = datetime.now()
+        
+        # Validar score (anti-cheat básico)
+        if score_data.score < 0 or score_data.score > 100000:
+            raise HTTPException(status_code=400, detail="Score inválido")
+        
+        # Guardar en base de datos
+        conn = sqlite3.connect(DATABASE_PATH)
+        cursor = conn.cursor()
+        
+        cursor.execute("""
+            INSERT INTO game_scores (player_name, score, level, data_points, time_played, timestamp)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (score_data.player_name, score_data.score, score_data.level_reached, 
+              score_data.data_points, score_data.time_played, timestamp))
+        
+        score_id = cursor.lastrowid
+        conn.commit()
+        conn.close()
+        
+        logger.info(f"🎮 Nuevo score guardado: {score_data.player_name} - {score_data.score} pts")
+        
+        return {
+            "status": "success",
+            "message": "Score guardado correctamente",
+            "id": score_id,
+            "rank": await get_player_rank(score_data.score)
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Error guardando score: {e}")
+        raise HTTPException(status_code=500, detail="Error guardando score")
+
+@app.get("/api/game/leaderboard")
+async def get_leaderboard(limit: int = 10):
+    """Obtener leaderboard del juego"""
+    
+    try:
+        conn = sqlite3.connect(DATABASE_PATH)
+        cursor = conn.cursor()
+        
+        cursor.execute("""
+            SELECT player_name, score, level, data_points, time_played, timestamp
+            FROM game_scores
+            ORDER BY score DESC, level DESC, timestamp ASC
+            LIMIT ?
+        """, (limit,))
+        
+        scores = cursor.fetchall()
+        conn.close()
+        
+        leaderboard = []
+        for i, score in enumerate(scores, 1):
+            leaderboard.append({
+                "rank": i,
+                "player_name": score[0],
+                "score": score[1],
+                "level": score[2],
+                "data_points": score[3],
+                "time_played": score[4],
+                "timestamp": score[5]
+            })
+        
+        return {
+            "status": "success",
+            "leaderboard": leaderboard,
+            "total_players": len(leaderboard)
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Error obteniendo leaderboard: {e}")
+        raise HTTPException(status_code=500, detail="Error obteniendo leaderboard")
+
+@app.get("/api/game/stats")
+async def get_game_stats():
+    """Estadísticas generales del juego"""
+    
+    try:
+        conn = sqlite3.connect(DATABASE_PATH)
+        cursor = conn.cursor()
+        
+        # Total de partidas
+        cursor.execute("SELECT COUNT(*) FROM game_scores")
+        total_games = cursor.fetchone()[0]
+        
+        # Score promedio
+        cursor.execute("SELECT AVG(score) FROM game_scores")
+        avg_score = cursor.fetchone()[0] or 0
+        
+        # Score más alto
+        cursor.execute("SELECT MAX(score) FROM game_scores")
+        high_score = cursor.fetchone()[0] or 0
+        
+        # Nivel más alto
+        cursor.execute("SELECT MAX(level) FROM game_scores")
+        max_level = cursor.fetchone()[0] or 0
+        
+        # Jugadores únicos
+        cursor.execute("SELECT COUNT(DISTINCT player_name) FROM game_scores")
+        unique_players = cursor.fetchone()[0]
+        
+        # Tiempo total jugado (en minutos)
+        cursor.execute("SELECT SUM(time_played) FROM game_scores")
+        total_time = (cursor.fetchone()[0] or 0) // 60
+        
+        conn.close()
+        
+        return {
+            "status": "success",
+            "stats": {
+                "total_games": total_games,
+                "unique_players": unique_players,
+                "average_score": round(avg_score, 2),
+                "high_score": high_score,
+                "max_level_reached": max_level,
+                "total_hours_played": round(total_time / 60, 1),
+                "last_updated": datetime.now().isoformat()
+            }
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Error obteniendo estadísticas: {e}")
+        raise HTTPException(status_code=500, detail="Error obteniendo estadísticas")
+
+@app.get("/api/game/player/{player_name}")
+async def get_player_stats(player_name: str):
+    """Estadísticas de un jugador específico"""
+    
+    try:
+        conn = sqlite3.connect(DATABASE_PATH)
+        cursor = conn.cursor()
+        
+        # Mejores scores del jugador
+        cursor.execute("""
+            SELECT score, level, data_points, timestamp
+            FROM game_scores
+            WHERE player_name = ?
+            ORDER BY score DESC
+            LIMIT 5
+        """, (player_name,))
+        
+        best_scores = cursor.fetchall()
+        
+        if not best_scores:
+            raise HTTPException(status_code=404, detail="Jugador no encontrado")
+        
+        # Estadísticas generales del jugador
+        cursor.execute("""
+            SELECT 
+                COUNT(*) as games_played,
+                MAX(score) as best_score,
+                AVG(score) as avg_score,
+                MAX(level) as best_level,
+                SUM(time_played) as total_time
+            FROM game_scores
+            WHERE player_name = ?
+        """, (player_name,))
+        
+        stats = cursor.fetchone()
+        conn.close()
+        
+        return {
+            "status": "success",
+            "player": player_name,
+            "stats": {
+                "games_played": stats[0],
+                "best_score": stats[1],
+                "average_score": round(stats[2], 2),
+                "best_level": stats[3],
+                "total_time_played": stats[4],
+                "rank": await get_player_rank(stats[1])
+            },
+            "recent_scores": [
+                {
+                    "score": score[0],
+                    "level": score[1],
+                    "data_points": score[2],
+                    "timestamp": score[3]
+                }
+                for score in best_scores
+            ]
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"❌ Error obteniendo stats del jugador: {e}")
+        raise HTTPException(status_code=500, detail="Error obteniendo estadísticas del jugador")
+
+async def get_player_rank(score: int) -> int:
+    """Obtener ranking de un score"""
+    try:
+        conn = sqlite3.connect(DATABASE_PATH)
+        cursor = conn.cursor()
+        
+        cursor.execute("SELECT COUNT(*) FROM game_scores WHERE score > ?", (score,))
+        rank = cursor.fetchone()[0] + 1
+        
+        conn.close()
+        return rank
+        
+    except Exception:
+        return 0
 
 # ==========================================
 # 🛠️ BACKGROUND TASKS

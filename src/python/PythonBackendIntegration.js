@@ -38,15 +38,23 @@ class PythonBackendIntegration {
      * 🔗 VERIFICAR CONEXIÓN CON BACKEND
      */
     async checkConnection() {
+        console.log(`🔍 Intentando conectar a: ${this.baseURL}/health`);
+        
         try {
             const response = await fetch(`${this.baseURL}/health`);
+            console.log('📡 Response status:', response.status);
+            
             if (response.ok) {
                 const data = await response.json();
                 this.isConnected = true;
                 console.log('✅ Conectado a Python Backend:', data);
                 return data;
+            } else {
+                console.error('❌ Response not OK:', response.status, response.statusText);
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
         } catch (error) {
+            console.error('💥 Error de conexión:', error);
             this.isConnected = false;
             throw new Error('Backend no disponible');
         }

@@ -10,7 +10,105 @@
  */
 
 /* ==========================================
-   🎮 CONTAINER PRINCIPAL DEL JUEGO
+   � LEADERBOARD Y RANKING STYLES
+   ========================================== */
+
+.leaderboard-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.leaderboard-section h4 {
+    color: #3b82f6;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.leaderboard-section ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    margin: 0.5rem 0;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid #3b82f6;
+    transition: all 0.3s ease;
+}
+
+.leaderboard-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.player-name {
+    color: #e2e8f0;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.player-score {
+    color: #10b981;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.ranking-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+    animation: rankingAppear 0.5s ease-out;
+    z-index: 1000;
+}
+
+@keyframes rankingAppear {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.rank-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rank-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.rank-text {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* ==========================================
+   �🎮 CONTAINER PRINCIPAL DEL JUEGO
    ========================================== */
 
 .data-game {
