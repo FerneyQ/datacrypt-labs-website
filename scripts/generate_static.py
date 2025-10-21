@@ -153,7 +153,7 @@ def update_html_for_github_pages(dist_dir):
         <!-- GitHub Pages Deploy - APIs Mock Funcionales -->
         <div id="github-pages-notice" style="background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 8px; text-align: center; font-size: 14px; position: relative; z-index: 1000;">
             🎉 <strong>DataCrypt Labs EN VIVO</strong> - Deploy GitHub Pages GRATUITO con APIs Mock Funcionales 
-            <span style="margin-left: 10px;">📧 Contacto: ferneyquirga97@hotmail.com | ferneyquiroga101@gmail.com</span>
+            <span style="margin-left: 10px;">📧 Contacto: ferneyquiroga101@gmail.com</span>
         </div>
         '''
         
