@@ -26,13 +26,86 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r backend/requirements.txt
         
-    - name: Generate static site
+    - name: Generate static site with APIs
       run: |
         python scripts/generate_static.py
+        
+    - name: Create API mock files directly
+      run: |
+        mkdir -p dist/api
+        
+        # Portfolio Stats API
+        cat > dist/api/portfolio-stats.json << 'EOF'
+        {
+          "status": "success",
+          "data": {
+            "total_projects": 25,
+            "technologies": ["Python", "FastAPI", "React", "Docker", "Machine Learning", "Business Intelligence"],
+            "experience_years": 6,
+            "certifications": 12,
+            "clients_served": 45,
+            "data_processed_gb": 2500,
+            "ml_models_deployed": 18
+          },
+          "timestamp": "2025-10-21T20:00:00Z"
+        }
+        EOF
+        
+        # Health Check API
+        cat > dist/api/health.json << 'EOF'
+        {
+          "status": "healthy",
+          "version": "2.2.0",
+          "environment": "production",
+          "uptime": "99.9%",
+          "services": {
+            "database": "online",
+            "analytics": "online", 
+            "ml_engine": "online"
+          },
+          "timestamp": "2025-10-21T20:00:00Z"
+        }
+        EOF
+        
+        # Crypto Prices API
+        cat > dist/api/crypto-prices.json << 'EOF'
+        {
+          "status": "success",
+          "data": {
+            "bitcoin": {"price": 67250.50, "change_24h": 2.45},
+            "ethereum": {"price": 2580.75, "change_24h": -1.20},
+            "cardano": {"price": 0.45, "change_24h": 3.80}
+          },
+          "timestamp": "2025-10-21T20:00:00Z"
+        }
+        EOF
+        
+        # Game Leaderboard API
+        cat > dist/api/game-leaderboard.json << 'EOF'
+        {
+          "status": "success",
+          "leaderboard": [
+            {"player": "DataMaster", "score": 9850, "level": 10},
+            {"player": "CryptoAnalyst", "score": 9200, "level": 9},
+            {"player": "MLExpert", "score": 8750, "level": 8},
+            {"player": "BISpecialist", "score": 8100, "level": 7},
+            {"player": "DataScientist", "score": 7650, "level": 6}
+          ],
+          "total_players": 1247,
+          "timestamp": "2025-10-21T20:00:00Z"
+        }
+        EOF
+        
+    - name: List generated files (debug)
+      run: |
+        echo "=== Contenido de dist/ ==="
+        ls -la dist/
+        echo "=== Contenido de dist/api/ ==="
+        ls -la dist/api/ || echo "No existe dist/api/"
         
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
-        cname: datacrypt-labs.github.io
+        force_orphan: true
