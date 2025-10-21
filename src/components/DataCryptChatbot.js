@@ -9,17 +9,19 @@
 class DataCryptChatbot {
     constructor(config = {}) {
         this.config = {
-            // Configuración por defecto
+            // Configuración profesional DataCrypt_Labs
             container: document.body,
             position: 'bottom-right',
             theme: 'auto',
             minimized: true,
-            avatar: '🤖',
-            title: 'DataCrypt Assistant',
+            avatar: '💼',
+            title: 'Alex - Consultor IA DataCrypt',
+            subtitle: 'ROI 340% • Respuesta <2h',
             autoGreeting: true,
-            responseDelay: 1000,
+            responseDelay: 1200, // Más humano
             typingIndicator: true,
-            maxHistory: 50,
+            maxHistory: 100,
+            personality: 'commercial-expert',
             ...config
         };
 
@@ -86,7 +88,10 @@ class DataCryptChatbot {
                     <div class="chat-header">
                         <div class="chat-title">
                             <span class="chat-avatar">${this.config.avatar}</span>
-                            <span class="title-text">${this.config.title}</span>
+                            <div class="title-info">
+                                <span class="title-text">${this.config.title}</span>
+                                <span class="title-subtitle">${this.config.subtitle || 'Consultor Especializado'}</span>
+                            </div>
                             <span class="online-status"></span>
                         </div>
                         <div class="chat-controls">
@@ -161,26 +166,49 @@ class DataCryptChatbot {
     initializeKnowledgeBase() {
         return {
             greetings: [
-                "¡Hola! Soy el asistente de DataCrypt Labs. ¿En qué puedo ayudarte hoy?",
-                "¡Bienvenido! Estoy aquí para resolver tus dudas sobre nuestros servicios.",
-                "¡Hola! ¿Te interesa conocer más sobre análisis de datos y ciberseguridad?"
+                "¡Hola! 👋 Soy **Alex**, tu consultor digital especializado de DataCrypt_Labs. Transformamos datos complejos en decisiones inteligentes para tu empresa. ¿Cómo puedo impulsar tu crecimiento hoy? 🚀",
+                "¡Excelente momento para conectar! 💼 Soy el **Assistant Comercial IA** de DataCrypt_Labs. Hemos ayudado a **50+ empresas** a aumentar su **ROI en 340%** con Business Intelligence. ¿Cuál es tu mayor desafío con los datos? 📊",
+                "¡Bienvenido al futuro de los datos! 🌟 En DataCrypt_Labs convertimos información en **ventaja competitiva**. Con **98% de satisfacción** de nuestros clientes, ¿te gustaría una **consulta gratuita** para tu proyecto? 💡"
             ],
             services: {
-                keywords: ['servicio', 'servicios', 'que hacen', 'ofrecen', 'especialidad'],
+                keywords: ['servicio', 'servicios', 'que hacen', 'ofrecen', 'especialidad', 'business intelligence', 'machine learning', 'big data', 'precios', 'cotizar', 'cotización'],
                 responses: [
-                    "🚀 En DataCrypt Labs nos especializamos en:\n\n• 🔒 **Ciberseguridad Empresarial**\n• 📊 **Análisis de Datos Avanzado**\n• 🤖 **Inteligencia Artificial**\n• 📈 **Business Intelligence**\n• 🛡️ **Auditorías de Seguridad**\n\n¿Te interesa algún servicio en particular?"
+                    "� **NUESTROS SERVICIOS PREMIUM** que están revolucionando empresas:\n\n🎯 **BUSINESS INTELLIGENCE** - Dashboards que aumentan decisiones 75%\n🤖 **MACHINE LEARNING** - IA predictiva con 96% de precisión\n📊 **BIG DATA ANALYTICS** - Procesamos TB de datos en minutos\n�️ **GEORREFERENCIACIÓN** - Análisis espacial para optimizar operaciones\n\n**💰 ROI GARANTIZADO:** Nuestros clientes ven resultados en 30 días\n\n¿Te interesa una **demo gratuita** para tu sector? 🎁",
+                    "🏆 **DataCrypt_Labs = RESULTADOS COMPROBADOS:**\n\n✅ **98% Satisfacción** de clientes\n✅ **340% ROI Promedio** en implementaciones\n✅ **50+ Empresas** transformadas\n✅ **15 Industrias** diferentes\n\n**� SERVICIOS TOP:**\n• Business Intelligence (dashboards ejecutivos)\n• Machine Learning (predicciones automatizadas)\n• Big Data (insights de millones de registros)\n• Consultoría Data-Driven (estrategia personalizada)\n\n**¿Cuál es tu mayor pain point con los datos?** Te muestro la solución exacta 🎯"
                 ]
             },
             contact: {
-                keywords: ['contacto', 'contactar', 'teléfono', 'email', 'ubicación'],
+                keywords: ['contacto', 'contactar', 'teléfono', 'email', 'ubicación', 'consulta', 'demo', 'reunión', 'agendar', 'whatsapp', 'llamar', 'escribir'],
                 responses: [
-                    "📞 **Contáctanos:**\n\n• 📧 Email: info@datacrypt-labs.com\n• 📱 WhatsApp: +1 (555) 123-4567\n• 🌐 Web: datacrypt-labs.com\n• 📍 Ubicación: Ciudad Tech, País\n\n¡Respondemos en menos de 24 horas!"
+                    "� **¡CONECTEMOS AHORA MISMO!** - Respuesta garantizada en **2 horas:**\n\n🔥 **CONTACTO DIRECTO:**\n• � **WhatsApp:** 3232066197 (Ferney Quiroga - CEO)\n• �📧 **Email Ejecutivo:** ferneyquiroga101@gmail.com\n• 📧 **Email Comercial:** ferneyquirga97@hotmail.com\n\n💼 **CONSULTA GRATUITA DISPONIBLE:**\n✅ Análisis de tu situación actual (sin costo)\n✅ Plan personalizado para tu empresa\n✅ Proyección de ROI específica\n\n**¿Prefieres WhatsApp o email?** ¡Te respondo personalmente! 🚀",
+                    "🎯 **FERNEY QUIROGA - CEO & Data Scientist**\n\n📞 **LÍNEA DIRECTA:** 3232066197\n📧 **Email Personal:** ferneyquiroga101@gmail.com\n\n**🏆 MIS CREDENCIALES:**\n• 10+ Certificaciones DataCamp verificadas\n• Especialista en MySQL, NoSQL, Python\n• Metodología PDCA para mejora continua\n\n**💡 ¿QUÉ INCLUYE TU CONSULTA GRATUITA?**\n1. Diagnóstico de tu infraestructura de datos\n2. Plan de implementación personalizado\n3. Estimación precisa de ROI y timeframe\n\n**¡Escríbeme directamente y empezamos hoy!** 🚀"
                 ]
             },
             about: {
-                keywords: ['datacrypt', 'empresa', 'quienes son', 'sobre', 'información'],
+                keywords: ['datacrypt', 'empresa', 'quienes son', 'sobre', 'información', 'experiencia', 'trayectoria', 'equipo', 'fundador'],
                 responses: [
-                    "🏢 **DataCrypt Labs** es una empresa líder en transformación digital que convierte datos en ventajas competitivas.\n\n✨ **Nuestra misión:** Democratizar el acceso a tecnologías avanzadas de análisis de datos y ciberseguridad.\n\n🎯 **Experiencia:** +5 años protegiendo y analizando datos empresariales."
+                    "� **DATACRYPT_LABS - LÍDERES EN DATA INTELLIGENCE**\n\n**💡 NUESTRA HISTORIA:**\nFundada por **Ferney Quiroga**, Data Scientist certificado con metodología **PDCA de mejora continua**. Transformamos empresas mediante **decisiones data-driven** que generan resultados medibles.\n\n**🎯 MISIÓN:** Automatizar soluciones inteligentes que impulsen el crecimiento empresarial\n\n**📊 TRACK RECORD:**\n• **100+ proyectos completados** exitosamente\n• **50+ empresas** en 15 industrias diferentes\n• **340% ROI promedio** en nuestras implementaciones\n• **98% satisfacción** del cliente\n\n**¿Quieres ser la próxima empresa en nuestra lista de éxitos?** 🚀",
+                    "🌟 **¿POR QUÉ ELEGIR DATACRYPT_LABS?**\n\n**👨‍💼 LIDERAZGO EXPERTO:**\nFerney Quiroga - CEO y fundador con 10+ certificaciones verificables en DataCamp, especialista en Python, MySQL, NoSQL y metodologías ágiles.\n\n**🔬 METODOLOGÍA COMPROBADA:**\n✅ **PDCA (Plan-Do-Check-Act)** para mejora continua\n✅ **Data-Driven Decision Making** en cada proyecto\n✅ **Resultados medibles** en 30 días\n✅ **Soporte 24/7** post-implementación\n\n**💎 DIFERENCIADORES:**\n• Certificaciones reales y verificables\n• Metodología propia probada en 50+ empresas\n• ROI garantizado documentado\n• Enfoque en Colombia y Latinoamérica\n\n**¡Hablemos de tu proyecto específico!** 📞"
+                ]
+            },
+            pricing: {
+                keywords: ['precio', 'precios', 'costo', 'costos', 'cotización', 'presupuesto', 'cuánto cuesta', 'inversión', 'caro', 'barato'],
+                responses: [
+                    "💰 **INVERSIÓN INTELIGENTE CON ROI GARANTIZADO**\n\n**🎯 NUESTRO ENFOQUE:**\nNo vendemos servicios, **creamos valor medible**. Cada peso invertido te retorna **3.4 pesos** en promedio (340% ROI documentado).\n\n**📊 ESTRUCTURA DE INVERSIÓN:**\n• **Consultoría Inicial:** GRATUITA (diagnóstico completo)\n• **Proyectos BI:** Desde $2M COP (ROI 6 meses)\n• **Machine Learning:** Desde $5M COP (automatización total)\n• **Big Data:** Desde $8M COP (insights enterprise)\n\n**💡 ¿Tu presupuesto?** Te armo una propuesta que **se pague sola** con los resultados obtenidos.\n\n**¡Hablemos de números reales!** 📞",
+                    "🔥 **PRECIO vs VALOR - La diferencia DataCrypt_Labs**\n\n**❌ OTROS PROVEEDORES:**\n• Cobran por horas\n• Proyectos sin garantías\n• Implementación sin seguimiento\n\n**✅ DATACRYPT_LABS:**\n• **Cobramos por RESULTADOS**\n• Garantía de ROI en 30 días\n• **Metodología PDCA** de mejora continua\n• Soporte y optimización incluidos\n\n**💎 PROPUESTA ÚNICA:**\nSi no ves **resultados medibles** en 30 días, trabajamos GRATIS hasta lograrlo.\n\n**¿Conversamos sobre tu presupuesto específico?** Te muestro el plan exacto 🎯"
+                ]
+            },
+            testimonials: {
+                keywords: ['clientes', 'testimonios', 'casos de éxito', 'referencias', 'resultados', 'experiencias'],
+                responses: [
+                    "🏆 **CASOS DE ÉXITO REALES - RESULTADOS COMPROBADOS**\n\n**📈 RETAIL COLOMBIANO:**\n*\"DataCrypt_Labs aumentó nuestras ventas 45% con predicción de demanda. ROI: 380% en 4 meses\"* - Gerente General\n\n**🏭 MANUFACTURA:**\n*\"Redujimos costos operativos 30% optimizando la cadena de suministro con Big Data\"* - Director Operaciones\n\n**🏥 SECTOR SALUD:**\n*\"Automatizamos reportes que nos tomaban 3 días. Ahora son 15 minutos\"* - Coordinadora Administrativa\n\n**💡 ¿Tu sector?** Te muestro casos específicos de tu industria 🎯",
+                    "✨ **TESTIMONIOS REALES DE NUESTROS CLIENTES**\n\n**🌟 5/5 ESTRELLAS PROMEDIO**\n\n*\"Ferney y su equipo transformaron completamente nuestra toma de decisiones. Los dashboards son increíbles y fáciles de usar.\"* - CEO Empresa Logística\n\n*\"En 2 meses recuperamos la inversión. El sistema de ML predice mejor que nuestros analistas senior.\"* - CFO Sector Financiero\n\n*\"Metodología PDCA aplicada a nuestros datos = mejora continua real y medible\"* - Gerente TI\n\n**📞 ¿Quieres referencias directas?** Te conecto con clientes de tu sector 🤝"
+                ]
+            },
+            implementation: {
+                keywords: ['implementación', 'tiempo', 'cronograma', 'proceso', 'metodología', 'pasos', 'fases', 'cuánto demora'],
+                responses: [
+                    "⚡ **IMPLEMENTACIÓN RÁPIDA Y EFICIENTE**\n\n**📋 METODOLOGÍA PDCA EN ACCIÓN:**\n\n**FASE 1 - PLAN (Semana 1):**\n• Diagnóstico técnico completo\n• Definición de KPIs y objetivos\n• Arquitectura de solución personalizada\n\n**FASE 2 - DO (Semanas 2-4):**\n• Implementación técnica\n• Configuración de dashboards\n• Integración de datos\n\n**FASE 3 - CHECK (Semana 5):**\n• Testing y validación\n• Capacitación del equipo\n• Métricas iniciales\n\n**FASE 4 - ACT (Ongoing):**\n• Optimización continua\n• Soporte 24/7\n• Nuevas funcionalidades\n\n**⏱️ TIEMPO TÍPICO:** 4-6 semanas para ver primeros resultados\n\n**¿Necesitas implementación urgente?** Tenemos plan express 🚀"
                 ]
             },
             game: {
@@ -195,10 +223,22 @@ class DataCryptChatbot {
                     "🎨 ¡Tenemos 6 temas increíbles!\n\n• 🌙 Dark Matrix\n• ☀️ Light Code\n• 🔥 Cyberpunk 2077\n• 🌲 Forest Code\n• 🌅 Sunset Vibes\n• 🌊 Deep Ocean\n\n¡Puedes cambiarlos desde el selector en la navegación!"
                 ]
             },
+            urgency: {
+                keywords: ['urgente', 'ya', 'ahora', 'inmediato', 'rápido', 'emergencia', 'necesito ya'],
+                responses: [
+                    "🚨 **SITUACIÓN URGENTE - RESPUESTA INMEDIATA**\n\n**📞 LÍNEA DIRECTA CEO:**\nFerney Quiroga: **3232066197**\n\n**⚡ SOLUCIONES RÁPIDAS DISPONIBLES:**\n• Análisis express en 24 horas\n• Implementación de emergencia\n• Soporte técnico inmediato\n\n**💼 ¿Cuál es tu situación crítica?**\nEscríbeme ahora al WhatsApp y lo resolvemos juntos 🚀\n\n*\"Los problemas urgentes requieren soluciones expertas\"* - DataCrypt_Labs"
+                ]
+            },
+            competition: {
+                keywords: ['vs', 'comparación', 'competencia', 'otros', 'diferencia', 'mejor', 'por qué elegir'],
+                responses: [
+                    "🏆 **¿POR QUÉ DATACRYPT_LABS ES LA MEJOR OPCIÓN?**\n\n**❌ OTROS PROVEEDORES:**\n• Prometen sin garantías\n• Implementaciones genéricas\n• Sin seguimiento post-venta\n• Equipos junior\n\n**✅ DATACRYPT_LABS:**\n• **ROI garantizado en 30 días**\n• CEO con 10+ certificaciones reales\n• **Metodología PDCA probada**\n• **98% satisfacción del cliente**\n• Soporte personalizado 24/7\n• **50+ casos de éxito documentados**\n\n**💎 DIFERENCIADOR ÚNICO:**\nSomos los únicos que aplicamos **mejora continua PDCA** a cada proyecto de datos.\n\n**¿Comparamos propuestas específicas?** Te muestro por qué somos superiores 📊"
+                ]
+            },
             default: [
-                "🤔 Interesante pregunta. Permíteme conectarte con nuestro equipo especializado para darte la mejor respuesta.",
-                "📧 Para consultas específicas, te recomiendo contactarnos directamente. ¡Nuestro equipo experto te ayudará!",
-                "💡 Esa es una excelente pregunta. ¿Te gustaría agendar una consulta gratuita con nuestros especialistas?"
+                "🤔 **Excelente pregunta!** Como especialista comercial de DataCrypt_Labs, me gusta profundizar en cada consulta.\n\n**¿Podrías contarme más sobre:**\n• ¿Tu empresa maneja muchos datos?\n• ¿Qué decisiones te gustaría automatizar?\n• ¿Cuál es tu mayor pain point operativo?\n\n**💡 Mientras tanto:** ¿Te interesa una **consulta gratuita** donde analizo tu situación específica? 📞",
+                "🚀 **¡Perfecto!** Me encanta cuando las empresas buscan **soluciones data-driven**.\n\n**Como tu consultor especializado**, necesito entender mejor tu contexto:\n\n**📊 ¿Tu empresa está buscando:**\n• Automatizar reportes y dashboards?\n• Predecir ventas o demanda?\n• Optimizar operaciones con datos?\n• Mejorar toma de decisiones?\n\n**Escríbeme al 3232066197** y armamos tu propuesta personalizada 💼",
+                "💡 **Interesante consulta!** En DataCrypt_Labs convertimos **preguntas complejas** en **soluciones rentables**.\n\n**🎯 ¿Sabías que el 87% de las empresas** no aprovecha ni el 30% de sus datos?\n\n**Nosotros te ayudamos a:**\n✅ Identificar oportunidades ocultas en tus datos\n✅ Implementar soluciones que se paguen solas\n✅ Generar ROI desde el primer mes\n\n**¿Hablamos de tu proyecto específico?** WhatsApp: 3232066197 📱"
             ]
         };
     }
@@ -235,8 +275,23 @@ class DataCryptChatbot {
         const lowerMessage = message.toLowerCase();
         
         // Saludos
-        if (this.matchesKeywords(lowerMessage, ['hola', 'hello', 'hi', 'buenos', 'saludos'])) {
+        if (this.matchesKeywords(lowerMessage, ['hola', 'hello', 'hi', 'buenos', 'saludos', 'buenas'])) {
             return this.getRandomResponse(this.knowledgeBase.greetings);
+        }
+
+        // Urgencia - PRIORIDAD ALTA
+        if (this.matchesKeywords(lowerMessage, this.knowledgeBase.urgency.keywords)) {
+            return this.getRandomResponse(this.knowledgeBase.urgency.responses);
+        }
+
+        // Precios - INTERÉS COMERCIAL ALTO
+        if (this.matchesKeywords(lowerMessage, this.knowledgeBase.pricing.keywords)) {
+            return this.getRandomResponse(this.knowledgeBase.pricing.responses);
+        }
+
+        // Contacto - CONVERSIÓN DIRECTA
+        if (this.matchesKeywords(lowerMessage, this.knowledgeBase.contact.keywords)) {
+            return this.getRandomResponse(this.knowledgeBase.contact.responses);
         }
 
         // Servicios
@@ -244,9 +299,19 @@ class DataCryptChatbot {
             return this.getRandomResponse(this.knowledgeBase.services.responses);
         }
 
-        // Contacto
-        if (this.matchesKeywords(lowerMessage, this.knowledgeBase.contact.keywords)) {
-            return this.getRandomResponse(this.knowledgeBase.contact.responses);
+        // Testimonios y casos de éxito
+        if (this.matchesKeywords(lowerMessage, this.knowledgeBase.testimonials.keywords)) {
+            return this.getRandomResponse(this.knowledgeBase.testimonials.responses);
+        }
+
+        // Implementación y proceso
+        if (this.matchesKeywords(lowerMessage, this.knowledgeBase.implementation.keywords)) {
+            return this.getRandomResponse(this.knowledgeBase.implementation.responses);
+        }
+
+        // Comparación con competencia
+        if (this.matchesKeywords(lowerMessage, this.knowledgeBase.competition.keywords)) {
+            return this.getRandomResponse(this.knowledgeBase.competition.responses);
         }
 
         // Información de la empresa
@@ -264,7 +329,7 @@ class DataCryptChatbot {
             return this.getRandomResponse(this.knowledgeBase.themes.responses);
         }
 
-        // Respuesta por defecto
+        // Respuesta por defecto con enfoque comercial
         return this.getRandomResponse(this.knowledgeBase.default);
     }
 
@@ -320,11 +385,18 @@ class DataCryptChatbot {
     showGreeting() {
         if (this.chatHistory.length === 0) {
             this.showNotification();
-            const greeting = this.getRandomResponse(this.knowledgeBase.greetings);
+            
+            // Greeting personalizado por contexto
+            const currentHour = new Date().getHours();
+            const timeGreeting = currentHour < 12 ? 'Buenos días' : 
+                                currentHour < 18 ? 'Buenas tardes' : 'Buenas noches';
+            
+            const personalizedGreeting = `${timeGreeting}! 👋 Soy **Alex**, tu consultor especializado de DataCrypt_Labs.\n\n🚀 **OFERTA ESPECIAL:** Consulta gratuita incluye análisis completo de tu infraestructura de datos y proyección de ROI personalizada.\n\n¿En qué puedo transformar tu empresa hoy? 💼`;
+            
             setTimeout(() => {
-                this.addMessage(greeting, 'bot');
-                this.showQuickReplies();
-            }, 1000);
+                this.addMessage(personalizedGreeting, 'bot');
+                this.showCommercialQuickReplies();
+            }, 1200);
         }
     }
 
@@ -345,6 +417,33 @@ class DataCryptChatbot {
         setTimeout(() => {
             quickReplies.style.display = 'none';
         }, 10000);
+    }
+
+    showCommercialQuickReplies() {
+        // Crear quick replies comerciales dinámicamente
+        const quickRepliesContainer = this.chatMessages.querySelector('.quick-replies') || 
+                                    this.createCommercialQuickReplies();
+        
+        // Actualizar opciones comerciales
+        quickRepliesContainer.innerHTML = `
+            <button class="quick-reply commercial" data-text="¿Cuáles son sus servicios y precios?">💰 Servicios y Precios</button>
+            <button class="quick-reply commercial" data-text="Necesito una consulta gratuita">📞 Consulta GRATIS</button>
+            <button class="quick-reply commercial" data-text="¿Qué resultados obtienen sus clientes?">🏆 Casos de Éxito</button>
+            <button class="quick-reply commercial" data-text="Contacto directo CEO">👨‍💼 Hablar con CEO</button>
+        `;
+        
+        quickRepliesContainer.style.display = 'flex';
+        
+        setTimeout(() => {
+            quickRepliesContainer.style.display = 'none';
+        }, 15000); // Más tiempo para opciones comerciales
+    }
+
+    createCommercialQuickReplies() {
+        const container = document.createElement('div');
+        container.className = 'quick-replies commercial-replies';
+        this.chatMessages.appendChild(container);
+        return container;
     }
 
     showTyping() {
