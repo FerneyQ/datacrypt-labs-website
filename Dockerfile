@@ -40,6 +40,10 @@ COPY *.xml ./
 COPY .env.production ./
 COPY railway_start.py ./
 
+# Set environment variables for Railway
+ENV RAILWAY_ENVIRONMENT=production
+ENV PRODUCTION=true
+
 # Create necessary directories
 RUN mkdir -p logs backups ssl data
 

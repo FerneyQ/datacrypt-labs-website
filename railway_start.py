@@ -35,11 +35,14 @@ def main():
         "date_header": False,
     }
     
-    print(f"🚀 Starting DataCrypt Labs on port {port}")
+    print(f"🚀 DataCrypt Labs Railway Deploy v2.1 - Starting on port {port}")
     print("📍 Available endpoints:")
     print(f"   • Main: https://your-app.railway.app/")
-    print(f"   • Docs: https://your-app.railway.app/docs")
+    print(f"   • API Docs: https://your-app.railway.app/docs")
+    print(f"   • Health: https://your-app.railway.app/health")
     print(f"   • Game: https://your-app.railway.app/game.html")
+    print(f"🔧 Railway Environment: {os.environ.get('RAILWAY_ENVIRONMENT', 'Not detected')}")
+    print(f"🌍 All Environment Variables loaded successfully")
     
     # Start server
     uvicorn.run(**config)
