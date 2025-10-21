@@ -264,39 +264,96 @@
     </script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <p>Cargando DataCrypt_Labs...</p>
+        </div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="header" id="header">
         <nav class="navbar">
-            <div class="nav-container">
+            <div class="container">
                 <div class="nav-brand">
-                    <img src="Material%20visual/Identidad.JPG" alt="DataCrypt_Labs" class="logo">
-                    <span class="brand-text">DataCrypt_Labs</span>
+                    <div class="logo-container">
+                        <img src="Material%20visual/Identidad.JPG" alt="DataCrypt_Labs Logo" class="logo critical" loading="eager">
+                    </div>
+                    <div class="brand-info">
+                        <span class="brand-text">DataCrypt_Labs</span>
+                        <span class="brand-tagline">Data Intelligence Solutions</span>
+                    </div>
                 </div>
                 
-                <div class="nav-menu">
-                    <ul class="nav-list">
-                        <li class="nav-item">
-                            <a href="index.html" class="nav-link">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="servicios.html" class="nav-link">Servicios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="portafolio.html" class="nav-link active">Portafolio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="certificaciones.html" class="nav-link">Certificaciones</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="index.html#contacto" class="nav-link">Contacto</a>
-                        </li>
-                    </ul>
-                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item nav-page">
+                        <a href="index.html" class="nav-link" data-translate="nav.home">Inicio</a>
+                    </li>
+                    <li class="nav-item nav-page">
+                        <a href="servicios.html" class="nav-link" data-translate="nav.services">Servicios</a>
+                    </li>
+                    <li class="nav-item nav-page">
+                        <a href="portafolio.html" class="nav-link active" data-translate="nav.portfolio">Portafolio</a>
+                    </li>
+                    <li class="nav-item nav-page">
+                        <a href="certificaciones.html" class="nav-link" data-translate="nav.certifications">Certificaciones</a>
+                    </li>
+                    <li class="nav-item nav-page">
+                        <a href="index.html#contacto" class="nav-link" data-translate="nav.contact">Contacto</a>
+                    </li>
+                    <li class="nav-item nav-control">
+                        <div class="language-selector" role="menu" aria-label="Selector de idioma">
+                            <button id="language-toggle" 
+                                    class="language-toggle" 
+                                    aria-label="Cambiar idioma" 
+                                    aria-expanded="false"
+                                    aria-haspopup="true">
+                                <i class="fas fa-globe" aria-hidden="true"></i>
+                                <span id="current-lang">ES</span>
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </button>
+                            <div class="language-dropdown" 
+                                 id="language-dropdown" 
+                                 role="menu"
+                                 aria-labelledby="language-toggle">
+                                <a href="#" 
+                                   class="lang-option" 
+                                   data-lang="es"
+                                   role="menuitem"
+                                   aria-label="Cambiar a Español">
+                                    <img src="https://flagcdn.com/w20/es.png" 
+                                         alt="Bandera de España" 
+                                         width="24" 
+                                         height="auto"
+                                         loading="lazy">
+                                    <span>Español</span>
+                                    <i class="fas fa-check lang-check" aria-hidden="true" style="display: none;"></i>
+                                </a>
+                                <a href="#" 
+                                   class="lang-option" 
+                                   data-lang="en"
+                                   role="menuitem"
+                                   aria-label="Change to English">
+                                    <img src="https://flagcdn.com/w20/us.png" 
+                                         alt="United States Flag" 
+                                         width="24" 
+                                         height="auto"
+                                         loading="lazy">
+                                    <span>English</span>
+                                    <i class="fas fa-check lang-check" aria-hidden="true" style="display: none;"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
                 
-                <div class="nav-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
                 </div>
             </div>
         </nav>
@@ -681,12 +738,53 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- DataCrypt_Labs Chatbot: Sistema de chat inteligente -->
+    <div id="datacrypt-chatbot-container"></div>
+    <script src="src/components/DataCryptChatbot.js"></script>
+
+    <!-- Core JavaScript: Sistema principal -->
     <script src="src/core/EnhancedWebsiteCore.js"></script>
+    <script src="src/core/ConfigManager.js"></script>
+    
+    <!-- Enhanced Features: Características mejoradas -->
     <script src="src/themes/EnhancedThemeSystem.js"></script>
     <script src="src/interactive/EnhancedInteractiveElements.js"></script>
+    <script src="src/pwa/EnhancedPWAManager.js"></script>
+    
+    <!-- Layout & Animation: Diseño y animaciones -->
     <script src="src/layout/ProfessionalLayout.js"></script>
-    <script src="src/responsive/ResponsiveDesign.js"></script>
+    <script src="src/animations/ModernAnimations.js"></script>
+    
+    <!-- Validation Systems: Sistemas de validación -->
+    <script src="src/validation/ComprehensiveValidator.js"></script>
+    <script src="src/validation/FinalDeploymentChecker.js"></script>
+    
+    <!-- 🚀 Automatic Validation: Validación automática al inicio -->
+    <script src="src/automation/AutomaticFinalValidation.js"></script>
+    
+    <!-- 🎨 Intelligent Visual System: Sistema visual inteligente -->
+    <link rel="stylesheet" href="src/visual/IntelligentVisualSystem.css">
+    <script src="src/visual/IntelligentVisualSystem.js"></script>
+    
+    <!-- 📱 Responsive Design System: Sistema responsive avanzado -->
+    <link rel="stylesheet" href="src/responsive/ResponsiveDesignSystem.css">
+    <script src="src/responsive/ResponsiveDesignSystem.js"></script>
+    
+    <!-- ✨ Aesthetic Microinteractions: Sistema de estética y microinteracciones -->
+    <link rel="stylesheet" href="src/aesthetics/AestheticMicrointeractions.css">
+    <script src="src/aesthetics/AestheticMicrointeractions.js"></script>
+    
+    <!-- Test Suites: Validación completa de todos los sistemas -->
+    <script src="tests/config-manager.test.js"></script>
+    <script src="tests/enhanced-theme-system.test.js"></script>
+    <script src="tests/enhanced-pwa-manager.test.js"></script>
+    <script src="tests/chatbot-integration.test.js"></script>
+    
+    <!-- DataCrypt_Labs Corporate JavaScript -->
+    <script src="assets/js/datacrypt.js"></script>
+    
+    <!-- Validation Suite (solo en desarrollo) -->
+    <script src="assets/js/validation.js"></script>
     
     <!-- Portfolio specific scripts -->
     <script>
