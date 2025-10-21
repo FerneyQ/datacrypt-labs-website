@@ -260,19 +260,44 @@
                 
                 <ul class="nav-menu" id="nav-menu">
                     <li class="nav-item">
-                        <a href="#inicio" class="nav-link active">Inicio</a>
+                        <a href="#inicio" class="nav-link active" data-translate="nav.home">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#servicios" class="nav-link">Servicios</a>
+                        <a href="#servicios" class="nav-link" data-translate="nav.services">Servicios</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#portafolio" class="nav-link">Portafolio</a>
+                        <a href="#data-wizard" class="nav-link" data-translate="nav.game">Juego</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#contacto" class="nav-link">Contacto</a>
+                        <a href="#portafolio" class="nav-link" data-translate="nav.portfolio">Portafolio</a>
                     </li>
                     <li class="nav-item">
-                        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">
+                        <a href="#certificaciones" class="nav-link" data-translate="nav.certifications">Certificaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contacto" class="nav-link" data-translate="nav.contact">Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="language-selector">
+                            <button id="language-toggle" class="language-toggle" aria-label="Cambiar idioma">
+                                <i class="fas fa-globe"></i>
+                                <span id="current-lang">ES</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="language-dropdown" id="language-dropdown">
+                                <a href="#" class="lang-option" data-lang="es">
+                                    <img src="https://flagcdn.com/w20/es.png" alt="Español" width="20">
+                                    <span>Español</span>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="en">
+                                    <img src="https://flagcdn.com/w20/us.png" alt="English" width="20">
+                                    <span>English</span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema" data-translate-attr="aria-label:theme.toggle">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
@@ -472,6 +497,116 @@
                             <li>Geoanalytics</li>
                             <li>Sistemas GIS</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Wizard Game Section -->
+        <section id="data-wizard" class="data-game">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title fade-in">🎮 Data Wizard Challenge</h2>
+                    <p class="section-description fade-in" data-delay="200">
+                        ¡Demuestra tus habilidades en el análisis de datos! Juega y descubre por qué somos expertos
+                    </p>
+                </div>
+                
+                <div class="game-container">
+                    <div class="game-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Score</span>
+                            <span class="stat-value" id="gameScore">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Level</span>
+                            <span class="stat-value" id="gameLevel">1</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Time</span>
+                            <span class="stat-value" id="gameTime">60</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Data Points</span>
+                            <span class="stat-value" id="dataPoints">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="game-area">
+                        <canvas id="dataWizardCanvas" width="800" height="600"></canvas>
+                        <div class="game-overlay" id="gameOverlay">
+                            <div class="game-start">
+                                <h3>🧙‍♂️ Data Wizard Challenge</h3>
+                                <p>Conecta los datos pixelados para crear insights valiosos</p>
+                                <div class="game-instructions">
+                                    <div class="instruction">
+                                        <i class="fas fa-mouse-pointer"></i>
+                                        <span>Click en los datos para conectarlos</span>
+                                    </div>
+                                    <div class="instruction">
+                                        <i class="fas fa-link"></i>
+                                        <span>Crea cadenas de 3+ para obtener puntos</span>
+                                    </div>
+                                    <div class="instruction">
+                                        <i class="fas fa-stopwatch"></i>
+                                        <span>¡Tienes 60 segundos por nivel!</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-lg" id="startGameBtn">
+                                    <i class="fas fa-play"></i>
+                                    Iniciar Desafío
+                                </button>
+                            </div>
+                            
+                            <div class="game-over hidden" id="gameOverScreen">
+                                <h3>🎯 ¡Desafío Completado!</h3>
+                                <div class="final-stats">
+                                    <div class="final-stat">
+                                        <span class="final-label">Score Final</span>
+                                        <span class="final-value" id="finalScore">0</span>
+                                    </div>
+                                    <div class="final-stat">
+                                        <span class="final-label">Nivel Alcanzado</span>
+                                        <span class="final-value" id="finalLevel">1</span>
+                                    </div>
+                                    <div class="final-stat">
+                                        <span class="final-label">Rating</span>
+                                        <span class="final-value" id="gameRating">Junior Analyst</span>
+                                    </div>
+                                </div>
+                                <div class="game-cta">
+                                    <p>¿Te gustó el desafío? ¡Imagina lo que podemos hacer con TUS datos!</p>
+                                    <div class="game-buttons">
+                                        <button class="btn btn-primary" id="playAgainBtn">
+                                            <i class="fas fa-redo"></i>
+                                            Jugar de Nuevo
+                                        </button>
+                                        <button class="btn btn-outline" id="contactUsBtn">
+                                            <i class="fas fa-envelope"></i>
+                                            Contáctanos
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-info">
+                        <div class="info-card">
+                            <i class="fas fa-brain"></i>
+                            <h4>Desarrolla Tu Intuición</h4>
+                            <p>Este juego simula patrones reales de análisis de datos</p>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>Visualización Interactiva</h4>
+                            <p>Experimenta cómo los datos cobran vida</p>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-trophy"></i>
+                            <h4>Gamificación</h4>
+                            <p>Convierte el análisis en una experiencia divertida</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -677,6 +812,272 @@
                                         <span class="tag">Full Stack</span>
                                         <span class="tag">AI/ML</span>
                                         <span class="tag">Cloud</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certificaciones" class="certifications">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title fade-in">🎓 Certificaciones y Estudios</h2>
+                    <p class="section-description fade-in" data-delay="200">
+                        Respaldo académico y profesional que garantiza la calidad de nuestros servicios
+                    </p>
+                </div>
+                
+                <div class="certifications-container">
+                    <!-- Academic Background -->
+                    <div class="cert-category">
+                        <h3 class="cert-category-title">
+                            <i class="fas fa-graduation-cap"></i>
+                            Formación Académica
+                        </h3>
+                        <div class="cert-grid">
+                            <div class="cert-card fade-in" data-delay="100">
+                                <div class="cert-icon">
+                                    <i class="fas fa-university"></i>
+                                </div>
+                                <div class="cert-content">
+                                    <h4>Licenciatura en Ciencias de Datos</h4>
+                                    <p class="cert-institution">Universidad Tecnológica</p>
+                                    <p class="cert-year">2018 - 2022</p>
+                                    <div class="cert-skills">
+                                        <span class="skill-tag">Statistics</span>
+                                        <span class="skill-tag">Machine Learning</span>
+                                        <span class="skill-tag">Database Design</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="cert-card fade-in" data-delay="200">
+                                <div class="cert-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="cert-content">
+                                    <h4>Especialización en Business Intelligence</h4>
+                                    <p class="cert-institution">Instituto de Análisis de Datos</p>
+                                    <p class="cert-year">2022 - 2023</p>
+                                    <div class="cert-skills">
+                                        <span class="skill-tag">Power BI</span>
+                                        <span class="skill-tag">Tableau</span>
+                                        <span class="skill-tag">Data Warehousing</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Professional Certifications -->
+                    <div class="cert-category">
+                        <h3 class="cert-category-title">
+                            <i class="fas fa-certificate"></i>
+                            Certificaciones Profesionales
+                        </h3>
+                        <div class="cert-grid">
+                            <div class="cert-card featured fade-in" data-delay="300">
+                                <div class="cert-badge">
+                                    <i class="fab fa-microsoft"></i>
+                                </div>
+                                <div class="cert-content">
+                                    <h4>Microsoft Certified: Azure Data Scientist Associate</h4>
+                                    <p class="cert-institution">Microsoft</p>
+                                    <p class="cert-year">2024</p>
+                                    <div class="cert-skills">
+                                        <span class="skill-tag">Azure ML</span>
+                                        <span class="skill-tag">Python</span>
+                                        <span class="skill-tag">MLOps</span>
+                                    </div>
+                                </div>
+                                <div class="cert-verified">
+                                    <i class="fas fa-check-circle"></i>
+                                    Verificado
+                                </div>
+                            </div>
+                            
+                            <div class="cert-card featured fade-in" data-delay="400">
+                                <div class="cert-badge">
+                                    <i class="fab fa-google"></i>
+                                </div>
+                                <div class="cert-content">
+                                    <h4>Google Cloud Professional Data Engineer</h4>
+                                    <p class="cert-institution">Google Cloud</p>
+                                    <p class="cert-year">2024</p>
+                                    <div class="cert-skills">
+                                        <span class="skill-tag">BigQuery</span>
+                                        <span class="skill-tag">Dataflow</span>
+                                        <span class="skill-tag">Cloud ML</span>
+                                    </div>
+                                </div>
+                                <div class="cert-verified">
+                                    <i class="fas fa-check-circle"></i>
+                                    Verificado
+                                </div>
+                            </div>
+                            
+                            <div class="cert-card fade-in" data-delay="500">
+                                <div class="cert-badge">
+                                    <i class="fab fa-aws"></i>
+                                </div>
+                                <div class="cert-content">
+                                    <h4>AWS Certified Machine Learning - Specialty</h4>
+                                    <p class="cert-institution">Amazon Web Services</p>
+                                    <p class="cert-year">2023</p>
+                                    <div class="cert-skills">
+                                        <span class="skill-tag">SageMaker</span>
+                                        <span class="skill-tag">Deep Learning</span>
+                                        <span class="skill-tag">Model Deployment</span>
+                                    </div>
+                                </div>
+                                <div class="cert-verified">
+                                    <i class="fas fa-check-circle"></i>
+                                    Verificado
+                                </div>
+                            </div>
+                            
+                            <div class="cert-card fade-in" data-delay="600">
+                                <div class="cert-badge">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                                <div class="cert-content">
+                                    <h4>Tableau Desktop Certified Professional</h4>
+                                    <p class="cert-institution">Tableau</p>
+                                    <p class="cert-year">2023</p>
+                                    <div class="cert-skills">
+                                        <span class="skill-tag">Data Visualization</span>
+                                        <span class="skill-tag">Dashboard Design</span>
+                                        <span class="skill-tag">Advanced Analytics</span>
+                                    </div>
+                                </div>
+                                <div class="cert-verified">
+                                    <i class="fas fa-check-circle"></i>
+                                    Verificado
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Continuous Learning -->
+                    <div class="cert-category">
+                        <h3 class="cert-category-title">
+                            <i class="fas fa-brain"></i>
+                            Educación Continua
+                        </h3>
+                        <div class="learning-tracks">
+                            <div class="learning-track fade-in" data-delay="700">
+                                <div class="track-header">
+                                    <i class="fas fa-robot"></i>
+                                    <h4>Artificial Intelligence & Deep Learning</h4>
+                                </div>
+                                <div class="track-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span class="progress-text">85% Completado</span>
+                                </div>
+                                <div class="track-courses">
+                                    <span class="course-tag">TensorFlow 2.0</span>
+                                    <span class="course-tag">PyTorch</span>
+                                    <span class="course-tag">Computer Vision</span>
+                                    <span class="course-tag">NLP</span>
+                                </div>
+                            </div>
+                            
+                            <div class="learning-track fade-in" data-delay="800">
+                                <div class="track-header">
+                                    <i class="fas fa-database"></i>
+                                    <h4>Big Data & Cloud Architecture</h4>
+                                </div>
+                                <div class="track-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 92%"></div>
+                                    </div>
+                                    <span class="progress-text">92% Completado</span>
+                                </div>
+                                <div class="track-courses">
+                                    <span class="course-tag">Apache Spark</span>
+                                    <span class="course-tag">Kubernetes</span>
+                                    <span class="course-tag">Data Lakes</span>
+                                    <span class="course-tag">ETL Pipelines</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skills Summary -->
+                    <div class="skills-summary">
+                        <h3 class="skills-title">
+                            <i class="fas fa-cogs"></i>
+                            Competencias Técnicas Verificadas
+                        </h3>
+                        <div class="skills-matrix">
+                            <div class="skill-category">
+                                <h4>Programming</h4>
+                                <div class="skill-items">
+                                    <div class="skill-item expert">
+                                        <span>Python</span>
+                                        <div class="skill-level">Expert</div>
+                                    </div>
+                                    <div class="skill-item expert">
+                                        <span>R</span>
+                                        <div class="skill-level">Expert</div>
+                                    </div>
+                                    <div class="skill-item advanced">
+                                        <span>SQL</span>
+                                        <div class="skill-level">Advanced</div>
+                                    </div>
+                                    <div class="skill-item intermediate">
+                                        <span>Scala</span>
+                                        <div class="skill-level">Intermediate</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-category">
+                                <h4>Analytics Platforms</h4>
+                                <div class="skill-items">
+                                    <div class="skill-item expert">
+                                        <span>Power BI</span>
+                                        <div class="skill-level">Expert</div>
+                                    </div>
+                                    <div class="skill-item expert">
+                                        <span>Tableau</span>
+                                        <div class="skill-level">Expert</div>
+                                    </div>
+                                    <div class="skill-item advanced">
+                                        <span>Jupyter</span>
+                                        <div class="skill-level">Advanced</div>
+                                    </div>
+                                    <div class="skill-item advanced">
+                                        <span>Apache Spark</span>
+                                        <div class="skill-level">Advanced</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="skill-category">
+                                <h4>Cloud Platforms</h4>
+                                <div class="skill-items">
+                                    <div class="skill-item expert">
+                                        <span>Azure</span>
+                                        <div class="skill-level">Expert</div>
+                                    </div>
+                                    <div class="skill-item advanced">
+                                        <span>AWS</span>
+                                        <div class="skill-level">Advanced</div>
+                                    </div>
+                                    <div class="skill-item advanced">
+                                        <span>Google Cloud</span>
+                                        <div class="skill-level">Advanced</div>
+                                    </div>
+                                    <div class="skill-item intermediate">
+                                        <span>Snowflake</span>
+                                        <div class="skill-level">Intermediate</div>
                                     </div>
                                 </div>
                             </div>
@@ -899,10 +1300,13 @@
     </div>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top" class="back-to-top" aria-label="Volver arriba">
+    <button id="back-to-top" class="back-to-top" aria-label="Volver arriba" data-translate-attr="aria-label:back_to_top">
         <i class="fas fa-chevron-up"></i>
     </button>
 
+    <!-- Translations System -->
+    <script src="assets/js/translations.js"></script>
+    
     <!-- DataCrypt_Labs Corporate JavaScript -->
     <script src="assets/js/datacrypt.js"></script>
     

@@ -179,9 +179,11 @@ class DataCryptLabsManager {
      */
     async initializeComponents() {
         const components = [
+            { name: 'Translations', init: () => this.initializeTranslations() },
             { name: 'Navigation', init: () => this.initializeNavigation() },
             { name: 'Hero', init: () => this.initializeHero() },
             { name: 'Services', init: () => this.initializeServices() },
+            { name: 'DataWizard', init: () => this.initializeDataWizard() },
             { name: 'Portfolio', init: () => this.initializePortfolio() },
             { name: 'Contact', init: () => this.initializeContact() },
             { name: 'Chatbot', init: () => this.initializeChatbot() }
@@ -198,6 +200,13 @@ class DataCryptLabsManager {
                 console.error(`❌ Error loading ${component.name} component:`, error);
             }
         }
+    }
+
+    /**
+     * Inicializar sistema de traducciones
+     */
+    initializeTranslations() {
+        this.translationSystem = new TranslationSystem();
     }
 
     /**
@@ -370,6 +379,32 @@ class DataCryptLabsManager {
                 this.saveBIMetrics();
             });
         });
+    }
+
+    /**
+     * Inicializar Data Wizard Game
+     */
+    initializeDataWizard() {
+        // Inicializar el juego Data Wizard
+        this.dataWizardGame = new DataWizardGame();
+        
+        // Observer para trackear engagement del juego
+        const gameSection = document.querySelector('#data-wizard');
+        if (gameSection) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.trackEvent('game_section_view', {
+                            timestamp: Date.now(),
+                            section: 'data-wizard'
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            observer.observe(gameSection);
+        }
     }
 
     /**
@@ -996,6 +1031,656 @@ class PortfolioCarousel {
     destroy() {
         this.pauseAutoPlay();
         // Remove event listeners if needed
+    }
+}
+
+// ==========================================
+// DATA WIZARD GAME MANAGER
+// ==========================================
+class DataWizardGame {
+    constructor() {
+        this.canvas = document.getElementById('dataWizardCanvas');
+        this.ctx = this.canvas ? this.canvas.getContext('2d') : null;
+        this.gameOverlay = document.getElementById('gameOverlay');
+        this.startBtn = document.getElementById('startGameBtn');
+        this.playAgainBtn = document.getElementById('playAgainBtn');
+        this.contactUsBtn = document.getElementById('contactUsBtn');
+        
+        // Game state
+        this.isPlaying = false;
+        this.isPaused = false;
+        this.score = 0;
+        this.level = 1;
+        this.timeLeft = 60;
+        this.dataPoints = 0;
+        this.gameTimer = null;
+        
+        // Game objects
+        this.pixels = [];
+        this.connections = [];
+        this.particles = [];
+        this.selectedPixels = [];
+        
+        // Game settings
+        this.pixelSize = 32;
+        this.gridWidth = 20;
+        this.gridHeight = 15;
+        this.colors = ['#3b82f6', '#f59e0b', '#10b981', '#ef4444', '#8b5cf6', '#f97316'];
+        this.targetScore = 1000;
+        
+        this.initialize();
+    }
+    
+    initialize() {
+        if (!this.canvas || !this.ctx) return;
+        
+        this.setupCanvas();
+        this.setupEventListeners();
+        this.generatePixelField();
+        
+        console.log('🎮 Data Wizard Game initialized');
+    }
+    
+    setupCanvas() {
+        // Set up canvas dimensions
+        const rect = this.canvas.getBoundingClientRect();
+        this.canvas.width = 800;
+        this.canvas.height = 600;
+        
+        // Enable pixel-perfect rendering
+        this.ctx.imageSmoothingEnabled = false;
+        this.ctx.msImageSmoothingEnabled = false;
+        this.ctx.webkitImageSmoothingEnabled = false;
+    }
+    
+    setupEventListeners() {
+        if (this.startBtn) {
+            this.startBtn.addEventListener('click', () => this.startGame());
+        }
+        
+        if (this.playAgainBtn) {
+            this.playAgainBtn.addEventListener('click', () => this.resetGame());
+        }
+        
+        if (this.contactUsBtn) {
+            this.contactUsBtn.addEventListener('click', () => {
+                document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+        
+        if (this.canvas) {
+            this.canvas.addEventListener('click', (e) => this.handleCanvasClick(e));
+            this.canvas.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+        }
+    }
+    
+    startGame() {
+        this.isPlaying = true;
+        this.score = 0;
+        this.level = 1;
+        this.timeLeft = 60;
+        this.dataPoints = 0;
+        this.selectedPixels = [];
+        this.connections = [];
+        
+        this.hideOverlay();
+        this.generatePixelField();
+        this.startGameTimer();
+        this.gameLoop();
+        
+        this.updateUI();
+    }
+    
+    resetGame() {
+        this.stopGame();
+        this.showStartScreen();
+    }
+    
+    stopGame() {
+        this.isPlaying = false;
+        if (this.gameTimer) {
+            clearInterval(this.gameTimer);
+            this.gameTimer = null;
+        }
+    }
+    
+    startGameTimer() {
+        this.gameTimer = setInterval(() => {
+            this.timeLeft--;
+            this.updateUI();
+            
+            if (this.timeLeft <= 0) {
+                this.endGame();
+            }
+        }, 1000);
+    }
+    
+    generatePixelField() {
+        this.pixels = [];
+        const offsetX = (this.canvas.width - this.gridWidth * this.pixelSize) / 2;
+        const offsetY = (this.canvas.height - this.gridHeight * this.pixelSize) / 2;
+        
+        for (let x = 0; x < this.gridWidth; x++) {
+            for (let y = 0; y < this.gridHeight; y++) {
+                this.pixels.push({
+                    x: offsetX + x * this.pixelSize,
+                    y: offsetY + y * this.pixelSize,
+                    gridX: x,
+                    gridY: y,
+                    color: this.colors[Math.floor(Math.random() * this.colors.length)],
+                    isSelected: false,
+                    alpha: 1,
+                    pulsePhase: Math.random() * Math.PI * 2
+                });
+            }
+        }
+    }
+    
+    handleCanvasClick(e) {
+        if (!this.isPlaying) return;
+        
+        const rect = this.canvas.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const clickY = e.clientY - rect.top;
+        
+        // Scale for canvas resolution
+        const scaleX = this.canvas.width / rect.width;
+        const scaleY = this.canvas.height / rect.height;
+        const scaledX = clickX * scaleX;
+        const scaledY = clickY * scaleY;
+        
+        const clickedPixel = this.getPixelAt(scaledX, scaledY);
+        
+        if (clickedPixel) {
+            this.selectPixel(clickedPixel);
+        }
+    }
+    
+    handleMouseMove(e) {
+        if (!this.isPlaying) return;
+        
+        const rect = this.canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        
+        // Scale for canvas resolution
+        const scaleX = this.canvas.width / rect.width;
+        const scaleY = this.canvas.height / rect.height;
+        const scaledX = mouseX * scaleX;
+        const scaledY = mouseY * scaleY;
+        
+        this.hoveredPixel = this.getPixelAt(scaledX, scaledY);
+    }
+    
+    getPixelAt(x, y) {
+        return this.pixels.find(pixel => 
+            x >= pixel.x && x < pixel.x + this.pixelSize &&
+            y >= pixel.y && y < pixel.y + this.pixelSize
+        );
+    }
+    
+    selectPixel(pixel) {
+        if (pixel.isSelected) return;
+        
+        // Check if this pixel can connect to selected pixels
+        if (this.selectedPixels.length > 0) {
+            const lastSelected = this.selectedPixels[this.selectedPixels.length - 1];
+            if (!this.canConnect(lastSelected, pixel)) return;
+        }
+        
+        pixel.isSelected = true;
+        this.selectedPixels.push(pixel);
+        
+        // Check for valid connections (3 or more of same color)
+        if (this.selectedPixels.length >= 3) {
+            const sameColor = this.selectedPixels.every(p => p.color === this.selectedPixels[0].color);
+            if (sameColor) {
+                this.scoreConnection();
+            }
+        }
+    }
+    
+    canConnect(pixel1, pixel2) {
+        const dx = Math.abs(pixel1.gridX - pixel2.gridX);
+        const dy = Math.abs(pixel1.gridY - pixel2.gridY);
+        return (dx <= 1 && dy <= 1) && pixel1.color === pixel2.color;
+    }
+    
+    scoreConnection() {
+        const points = this.selectedPixels.length * 100 * this.level;
+        this.score += points;
+        this.dataPoints += this.selectedPixels.length;
+        
+        // Create particle effects
+        this.selectedPixels.forEach(pixel => {
+            this.createParticleExplosion(pixel.x + this.pixelSize/2, pixel.y + this.pixelSize/2, pixel.color);
+        });
+        
+        // Remove connected pixels
+        this.selectedPixels.forEach(pixel => {
+            const index = this.pixels.indexOf(pixel);
+            if (index > -1) {
+                this.pixels.splice(index, 1);
+            }
+        });
+        
+        this.selectedPixels = [];
+        this.addNewPixels();
+        this.updateUI();
+        
+        // Check for level up
+        if (this.score >= this.targetScore * this.level) {
+            this.levelUp();
+        }
+    }
+    
+    createParticleExplosion(x, y, color) {
+        for (let i = 0; i < 8; i++) {
+            this.particles.push({
+                x: x,
+                y: y,
+                vx: (Math.random() - 0.5) * 4,
+                vy: (Math.random() - 0.5) * 4,
+                color: color,
+                life: 1,
+                decay: 0.02
+            });
+        }
+    }
+    
+    addNewPixels() {
+        // Add new pixels from top
+        const offsetX = (this.canvas.width - this.gridWidth * this.pixelSize) / 2;
+        const offsetY = (this.canvas.height - this.gridHeight * this.pixelSize) / 2;
+        
+        for (let i = 0; i < 5; i++) {
+            this.pixels.push({
+                x: offsetX + Math.random() * (this.gridWidth - 1) * this.pixelSize,
+                y: offsetY - this.pixelSize,
+                gridX: Math.floor(Math.random() * this.gridWidth),
+                gridY: -1,
+                color: this.colors[Math.floor(Math.random() * this.colors.length)],
+                isSelected: false,
+                alpha: 1,
+                pulsePhase: Math.random() * Math.PI * 2
+            });
+        }
+    }
+    
+    levelUp() {
+        this.level++;
+        this.timeLeft += 30; // Bonus time
+        this.targetScore = 1000 * this.level;
+        
+        // Visual feedback
+        this.createLevelUpEffect();
+        this.updateUI();
+    }
+    
+    createLevelUpEffect() {
+        // Create celebration particles
+        for (let i = 0; i < 20; i++) {
+            this.particles.push({
+                x: this.canvas.width / 2,
+                y: this.canvas.height / 2,
+                vx: (Math.random() - 0.5) * 8,
+                vy: (Math.random() - 0.5) * 8,
+                color: '#f59e0b',
+                life: 1,
+                decay: 0.01
+            });
+        }
+    }
+    
+    gameLoop() {
+        if (!this.isPlaying) return;
+        
+        this.update();
+        this.render();
+        
+        requestAnimationFrame(() => this.gameLoop());
+    }
+    
+    update() {
+        // Update particles
+        this.particles = this.particles.filter(particle => {
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            particle.life -= particle.decay;
+            return particle.life > 0;
+        });
+        
+        // Update pixel animations
+        this.pixels.forEach(pixel => {
+            pixel.pulsePhase += 0.1;
+        });
+    }
+    
+    render() {
+        // Clear canvas
+        this.ctx.fillStyle = '#0a0a0a';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // Draw background grid
+        this.drawGrid();
+        
+        // Draw pixels
+        this.pixels.forEach(pixel => this.drawPixel(pixel));
+        
+        // Draw connections
+        this.drawConnections();
+        
+        // Draw particles
+        this.particles.forEach(particle => this.drawParticle(particle));
+        
+        // Draw hover effect
+        if (this.hoveredPixel && !this.hoveredPixel.isSelected) {
+            this.drawHoverEffect(this.hoveredPixel);
+        }
+    }
+    
+    drawGrid() {
+        this.ctx.strokeStyle = 'rgba(59, 130, 246, 0.1)';
+        this.ctx.lineWidth = 1;
+        
+        const offsetX = (this.canvas.width - this.gridWidth * this.pixelSize) / 2;
+        const offsetY = (this.canvas.height - this.gridHeight * this.pixelSize) / 2;
+        
+        for (let x = 0; x <= this.gridWidth; x++) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(offsetX + x * this.pixelSize, offsetY);
+            this.ctx.lineTo(offsetX + x * this.pixelSize, offsetY + this.gridHeight * this.pixelSize);
+            this.ctx.stroke();
+        }
+        
+        for (let y = 0; y <= this.gridHeight; y++) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(offsetX, offsetY + y * this.pixelSize);
+            this.ctx.lineTo(offsetX + this.gridWidth * this.pixelSize, offsetY + y * this.pixelSize);
+            this.ctx.stroke();
+        }
+    }
+    
+    drawPixel(pixel) {
+        const pulse = Math.sin(pixel.pulsePhase) * 0.1 + 1;
+        const size = (this.pixelSize - 4) * pulse;
+        
+        this.ctx.fillStyle = pixel.color;
+        this.ctx.fillRect(
+            pixel.x + (this.pixelSize - size) / 2,
+            pixel.y + (this.pixelSize - size) / 2,
+            size,
+            size
+        );
+        
+        if (pixel.isSelected) {
+            this.ctx.strokeStyle = '#ffffff';
+            this.ctx.lineWidth = 2;
+            this.ctx.strokeRect(pixel.x + 2, pixel.y + 2, this.pixelSize - 4, this.pixelSize - 4);
+        }
+    }
+    
+    drawConnections() {
+        if (this.selectedPixels.length > 1) {
+            this.ctx.strokeStyle = '#ffffff';
+            this.ctx.lineWidth = 3;
+            this.ctx.beginPath();
+            
+            for (let i = 0; i < this.selectedPixels.length - 1; i++) {
+                const current = this.selectedPixels[i];
+                const next = this.selectedPixels[i + 1];
+                
+                const currentX = current.x + this.pixelSize / 2;
+                const currentY = current.y + this.pixelSize / 2;
+                const nextX = next.x + this.pixelSize / 2;
+                const nextY = next.y + this.pixelSize / 2;
+                
+                this.ctx.moveTo(currentX, currentY);
+                this.ctx.lineTo(nextX, nextY);
+            }
+            
+            this.ctx.stroke();
+        }
+    }
+    
+    drawParticle(particle) {
+        this.ctx.globalAlpha = particle.life;
+        this.ctx.fillStyle = particle.color;
+        this.ctx.fillRect(particle.x - 2, particle.y - 2, 4, 4);
+        this.ctx.globalAlpha = 1;
+    }
+    
+    drawHoverEffect(pixel) {
+        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeRect(pixel.x + 1, pixel.y + 1, this.pixelSize - 2, this.pixelSize - 2);
+    }
+    
+    updateUI() {
+        const scoreEl = document.getElementById('gameScore');
+        const levelEl = document.getElementById('gameLevel');
+        const timeEl = document.getElementById('gameTime');
+        const pointsEl = document.getElementById('dataPoints');
+        
+        if (scoreEl) scoreEl.textContent = this.score.toLocaleString();
+        if (levelEl) levelEl.textContent = this.level;
+        if (timeEl) timeEl.textContent = this.timeLeft;
+        if (pointsEl) pointsEl.textContent = this.dataPoints;
+        
+        // Add animation to score updates
+        if (scoreEl) {
+            scoreEl.classList.add('score-animation');
+            setTimeout(() => scoreEl.classList.remove('score-animation'), 300);
+        }
+    }
+    
+    endGame() {
+        this.stopGame();
+        this.showGameOverScreen();
+    }
+    
+    showStartScreen() {
+        if (this.gameOverlay) {
+            this.gameOverlay.classList.remove('hidden');
+            document.querySelector('.game-start').classList.remove('hidden');
+            document.querySelector('.game-over').classList.add('hidden');
+        }
+    }
+    
+    showGameOverScreen() {
+        if (this.gameOverlay) {
+            this.gameOverlay.classList.remove('hidden');
+            document.querySelector('.game-start').classList.add('hidden');
+            document.querySelector('.game-over').classList.remove('hidden');
+            
+            // Update final stats
+            const finalScore = document.getElementById('finalScore');
+            const finalLevel = document.getElementById('finalLevel');
+            const gameRating = document.getElementById('gameRating');
+            
+            if (finalScore) finalScore.textContent = this.score.toLocaleString();
+            if (finalLevel) finalLevel.textContent = this.level;
+            if (gameRating) gameRating.textContent = this.getGameRating();
+        }
+    }
+    
+    hideOverlay() {
+        if (this.gameOverlay) {
+            this.gameOverlay.classList.add('hidden');
+        }
+    }
+    
+    getGameRating() {
+        if (this.score >= 10000) return 'Data Scientist 🧬';
+        if (this.score >= 7500) return 'Senior Analyst 🎯';
+        if (this.score >= 5000) return 'Data Analyst 📊';
+        if (this.score >= 2500) return 'Junior Analyst 📈';
+        return 'Data Apprentice 🌱';
+    }
+}
+
+// ==========================================
+// MULTILANGUAGE TRANSLATION SYSTEM
+// ==========================================
+class TranslationSystem {
+    constructor() {
+        this.currentLanguage = localStorage.getItem('datacrypt-language') || 'es';
+        this.translations = window.TRANSLATIONS || {};
+        this.languageToggle = document.getElementById('language-toggle');
+        this.languageDropdown = document.getElementById('language-dropdown');
+        this.currentLangSpan = document.getElementById('current-lang');
+        
+        this.initialize();
+    }
+    
+    initialize() {
+        this.setupEventListeners();
+        this.updateLanguageDisplay();
+        this.translatePage();
+        
+        console.log('🌐 Translation System initialized with language:', this.currentLanguage);
+    }
+    
+    setupEventListeners() {
+        // Language toggle click
+        if (this.languageToggle) {
+            this.languageToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.toggleLanguageDropdown();
+            });
+        }
+        
+        // Language option clicks
+        if (this.languageDropdown) {
+            this.languageDropdown.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const langOption = e.target.closest('.lang-option');
+                if (langOption) {
+                    const newLang = langOption.dataset.lang;
+                    this.changeLanguage(newLang);
+                }
+            });
+        }
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            this.closeLanguageDropdown();
+        });
+    }
+    
+    toggleLanguageDropdown() {
+        const selector = document.querySelector('.language-selector');
+        if (selector) {
+            selector.classList.toggle('active');
+        }
+    }
+    
+    closeLanguageDropdown() {
+        const selector = document.querySelector('.language-selector');
+        if (selector) {
+            selector.classList.remove('active');
+        }
+    }
+    
+    changeLanguage(newLanguage) {
+        if (newLanguage !== this.currentLanguage && this.translations[newLanguage]) {
+            this.currentLanguage = newLanguage;
+            localStorage.setItem('datacrypt-language', newLanguage);
+            
+            this.updateLanguageDisplay();
+            this.translatePage();
+            this.closeLanguageDropdown();
+            
+            // Track language change
+            if (window.DataCryptLabs && window.DataCryptLabs.trackEvent) {
+                window.DataCryptLabs.trackEvent('language_change', {
+                    from: this.currentLanguage,
+                    to: newLanguage,
+                    timestamp: Date.now()
+                });
+            }
+            
+            console.log('🌐 Language changed to:', newLanguage);
+        }
+    }
+    
+    updateLanguageDisplay() {
+        if (this.currentLangSpan) {
+            this.currentLangSpan.textContent = this.currentLanguage.toUpperCase();
+        }
+        
+        // Update document language attribute
+        document.documentElement.lang = this.currentLanguage;
+    }
+    
+    translatePage() {
+        const translations = this.translations[this.currentLanguage];
+        if (!translations) return;
+        
+        // Translate elements with data-translate attribute
+        const elementsToTranslate = document.querySelectorAll('[data-translate]');
+        elementsToTranslate.forEach(element => {
+            const key = element.dataset.translate;
+            const translation = this.getNestedTranslation(translations, key);
+            if (translation) {
+                element.textContent = translation;
+            }
+        });
+        
+        // Translate attributes with data-translate-attr
+        const elementsWithAttrs = document.querySelectorAll('[data-translate-attr]');
+        elementsWithAttrs.forEach(element => {
+            const attrs = element.dataset.translateAttr.split(',');
+            attrs.forEach(attr => {
+                const [attrName, key] = attr.split(':');
+                const translation = this.getNestedTranslation(translations, key);
+                if (translation) {
+                    element.setAttribute(attrName.trim(), translation);
+                }
+            });
+        });
+        
+        // Update page title and meta
+        this.updateSEO();
+    }
+    
+    updateSEO() {
+        if (this.currentLanguage === 'en') {
+            document.title = 'DataCrypt_Labs - Business Intelligence & Data Science Solutions | ML Consulting';
+            const metaDescription = document.querySelector('meta[name="description"]');
+            if (metaDescription) {
+                metaDescription.content = 'DataCrypt_Labs - Leading company in Business Intelligence, Machine Learning and Data Science. We automate data-driven solutions for enterprises. Contact: 3232066197';
+            }
+        } else {
+            document.title = 'DataCrypt_Labs - Business Intelligence y Data Science | Consultoría ML';
+            const metaDescription = document.querySelector('meta[name="description"]');
+            if (metaDescription) {
+                metaDescription.content = 'DataCrypt_Labs - Empresa líder en Business Intelligence, Machine Learning y Data Science. Automatizamos soluciones data-driven para empresas. Contacto: 3232066197';
+            }
+        }
+    }
+    
+    getNestedTranslation(translations, key) {
+        const keys = key.split('.');
+        let current = translations;
+        
+        for (const k of keys) {
+            if (current && typeof current === 'object' && k in current) {
+                current = current[k];
+            } else {
+                return null;
+            }
+        }
+        
+        return typeof current === 'string' ? current : null;
+    }
+    
+    getCurrentLanguage() {
+        return this.currentLanguage;
+    }
+    
+    getTranslation(key) {
+        return this.getNestedTranslation(this.translations[this.currentLanguage], key);
     }
 }
 
