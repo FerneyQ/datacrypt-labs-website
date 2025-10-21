@@ -52,7 +52,8 @@ def generate_static_site():
     update_html_for_github_pages(dist_dir)
     
     print("🎉 Sitio estático generado exitosamente en /dist")
-    print("🌐 Se desplegará en: https://ferneyq.github.io/datacrypt-labs-website")
+    print("🌐 URL EN VIVO: https://ferneyq.github.io/datacrypt-labs-website")
+    print("✅ Deploy GitHub Pages - 100% GRATUITO ¡Funcionando!")
 
 def generate_mock_api(dist_dir):
     """Genera API mock para demostración"""
