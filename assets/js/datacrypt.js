@@ -373,18 +373,15 @@ class DataCryptLabsManager {
     }
 
     /**
-     * Inicializar galería del portafolio
+     * Inicializar galería del portafolio con carousel automático
      */
     initializePortfolio() {
-        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        // Inicializar carousel del portafolio
+        this.portfolioCarousel = new PortfolioCarousel();
         
-        portfolioItems.forEach((item, index) => {
-            // Animación de entrada
-            setTimeout(() => {
-                item.classList.add('fade-in', 'visible');
-            }, index * 150);
-            
-            // Track views del portafolio
+        // Observer para trackear visualizaciones
+        const portfolioSection = document.querySelector('#portafolio');
+        if (portfolioSection) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -393,10 +390,18 @@ class DataCryptLabsManager {
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.5 });
+            }, { threshold: 0.3 });
             
-            observer.observe(item);
-        });
+            observer.observe(portfolioSection);
+        }
+        
+        // Animación de entrada para el carousel
+        const carouselContainer = document.querySelector('.portfolio-carousel-container');
+        if (carouselContainer) {
+            setTimeout(() => {
+                carouselContainer.classList.add('fade-in', 'visible');
+            }, 300);
+        }
     }
 
     /**
@@ -792,6 +797,205 @@ class DataCryptLabsManager {
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
         };
+    }
+}
+
+// ==========================================
+// PORTFOLIO CAROUSEL MANAGER
+// ==========================================
+class PortfolioCarousel {
+    constructor() {
+        this.carousel = document.getElementById('portfolioCarousel');
+        this.slides = document.querySelectorAll('.portfolio-slide');
+        this.indicators = document.querySelectorAll('.indicator');
+        this.prevBtn = document.getElementById('prevBtn');
+        this.nextBtn = document.getElementById('nextBtn');
+        
+        this.currentSlide = 0;
+        this.totalSlides = this.slides.length;
+        this.isAutoPlaying = true;
+        this.autoPlayInterval = null;
+        this.transitionDuration = 600;
+        
+        this.initialize();
+    }
+    
+    initialize() {
+        if (!this.carousel || this.totalSlides === 0) return;
+        
+        this.setupEventListeners();
+        this.startAutoPlay();
+        this.updateSlidePosition();
+        
+        console.log('🎠 Portfolio Carousel initialized with', this.totalSlides, 'slides');
+    }
+    
+    setupEventListeners() {
+        // Botones de navegación
+        if (this.prevBtn) {
+            this.prevBtn.addEventListener('click', () => this.previousSlide());
+        }
+        
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', () => this.nextSlide());
+        }
+        
+        // Indicadores
+        this.indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => this.goToSlide(index));
+        });
+        
+        // Pausar autoplay en hover
+        if (this.carousel) {
+            this.carousel.addEventListener('mouseenter', () => this.pauseAutoPlay());
+            this.carousel.addEventListener('mouseleave', () => this.resumeAutoPlay());
+        }
+        
+        // Control de teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') this.previousSlide();
+            if (e.key === 'ArrowRight') this.nextSlide();
+        });
+        
+        // Touch events para móviles
+        this.setupTouchEvents();
+    }
+    
+    setupTouchEvents() {
+        let startX = 0;
+        let endX = 0;
+        
+        this.carousel.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            this.pauseAutoPlay();
+        });
+        
+        this.carousel.addEventListener('touchmove', (e) => {
+            e.preventDefault(); // Prevenir scroll
+        });
+        
+        this.carousel.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            this.handleSwipe(startX, endX);
+            this.resumeAutoPlay();
+        });
+    }
+    
+    handleSwipe(startX, endX) {
+        const threshold = 50; // Minimum swipe distance
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > threshold) {
+            if (diff > 0) {
+                this.nextSlide(); // Swipe left - next slide
+            } else {
+                this.previousSlide(); // Swipe right - previous slide
+            }
+        }
+    }
+    
+    nextSlide() {
+        this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+        this.updateSlidePosition();
+        this.trackCarouselInteraction('next');
+    }
+    
+    previousSlide() {
+        this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+        this.updateSlidePosition();
+        this.trackCarouselInteraction('previous');
+    }
+    
+    goToSlide(index) {
+        if (index >= 0 && index < this.totalSlides) {
+            this.currentSlide = index;
+            this.updateSlidePosition();
+            this.trackCarouselInteraction('indicator');
+        }
+    }
+    
+    updateSlidePosition() {
+        if (!this.carousel) return;
+        
+        // Smooth transition
+        this.carousel.style.transform = `translateX(-${this.currentSlide * 100}%)`;
+        
+        // Update indicators
+        this.updateIndicators();
+        
+        // Update slide states
+        this.updateSlideStates();
+    }
+    
+    updateIndicators() {
+        this.indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === this.currentSlide);
+        });
+    }
+    
+    updateSlideStates() {
+        this.slides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === this.currentSlide);
+        });
+    }
+    
+    startAutoPlay() {
+        if (!this.isAutoPlaying) return;
+        
+        this.autoPlayInterval = setInterval(() => {
+            this.nextSlide();
+        }, 5000); // Change slide every 5 seconds
+    }
+    
+    pauseAutoPlay() {
+        if (this.autoPlayInterval) {
+            clearInterval(this.autoPlayInterval);
+            this.autoPlayInterval = null;
+        }
+    }
+    
+    resumeAutoPlay() {
+        if (this.isAutoPlaying && !this.autoPlayInterval) {
+            this.startAutoPlay();
+        }
+    }
+    
+    toggleAutoPlay() {
+        this.isAutoPlaying = !this.isAutoPlaying;
+        
+        if (this.isAutoPlaying) {
+            this.startAutoPlay();
+        } else {
+            this.pauseAutoPlay();
+        }
+    }
+    
+    trackCarouselInteraction(action) {
+        // Track analytics if DataCryptLabs manager is available
+        if (window.DataCryptLabs && window.DataCryptLabs.trackEvent) {
+            window.DataCryptLabs.trackEvent('carousel_interaction', {
+                action: action,
+                slide: this.currentSlide,
+                timestamp: Date.now()
+            });
+        }
+        
+        // Update portfolio views metric
+        const portfolioViews = parseInt(localStorage.getItem('datacrypt-portfolioviews') || '0') + 1;
+        localStorage.setItem('datacrypt-portfolioviews', portfolioViews.toString());
+    }
+    
+    getCurrentSlide() {
+        return this.currentSlide;
+    }
+    
+    getTotalSlides() {
+        return this.totalSlides;
+    }
+    
+    destroy() {
+        this.pauseAutoPlay();
+        // Remove event listeners if needed
     }
 }
 

@@ -487,67 +487,143 @@
                     </p>
                 </div>
                 
-                <div class="portfolio-grid">
-                    <div class="portfolio-item fade-in" data-delay="100">
-                        <div class="portfolio-image">
-                            <img src="Material visual/Portafolio/1.jpg" alt="Proyecto de Business Intelligence" loading="lazy">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-content">
-                                    <h3>Dashboard Ejecutivo BI</h3>
-                                    <p>Solución integral de Business Intelligence para empresa multinacional</p>
-                                    <div class="portfolio-tags">
-                                        <span class="tag">Power BI</span>
-                                        <span class="tag">SQL Server</span>
-                                        <span class="tag">Python</span>
+                <div class="portfolio-carousel-container">
+                    <div class="portfolio-carousel" id="portfolioCarousel">
+                        <div class="portfolio-slide active">
+                            <div class="portfolio-item">
+                                <div class="portfolio-image">
+                                    <img src="Material visual/Portafolio/1.jpg" alt="Proyecto de Business Intelligence" loading="lazy">
+                                    <div class="portfolio-overlay">
+                                        <div class="portfolio-content">
+                                            <h3>Dashboard Ejecutivo BI</h3>
+                                            <p>Solución integral de Business Intelligence para empresa multinacional</p>
+                                            <div class="portfolio-tags">
+                                                <span class="tag">Power BI</span>
+                                                <span class="tag">SQL Server</span>
+                                                <span class="tag">Python</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-slide">
+                            <div class="portfolio-item">
+                                <div class="portfolio-image">
+                                    <img src="Material visual/Portafolio/2.jpg" alt="Proyecto de Machine Learning" loading="lazy">
+                                    <div class="portfolio-overlay">
+                                        <div class="portfolio-content">
+                                            <h3>Modelo Predictivo ML</h3>
+                                            <p>Sistema de predicción de demanda con 95% de precisión</p>
+                                            <div class="portfolio-tags">
+                                                <span class="tag">Machine Learning</span>
+                                                <span class="tag">TensorFlow</span>
+                                                <span class="tag">AWS</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-slide">
+                            <div class="portfolio-item">
+                                <div class="portfolio-image">
+                                    <img src="Material visual/Portafolio/3.jpg" alt="Proyecto de Big Data" loading="lazy">
+                                    <div class="portfolio-overlay">
+                                        <div class="portfolio-content">
+                                            <h3>Arquitectura Big Data</h3>
+                                            <p>Pipeline de datos en tiempo real para análisis de IoT</p>
+                                            <div class="portfolio-tags">
+                                                <span class="tag">Apache Spark</span>
+                                                <span class="tag">Kafka</span>
+                                                <span class="tag">Azure</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-slide">
+                            <div class="portfolio-item">
+                                <div class="portfolio-image">
+                                    <img src="Material visual/Portafolio/4.jpg" alt="Proyecto de Data Visualization" loading="lazy">
+                                    <div class="portfolio-overlay">
+                                        <div class="portfolio-content">
+                                            <h3>Dashboard Analytics</h3>
+                                            <p>Visualización interactiva de métricas de rendimiento</p>
+                                            <div class="portfolio-tags">
+                                                <span class="tag">Tableau</span>
+                                                <span class="tag">D3.js</span>
+                                                <span class="tag">React</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-slide">
+                            <div class="portfolio-item">
+                                <div class="portfolio-image">
+                                    <img src="Material visual/Portafolio/5.jpg" alt="Proyecto de ETL" loading="lazy">
+                                    <div class="portfolio-overlay">
+                                        <div class="portfolio-content">
+                                            <h3>Pipeline ETL Avanzado</h3>
+                                            <p>Automatización de procesos de extracción y transformación</p>
+                                            <div class="portfolio-tags">
+                                                <span class="tag">Apache Airflow</span>
+                                                <span class="tag">Docker</span>
+                                                <span class="tag">PostgreSQL</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-slide">
+                            <div class="portfolio-item">
+                                <div class="portfolio-image">
+                                    <img src="Material visual/Portafolio/6.jpg" alt="Proyecto de AI Analytics" loading="lazy">
+                                    <div class="portfolio-overlay">
+                                        <div class="portfolio-content">
+                                            <h3>IA para Análisis Predictivo</h3>
+                                            <p>Sistema inteligente de análisis de comportamiento de clientes</p>
+                                            <div class="portfolio-tags">
+                                                <span class="tag">Deep Learning</span>
+                                                <span class="tag">PyTorch</span>
+                                                <span class="tag">Google Cloud</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="portfolio-item fade-in" data-delay="200">
-                        <div class="portfolio-image">
-                            <img src="Material visual/Portafolio/2.jpg" alt="Proyecto de Machine Learning" loading="lazy">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-content">
-                                    <h3>Modelo Predictivo ML</h3>
-                                    <p>Sistema de predicción de demanda con 95% de precisión</p>
-                                    <div class="portfolio-tags">
-                                        <span class="tag">Machine Learning</span>
-                                        <span class="tag">TensorFlow</span>
-                                        <span class="tag">AWS</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Controles del carousel -->
+                    <div class="carousel-controls">
+                        <button class="carousel-btn prev-btn" id="prevBtn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-btn next-btn" id="nextBtn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
                     </div>
                     
-                    <div class="portfolio-item fade-in" data-delay="300">
-                        <div class="portfolio-image">
-                            <img src="Material visual/Portafolio/3.jpg" alt="Proyecto de Big Data" loading="lazy">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-content">
-                                    <h3>Arquitectura Big Data</h3>
-                                    <p>Pipeline de datos en tiempo real para análisis de IoT</p>
-                                    <div class="portfolio-tags">
-                                        <span class="tag">Apache Spark</span>
-                                        <span class="tag">Kafka</span>
-                                        <span class="tag">Azure</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Indicadores del carousel -->
+                    <div class="carousel-indicators">
+                        <span class="indicator active" data-slide="0"></span>
+                        <span class="indicator" data-slide="1"></span>
+                        <span class="indicator" data-slide="2"></span>
+                        <span class="indicator" data-slide="3"></span>
+                        <span class="indicator" data-slide="4"></span>
+                        <span class="indicator" data-slide="5"></span>
                     </div>
-                    
-                    <div class="portfolio-item fade-in" data-delay="400">
-                        <div class="portfolio-image">
-                            <img src="Material visual/Portafolio/4.jpg" alt="Proyecto de Data Visualization" loading="lazy">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-content">
-                                    <h3>Dashboard Analytics</h3>
-                                    <p>Visualización interactiva de métricas de rendimiento</p>
-                                    <div class="portfolio-tags">
-                                        <span class="tag">Tableau</span>
+                </div>
                                         <span class="tag">D3.js</span>
                                         <span class="tag">React</span>
                                     </div>
@@ -640,7 +716,7 @@
                             </div>
                             <div class="contact-details">
                                 <h4>Email</h4>
-                                <p><a href="mailto:info@datacrypt-labs.com">info@datacrypt-labs.com</a></p>
+                                <p><a href="mailto:ferneyquiroga97@hotmail.com">ferneyquiroga97@hotmail.com</a></p>
                             </div>
                         </div>
                         
@@ -657,14 +733,8 @@
                         <div class="social-links">
                             <h4>Síguenos</h4>
                             <div class="social-icons">
-                                <a href="https://linkedin.com/company/datacrypt-labs" target="_blank" aria-label="LinkedIn">
+                                <a href="https://www.linkedin.com/in/ferney-david-quiroga-pinzón-78b91122b" target="_blank" aria-label="LinkedIn">
                                     <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a href="https://twitter.com/datacrypt_labs" target="_blank" aria-label="Twitter">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="https://github.com/datacrypt-labs" target="_blank" aria-label="GitHub">
-                                    <i class="fab fa-github"></i>
                                 </a>
                             </div>
                         </div>
@@ -770,14 +840,8 @@
                     </div>
                     
                     <div class="footer-social">
-                        <a href="https://linkedin.com/company/datacrypt-labs" target="_blank" aria-label="LinkedIn">
+                        <a href="https://www.linkedin.com/in/ferney-david-quiroga-pinzón-78b91122b" target="_blank" aria-label="LinkedIn">
                             <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://twitter.com/datacrypt_labs" target="_blank" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://github.com/datacrypt-labs" target="_blank" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
                         </a>
                     </div>
                 </div>
