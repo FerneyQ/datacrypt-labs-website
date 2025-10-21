@@ -1,0 +1,41 @@
+# DataCrypt_Labs - Archivos a ignorar en Git
+
+# Archivos de desarrollo
+/tests/
+/docs/development/
+*.log
+.DS_Store
+Thumbs.db
+
+# Configuraciones locales
+.env
+.env.local
+config/local.js
+
+# Cache y temporales
+node_modules/
+.cache/
+dist/
+build/
+
+# Archivos de editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backups
+*.bak
+*.tmp
+
+# Archivos específicos de desarrollo
+IMPLEMENTATION_SUCCESS.js
+
+# Mantener archivos importantes para producción
+!index.html
+!assets/
+!Material visual/
+!sitemap.xml
+!robots.txt
+!README.md

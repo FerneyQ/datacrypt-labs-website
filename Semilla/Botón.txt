@@ -1,0 +1,12 @@
+Aplica la filosofía "La Mejora Continua" versión 2.1 a mi bot [Página Web - Portafolio].
+
+Mi bot [En realidad es una página web portafolio personal. Si podemos dejarle un chat bot de principio estaría cool] pero presenta estos problemas:
+- [Solo tengo el Prompt "Filosofia_Mejora_Continua" como semilla]
+- [Necesito crear una estructura web completa desde cero]
+- [Falta arquitectura modular para el portafolio]
+- [Sin testing ni validación implementada]
+- [Configuración hardcodeada]
+- [Falta sistema de componentes reutilizables]
+
+Siguiendo la metodología exitosa del Pescador Bot 2.0, inicia con Fase 1.
+Requisitos: Zero breaking changes + testing desde día 1 + validación continua.

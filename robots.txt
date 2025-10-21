@@ -1,0 +1,42 @@
+# Robots.txt para DataCrypt_Labs
+# Empresa de Business Intelligence & Data Science
+
+User-agent: *
+Allow: /
+
+# Permitir acceso a recursos importantes
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /Material visual/Identidad.JPG
+Allow: /Material visual/Portafolio/
+
+# Bloquear archivos de desarrollo y configuración
+Disallow: /assets/js/validation.js
+Disallow: /tests/
+Disallow: /docs/
+Disallow: /*.log
+Disallow: /config/
+Disallow: /src/
+Disallow: /Semilla/
+
+# Optimización para buscadores específicos
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 3
+
+# Sitemap
+Sitemap: https://datacrypt-labs.com/sitemap.xml
+
+# Información de contacto
+# Empresa: DataCrypt_Labs
+# Servicios: Business Intelligence, Machine Learning, Data Science
+# Teléfono: 3232066197
+# Ubicación: Colombia
