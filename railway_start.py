@@ -17,10 +17,27 @@ def main():
     """Ejecutar servidor optimizado para Railway"""
     
     # Railway provides PORT environment variable - CRITICAL for Railway deployment
-    port = int(os.environ.get("PORT", 8000))
+    # Railway REQUIRES the app to listen on the exact port provided
+    port_env = os.environ.get("PORT")
+    if port_env:
+        port = int(port_env)
+        print(f"✅ Railway PORT detected: {port}")
+    else:
+        port = 8000
+        print(f"⚠️ No Railway PORT env var - using default: {port}")
     
-    print(f"🔧 Railway Port Configuration: {port}")
-    print(f"🌍 Environment PORT variable: {os.environ.get('PORT', 'Not set - using 8000')}")
+    print(f"🔧 Starting server on HOST: 0.0.0.0, PORT: {port}")
+    print(f"🌍 All environment variables: PORT={os.environ.get('PORT', 'NONE')}")
+    
+    # Test import before starting server
+    try:
+        print("🧪 Testing backend import...")
+        from backend.main import app
+        print("✅ Backend imported successfully!")
+    except Exception as e:
+        print(f"❌ CRITICAL: Backend import failed: {e}")
+        print("🔍 Python path:", sys.path)
+        return
     
     # Configuration for Railway deployment
     config = {
