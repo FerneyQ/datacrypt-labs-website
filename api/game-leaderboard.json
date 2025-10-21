@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "leaderboard": [
+    {"player": "DataMaster", "score": 9850, "level": 10},
+    {"player": "CryptoAnalyst", "score": 9200, "level": 9},
+    {"player": "MLExpert", "score": 8750, "level": 8},
+    {"player": "BISpecialist", "score": 8100, "level": 7},
+    {"player": "DataScientist", "score": 7650, "level": 6}
+  ],
+  "total_players": 1247,
+  "timestamp": "2025-10-21T20:30:00Z",
+  "game_mode": "GitHub Pages Demo"
+}
