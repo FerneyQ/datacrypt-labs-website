@@ -1,0 +1,600 @@
+/**
+ * 🐍 PYTHON BACKEND INTEGRATION - STYLES v2.2
+ * Estilos para la integración con el backend Python
+ * 
+ * Filosofía Mejora Continua v2.2:
+ * - UI moderna para funcionalidades Python
+ * - Data Science dashboard styling
+ * - Responsive design para demos
+ * - Animations para feedback visual
+ */
+
+/* ==========================================
+   🐍 SECCIÓN PRINCIPAL PYTHON
+   ========================================== */
+
+.python-integration-section {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+    border-radius: 16px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.python-integration-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="python-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(59,130,246,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23python-grid)"/></svg>');
+    pointer-events: none;
+    z-index: 0;
+}
+
+.python-dashboard {
+    position: relative;
+    z-index: 1;
+}
+
+.python-dashboard h3 {
+    color: var(--text-primary);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ==========================================
+   📊 STATUS Y CONEXIÓN
+   ========================================== */
+
+.python-status {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+.python-status.connected {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.python-status.disconnected {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* ==========================================
+   🎯 GRID DE CARACTERÍSTICAS
+   ========================================== */
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 15px 35px rgba(59, 130, 246, 0.2);
+}
+
+.feature-card:hover::before {
+    left: 100%;
+}
+
+.feature-card h4 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.feature-card .btn {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+/* ==========================================
+   📊 RESULTADOS DE ANÁLISIS
+   ========================================== */
+
+.analytics-result,
+.ml-result,
+.crypto-result,
+.code-result {
+    margin-top: 1rem;
+    min-height: 60px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.analytics-display,
+.prediction-result,
+.crypto-prices,
+.code-executor {
+    padding: 1rem;
+}
+
+.analytics-display h5,
+.prediction-result h6,
+.crypto-prices h5,
+.code-executor h5 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.summary .stat {
+    background: rgba(59, 130, 246, 0.1);
+    padding: 0.5rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+}
+
+.analysis-plot {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================
+   🤖 PREDICTOR ML
+   ========================================== */
+
+.ml-predictor {
+    padding: 1rem;
+}
+
+.predictor-form {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.predictor-form label {
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.predictor-form select,
+.predictor-form input {
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+}
+
+.predictor-form select:focus,
+.predictor-form input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.prediction-details {
+    display: grid;
+    gap: 0.5rem;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.prediction-details > div {
+    font-size: 0.875rem;
+}
+
+/* ==========================================
+   💰 PRECIOS CRYPTO
+   ========================================== */
+
+.crypto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.crypto-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.crypto-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+.crypto-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.crypto-price {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #f59e0b;
+    margin-bottom: 0.25rem;
+}
+
+.crypto-change {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.crypto-change.positive {
+    color: #10b981;
+}
+
+.crypto-change.negative {
+    color: #ef4444;
+}
+
+.crypto-source {
+    text-align: center;
+    margin-top: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ==========================================
+   ⚡ EXECUTOR DE CÓDIGO
+   ========================================== */
+
+.code-executor {
+    padding: 1rem;
+}
+
+.code-form {
+    margin-bottom: 1rem;
+}
+
+#python-code {
+    width: 100%;
+    min-height: 150px;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--text-primary);
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    resize: vertical;
+    margin-bottom: 1rem;
+}
+
+#python-code:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.code-output,
+.error-output {
+    background: rgba(0, 0, 0, 0.7);
+    color: #00ff00;
+    padding: 1rem;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    margin: 1rem 0;
+    border-left: 4px solid #10b981;
+}
+
+.error-output {
+    color: #ff6b6b;
+    border-left-color: #ef4444;
+}
+
+.execution-success {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.execution-error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+/* ==========================================
+   🔄 ESTADOS DE CARGA
+   ========================================== */
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    animation: loadingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    font-weight: 500;
+}
+
+/* ==========================================
+   📢 NOTIFICACIONES
+   ========================================== */
+
+.python-notification,
+.python-offline-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    animation: slideInRight 0.3s ease-out;
+}
+
+.notification {
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    max-width: 400px;
+    position: relative;
+}
+
+.notification.success {
+    border-color: rgba(16, 185, 129, 0.3);
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.notification.error {
+    border-color: rgba(239, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.notification button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 1;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ==========================================
+   📱 RESPONSIVE DESIGN
+   ========================================== */
+
+/* Mobile */
+@media (max-width: 768px) {
+    .python-integration-section {
+        margin: 2rem 0;
+        padding: 1rem;
+    }
+    
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .feature-card {
+        padding: 1rem;
+    }
+    
+    .summary {
+        grid-template-columns: 1fr;
+    }
+    
+    .crypto-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .python-notification,
+    .python-offline-notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        right: 10px;
+    }
+    
+    .notification {
+        max-width: none;
+    }
+    
+    #python-code {
+        min-height: 120px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .crypto-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Desktop Large */
+@media (min-width: 1400px) {
+    .feature-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .python-integration-section {
+        padding: 3rem;
+    }
+}
+
+/* ==========================================
+   🌙 TEMA CLARO
+   ========================================== */
+
+[data-theme="light"] .python-integration-section {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
+    border-color: rgba(59, 130, 246, 0.15);
+}
+
+[data-theme="light"] .feature-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .analytics-result,
+[data-theme="light"] .ml-result,
+[data-theme="light"] .crypto-result,
+[data-theme="light"] .code-result {
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] #python-code {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.2);
+    color: #1f2937;
+}
+
+[data-theme="light"] .code-output {
+    background: rgba(0, 0, 0, 0.05);
+    color: #059669;
+}
+
+/* ==========================================
+   ♿ ACCESIBILIDAD
+   ========================================== */
+
+/* Focus states */
+.feature-card:focus-within {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .feature-card,
+    .crypto-item,
+    .loading,
+    .statusPulse,
+    .python-notification {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .feature-card:hover,
+    .crypto-item:hover {
+        transform: none !important;
+    }
+}
+
+/* High contrast */
+@media (prefers-contrast: high) {
+    .feature-card,
+    .crypto-item,
+    .notification {
+        border-width: 2px;
+    }
+    
+    .python-status {
+        border-width: 2px;
+    }
+}
