@@ -32,6 +32,43 @@ build/
 # Archivos específicos de desarrollo
 IMPLEMENTATION_SUCCESS.js
 
+# Python Backend
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+backend/venv/
+backend/env/
+backend/ENV/
+backend/.venv/
+backend/.env/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+backend/datacrypt.db
+
 # Mantener archivos importantes para producción
 !index.html
 !assets/
