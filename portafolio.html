@@ -91,6 +91,9 @@
     <link rel="stylesheet" href="src/components/DataCryptChatbot.css" media="print" onload="this.media='all'; this.onload=null;">
     <noscript><link rel="stylesheet" href="src/components/DataCryptChatbot.css"></noscript>
     
+    <!-- Portfolio Mejoras CSS -->
+    <link rel="stylesheet" href="assets/css/portfolio-cert-mejoras.css">
+    
     <!-- JSON-LD Schema Markup para SEO Empresarial -->
     <script type="application/ld+json">
     {
@@ -305,10 +308,35 @@
         <section id="portafolio" class="portfolio">
             <div class="container">
                 <div class="section-header">
-                    <h1 class="section-title fade-in">Nuestro Portafolio</h1>
+                    <div class="portfolio-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">340%</span>
+                            <span class="stat-label">ROI Promedio</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Industrias</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">96%</span>
+                            <span class="stat-label">Precisión IA</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Empresas</span>
+                        </div>
+                    </div>
+                    <h1 class="section-title fade-in">🏆 Casos de Éxito Comprobados</h1>
                     <p class="section-description fade-in" data-delay="200">
-                        Casos de éxito que demuestran nuestro expertise en transformación de datos
+                        <strong>Resultados medibles y transformación real.</strong> Proyectos implementados bajo metodología PDCA 
+                        con certificaciones DataCamp y métricas de éxito verificables en empresas líderes.
                     </p>
+                    <div class="portfolio-filters">
+                        <button class="filter-btn active" data-filter="all">Todos los Proyectos</button>
+                        <button class="filter-btn" data-filter="bi">Business Intelligence</button>
+                        <button class="filter-btn" data-filter="ml">Machine Learning</button>
+                        <button class="filter-btn" data-filter="bigdata">Big Data</button>
+                    </div>
                 </div>
                 
                 <div class="portfolio-carousel-container">

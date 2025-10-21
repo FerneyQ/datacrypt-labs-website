@@ -3517,6 +3517,7 @@ a:hover {
 
 .theme-applied .section-title h2 {
     background: linear-gradient(45deg, var(--theme-accent), var(--theme-accent-glow)) !important;
+    background-clip: text !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
 }

@@ -1,0 +1,64 @@
+{
+  "name": "datacrypt-labs-website",
+  "version": "1.0.0",
+  "description": "DataCrypt Labs - Professional Business Intelligence & Data Science Portfolio Website",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -p 8080 -c-1",
+    "build": "npm run minify-css && npm run optimize-images",
+    "minify-css": "cleancss -o assets/css/main.min.css assets/css/main.css",
+    "optimize-images": "imagemin Material\\ visual/*.jpg --out-dir=assets/images/optimized/",
+    "test": "jest",
+    "deploy": "gh-pages -d .",
+    "validate": "html-validate *.html",
+    "lighthouse": "lighthouse https://ferneyq.github.io/datacrypt-labs-website/ --output=json --output-path=./lighthouse-report.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FerneyQ/datacrypt-labs-website.git"
+  },
+  "keywords": [
+    "business-intelligence",
+    "data-science",
+    "machine-learning",
+    "portfolio",
+    "datacrypt-labs",
+    "analytics",
+    "big-data",
+    "consulting"
+  ],
+  "author": {
+    "name": "FerneyQ",
+    "email": "ferneyquirga97@hotmail.com",
+    "url": "https://ferneyq.github.io/datacrypt-labs-website/"
+  },
+  "license": "MIT",
+  "homepage": "https://ferneyq.github.io/datacrypt-labs-website/",
+  "devDependencies": {
+    "clean-css-cli": "^5.6.2",
+    "http-server": "^14.1.1",
+    "imagemin": "^8.0.1",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-webp": "^8.0.0",
+    "jest": "^29.7.0",
+    "html-validate": "^8.7.4",
+    "lighthouse": "^11.3.0",
+    "gh-pages": "^6.0.0"
+  },
+  "dependencies": {},
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie <= 11"
+  ],
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
