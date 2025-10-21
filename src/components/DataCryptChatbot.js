@@ -180,8 +180,8 @@ class DataCryptChatbot {
             contact: {
                 keywords: ['contacto', 'contactar', 'teléfono', 'email', 'ubicación', 'consulta', 'demo', 'reunión', 'agendar', 'whatsapp', 'llamar', 'escribir'],
                 responses: [
-                    "� **¡CONECTEMOS AHORA MISMO!** - Respuesta garantizada en **2 horas:**\n\n🔥 **CONTACTO DIRECTO:**\n• � **WhatsApp:** 3232066197 (Ferney Quiroga - CEO)\n• �📧 **Email Ejecutivo:** ferneyquiroga101@gmail.com\n• 📧 **Email Comercial:** ferneyquirga97@hotmail.com\n\n💼 **CONSULTA GRATUITA DISPONIBLE:**\n✅ Análisis de tu situación actual (sin costo)\n✅ Plan personalizado para tu empresa\n✅ Proyección de ROI específica\n\n**¿Prefieres WhatsApp o email?** ¡Te respondo personalmente! 🚀",
-                    "🎯 **FERNEY QUIROGA - CEO & Data Scientist**\n\n📞 **LÍNEA DIRECTA:** 3232066197\n📧 **Email Personal:** ferneyquiroga101@gmail.com\n\n**🏆 MIS CREDENCIALES:**\n• 10+ Certificaciones DataCamp verificadas\n• Especialista en MySQL, NoSQL, Python\n• Metodología PDCA para mejora continua\n\n**💡 ¿QUÉ INCLUYE TU CONSULTA GRATUITA?**\n1. Diagnóstico de tu infraestructura de datos\n2. Plan de implementación personalizado\n3. Estimación precisa de ROI y timeframe\n\n**¡Escríbeme directamente y empezamos hoy!** 🚀"
+                    "📧 **¡CONECTEMOS AHORA MISMO!** - Respuesta garantizada en **2 horas:**\n\n🔥 **CONTACTO DIRECTO:**\n• � **Email Ejecutivo:** ferneyquiroga101@gmail.com\n\n💼 **CONSULTA GRATUITA DISPONIBLE:**\n✅ Análisis de tu situación actual (sin costo)\n✅ Plan personalizado para tu empresa\n✅ Proyección de ROI específica\n\n**¡Escríbeme por email y te respondo personalmente!** 🚀",
+                    "🎯 **FERNEY QUIROGA - CEO & Data Scientist**\n\n\n📧 **Email Personal:** ferneyquiroga101@gmail.com\n\n**🏆 MIS CREDENCIALES:**\n• 10+ Certificaciones DataCamp verificadas\n• Especialista en MySQL, NoSQL, Python\n• Metodología PDCA para mejora continua\n\n**💡 ¿QUÉ INCLUYE TU CONSULTA GRATUITA?**\n1. Diagnóstico de tu infraestructura de datos\n2. Plan de implementación personalizado\n3. Estimación precisa de ROI y timeframe\n\n**¡Escríbeme directamente y empezamos hoy!** 🚀"
                 ]
             },
             about: {
@@ -226,7 +226,7 @@ class DataCryptChatbot {
             urgency: {
                 keywords: ['urgente', 'ya', 'ahora', 'inmediato', 'rápido', 'emergencia', 'necesito ya'],
                 responses: [
-                    "🚨 **SITUACIÓN URGENTE - RESPUESTA INMEDIATA**\n\n**📞 LÍNEA DIRECTA CEO:**\nFerney Quiroga: **3232066197**\n\n**⚡ SOLUCIONES RÁPIDAS DISPONIBLES:**\n• Análisis express en 24 horas\n• Implementación de emergencia\n• Soporte técnico inmediato\n\n**💼 ¿Cuál es tu situación crítica?**\nEscríbeme ahora al WhatsApp y lo resolvemos juntos 🚀\n\n*\"Los problemas urgentes requieren soluciones expertas\"* - DataCrypt_Labs"
+                    "🚨 **SITUACIÓN URGENTE - RESPUESTA INMEDIATA**\n\n**� CONTACTO DIRECTO CEO:**\nFerney Quiroga: **ferneyquiroga101@gmail.com**\n\n**⚡ SOLUCIONES RÁPIDAS DISPONIBLES:**\n• Análisis express en 24 horas\n• Implementación de emergencia\n• Soporte técnico inmediato\n\n**💼 ¿Cuál es tu situación crítica?**\n¡Escríbeme por email y lo resolvemos juntos! 🚀\n\n*\"Los problemas urgentes requieren soluciones expertas\"* - DataCrypt_Labs"
                 ]
             },
             competition: {
@@ -237,8 +237,8 @@ class DataCryptChatbot {
             },
             default: [
                 "🤔 **Excelente pregunta!** Como especialista comercial de DataCrypt_Labs, me gusta profundizar en cada consulta.\n\n**¿Podrías contarme más sobre:**\n• ¿Tu empresa maneja muchos datos?\n• ¿Qué decisiones te gustaría automatizar?\n• ¿Cuál es tu mayor pain point operativo?\n\n**💡 Mientras tanto:** ¿Te interesa una **consulta gratuita** donde analizo tu situación específica? 📞",
-                "🚀 **¡Perfecto!** Me encanta cuando las empresas buscan **soluciones data-driven**.\n\n**Como tu consultor especializado**, necesito entender mejor tu contexto:\n\n**📊 ¿Tu empresa está buscando:**\n• Automatizar reportes y dashboards?\n• Predecir ventas o demanda?\n• Optimizar operaciones con datos?\n• Mejorar toma de decisiones?\n\n**Escríbeme al 3232066197** y armamos tu propuesta personalizada 💼",
-                "💡 **Interesante consulta!** En DataCrypt_Labs convertimos **preguntas complejas** en **soluciones rentables**.\n\n**🎯 ¿Sabías que el 87% de las empresas** no aprovecha ni el 30% de sus datos?\n\n**Nosotros te ayudamos a:**\n✅ Identificar oportunidades ocultas en tus datos\n✅ Implementar soluciones que se paguen solas\n✅ Generar ROI desde el primer mes\n\n**¿Hablamos de tu proyecto específico?** WhatsApp: 3232066197 📱"
+                "🚀 **¡Perfecto!** Me encanta cuando las empresas buscan **soluciones data-driven**.\n\n**Como tu consultor especializado**, necesito entender mejor tu contexto:\n\n**📊 ¿Tu empresa está buscando:**\n• Automatizar reportes y dashboards?\n• Predecir ventas o demanda?\n• Optimizar operaciones con datos?\n• Mejorar toma de decisiones?\n\n**¡Escríbeme por email!** ferneyquiroga101@gmail.com y armamos tu propuesta personalizada 💼",
+                "💡 **Interesante consulta!** En DataCrypt_Labs convertimos **preguntas complejas** en **soluciones rentables**.\n\n**🎯 ¿Sabías que el 87% de las empresas** no aprovecha ni el 30% de sus datos?\n\n**Nosotros te ayudamos a:**\n✅ Identificar oportunidades ocultas en tus datos\n✅ Implementar soluciones que se paguen solas\n✅ Generar ROI desde el primer mes\n\n**¿Hablamos de tu proyecto específico?** Email: ferneyquiroga101@gmail.com �"
             ]
         };
     }
