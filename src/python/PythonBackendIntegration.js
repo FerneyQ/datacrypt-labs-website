@@ -23,14 +23,25 @@ class PythonBackendIntegration {
     async init() {
         console.log('🐍 Inicializando integración con Python Backend...');
         
+        // GitHub Pages Mode: Usar APIs mock sin mostrar popup
+        if (window.location.hostname.includes('github.io')) {
+            console.log('🌐 GitHub Pages detectado - usando APIs mock');
+            this.setupEventListeners();
+            this.createPythonDashboard();
+            console.log('✅ GitHub Pages Mode con APIs Mock activado');
+            return;
+        }
+        
         try {
             await this.checkConnection();
             this.setupEventListeners();
             this.createPythonDashboard();
             console.log('✅ Python Backend Integration activado');
         } catch (error) {
-            console.warn('⚠️ Backend Python no disponible:', error);
-            this.showOfflineMode();
+            console.warn('⚠️ Backend Python no disponible - usando modo mock');
+            // NO mostrar popup en GitHub Pages - usar APIs mock silenciosamente
+            this.setupEventListeners();
+            this.createPythonDashboard();
         }
     }
 
@@ -38,6 +49,22 @@ class PythonBackendIntegration {
      * 🔗 VERIFICAR CONEXIÓN CON BACKEND
      */
     async checkConnection() {
+        // GitHub Pages: usar API mock directamente
+        if (window.location.hostname.includes('github.io')) {
+            console.log('🌐 GitHub Pages - usando API mock health check');
+            try {
+                const response = await fetch('./api/health.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    this.isConnected = true;
+                    console.log('✅ API Mock health check exitoso:', data);
+                    return data;
+                }
+            } catch (error) {
+                console.log('📡 API Mock aún no disponible - continuando con modo local');
+            }
+        }
+        
         console.log(`🔍 Intentando conectar a: ${this.baseURL}/health`);
         
         try {
