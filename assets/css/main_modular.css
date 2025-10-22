@@ -1,0 +1,213 @@
+/**
+ * 🎨 DATACRYPT LABS - ESTILOS MODULARES v3.0
+ * Sistema CSS modular unificado
+ * Filosofía Mejora Continua: De monolítico a modular
+ * 
+ * ANTES: main.css monolítico (4,237 líneas)
+ * DESPUÉS: Sistema modular organizad (12+ módulos)
+ * 
+ * VENTAJAS:
+ * - Mantenibilidad mejorada
+ * - Carga selectiva de módulos
+ * - Organización por componentes
+ * - Debugging más fácil
+ * - Colaboración en equipo
+ */
+
+/* ==========================================
+   IMPORTACIONES MODULARES
+   Orden de importación optimizado para cascada CSS
+   ========================================== */
+
+/* 1. BASE Y VARIABLES */
+@import url('./modules/base.css');
+/* Variables, reset, tipografía */
+
+/* 2. COMPONENTES DE NAVEGACIÓN */
+@import url('./modules/navigation.css');
+/* Header, navbar, menú móvil */
+
+/* 3. SECCIONES PRINCIPALES */
+@import url('./modules/hero.css');
+/* Banner principal y efectos */
+
+/* 4. COMPONENTES DE CONTENIDO */
+/* @import url('./modules/services.css');         Servicios y características */
+/* @import url('./modules/portfolio.css');        Portfolio y proyectos */
+/* @import url('./modules/contact.css');          Formularios y contacto */
+
+/* 5. ELEMENTOS INTERACTIVOS */
+/* @import url('./modules/buttons.css');          Botones y CTAs */
+/* @import url('./modules/forms.css');            Inputs y validación */
+/* @import url('./modules/modals.css');           Modales y popups */
+
+/* 6. FUNCIONALIDADES ESPECIALES */
+/* @import url('./modules/animations.css');       Animaciones y transiciones */
+/* @import url('./modules/charts.css');           Gráficos y visualizaciones */
+/* @import url('./modules/chatbot.css');          Chatbot y asistente */
+
+/* 7. UTILIDADES */
+/* @import url('./modules/utilities.css');        Clases de utilidad */
+/* @import url('./modules/responsive.css');       Media queries específicas */
+
+/* 8. TEMAS */
+/* @import url('./modules/themes.css');           Temas alternativos */
+
+/**
+ * 📊 PROGRESO DE MODULARIZACIÓN
+ * 
+ * ✅ COMPLETADOS:
+ * - base.css (Variables, reset, tipografía base)
+ * - navigation.css (Header, navbar, menú móvil)  
+ * - hero.css (Banner principal, efectos visuales)
+ * 
+ * 🔄 EN PROCESO:
+ * - services.css
+ * - portfolio.css
+ * - contact.css
+ * 
+ * 📋 PENDIENTES:
+ * - buttons.css
+ * - forms.css
+ * - animations.css
+ * - utilities.css
+ * - responsive.css
+ * - themes.css
+ */
+
+/* ==========================================
+   ESTILOS TEMPORALES DE COMPATIBILIDAD
+   (Se eliminarán cuando se completen todos los módulos)
+   ========================================== */
+
+/* Estilos básicos para secciones aún no modularizadas */
+.section {
+    padding: var(--space-20) 0;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    text-align: center;
+    margin-bottom: var(--space-12);
+    color: var(--text-primary);
+}
+
+.section-subtitle {
+    font-size: var(--text-lg);
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-8);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Grid básico para contenido */
+.content-grid {
+    display: grid;
+    gap: var(--space-8);
+    margin-top: var(--space-12);
+}
+
+@media (min-width: 768px) {
+    .content-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .content-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Cards básicas */
+.card {
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: var(--border-radius-xl);
+    padding: var(--space-6);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    transition: var(--transition-base);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Botones básicos */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--border-radius-lg);
+    font-weight: var(--font-semibold);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* ==========================================
+   NOTAS DE MIGRACIÓN
+   ========================================== */
+
+/*
+PLAN DE MIGRACIÓN COMPLETA:
+
+FASE 1 - ESTRUCTURA BASE ✅
+✅ Variables y reset (base.css)
+✅ Navegación (navigation.css) 
+✅ Hero section (hero.css)
+
+FASE 2 - COMPONENTES PRINCIPALES 🔄
+📋 Servicios (services.css)
+📋 Portfolio (portfolio.css) 
+📋 Contacto (contact.css)
+
+FASE 3 - ELEMENTOS INTERACTIVOS
+📋 Botones (buttons.css)
+📋 Formularios (forms.css)
+📋 Modales (modals.css)
+
+FASE 4 - FUNCIONALIDADES AVANZADAS
+📋 Animaciones (animations.css)
+📋 Gráficos (charts.css)
+📋 Chatbot (chatbot.css)
+
+FASE 5 - OPTIMIZACIÓN
+📋 Utilidades (utilities.css)
+📋 Responsive específico (responsive.css)
+📋 Temas alternativos (themes.css)
+
+ELIMINACIÓN FINAL:
+- Eliminar main.css original (4,237 líneas)
+- Actualizar referencias en HTML
+- Verificar carga y performance
+*/
