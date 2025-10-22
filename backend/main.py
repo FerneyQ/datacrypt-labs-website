@@ -30,11 +30,10 @@ import matplotlib
 import os
 from dotenv import load_dotenv
 
-# Load environment variables - Railway compatible
+# Load environment variables for local development
 try:
-    env_file = '.env.production' if os.getenv('PRODUCTION') or os.getenv('RAILWAY_ENVIRONMENT') else '.env'
-    load_dotenv(env_file)
-    print(f"✅ Environment loaded from {env_file}")
+    load_dotenv('.env')
+    print(f"✅ Environment loaded for local development")
 except Exception as e:
     print(f"⚠️  Could not load .env file: {e} - Using system environment variables")
     pass  # Continue with system environment variables
@@ -1193,15 +1192,15 @@ async def admin_login_page():
         }}
         .logo {{ text-align: center; margin-bottom: 30px; }}
         .logo h1 {{ color: #667eea; font-weight: bold; margin: 0; }}
-        .railway-badge {{
-            position: fixed; top: 20px; right: 20px; background: #0066ff;
+        .localhost-badge {{
+            position: fixed; top: 20px; right: 20px; background: #28a745;
             color: white; padding: 8px 15px; border-radius: 20px; font-size: 12px;
         }}
         .btn-primary {{ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; }}
     </style>
 </head>
 <body>
-    <div class="railway-badge"><i class="fas fa-train"></i> Live on Railway</div>
+    <div class="localhost-badge"><i class="fas fa-home"></i> Localhost Only</div>
     
     <div class="login-container">
         <div class="logo">
@@ -1326,7 +1325,7 @@ async def admin_dashboard():
         .navbar {{ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }}
         .dashboard-header {{ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px 0; }}
         .stat-card {{ background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }}
-        .railway-status {{ background: #0066ff; color: white; padding: 10px 20px; border-radius: 25px; display: inline-block; }}
+        .localhost-status {{ background: #28a745; color: white; padding: 10px 20px; border-radius: 25px; display: inline-block; }}
     </style>
 </head>
 <body>
@@ -1341,8 +1340,8 @@ async def admin_dashboard():
     
     <div class="dashboard-header">
         <div class="container text-center">
-            <div class="railway-status mb-3">
-                <i class="fas fa-train"></i> Sistema activo en Railway
+            <div class="localhost-status mb-3">
+                <i class="fas fa-home"></i> Sistema activo en Localhost
             </div>
             <h1>🎉 ¡Panel Administrativo Operativo!</h1>
             <p class="lead">Sistema integrado con FastAPI Backend</p>
@@ -1359,7 +1358,7 @@ async def admin_dashboard():
                         <ul class="mb-0">
                             <li>🚀 FastAPI Backend funcionando</li>
                             <li>🔐 Autenticación administrativa activa</li>
-                            <li>🌐 Accesible desde Railway</li>
+                            <li>� Sistema localhost-only seguro</li>
                             <li>📊 APIs de Data Science operativas</li>
                         </ul>
                     </div>
@@ -1389,22 +1388,22 @@ async def admin_dashboard():
         <div class="row">
             <div class="col-md-12">
                 <div class="stat-card">
-                    <h5><i class="fas fa-info-circle"></i> Información del Deployment</h5>
+                    <h5><i class="fas fa-info-circle"></i> Información del Sistema</h5>
                     <div class="row">
                         <div class="col-md-6">
                             <ul class="list-unstyled">
-                                <li><strong>Plataforma:</strong> Railway Cloud</li>
+                                <li><strong>Plataforma:</strong> Localhost</li>
                                 <li><strong>Framework:</strong> FastAPI + Uvicorn</li>
                                 <li><strong>Base de Datos:</strong> SQLite</li>
-                                <li><strong>Puerto:</strong> $PORT (automático)</li>
+                                <li><strong>Puerto:</strong> 8000 (localhost)</li>
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <ul class="list-unstyled">
-                                <li><strong>Timestamp:</strong> {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}</li>
-                                <li><strong>Uptime:</strong> Continuo 24/7</li>
-                                <li><strong>SSL:</strong> Automático Railway</li>
-                                <li><strong>CDN:</strong> Global Railway Network</li>
+                                <li><strong>Timestamp:</strong> {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</li>
+                                <li><strong>Acceso:</strong> Solo localhost</li>
+                                <li><strong>Seguridad:</strong> Localhost-only</li>
+                                <li><strong>Red:</strong> Local exclusivamente</li>
                             </ul>
                         </div>
                     </div>
@@ -1416,7 +1415,7 @@ async def admin_dashboard():
     <footer class="mt-5 py-4 bg-dark text-white text-center">
         <div class="container">
             <p>&copy; 2025 DataCrypt Labs - Sistema Administrativo Integrado</p>
-            <p><small>FastAPI Backend • Railway Hosting • Admin Panel Activo</small></p>
+            <p><small>FastAPI Backend • Localhost Only • Admin Panel Activo</small></p>
         </div>
     </footer>
 </body>
