@@ -15,8 +15,8 @@
         const selectors = [
             '.social-icons i.fab',
             '.social-links i.fab',
-            'i.fab[style*="translateY(100px)"]',
-            'a[href*="linkedin"] i.fab'
+            '.contact-info-item i.fab',
+            'i.fab[style*="translateY(100px)"]'
         ];
 
         selectors.forEach(selector => {

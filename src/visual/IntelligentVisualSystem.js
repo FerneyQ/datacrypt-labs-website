@@ -17,7 +17,7 @@ class IntelligentVisualSystem {
         this.imageCache = new Map();
         this.loadingQueue = [];
         this.isInitialized = false;
-        
+
         // Configuración del sistema
         this.config = {
             lazyLoadThreshold: '50px',
@@ -28,7 +28,7 @@ class IntelligentVisualSystem {
             enableWebP: true,
             enableResponsive: true
         };
-        
+
         this.init();
     }
 
@@ -36,27 +36,27 @@ class IntelligentVisualSystem {
      * 🚀 INICIALIZACIÓN DEL SISTEMA
      */
     async init() {
-        
-        
+
+
         try {
             // 1. Detectar capacidades del navegador
             await this.detectBrowserCapabilities();
-            
+
             // 2. Configurar observadores de intersección
             this.setupIntersectionObservers();
-            
+
             // 3. Configurar fallbacks por defecto
             this.setupDefaultFallbacks();
-            
+
             // 4. Procesar imágenes existentes
             await this.processExistingImages();
-            
+
             // 5. Configurar responsive images
             this.setupResponsiveImages();
-            
+
             this.isInitialized = true;
-            
-            
+
+
             // Notificar al chatbot
             if (window.dataCryptChatbot) {
                 window.dataCryptChatbot.addMessage(
@@ -64,9 +64,9 @@ class IntelligentVisualSystem {
                     'assistant'
                 );
             }
-            
+
         } catch (error) {
-            
+
             this.handleSystemError(error);
         }
     }
@@ -77,13 +77,13 @@ class IntelligentVisualSystem {
     async detectBrowserCapabilities() {
         // Detectar soporte WebP
         this.supportsWebP = await this.checkWebPSupport();
-        
+
         // Detectar soporte para lazy loading nativo
         this.supportsNativeLazyLoading = 'loading' in HTMLImageElement.prototype;
-        
+
         // Detectar soporte para intersection observer
         this.supportsIntersectionObserver = 'IntersectionObserver' in window;
-        
+
         // Detectar conexión de red
         this.detectNetworkConnection();
     }
@@ -147,16 +147,16 @@ class IntelligentVisualSystem {
     setupDefaultFallbacks() {
         // Fallback para logo
         this.fallbackImages.set('logo', this.generatePlaceholderSVG(200, 80, 'DataCrypt Labs'));
-        
+
         // Fallback para imágenes de portafolio
         for (let i = 1; i <= 7; i++) {
-            this.fallbackImages.set(`portfolio-${i}`, 
+            this.fallbackImages.set(`portfolio-${i}`,
                 this.generatePlaceholderSVG(400, 300, `Proyecto ${i}`)
             );
         }
-        
+
         // Fallback genérico
-        this.fallbackImages.set('default', 
+        this.fallbackImages.set('default',
             this.generatePlaceholderSVG(300, 200, 'Imagen no disponible')
         );
     }
@@ -183,7 +183,7 @@ class IntelligentVisualSystem {
                 <rect x="25%" y="70%" width="50%" height="3" fill="#8b5cf6" opacity="0.2" rx="1.5"/>
             </svg>
         `;
-        
+
         return `data:image/svg+xml;base64,${btoa(svg)}`;
     }
 
@@ -192,8 +192,8 @@ class IntelligentVisualSystem {
      */
     async processExistingImages() {
         const images = document.querySelectorAll('img');
-        
-        
+
+
         for (const img of images) {
             await this.processImage(img);
         }
@@ -206,25 +206,25 @@ class IntelligentVisualSystem {
         try {
             // 1. Configurar placeholder inmediato
             this.setPlaceholder(img);
-            
+
             // 2. Determinar URL optimizada
             const optimizedSrc = this.getOptimizedImageUrl(img.src || img.dataset.src);
-            
+
             // 3. Configurar lazy loading
             if (this.shouldLazyLoad(img)) {
                 this.setupLazyLoading(img, optimizedSrc);
             } else {
                 await this.loadImageWithFallback(img, optimizedSrc);
             }
-            
+
             // 4. Configurar responsive
             this.setupResponsiveImage(img);
-            
+
             // 5. Añadir efectos de carga
             this.addLoadingEffects(img);
-            
+
         } catch (error) {
-            
+
             this.setFallbackImage(img);
         }
     }
@@ -234,15 +234,15 @@ class IntelligentVisualSystem {
      */
     setPlaceholder(img) {
         if (!img.src && !img.dataset.src) return;
-        
+
         // Añadir clases para styling
         img.classList.add('visual-loading');
-        
+
         // Configurar placeholder mientras carga
         if (!img.src) {
             img.src = this.generatePlaceholderSVG(
-                img.width || 300, 
-                img.height || 200, 
+                img.width || 300,
+                img.height || 200,
                 'Cargando...'
             );
         }
@@ -253,22 +253,22 @@ class IntelligentVisualSystem {
      */
     getOptimizedImageUrl(originalSrc) {
         if (!originalSrc) return null;
-        
+
         // Normalizar ruta
         let src = originalSrc;
-        
+
         // Corregir rutas problemáticas
         if (src.includes('Material visual/')) {
             src = src.replace('Material visual/', 'Material%20visual/');
         }
-        
+
         // Si soporta WebP y tenemos versión WebP, usarla
         if (this.supportsWebP && this.config.enableWebP) {
             const webpSrc = src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
             // En un caso real, verificaríamos si existe
             // Por ahora, usamos la original
         }
-        
+
         return src;
     }
 
@@ -279,12 +279,12 @@ class IntelligentVisualSystem {
         // No lazy load si está en viewport inmediato
         const rect = img.getBoundingClientRect();
         const isInImmediateViewport = rect.top < window.innerHeight * 1.5;
-        
+
         // No lazy load para imágenes críticas
-        const isCritical = img.classList.contains('critical') || 
-                          img.closest('.hero') || 
-                          img.closest('.header');
-        
+        const isCritical = img.classList.contains('critical') ||
+            img.closest('.hero') ||
+            img.closest('.header');
+
         return !isInImmediateViewport && !isCritical && this.supportsIntersectionObserver;
     }
 
@@ -294,7 +294,7 @@ class IntelligentVisualSystem {
     setupLazyLoading(img, src) {
         img.dataset.src = src;
         img.classList.add('lazy-load');
-        
+
         if (this.supportsNativeLazyLoading) {
             img.loading = 'lazy';
             img.src = src;
@@ -308,21 +308,21 @@ class IntelligentVisualSystem {
      */
     setupResponsiveImage(img) {
         if (!this.config.enableResponsive) return;
-        
+
         const src = img.src || img.dataset.src;
         if (!src) return;
-        
+
         // Generar srcset para diferentes tamaños
         const baseSrc = src.replace(/\.[^/.]+$/, '');
         const ext = src.split('.').pop();
-        
+
         // Configurar srcset (las imágenes deben existir en el servidor)
         const srcset = [
             `${src} 1x`,
             // En un caso real, tendríamos diferentes tamaños
             `${src} 2x`
         ].join(', ');
-        
+
         img.srcset = srcset;
         img.sizes = this.calculateImageSizes(img);
     }
@@ -332,7 +332,7 @@ class IntelligentVisualSystem {
      */
     calculateImageSizes(img) {
         const container = img.closest('.container');
-        
+
         if (img.closest('.hero')) {
             return '100vw';
         } else if (img.closest('.portfolio-grid')) {
@@ -340,7 +340,7 @@ class IntelligentVisualSystem {
         } else if (container) {
             return '(max-width: 768px) 100vw, 80vw';
         }
-        
+
         return '100vw';
     }
 
@@ -350,16 +350,16 @@ class IntelligentVisualSystem {
     addLoadingEffects(img) {
         // Efecto shimmer mientras carga
         img.classList.add('image-shimmer');
-        
+
         // Listener para cuando termine de cargar
         img.addEventListener('load', () => {
             img.classList.remove('visual-loading', 'image-shimmer', 'lazy-load');
             img.classList.add('visual-loaded');
-            
+
             // Efecto de fade-in
             this.animateImageLoad(img);
         });
-        
+
         img.addEventListener('error', () => {
             this.handleImageError(img);
         });
@@ -371,7 +371,7 @@ class IntelligentVisualSystem {
     animateImageLoad(img) {
         img.style.opacity = '0';
         img.style.transform = 'scale(1.1)';
-        
+
         requestAnimationFrame(() => {
             img.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             img.style.opacity = '1';
@@ -386,15 +386,15 @@ class IntelligentVisualSystem {
         try {
             await this.loadImage(src);
             img.src = src;
-            
+
         } catch (error) {
             if (retryCount < this.config.maxRetries) {
-                
-                
+
+
                 await new Promise(resolve => setTimeout(resolve, this.config.retryDelay));
                 return this.loadImageWithFallback(img, src, retryCount + 1);
             } else {
-                
+
                 this.setFallbackImage(img);
             }
         }
@@ -418,14 +418,14 @@ class IntelligentVisualSystem {
     setFallbackImage(img) {
         // Determinar tipo de fallback según contexto
         let fallbackKey = 'default';
-        
+
         if (img.alt && img.alt.toLowerCase().includes('logo')) {
             fallbackKey = 'logo';
         } else if (img.closest('.portfolio')) {
             const index = Array.from(img.closest('.portfolio').parentElement.children).indexOf(img.closest('.portfolio')) + 1;
             fallbackKey = `portfolio-${index}`;
         }
-        
+
         const fallbackSrc = this.fallbackImages.get(fallbackKey) || this.fallbackImages.get('default');
         img.src = fallbackSrc;
         img.classList.add('fallback-image');
@@ -439,7 +439,7 @@ class IntelligentVisualSystem {
             if (entry.isIntersecting) {
                 const img = entry.target;
                 const src = img.dataset.src;
-                
+
                 if (src) {
                     this.loadImageWithFallback(img, src);
                     this.lazyLoadObserver.unobserve(img);
@@ -464,9 +464,9 @@ class IntelligentVisualSystem {
      * 🚨 MANEJAR ERROR DE IMAGEN
      */
     handleImageError(img) {
-        
+
         this.setFallbackImage(img);
-        
+
         // Reportar al sistema de monitoreo
         if (window.continuousMonitoring) {
             window.continuousMonitoring.reportError({
@@ -481,11 +481,11 @@ class IntelligentVisualSystem {
      * 🔧 MANEJAR ERROR DEL SISTEMA
      */
     handleSystemError(error) {
-        
-        
+
+
         // Fallback a modo básico
         this.enableBasicMode();
-        
+
         // Notificar al sistema de monitoreo
         if (window.continuousMonitoring) {
             window.continuousMonitoring.reportError({
@@ -500,8 +500,8 @@ class IntelligentVisualSystem {
      * 🏥 HABILITAR MODO BÁSICO
      */
     enableBasicMode() {
-        
-        
+
+
         // Procesar imágenes de forma básica
         const images = document.querySelectorAll('img');
         images.forEach(img => {
@@ -517,13 +517,13 @@ class IntelligentVisualSystem {
     async refreshImage(img) {
         const originalSrc = img.dataset.originalSrc || img.src;
         img.classList.add('visual-loading');
-        
+
         try {
             const newSrc = `${originalSrc}?refresh=${Date.now()}`;
             await this.loadImageWithFallback(img, newSrc);
-            
+
         } catch (error) {
-            
+
             this.setFallbackImage(img);
         }
     }
@@ -536,7 +536,7 @@ class IntelligentVisualSystem {
         const loadedImages = document.querySelectorAll('img.visual-loaded').length;
         const fallbackImages = document.querySelectorAll('img.fallback-image').length;
         const loadingImages = document.querySelectorAll('img.visual-loading').length;
-        
+
         return {
             total: totalImages,
             loaded: loadedImages,
@@ -555,19 +555,19 @@ class IntelligentVisualSystem {
      * 🎨 OPTIMIZAR TODAS LAS IMÁGENES
      */
     async optimizeAllImages() {
-        
-        
+
+
         const images = document.querySelectorAll('img');
         const promises = Array.from(images).map(img => this.processImage(img));
-        
+
         try {
             await Promise.allSettled(promises);
-            
-            
+
+
             return this.getStats();
-            
+
         } catch (error) {
-            
+
             throw error;
         }
     }
@@ -578,6 +578,6 @@ window.IntelligentVisualSystem = IntelligentVisualSystem;
 
 // 🔄 AUTO-INICIALIZACIÓN
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     window.intelligentVisualSystem = new IntelligentVisualSystem();
 });
