@@ -908,7 +908,6 @@ class AestheticMicrointeractions {
             // Limpiar cualquier transform inline problemático
             if (icon.style.transform && icon.style.transform.includes('translateY(100px)')) {
                 icon.style.transform = '';
-                console.log('🔧 Fixed transform on social icon:', icon.className);
             }
         });
 
@@ -922,7 +921,6 @@ class AestheticMicrointeractions {
                         target.style.transform &&
                         target.style.transform.includes('translateY(100px)')) {
                         target.style.transform = '';
-                        console.log('🔧 Prevented problematic transform on social icon');
                     }
                 }
             });
