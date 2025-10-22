@@ -1,0 +1,204 @@
+{
+  "timestamp": "2025-10-21T18:48:25.562694",
+  "base_url": "http://localhost:8080",
+  "scores": {
+    "overall": 1.2,
+    "quality": 0.0,
+    "security": 5.0,
+    "chatbot": 0,
+    "deployment": 0
+  },
+  "status": "❌ CRÍTICO - NO APTO PARA PRODUCCIÓN",
+  "detailed_results": {
+    "calidad": {
+      "accesibilidad_index": {
+        "status": "FAIL",
+        "details": {
+          "score": 0,
+          "issues": [
+            "Error: HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000239C9203A10>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))"
+          ]
+        },
+        "duration": null,
+        "score": 0,
+        "timestamp": "2025-10-21T18:48:29.622265"
+      },
+      "rendimiento_index": {
+        "status": "FAIL",
+        "details": {
+          "score": 0,
+          "error": "HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000239C9B7A5D0>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))"
+        },
+        "duration": null,
+        "score": 0,
+        "timestamp": "2025-10-21T18:48:33.692562"
+      },
+      "accesibilidad_indexabout": {
+        "status": "FAIL",
+        "details": {
+          "score": 0,
+          "issues": [
+            "Error: HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /about.html (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000239C9B7AE90>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))"
+          ]
+        },
+        "duration": null,
+        "score": 0,
+        "timestamp": "2025-10-21T18:48:37.709912"
+      },
+      "rendimiento_indexabout": {
+        "status": "FAIL",
+        "details": {
+          "score": 0,
+          "error": "HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /about.html (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000239C92C6FD0>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))"
+        },
+        "duration": null,
+        "score": 0,
+        "timestamp": "2025-10-21T18:48:41.738500"
+      },
+      "accesibilidad_indexservices": {
+        "status": "FAIL",
+        "details": {
+          "score": 0,
+          "issues": [
+            "Error: HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /services.html (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000239C92C7820>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))"
+          ]
+        },
+        "duration": null,
+        "score": 0,
+        "timestamp": "2025-10-21T18:48:45.784943"
+      },
+      "rendimiento_indexservices": {
+        "status": "FAIL",
+        "details": {
+          "score": 0,
+          "error": "HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /services.html (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000239C92C3AD0>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))"
+        },
+        "duration": null,
+        "score": 0,
+        "timestamp": "2025-10-21T18:48:49.815896"
+      },
+      "accesibilidad_indexportfolio": {
+        "status": "FAIL",
+        "details": {
+          "score": 0,
+          "issues": [
+            "Error: HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /portfolio.html (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000239C927ABE0>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))"
+          ]
+        },
+        "duration": null,
+        "score": 0,
+        "timestamp": "2025-10-21T18:48:53.880107"
+      },
+      "rendimiento_indexportfolio": {
+        "status": "FAIL",
+        "details": {
+          "score": 0,
+          "error": "HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /portfolio.html (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000239C927B350>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))"
+        },
+        "duration": null,
+        "score": 0,
+        "timestamp": "2025-10-21T18:48:57.910985"
+      },
+      "accesibilidad_indexcontact": {
+        "status": "FAIL",
+        "details": {
+          "score": 0,
+          "issues": [
+            "Error: HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /contact.html (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000239C927A8B0>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))"
+          ]
+        },
+        "duration": null,
+        "score": 0,
+        "timestamp": "2025-10-21T18:49:01.925454"
+      },
+      "rendimiento_indexcontact": {
+        "status": "FAIL",
+        "details": {
+          "score": 0,
+          "error": "HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /contact.html (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000239C927A9C0>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))"
+        },
+        "duration": null,
+        "score": 0,
+        "timestamp": "2025-10-21T18:49:05.974536"
+      },
+      "accesibilidad_indexdiagnostico_chatbot": {
+        "status": "FAIL",
+        "details": {
+          "score": 0,
+          "issues": [
+            "Error: HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /diagnostico_chatbot.html (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000239C927ACF0>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))"
+          ]
+        },
+        "duration": null,
+        "score": 0,
+        "timestamp": "2025-10-21T18:49:10.020008"
+      },
+      "rendimiento_indexdiagnostico_chatbot": {
+        "status": "FAIL",
+        "details": {
+          "score": 0,
+          "error": "HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /diagnostico_chatbot.html (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000239C927A580>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))"
+        },
+        "duration": null,
+        "score": 0,
+        "timestamp": "2025-10-21T18:49:14.050939"
+      }
+    },
+    "seguridad": {
+      "headers_seguridad": {
+        "status": "FAIL",
+        "details": {
+          "score": 0,
+          "error": "HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000239C927A250>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))"
+        },
+        "duration": null,
+        "score": 0,
+        "timestamp": "2025-10-21T18:49:18.098380"
+      },
+      "proteccion_xss": {
+        "status": "PASS",
+        "details": {
+          "score": 10,
+          "vulnerabilities": [],
+          "payloads_tested": 4
+        },
+        "duration": null,
+        "score": 10,
+        "timestamp": "2025-10-21T18:49:34.238245"
+      }
+    },
+    "rendimiento": {},
+    "chatbot": {
+      "funcionalidad_completa": {
+        "status": "FAIL",
+        "details": {
+          "score": 0,
+          "error": "HTTPConnectionPool(host='localhost', port=8080): Max retries exceeded with url: /diagnostico_chatbot.html (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000239C92798C0>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))"
+        },
+        "duration": null,
+        "score": 0,
+        "timestamp": "2025-10-21T18:49:38.285608"
+      }
+    },
+    "deployment": {
+      "deployment_readiness": {
+        "status": "FAIL",
+        "details": {
+          "score": 0,
+          "readiness": {
+            "error__": "timeout",
+            "error__index.html": "timeout",
+            "error__src_components_DataCryptChatbot.js": "timeout",
+            "error__src_core_DataCryptSecurity.js": "timeout",
+            "error__src_utils_ConfigManager.js": "timeout",
+            "available_files": "0/5",
+            "server_stability": "unstable"
+          }
+        },
+        "duration": null,
+        "score": 0,
+        "timestamp": "2025-10-21T18:50:02.544645"
+      }
+    }
+  }
+}

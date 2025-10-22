@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Test de Consistencia - Chatbot Neyd c:</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #111;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #00ff00;
+        }
+        h1 {
+            text-align: center;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        .test-info {
+            background: #001a1a;
+            padding: 15px;
+            border-left: 4px solid #00ffff;
+            margin-bottom: 20px;
+        }
+        .button {
+            background: #00ff00;
+            color: #000;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        .button:hover {
+            background: #00ffff;
+            transform: scale(1.05);
+        }
+        #console-output {
+            background: #000;
+            color: #00ff00;
+            padding: 20px;
+            border: 1px solid #333;
+            height: 400px;
+            overflow-y: auto;
+            font-family: monospace;
+            white-space: pre-wrap;
+            margin-top: 20px;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        .status.loading { background: #ffaa00; color: #000; }
+        .status.success { background: #00ff00; color: #000; }
+        .status.error { background: #ff0000; color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 TEST DE CONSISTENCIA - CHATBOT Neyd c:</h1>
+        
+        <div class="test-info">
+            <h3>📋 Objetivo del Test:</h3>
+            <p>Verificar que el chatbot Neyd c: tenga una personalidad comercial consistente y uniforme, eliminando todas las referencias técnicas a "GitHub Copilot".</p>
+            
+            <h3>🎯 Aspectos a Evaluar:</h3>
+            <ul>
+                <li>✅ Configuración de personalidad (avatar, título, tipo)</li>
+                <li>✅ Consistencia en saludos (mencionar Alex, no GitHub Copilot)</li>
+                <li>✅ Tono comercial uniforme en todas las respuestas</li>
+                <li>✅ Keywords actualizadas correctamente</li>
+                <li>✅ Respuestas por defecto alineadas con personalidad comercial</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center;">
+            <button class="button" onclick="runConsistencyTest()">🚀 EJECUTAR TEST DE CONSISTENCIA</button>
+            <button class="button" onclick="clearConsole()">🗑️ LIMPIAR CONSOLA</button>
+            <button class="button" onclick="testChatbot()">💬 PROBAR CHATBOT MANUALMENTE</button>
+        </div>
+
+        <div id="status" class="status loading" style="display: none;">
+            🔄 Ejecutando pruebas de consistencia...
+        </div>
+
+        <div id="console-output"></div>
+    </div>
+
+    <!-- Scripts necesarios del chatbot -->
+    <script src="../src/modules/ConfigManager.js"></script>
+    <script src="../src/components/DataCryptSecurity.js"></script>
+    <script src="../src/components/DataCryptChatbot.js"></script>
+    <script src="chatbot_consistency_test.js"></script>
+
+    <script>
+        // Capturar console.log para mostrar en pantalla
+        const originalLog = console.log;
+        const consoleOutput = document.getElementById('console-output');
+        const statusDiv = document.getElementById('status');
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const message = args.join(' ') + '\n';
+            consoleOutput.textContent += message;
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        };
+
+        async function runConsistencyTest() {
+            statusDiv.style.display = 'block';
+            statusDiv.className = 'status loading';
+            statusDiv.textContent = '🔄 Ejecutando pruebas de consistencia...';
+            
+            clearConsole();
+            console.log('🧪 INICIANDO TEST DE CONSISTENCIA DEL CHATBOT Neyd c:');
+            console.log('═══════════════════════════════════════════════\n');
+
+            try {
+                // Inicializar chatbot si no existe
+                if (!window.dataCryptChatbot) {
+                    console.log('🤖 Inicializando chatbot para testing...');
+                    const chatbotConfig = {
+                        enabled: true,
+                        container: document.body,
+                        autoGreeting: false // No mostrar saludo automático en test
+                    };
+                    window.dataCryptChatbot = new DataCryptChatbot(chatbotConfig);
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
+
+                // Ejecutar test
+                const tester = new ChatbotConsistencyTester();
+                const results = await tester.runConsistencyTests();
+
+                // Mostrar status final
+                if (results.overallScore >= 90) {
+                    statusDiv.className = 'status success';
+                    statusDiv.textContent = `✅ TEST APROBADO - Puntuación: ${results.overallScore}/100`;
+                } else if (results.overallScore >= 50) {
+                    statusDiv.className = 'status error';
+                    statusDiv.textContent = `⚠️ REQUIERE MEJORAS - Puntuación: ${results.overallScore}/100`;
+                } else {
+                    statusDiv.className = 'status error';
+                    statusDiv.textContent = `❌ TEST FALLIDO - Puntuación: ${results.overallScore}/100`;
+                }
+
+            } catch (error) {
+                console.log('❌ ERROR EN EL TEST:', error);
+                statusDiv.className = 'status error';
+                statusDiv.textContent = '❌ Error ejecutando el test';
+            }
+        }
+
+        function clearConsole() {
+            consoleOutput.textContent = '';
+        }
+
+        function testChatbot() {
+            console.log('💬 ACTIVANDO CHATBOT PARA PRUEBA MANUAL...');
+            if (window.dataCryptChatbot) {
+                window.dataCryptChatbot.openChat();
+                console.log('✅ Chatbot activado. Puedes probarlo manualmente.');
+            } else {
+                console.log('❌ Chatbot no disponible. Ejecuta el test primero.');
+            }
+        }
+
+        // Inicialización automática
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🌐 Página de test cargada');
+            console.log('📝 Usa los botones para ejecutar las pruebas');
+            console.log('───────────────────────────────────────────────\n');
+        });
+    </script>
+</body>
+</html>

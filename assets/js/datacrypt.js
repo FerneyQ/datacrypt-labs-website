@@ -1782,27 +1782,6 @@ if (document.readyState === 'loading') {
     window.DataCryptLabs.initialize();
 }
 
-// ==========================================
-// 🐍 PYTHON BACKEND INTEGRATION
-// ==========================================
-// Inicializar integración con Python Backend cuando esté disponible
-let pythonBackend = null;
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Esperar a que PythonBackendIntegration esté disponible
-    if (typeof PythonBackendIntegration !== 'undefined') {
-        console.log('🐍 Inicializando Python Backend Integration...');
-        pythonBackend = new PythonBackendIntegration();
-        
-        // Hacer disponible globalmente para botones
-        window.pythonBackend = pythonBackend;
-        
-        console.log('✅ Python Backend Integration activado');
-    } else {
-        console.log('⚠️ PythonBackendIntegration no disponible - funcionando sin backend');
-    }
-});
-
 // Exportar para uso en módulos (si es necesario)
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = DataCryptLabsManager;

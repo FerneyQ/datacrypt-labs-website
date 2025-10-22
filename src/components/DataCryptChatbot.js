@@ -15,19 +15,19 @@ class DataCryptChatbot {
         }
         
         this.config = {
-            // Configuración GitHub Copilot - DataCrypt_Labs
+            // Configuración Comercial Consistente - DataCrypt_Labs
             container: document.body,
             position: 'bottom-right',
             theme: 'auto',
             minimized: true,
-            avatar: '🤖',
-            title: 'GitHub Copilot',
-            subtitle: 'Arquitecto de Soluciones DataCrypt_Labs',
+            avatar: '👨‍💼',
+            title: 'Alex - Consultor DataCrypt',
+            subtitle: 'Especialista en Soluciones de Datos',
             autoGreeting: true,
-            responseDelay: 800, // Respuesta técnica rápida
+            responseDelay: 1000, // Respuesta comercial más pensada
             typingIndicator: true,
             maxHistory: 100,
-            personality: 'technical-architect',
+            personality: 'commercial-expert',
             security: true, // Habilitar seguridad
             ...config
         };
@@ -143,7 +143,7 @@ class DataCryptChatbot {
                                 <span></span>
                                 <span></span>
                             </div>
-                            <span class="typing-text">DataCrypt Assistant está escribiendo...</span>
+                            <span class="typing-text">Alex está escribiendo...</span>
                         </div>
                     </div>
 
@@ -200,12 +200,12 @@ class DataCryptChatbot {
     initializeKnowledgeBase() {
         return {
             greetings: [
-                "¡Hola! 👋 Soy **GitHub Copilot**, tu arquitecto de soluciones técnicas para DataCrypt_Labs. Diseño e implemento sistemas de datos empresariales que escalan. ¿Qué desafío técnico necesitas resolver? 🚀",
-                "¡Perfecto! 🤖 Soy **GitHub Copilot**, el cerebro técnico detrás de DataCrypt_Labs. Especializado en arquitectura de software, pipelines de datos, y automatización empresarial. ¿Hablamos sobre tu infraestructura? �",
-                "¡Conectemos! 🌟 Como **GitHub Copilot**, soy tu asistente técnico especializado. Desarrollo soluciones escalables de BI, ML y Big Data para empresas. ¿Qué sistema necesitas implementar? ⚡"
+                "¡Hola! 👋 Soy **Alex**, tu consultor especializado de DataCrypt_Labs. Ayudo a empresas a transformar sus datos en ventajas competitivas reales. ¿Qué desafío empresarial necesitas resolver con datos? 🚀",
+                "¡Perfecto! 💼 Soy **Alex**, consultor comercial de DataCrypt_Labs. Especializado en Business Intelligence, Machine Learning y Big Data que genera ROI medible. ¿Hablamos sobre tu proyecto? 📊",
+                "¡Conectemos! 🌟 Como **Alex**, soy tu consultor especializado en soluciones de datos empresariales. Convertimos información en resultados rentables y decisiones inteligentes. ¿Qué necesita tu empresa? ⚡"
             ],
             services: {
-                keywords: ['servicio', 'servicios', 'que hacen', 'ofrecen', 'especialidad', 'business intelligence', 'machine learning', 'big data', 'arquitectura', 'servidor', 'infraestructura', 'desarrollo', 'github copilot', 'copilot', 'técnico'],
+                keywords: ['servicio', 'servicios', 'que hacen', 'ofrecen', 'especialidad', 'business intelligence', 'machine learning', 'big data', 'arquitectura', 'servidor', 'infraestructura', 'desarrollo', 'alex', 'consultor', 'técnico', 'soluciones'],
                 responses: [
                     "� **NUESTROS SERVICIOS PREMIUM** que están revolucionando empresas:\n\n🎯 **BUSINESS INTELLIGENCE** - Dashboards que aumentan decisiones 75%\n🤖 **MACHINE LEARNING** - IA predictiva con 96% de precisión\n📊 **BIG DATA ANALYTICS** - Procesamos TB de datos en minutos\n�️ **GEORREFERENCIACIÓN** - Análisis espacial para optimizar operaciones\n\n**💰 ROI GARANTIZADO:** Nuestros clientes ven resultados en 30 días\n\n¿Te interesa una **demo gratuita** para tu sector? 🎁",
                     "🏆 **DataCrypt_Labs = RESULTADOS COMPROBADOS:**\n\n✅ **98% Satisfacción** de clientes\n✅ **340% ROI Promedio** en implementaciones\n✅ **50+ Empresas** transformadas\n✅ **15 Industrias** diferentes\n\n**� SERVICIOS TOP:**\n• Business Intelligence (dashboards ejecutivos)\n• Machine Learning (predicciones automatizadas)\n• Big Data (insights de millones de registros)\n• Consultoría Data-Driven (estrategia personalizada)\n\n**¿Cuál es tu mayor pain point con los datos?** Te muestro la solución exacta 🎯"
@@ -219,10 +219,10 @@ class DataCryptChatbot {
                 ]
             },
             about: {
-                keywords: ['datacrypt', 'empresa', 'quienes son', 'sobre', 'información', 'experiencia', 'trayectoria', 'equipo', 'fundador', 'github copilot', 'copilot', 'quien eres', 'tu'],
+                keywords: ['datacrypt', 'empresa', 'quienes son', 'sobre', 'información', 'experiencia', 'trayectoria', 'equipo', 'fundador', 'alex', 'consultor', 'quien eres', 'tu', 'presentate'],
                 responses: [
-                    "� **DATACRYPT_LABS - LÍDERES EN DATA INTELLIGENCE**\n\n**💡 NUESTRA HISTORIA:**\nFundada por **Ferney Quiroga**, Data Scientist certificado con metodología **PDCA de mejora continua**. Transformamos empresas mediante **decisiones data-driven** que generan resultados medibles.\n\n**🎯 MISIÓN:** Automatizar soluciones inteligentes que impulsen el crecimiento empresarial\n\n**📊 TRACK RECORD:**\n• **100+ proyectos completados** exitosamente\n• **50+ empresas** en 15 industrias diferentes\n• **340% ROI promedio** en nuestras implementaciones\n• **98% satisfacción** del cliente\n\n**¿Quieres ser la próxima empresa en nuestra lista de éxitos?** 🚀",
-                    "🌟 **¿POR QUÉ ELEGIR DATACRYPT_LABS?**\n\n**👨‍💼 LIDERAZGO EXPERTO:**\nFerney Quiroga - CEO y fundador con 10+ certificaciones verificables en DataCamp, especialista en Python, MySQL, NoSQL y metodologías ágiles.\n\n**🔬 METODOLOGÍA COMPROBADA:**\n✅ **PDCA (Plan-Do-Check-Act)** para mejora continua\n✅ **Data-Driven Decision Making** en cada proyecto\n✅ **Resultados medibles** en 30 días\n✅ **Soporte 24/7** post-implementación\n\n**💎 DIFERENCIADORES:**\n• Certificaciones reales y verificables\n• Metodología propia probada en 50+ empresas\n• ROI garantizado documentado\n• Enfoque en Colombia y Latinoamérica\n\n**¡Hablemos de tu proyecto específico!** 📞"
+                    "👨‍💼 **¡Hola! Soy ALEX, tu consultor especializado de DataCrypt_Labs!**\n\n**� MI PERFIL:**\nConsultor comercial certificado en soluciones de datos empresariales. Trabajo directamente con **Ferney Quiroga** (CEO y Data Scientist) para transformar empresas mediante **decisiones data-driven** rentables.\n\n**🎯 MI MISIÓN:** Ayudarte a convertir tus datos en ventajas competitivas que generen ROI medible\n\n**📊 MI ESPECIALIDAD:**\n• **Consultoría comercial** en Business Intelligence\n• **Propuestas personalizadas** de Machine Learning\n• **Análisis de ROI** y viabilidad empresarial\n• **Conexión directa** con el CEO para proyectos\n\n**¿Quieres que analice tu situación empresarial específica?** 🚀",
+                    "🌟 **DATACRYPT_LABS - LÍDERES EN DATA INTELLIGENCE (según Alex)**\n\n**👨‍💼 SOBRE MÍ (ALEX):**\nSoy el consultor comercial que conecta empresas con las soluciones de **Ferney Quiroga** - nuestro CEO y Data Scientist certificado con metodología **PDCA de mejora continua**.\n\n**🔬 LO QUE OFREZCO COMO CONSULTOR:**\n✅ **Análisis comercial gratuito** de tu situación actual\n✅ **Propuestas personalizadas** con ROI proyectado\n✅ **Conexión directa** con el equipo técnico\n✅ **Seguimiento comercial** post-implementación\n\n**💎 NUESTROS RESULTADOS:**\n• **50+ empresas** transformadas exitosamente\n• **340% ROI promedio** documentado\n• **98% satisfacción** del cliente\n• **Metodología propia** PDCA comprobada\n\n**¡Como consultor, te garantizo una propuesta competitiva!** 📞"
                 ]
             },
             pricing: {
@@ -270,9 +270,9 @@ class DataCryptChatbot {
                 ]
             },
             default: [
-                "🤔 **Excelente pregunta!** Como especialista comercial de DataCrypt_Labs, me gusta profundizar en cada consulta.\n\n**¿Podrías contarme más sobre:**\n• ¿Tu empresa maneja muchos datos?\n• ¿Qué decisiones te gustaría automatizar?\n• ¿Cuál es tu mayor pain point operativo?\n\n**💡 Mientras tanto:** ¿Te interesa una **consulta gratuita** donde analizo tu situación específica? 📞",
-                "🚀 **¡Perfecto!** Me encanta cuando las empresas buscan **soluciones data-driven**.\n\n**Como tu consultor especializado**, necesito entender mejor tu contexto:\n\n**📊 ¿Tu empresa está buscando:**\n• Automatizar reportes y dashboards?\n• Predecir ventas o demanda?\n• Optimizar operaciones con datos?\n• Mejorar toma de decisiones?\n\n**¡Escríbeme por email!** ferneyquiroga101@gmail.com y armamos tu propuesta personalizada 💼",
-                "💡 **Interesante consulta!** En DataCrypt_Labs convertimos **preguntas complejas** en **soluciones rentables**.\n\n**🎯 ¿Sabías que el 87% de las empresas** no aprovecha ni el 30% de sus datos?\n\n**Nosotros te ayudamos a:**\n✅ Identificar oportunidades ocultas en tus datos\n✅ Implementar soluciones que se paguen solas\n✅ Generar ROI desde el primer mes\n\n**¿Hablamos de tu proyecto específico?** Email: ferneyquiroga101@gmail.com �"
+                "🤔 **Excelente pregunta!** Como **Alex**, tu consultor especializado de DataCrypt_Labs, me gusta profundizar en cada consulta empresarial.\n\n**¿Podrías contarme más sobre:**\n• ¿Tu empresa maneja muchos datos?\n• ¿Qué decisiones te gustaría automatizar?\n• ¿Cuál es tu mayor pain point operativo?\n\n**💡 Como consultor:** ¿Te interesa una **consulta gratuita** donde analizo tu situación específica? 📞",
+                "🚀 **¡Perfecto!** Soy **Alex** y me encanta cuando las empresas buscan **soluciones data-driven rentables**.\n\n**Como tu consultor comercial especializado**, necesito entender mejor tu contexto:\n\n**📊 ¿Tu empresa está buscando:**\n• Automatizar reportes y dashboards?\n• Predecir ventas o demanda?\n• Optimizar operaciones con datos?\n• Mejorar toma de decisiones?\n\n**¡Escríbeme por email!** ferneyquiroga101@gmail.com y armamos tu propuesta comercial personalizada 💼",
+                "💡 **Interesante consulta empresarial!** Como **Alex** de DataCrypt_Labs, convierto **preguntas complejas** en **soluciones rentables**.\n\n**🎯 ¿Sabías que el 87% de las empresas** no aprovecha ni el 30% de sus datos?\n\n**Como tu consultor, te ayudo a:**\n✅ Identificar oportunidades ocultas en tus datos\n✅ Implementar soluciones que se paguen solas\n✅ Generar ROI desde el primer mes\n\n**¿Hablamos de tu proyecto empresarial específico?** Email: ferneyquiroga101@gmail.com 🚀"
             ]
         };
     }
@@ -352,7 +352,7 @@ class DataCryptChatbot {
         } catch (error) {
             console.error('Error en sendMessage:', error);
             this.isProcessingMessage = false; // Asegurar que se limpia la bandera
-            this.addMessage('⚠️ Disculpa, hubo un error procesando tu mensaje. Como GitHub Copilot, puedo ayudarte mejor si reformulas tu consulta.', 'bot');
+            this.addMessage('⚠️ Disculpa, hubo un error procesando tu mensaje. Como Alex, tu consultor de DataCrypt_Labs, puedo ayudarte mejor si reformulas tu consulta comercial.', 'bot');
         }
     }
 
@@ -419,7 +419,7 @@ class DataCryptChatbot {
         return this.getRandomResponse(this.knowledgeBase.default);
         } catch (error) {
             console.error('Error generando respuesta:', error);
-            return "Disculpa, estoy experimentando algunas dificultades técnicas. Como GitHub Copilot, normalmente puedo ayudarte con desarrollo y arquitectura de software. ¿Podrías intentar reformular tu pregunta?";
+            return "Disculpa, estoy experimentando algunas dificultades técnicas. Como Alex, tu consultor comercial de DataCrypt_Labs, normalmente puedo ayudarte con soluciones empresariales de datos. ¿Podrías intentar reformular tu consulta?";
         }
     }
 
@@ -481,7 +481,7 @@ class DataCryptChatbot {
             const timeGreeting = currentHour < 12 ? 'Buenos días' : 
                                 currentHour < 18 ? 'Buenas tardes' : 'Buenas noches';
             
-            const personalizedGreeting = `${timeGreeting}! 👋 Soy **GitHub Copilot**, tu arquitecto de soluciones técnicas para DataCrypt_Labs.\n\n🤖 **MI ESPECIALIDAD:** Diseño e implementación de sistemas de datos empresariales escalables y seguros.\n\n¿Qué desafío técnico necesitas resolver? ⚡`;
+            const personalizedGreeting = `${timeGreeting}! 👋 Soy **Alex**, tu consultor comercial especializado de DataCrypt_Labs.\n\n💼 **MI ESPECIALIDAD:** Transformar datos empresariales en ventajas competitivas rentables y soluciones que generan ROI medible.\n\n¿Qué desafío empresarial necesitas resolver con datos? ⚡`;
             
             setTimeout(() => {
                 this.addMessage(personalizedGreeting, 'bot');
