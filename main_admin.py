@@ -873,19 +873,35 @@ async def admin_login():
     """)
 
 if __name__ == "__main__":
+    import os
+    
+    # Configuración de puerto para Railway/producción
+    port = int(os.environ.get("PORT", 8000))
+    host = os.environ.get("HOST", "0.0.0.0")
+    environment = os.environ.get("RAILWAY_ENVIRONMENT", "development")
+    reload_mode = environment == "development"
+    
     print("🎛️ Iniciando DataCrypt Labs - Sistema Completo con Admin...")
-    print("🚀 Backend API: http://localhost:8000/api/docs")
-    print("🎛️ Panel Admin: http://localhost:8000/admin/dashboard")
-    print("🔐 Admin Login: http://localhost:8000/admin/login")
-    print("💡 Health Check: http://localhost:8000/api/health")
-    print("\n📋 Credenciales Admin:")
-    print("   Usuario: admin")
-    print("   Password: datacrypt2025")
+    print(f"🌍 Entorno: {environment}")
+    print(f"🔗 Puerto: {port}")
+    
+    if environment == "development":
+        print(f"🚀 Backend API: http://localhost:{port}/api/docs")
+        print(f"🎛️ Panel Admin: http://localhost:{port}/admin/dashboard")
+        print(f"🔐 Admin Login: http://localhost:{port}/admin/login")
+        print(f"💡 Health Check: http://localhost:{port}/api/health")
+        print("\n📋 Credenciales Admin:")
+        print("   Usuario: admin")
+        print("   Password: datacrypt2025")
+    else:
+        print("🚀 Sistema iniciado en modo producción")
+        print("✅ Health check disponible en /api/health")
+        print("🎛️ Panel admin disponible en /admin/dashboard")
     
     uvicorn.run(
         "main_admin:app",
-        host="0.0.0.0", 
-        port=8000,
-        reload=True,
+        host=host, 
+        port=port,
+        reload=reload_mode,
         log_level="info"
     )

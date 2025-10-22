@@ -1,0 +1,13 @@
+# Railway Build Configuration
+# Optimized Python runtime for DataCrypt Labs v3.1
+
+# Python version
+python==3.11.*
+
+# Build commands
+[build]
+  cmd = "pip install -r requirements-railway.txt"
+
+# Start command  
+[start]
+  cmd = "python main_admin.py"
