@@ -318,7 +318,7 @@ class AestheticMicrointeractions {
         if (!this.config.animations.enabled) return;
 
         card.style.transform = 'translateY(-4px) scale(0.98)';
-        
+
         setTimeout(() => {
             card.style.transform = 'translateY(-8px)';
         }, 150);
@@ -413,7 +413,8 @@ class AestheticMicrointeractions {
      * 🎯 Inicializar FAB
      */
     initializeFAB() {
-        const fab = document.querySelector('.fab');
+        // Selector más específico para evitar conflicto con iconos Font Awesome
+        const fab = document.querySelector('.floating-action-btn, .fab-button, button.fab');
         if (!fab) return;
 
         fab.addEventListener('click', () => {
@@ -424,7 +425,7 @@ class AestheticMicrointeractions {
         let lastScrollY = window.scrollY;
         window.addEventListener('scroll', () => {
             const currentScrollY = window.scrollY;
-            
+
             if (currentScrollY > lastScrollY && currentScrollY > 100) {
                 // Scrolling down
                 fab.style.transform = 'translateY(100px)';
@@ -432,7 +433,7 @@ class AestheticMicrointeractions {
                 // Scrolling up
                 fab.style.transform = '';
             }
-            
+
             lastScrollY = currentScrollY;
         }, { passive: true });
     }
@@ -445,7 +446,7 @@ class AestheticMicrointeractions {
 
         // Animación de click
         fab.style.transform = 'translateY(-2px) scale(1.05)';
-        
+
         setTimeout(() => {
             fab.style.transform = '';
         }, 150);
@@ -549,7 +550,7 @@ class AestheticMicrointeractions {
         if (!toast || !toast.parentNode) return;
 
         toast.classList.remove('show');
-        
+
         setTimeout(() => {
             if (toast.parentNode) {
                 toast.parentNode.removeChild(toast);
@@ -593,9 +594,9 @@ class AestheticMicrointeractions {
 
         const target = parseInt(element.dataset.progress) || 0;
         const duration = parseInt(element.dataset.duration) || 1500;
-        
+
         element.style.setProperty('--progress', '0%');
-        
+
         requestAnimationFrame(() => {
             element.style.transition = `--progress ${duration}ms ease-out`;
             element.style.setProperty('--progress', `${target}%`);
@@ -704,7 +705,7 @@ class AestheticMicrointeractions {
             particle.style.background = 'rgba(59, 130, 246, 0.3)';
             particle.style.borderRadius = '50%';
             particle.style.pointerEvents = 'none';
-            
+
             container.appendChild(particle);
             particles.push({
                 element: particle,
@@ -870,7 +871,7 @@ class AestheticMicrointeractions {
     /**
      * 📊 API pública para otros sistemas
      */
-    
+
     // Mostrar notificación
     notify(message, type = 'info') {
         return this.showToast(message, type);
@@ -897,6 +898,46 @@ class AestheticMicrointeractions {
     }
 
     /**
+     * 🔧 Corregir transforms problemáticos en iconos sociales
+     */
+    fixSocialIconsTransform() {
+        // Seleccionar todos los iconos Font Awesome en contenedores sociales
+        const socialIcons = document.querySelectorAll('.social-icons i.fab, .social-links i.fab');
+
+        socialIcons.forEach(icon => {
+            // Limpiar cualquier transform inline problemático
+            if (icon.style.transform && icon.style.transform.includes('translateY(100px)')) {
+                icon.style.transform = '';
+                console.log('🔧 Fixed transform on social icon:', icon.className);
+            }
+        });
+
+        // Observador para prevenir futuros cambios problemáticos
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    const target = mutation.target;
+                    if (target.classList.contains('fab') &&
+                        target.closest('.social-icons, .social-links') &&
+                        target.style.transform &&
+                        target.style.transform.includes('translateY(100px)')) {
+                        target.style.transform = '';
+                        console.log('🔧 Prevented problematic transform on social icon');
+                    }
+                }
+            });
+        });
+
+        // Observar cambios en iconos sociales
+        socialIcons.forEach(icon => {
+            observer.observe(icon, {
+                attributes: true,
+                attributeFilter: ['style']
+            });
+        });
+    }
+
+    /**
      * 🧹 Limpiar recursos
      */
     destroy() {
@@ -916,7 +957,7 @@ class AestheticMicrointeractions {
 
         // Limpiar toasts
         this.state.toasts.forEach(toast => this.hideToast(toast));
-        
+
         // Limpiar ripples
         this.state.ripples.forEach(ripple => {
             if (ripple.parentNode) {
@@ -932,6 +973,13 @@ class AestheticMicrointeractions {
 // 🚀 Inicialización automática
 document.addEventListener('DOMContentLoaded', () => {
     window.AestheticMicrointeractions = new AestheticMicrointeractions();
+
+    // Corregir bugs visuales después de la inicialización
+    setTimeout(() => {
+        if (window.AestheticMicrointeractions) {
+            window.AestheticMicrointeractions.fixSocialIconsTransform();
+        }
+    }, 100);
 });
 
 // 📤 Export para módulos
