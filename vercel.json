@@ -1,0 +1,37 @@
+{
+    "version": 2,
+    "name": "datacrypt-labs-admin",
+    "builds": [
+        {
+            "src": "backend/main.py",
+            "use": "@vercel/python"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/admin(.*)",
+            "dest": "backend/main.py"
+        },
+        {
+            "src": "/api/(.*)",
+            "dest": "backend/main.py"
+        },
+        {
+            "src": "/health",
+            "dest": "backend/main.py"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "backend/main.py"
+        }
+    ],
+    "env": {
+        "PYTHONPATH": ".",
+        "PRODUCTION": "true"
+    },
+    "functions": {
+        "backend/main.py": {
+            "maxDuration": 30
+        }
+    }
+}
