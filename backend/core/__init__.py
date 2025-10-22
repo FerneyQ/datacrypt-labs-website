@@ -12,6 +12,7 @@ from datetime import datetime
 from functools import wraps
 
 from fastapi import Request, Response, HTTPException, Depends, status
+from fastapi.responses import JSONResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.middleware.cors import CORSMiddleware
@@ -39,16 +40,7 @@ class RequestTrackingMiddleware(BaseHTTPMiddleware):
         request.state.start_time = start_time
         
         # Log request
-        logger.info(
-            "Request started",
-            extra={
-                "request_id": request_id,
-                "method": request.method,
-                "url": str(request.url),
-                "client_ip": request.client.host if request.client else None,
-                "user_agent": request.headers.get("user-agent")
-            }
-        )
+        logger.info(f"Request started: {request.method} {request.url} [ID: {request_id}]")
         
         try:
             # Process request
@@ -62,14 +54,7 @@ class RequestTrackingMiddleware(BaseHTTPMiddleware):
             response.headers["X-Execution-Time"] = f"{execution_time:.2f}ms"
             
             # Log response
-            logger.info(
-                "Request completed",
-                extra={
-                    "request_id": request_id,
-                    "status_code": response.status_code,
-                    "execution_time_ms": execution_time
-                }
-            )
+            logger.info(f"Request completed: {response.status_code} [{execution_time:.2f}ms] [ID: {request_id}]")
             
             return response
             
@@ -77,14 +62,7 @@ class RequestTrackingMiddleware(BaseHTTPMiddleware):
             execution_time = (time.time() - start_time) * 1000
             
             # Log error
-            logger.error(
-                "Request failed",
-                extra={
-                    "request_id": request_id,
-                    "error": str(e),
-                    "execution_time_ms": execution_time
-                }
-            )
+            logger.error(f"Request failed: {str(e)} [{execution_time:.2f}ms] [ID: {request_id}]")
             
             raise
 
@@ -102,7 +80,7 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
         
         # Only add HSTS in production
-        if settings.ENVIRONMENT == "production":
+        if settings.environment == "production":
             response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
         
         return response
@@ -354,28 +332,31 @@ response_cache = ResponseCache()
 async def validation_exception_handler(request: Request, exc: Exception):
     """Handler para errores de validación"""
     logger.error(f"Validation error: {exc}")
-    return {
-        "status": "error",
-        "message": "Validation failed",
-        "details": str(exc),
-        "timestamp": datetime.utcnow().isoformat()
-    }
+    return JSONResponse(
+        status_code=400,
+        content={
+            "status": "error",
+            "message": "Validation failed",
+            "details": str(exc),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    )
 
 async def generic_exception_handler(request: Request, exc: Exception):
     """Handler genérico para excepciones"""
     request_id = getattr(request.state, 'request_id', 'unknown')
     
-    logger.error(
-        f"Unhandled exception: {exc}",
-        extra={"request_id": request_id}
-    )
+    logger.error(f"Unhandled exception: {exc} [ID: {request_id}]")
     
-    return {
-        "status": "error",
-        "message": "Internal server error",
-        "request_id": request_id,
-        "timestamp": datetime.utcnow().isoformat()
-    }
+    return JSONResponse(
+        status_code=500,
+        content={
+            "status": "error",
+            "message": "Internal server error",
+            "request_id": request_id,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    )
 
 # Export
 __all__ = [

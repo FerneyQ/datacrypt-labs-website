@@ -153,10 +153,8 @@ async def root():
         </div>
         
         <script>
-            // Auto-redirect al admin si viene de localhost admin
-            if (window.location.search.includes('admin=true')) {
-                window.location.href = '/api/v1/admin/dashboard';
-            }
+            // Sistema simplificado - solo local
+            console.log('DataCrypt Labs - Sistema Local v2.0');
         </script>
     </body>
     </html>
