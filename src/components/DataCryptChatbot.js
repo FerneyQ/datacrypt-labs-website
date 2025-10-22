@@ -8,26 +8,28 @@
 
 class DataCryptChatbot {
     constructor(config = {}) {
-        // Prevenir múltiples instancias
-        if (DataCryptChatbot.instance) {
-            console.warn('Ya existe una instancia de DataCryptChatbot');
-            return DataCryptChatbot.instance;
-        }
+        // 🔒 CHATBOT COMPLETAMENTE DESACTIVADO POR SEGURIDAD
+        console.error('🚫 ACCESO DENEGADO: Chatbot desactivado por políticas de seguridad');
+        console.warn('🛡️ Sistema de seguridad reforzado - No se permite inicialización de chatbot');
+        console.info('📞 Para consultas, contactar directamente: ferneyquiroga101@gmail.com');
+        throw new Error('CHATBOT_DISABLED: Sistema desactivado por seguridad');
+        return null;
         
         this.config = {
-            // Configuración Comercial Consistente - DataCrypt_Labs
+            // CHATBOT DESACTIVADO - SISTEMA DE SEGURIDAD REFORZADO
+            enabled: false,  // CHATBOT COMPLETAMENTE DESHABILITADO
             container: document.body,
             position: 'bottom-right',
             theme: 'auto',
             minimized: true,
-            avatar: '👨‍💼',
-            title: 'Alex - Consultor DataCrypt',
-            subtitle: 'Especialista en Soluciones de Datos',
-            autoGreeting: true,
-            responseDelay: 1000, // Respuesta comercial más pensada
-            typingIndicator: true,
-            maxHistory: 100,
-            personality: 'commercial-expert',
+            avatar: '�',
+            title: 'Sistema Desactivado',
+            subtitle: 'Chatbot No Disponible',
+            autoGreeting: false,
+            responseDelay: 0,
+            typingIndicator: false,
+            maxHistory: 0,
+            personality: 'disabled',
             security: true, // Habilitar seguridad
             ...config
         };

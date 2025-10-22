@@ -100,9 +100,9 @@ class ConfigManager {
             autoDetect: true
         });
 
-        // Configuración del Chatbot (IMPLEMENTADO v2.1)
+        // 🚫 CHATBOT COMPLETAMENTE DESACTIVADO POR SEGURIDAD
         this.setConfig('chatbot', {
-            enabled: true,
+            enabled: false,  // DESACTIVADO PERMANENTEMENTE
             provider: 'local', // 'local', 'openai', 'custom'
             appearance: {
                 position: 'bottom-right',
