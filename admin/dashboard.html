@@ -252,6 +252,27 @@
                     </div>
                 </div>
 
+                <div class="panel" style="border: 2px solid #00ff41; background: linear-gradient(135deg, #001a0d, #002d1a);">
+                    <h3>🎛️ Dashboard Dinámico <span class="status-indicator status-online"></span></h3>
+                    <div class="metric">
+                        <span>Server Local:</span>
+                        <span class="metric-value" id="localServerStatus">CHECKING...</span>
+                    </div>
+                    <div class="metric">
+                        <span>Admin Panel:</span>
+                        <span class="metric-value">FUNCIONAL</span>
+                    </div>
+                    <div class="metric">
+                        <span>Base de Datos:</span>
+                        <span class="metric-value">SQLite ACTIVA</span>
+                    </div>
+                    <div class="action-buttons">
+                        <a href="http://localhost:8000/admin" target="_blank" class="btn" style="background: #00ff41; color: #000; font-weight: bold;">🚀 ADMIN PANEL</a>
+                        <a href="http://localhost:8000/admin/dashboard" target="_blank" class="btn" style="background: #0066ff; color: white;">📊 DASHBOARD</a>
+                        <button class="btn" onclick="checkLocalServer()">Test Conexión</button>
+                    </div>
+                </div>
+
                 <div class="panel">
                     <h3>🛡️ Sistema de Seguridad <span class="status-indicator status-online"></span></h3>
                     <div class="metric">
@@ -561,6 +582,42 @@
             } catch (error) {
                 addLog(`❌ Error verificando sitio: ${error.message}`, 'error');
                 updateMetric('System Status:', 'Offline');
+            }
+        }
+
+        async function checkLocalServer() {
+            addLog('🔍 Verificando servidor local...', 'info');
+            const statusElement = document.getElementById('localServerStatus');
+            
+            try {
+                statusElement.textContent = 'CONNECTING...';
+                statusElement.style.color = '#ffaa00';
+                
+                const response = await fetch('http://localhost:8000/health', {
+                    method: 'GET',
+                    timeout: 5000
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    statusElement.textContent = 'ONLINE ✅';
+                    statusElement.style.color = '#00ff41';
+                    
+                    addLog('✅ Servidor local ONLINE', 'success');
+                    addLog(`📊 Status: ${data.status}`, 'info');
+                    addLog(`🚀 Admin panel disponible en localhost:8000/admin`, 'success');
+                    addLog(`📊 Dashboard disponible en localhost:8000/admin/dashboard`, 'success');
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+            } catch (error) {
+                statusElement.textContent = 'OFFLINE ❌';
+                statusElement.style.color = '#ff4444';
+                
+                addLog('❌ Servidor local no disponible', 'error');
+                addLog('💡 Inicia el servidor con: uvicorn backend.main:app --host 0.0.0.0 --port 8000', 'info');
+                addLog(`📋 Error: ${error.message}`, 'warning');
             }
         }
 
@@ -1044,6 +1101,9 @@
         document.addEventListener('DOMContentLoaded', async function() {
             addLog('🎛️ Consola de gestión iniciada', 'success');
             addLog('🌐 Conectando a backend Python...', 'info');
+            
+            // Verificar servidor local inmediatamente
+            setTimeout(() => checkLocalServer(), 1000);
             
             // Inicializar sistema de voz
             initVoiceSystem();
