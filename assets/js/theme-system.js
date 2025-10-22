@@ -121,7 +121,7 @@ class ThemeSystem {
         
         this.isInitialized = true;
         
-        console.log('🎨 Theme System initialized with theme:', this.currentTheme);
+        
     }
 
     loadSavedTheme() {
@@ -209,7 +209,7 @@ class ThemeSystem {
             detail: { theme, themeData: this.themes[theme] }
         }));
         
-        console.log('🎨 Theme changed to:', theme);
+        
     }
 
     applyTheme(theme) {

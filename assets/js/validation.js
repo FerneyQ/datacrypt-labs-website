@@ -9,7 +9,7 @@
 
 // Función principal de validación
 async function runPortfolioValidation() {
-    console.log('🧪 [VALIDACIÓN] Iniciando suite de validación completa...');
+    
     
     const results = {
         structure: await validateProjectStructure(),
@@ -30,7 +30,7 @@ async function runPortfolioValidation() {
  * Validar estructura de archivos
  */
 async function validateProjectStructure() {
-    console.log('[VALIDACIÓN] 📁 Validando estructura de archivos...');
+    
     
     const requiredFiles = [
         'index.html',
@@ -72,7 +72,7 @@ async function validateProjectStructure() {
  * Validar sistema de configuración
  */
 async function validateConfiguration() {
-    console.log('[VALIDACIÓN] ⚙️ Validando sistema de configuración...');
+    
     
     const tests = [];
     
@@ -114,7 +114,7 @@ async function validateConfiguration() {
  * Validar inicialización de componentes
  */
 async function validateComponents() {
-    console.log('[VALIDACIÓN] 🧩 Validando componentes...');
+    
     
     const tests = [];
     
@@ -158,7 +158,7 @@ async function validateComponents() {
  * Validar métricas de performance
  */
 async function validatePerformance() {
-    console.log('[VALIDACIÓN] ⏱️ Validando performance...');
+    
     
     const tests = [];
     
@@ -204,7 +204,7 @@ async function validatePerformance() {
  * Validar manejo de errores
  */
 async function validateErrorHandling() {
-    console.log('[VALIDACIÓN] 🛡️ Validando manejo de errores...');
+    
     
     const tests = [];
     
@@ -238,7 +238,7 @@ async function validateErrorHandling() {
  * Validar responsive design
  */
 function validateResponsiveDesign() {
-    console.log('[VALIDACIÓN] 📱 Validando responsive design...');
+    
     
     const tests = [];
     
@@ -287,7 +287,7 @@ function validateResponsiveDesign() {
  * Validar accesibilidad
  */
 function validateAccessibility() {
-    console.log('[VALIDACIÓN] ♿ Validando accesibilidad...');
+    
     
     const tests = [];
     
@@ -336,7 +336,7 @@ function validateAccessibility() {
  * Validar SEO
  */
 function validateSEO() {
-    console.log('[VALIDACIÓN] 🔍 Validando SEO...');
+    
     
     const tests = [];
     
@@ -382,22 +382,22 @@ function validateSEO() {
  * Generar reporte de validación
  */
 function generateValidationReport(results) {
-    console.log('\n🎯 [REPORTE] Generando reporte de validación...\n');
+    
     
     let totalTests = 0;
     let passedTests = 0;
     
     Object.entries(results).forEach(([category, result]) => {
         const status = result.passed ? '✅' : '❌';
-        console.log(`${status} ${category.toUpperCase()}: ${result.passed ? 'PASÓ' : 'FALLÓ'}`);
+        
         
         if (result.tests) {
             result.tests.forEach(test => {
                 const testStatus = test.passed ? '  ✓' : '  ✗';
                 const value = test.value ? ` (${test.value})` : '';
-                console.log(`${testStatus} ${test.name}${value}`);
+                
                 if (test.error) {
-                    console.log(`    Error: ${test.error}`);
+                    
                 }
                 totalTests++;
                 if (test.passed) passedTests++;
@@ -407,20 +407,20 @@ function generateValidationReport(results) {
             if (result.passed) passedTests++;
         }
         
-        console.log('');
+        
     });
     
     const percentage = Math.round((passedTests / totalTests) * 100);
     const overallStatus = percentage >= 80 ? '🎉' : percentage >= 60 ? '⚠️' : '🚨';
     
-    console.log(`${overallStatus} RESULTADO GENERAL: ${passedTests}/${totalTests} tests pasaron (${percentage}%)`);
+    
     
     if (percentage >= 80) {
-        console.log('🌟 ¡EXCELENTE! El portafolio está funcionando correctamente.');
+        
     } else if (percentage >= 60) {
-        console.log('⚠️  El portafolio funciona pero hay áreas de mejora.');
+        
     } else {
-        console.log('🚨 Se requiere atención inmediata para corregir los problemas detectados.');
+        
     }
     
     // Almacenar reporte para debugging

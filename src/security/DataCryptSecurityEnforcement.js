@@ -68,7 +68,7 @@ class DataCryptSecurityEnforcement {
                 element.setAttribute = function(name, value) {
                     if (name === 'class' && typeof value === 'string') {
                         if (value.includes('chat') || value.includes('bot')) {
-                            console.error('🚫 BLOCKED: Intento de crear elemento chatbot');
+                            
                             return;
                         }
                     }
@@ -136,7 +136,7 @@ class DataCryptSecurityEnforcement {
                     src.toLowerCase().includes('alex') ||
                     src.toLowerCase().includes('datacryptchat')) {
                     
-                    console.error('🚫 SCRIPT BLOCKED: Intento de cargar script de chatbot');
+                    
                     this.logSecurityViolation('SCRIPT_LOAD_BLOCKED', src);
                     return child; // No ejecutar appendChild
                 }
@@ -155,7 +155,7 @@ class DataCryptSecurityEnforcement {
             severity: 'HIGH'
         };
 
-        console.error(`🚨 SECURITY VIOLATION: ${type}`, violation);
+        
         
         // Guardar en localStorage para auditoría
         const violations = JSON.parse(localStorage.getItem('datacrypt_security_violations') || '[]');
@@ -171,7 +171,7 @@ class DataCryptSecurityEnforcement {
             severity: 'INFO'
         };
 
-        console.info(`🛡️ SECURITY EVENT: ${type}`, event);
+        
         
         const events = JSON.parse(localStorage.getItem('datacrypt_security_events') || '[]');
         events.push(event);
@@ -180,7 +180,7 @@ class DataCryptSecurityEnforcement {
 
     // Método para verificar integridad del sistema
     performSecurityAudit() {
-        console.log('🔍 EJECUTANDO AUDITORÍA DE SEGURIDAD...');
+        
         
         const audit = {
             timestamp: Date.now(),
@@ -193,16 +193,16 @@ class DataCryptSecurityEnforcement {
 
         if (audit.domElements > 0) {
             audit.status = 'COMPROMISED';
-            console.error('🚨 COMPROMISO DETECTADO: Elementos de chatbot en DOM');
+            
         }
 
-        console.log('📊 REPORTE DE AUDITORÍA:', audit);
+        
         return audit;
     }
 
     // Método de emergencia para limpiar todo rastro de chatbot
     emergencyCleanup() {
-        console.warn('🧹 EJECUTANDO LIMPIEZA DE EMERGENCIA...');
+        
         
         // Remover todos los elementos sospechosos del DOM
         const suspiciousSelectors = [
@@ -218,7 +218,7 @@ class DataCryptSecurityEnforcement {
             elements.forEach(element => {
                 if (element.parentNode) {
                     element.parentNode.removeChild(element);
-                    console.log(`🗑️ Removido: ${element.tagName}.${element.className}`);
+                    
                 }
             });
         });
@@ -239,7 +239,7 @@ class DataCryptSecurityEnforcement {
         
         keysToRemove.forEach(key => {
             localStorage.removeItem(key);
-            console.log(`🗑️ Removido localStorage: ${key}`);
+            
         });
 
         this.logSecurityEvent('EMERGENCY_CLEANUP_EXECUTED', {
@@ -247,7 +247,7 @@ class DataCryptSecurityEnforcement {
             removedKeys: keysToRemove.length
         });
         
-        console.log('✅ LIMPIEZA DE EMERGENCIA COMPLETADA');
+        
     }
 
     // Generar reporte de seguridad
@@ -267,7 +267,7 @@ class DataCryptSecurityEnforcement {
             ]
         };
 
-        console.log('📋 REPORTE DE SEGURIDAD GENERADO:', report);
+        
         return report;
     }
 }
@@ -279,7 +279,7 @@ if (typeof window !== 'undefined') {
     // Inicializar inmediatamente
     document.addEventListener('DOMContentLoaded', () => {
         window.dataCryptSecurity = new DataCryptSecurityEnforcement();
-        console.log('🛡️ SISTEMA DE SEGURIDAD REFORZADO ACTIVADO');
+        
     });
     
     // Inicializar también si el DOM ya está listo
@@ -288,7 +288,7 @@ if (typeof window !== 'undefined') {
     } else {
         // DOM ya listo
         window.dataCryptSecurity = new DataCryptSecurityEnforcement();
-        console.log('🛡️ SISTEMA DE SEGURIDAD REFORZADO ACTIVADO (DOM READY)');
+        
     }
 }
 

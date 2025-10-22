@@ -107,7 +107,7 @@ class DataCryptDirectContact {
         document.head.appendChild(style);
         document.body.appendChild(contactButton);
 
-        console.log('📧 Sistema de contacto directo iniciado');
+        
     }
 
     createContactModal() {
@@ -366,7 +366,7 @@ class DataCryptDirectContact {
         modal.style.display = 'block';
         
         // Log del evento
-        console.log('📧 Modal de contacto directo abierto');
+        
         this.logContactEvent('CONTACT_MODAL_OPENED');
     }
 
@@ -374,7 +374,7 @@ class DataCryptDirectContact {
         const modal = document.getElementById('direct-contact-modal');
         modal.style.display = 'none';
         
-        console.log('📧 Modal de contacto directo cerrado');
+        
         this.logContactEvent('CONTACT_MODAL_CLOSED');
     }
 
@@ -388,7 +388,7 @@ class DataCryptDirectContact {
             status: 'ACTIVE'
         };
 
-        console.log('📞 SISTEMA DE CONTACTO DIRECTO INICIADO:', initEvent);
+        
         
         const events = JSON.parse(localStorage.getItem('datacrypt_contact_events') || '[]');
         events.push(initEvent);
@@ -441,11 +441,11 @@ if (typeof window !== 'undefined') {
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             window.dataCryptDirectContact = new DataCryptDirectContact();
-            console.log('📞 Sistema de contacto directo activado');
+            
         });
     } else {
         window.dataCryptDirectContact = new DataCryptDirectContact();
-        console.log('📞 Sistema de contacto directo activado (DOM ready)');
+        
     }
 }
 

@@ -24,7 +24,7 @@ class PerformanceOptimizer {
         this.setupPerformanceMonitoring();
         this.enableCompressionHeaders();
         
-        console.log('⚡ Performance Optimizer initialized');
+        
         this.isOptimized = true;
     }
 
@@ -179,7 +179,7 @@ class PerformanceOptimizer {
                     section.classList.add('loaded');
                 })
                 .catch(error => {
-                    console.error('Failed to load section:', error);
+                    
                     section.classList.add('error');
                 });
         }
@@ -334,9 +334,9 @@ class PerformanceOptimizer {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             loader().then(module => {
-                                console.log(`✅ Feature loaded: ${featureName}`);
+                                
                             }).catch(error => {
-                                console.error(`❌ Failed to load feature: ${featureName}`, error);
+                                
                             });
                             observer.unobserve(entry.target);
                         }
@@ -375,7 +375,7 @@ class PerformanceOptimizer {
             list.getEntries().forEach(entry => {
                 if (entry.name === 'first-contentful-paint') {
                     this.performanceMetrics.fcp = entry.startTime;
-                    console.log('📊 FCP:', entry.startTime);
+                    
                 }
             });
         }).observe({ entryTypes: ['paint'] });
@@ -384,7 +384,7 @@ class PerformanceOptimizer {
         new PerformanceObserver((list) => {
             list.getEntries().forEach(entry => {
                 this.performanceMetrics.lcp = entry.startTime;
-                console.log('📊 LCP:', entry.startTime);
+                
             });
         }).observe({ entryTypes: ['largest-contentful-paint'] });
 
@@ -397,7 +397,7 @@ class PerformanceOptimizer {
                 }
             });
             this.performanceMetrics.cls = cls;
-            console.log('📊 CLS:', cls);
+            
         }).observe({ entryTypes: ['layout-shift'] });
     }
 
@@ -405,7 +405,7 @@ class PerformanceOptimizer {
         new PerformanceObserver((list) => {
             list.getEntries().forEach(entry => {
                 if (entry.duration > 1000) {
-                    console.warn('⚠️ Slow resource:', entry.name, entry.duration + 'ms');
+                    
                 }
             });
         }).observe({ entryTypes: ['resource'] });
@@ -417,7 +417,7 @@ class PerformanceOptimizer {
             list.getEntries().forEach(entry => {
                 if (entry.entryType === 'navigation') {
                     this.performanceMetrics.tti = entry.loadEventEnd - entry.navigationStart;
-                    console.log('📊 TTI (estimated):', this.performanceMetrics.tti);
+                    
                 }
             });
         });

@@ -9,13 +9,13 @@
 // Test suite para ConfigManager
 function runConfigManagerTests() {
     if (!window.TestRunner) {
-        console.error('❌ TestRunner not available');
+        
         return;
     }
 
     const tests = window.TestRunner.createSuite('ConfigManager');
     
-    console.log('⚙️ Running ConfigManager Tests...');
+    
 
     tests.describe('ConfigManager Core System', () => {
         
@@ -445,16 +445,16 @@ function runConfigManagerResourceTests() {
 
 // Ejecutar todas las pruebas del ConfigManager
 async function runAllConfigManagerTests() {
-    console.log('🚀 Starting Complete ConfigManager Test Suite...');
+    
     
     try {
         const coreTests = await runConfigManagerTests();
         const performanceTests = await runConfigManagerPerformanceTests();
         const resourceTests = await runConfigManagerResourceTests();
         
-        console.log('✅ ConfigManager Core Tests:', coreTests);
-        console.log('⚡ ConfigManager Performance Tests:', performanceTests);
-        console.log('💾 ConfigManager Resource Tests:', resourceTests);
+        
+        
+        
         
         const totalPassed = (coreTests?.passed || 0) + 
                            (performanceTests?.passed || 0) + 
@@ -464,7 +464,7 @@ async function runAllConfigManagerTests() {
                            (performanceTests?.failed || 0) + 
                            (resourceTests?.failed || 0);
         
-        console.log(`\n📊 TOTAL CONFIGMANAGER TESTS: ${totalPassed} passed, ${totalFailed} failed`);
+        
         
         return {
             passed: totalPassed,
@@ -475,7 +475,7 @@ async function runAllConfigManagerTests() {
         };
         
     } catch (error) {
-        console.error('❌ Error running ConfigManager tests:', error);
+        
         return null;
     }
 }

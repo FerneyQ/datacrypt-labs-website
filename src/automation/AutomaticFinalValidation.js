@@ -21,38 +21,38 @@ class AutomaticFinalValidation {
      */
     async startAutomaticValidation() {
         if (this.validationStarted) {
-            console.log('⚠️ Validación ya iniciada');
+            
             return;
         }
 
         this.validationStarted = true;
-        console.log('🚀 INICIANDO VALIDACIÓN AUTOMÁTICA FINAL...');
-        console.log('='.repeat(70));
+        
+        
 
         try {
             // Esperar a que todos los sistemas estén cargados
             await this.waitForSystemsReady();
 
             // 1. Ejecutar validación comprensiva
-            console.log('🔍 Paso 1: Ejecutando validación comprensiva...');
+            
             await this.runComprehensiveValidation();
 
             // 2. Ejecutar verificación de deployment
-            console.log('🚀 Paso 2: Ejecutando verificación de deployment...');
+            
             await this.runDeploymentCheck();
 
             // 3. Ejecutar suite de tests
-            console.log('🧪 Paso 3: Ejecutando suite completa de tests...');
+            
             await this.runMasterTestSuite();
 
             // 4. Generar reporte final
-            console.log('📊 Paso 4: Generando reporte final...');
+            
             await this.generateFinalReport();
 
-            console.log('✅ VALIDACIÓN AUTOMÁTICA COMPLETADA');
+            
 
         } catch (error) {
-            console.error('❌ Error en validación automática:', error);
+            
             this.handleValidationError(error);
         }
     }
@@ -79,7 +79,7 @@ class AutomaticFinalValidation {
             const allReady = requiredSystems.every(system => window[system] !== undefined);
             
             if (allReady) {
-                console.log('✅ Todos los sistemas están listos');
+                
                 return;
             }
 
@@ -87,7 +87,7 @@ class AutomaticFinalValidation {
             waitTime += checkInterval;
         }
 
-        console.warn('⚠️ Algunos sistemas no están listos, continuando con validación...');
+        
     }
 
     /**
@@ -125,16 +125,16 @@ class AutomaticFinalValidation {
      */
     async runMasterTestSuite() {
         if (!window.MasterTestSuite) {
-            console.warn('⚠️ MasterTestSuite no disponible, saltando tests');
+            
             return;
         }
 
         try {
             const masterSuite = new window.MasterTestSuite();
             await masterSuite.runAllTestSuites();
-            console.log('🧪 Suite de tests completada');
+            
         } catch (error) {
-            console.warn('⚠️ Error en suite de tests:', error.message);
+            
         }
     }
 
@@ -226,34 +226,34 @@ class AutomaticFinalValidation {
      * 📊 MOSTRAR REPORTE FINAL
      */
     displayFinalReport(report) {
-        console.log('');
-        console.log('📊 REPORTE FINAL DE VALIDACIÓN AUTOMÁTICA');
-        console.log('='.repeat(70));
-        console.log(`⏰ Timestamp: ${report.timestamp}`);
-        console.log(`📊 Estado General: ${report.overallStatus}`);
-        console.log(`🚀 Listo para Producción: ${report.readyForProduction ? 'SÍ' : 'NO'}`);
-        console.log('');
+        
+        
+        
+        
+        
+        
+        
 
         if (report.validation) {
-            console.log(`🔍 Validación: ${report.validation.overallStatus}`);
+            
         }
 
         if (report.deployment) {
-            console.log(`🚀 Deployment: ${report.deployment.status}`);
+            
         }
 
-        console.log('');
-        console.log('💡 RECOMENDACIONES:');
+        
+        
         report.recommendations.forEach((rec, index) => {
-            console.log(`  ${index + 1}. [${rec.type}] ${rec.message}`);
+            
         });
 
         if (report.readyForProduction) {
-            console.log('');
-            console.log('🎉 ¡FELICITACIONES!');
-            console.log('✅ El sistema ha pasado todas las validaciones');
-            console.log('🚀 Está listo para deployment en producción');
-            console.log('📊 Monitoreo continuo activo');
+            
+            
+            
+            
+            
         }
     }
 
@@ -261,9 +261,9 @@ class AutomaticFinalValidation {
      * ❌ MANEJAR ERRORES DE VALIDACIÓN
      */
     handleValidationError(error) {
-        console.error('❌ ERROR CRÍTICO EN VALIDACIÓN:');
-        console.error(`   Mensaje: ${error.message}`);
-        console.error(`   Stack: ${error.stack}`);
+        
+        
+        
         
         // Notificar al chatbot si está disponible
         if (window.dataCryptChatbot) {
@@ -277,7 +277,7 @@ class AutomaticFinalValidation {
 
 // 🚀 EJECUTAR VALIDACIÓN AUTOMÁTICA AL CARGAR
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('🚀 Iniciando validación automática...');
+    
     
     // Pequeña espera para asegurar que todos los scripts estén cargados
     setTimeout(async () => {

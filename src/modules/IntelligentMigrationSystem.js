@@ -31,7 +31,7 @@ class IntelligentMigrationSystem {
     }
 
     init() {
-        console.log('🔄 Initializing Intelligent Migration System v2.1...');
+        
         
         // Definir fases de migración
         this.defineMigrationPhases();
@@ -42,7 +42,7 @@ class IntelligentMigrationSystem {
         // Configurar monitoring
         this.setupMigrationMonitoring();
         
-        console.log('✅ Migration System ready - Starting migration process...');
+        
         
         // Iniciar migración automática
         this.startMigration();
@@ -96,7 +96,7 @@ class IntelligentMigrationSystem {
     }
 
     detectExistingSystems() {
-        console.log('🔍 Detecting existing systems...');
+        
         
         // Detectar Theme System
         if (window.themeSystem) {
@@ -106,7 +106,7 @@ class IntelligentMigrationSystem {
                 api: window.themeSystem,
                 status: 'active'
             };
-            console.log('✅ Theme System detected');
+            
         }
         
         // Detectar PWA Manager
@@ -117,7 +117,7 @@ class IntelligentMigrationSystem {
                 api: window.pwaManager,
                 status: 'active'
             };
-            console.log('✅ PWA Manager detected');
+            
         }
         
         // Detectar Translation System
@@ -128,7 +128,7 @@ class IntelligentMigrationSystem {
                 api: window.translationSystem,
                 status: 'active'
             };
-            console.log('✅ Translation System detected');
+            
         }
         
         // Detectar Game System
@@ -139,7 +139,7 @@ class IntelligentMigrationSystem {
                 api: window.dataWizardGame,
                 status: 'active'
             };
-            console.log('✅ Game System detected');
+            
         }
         
         // Detectar Performance Optimizer
@@ -150,7 +150,7 @@ class IntelligentMigrationSystem {
                 api: window.performanceOptimizer,
                 status: 'active'
             };
-            console.log('✅ Performance Optimizer detected');
+            
         }
     }
 
@@ -176,15 +176,15 @@ class IntelligentMigrationSystem {
         this.isActive = true;
         this.migrationReport.started = new Date().toISOString();
         
-        console.log('🚀 Starting coordinated migration process...');
+        
         
         try {
             for (let i = 0; i < this.migrationPhases.length; i++) {
                 this.currentPhase = i;
                 const phase = this.migrationPhases[i];
                 
-                console.log(`\n📋 Phase ${i + 1}/${this.migrationPhases.length}: ${phase.name}`);
-                console.log(`   ${phase.description}`);
+                
+                
                 
                 const phaseStart = performance.now();
                 
@@ -202,11 +202,11 @@ class IntelligentMigrationSystem {
                         timestamp: new Date().toISOString()
                     });
                     
-                    console.log(`✅ Phase ${phase.name} completed (${Math.round(duration)}ms)`);
+                    
                     
                 } catch (phaseError) {
                     this.logMigrationError(`Phase ${phase.name}`, phaseError);
-                    console.error(`❌ Phase ${phase.name} failed:`, phaseError);
+                    
                     
                     // Decidir si continuar o abortar
                     if (this.isCriticalPhase(phase.id)) {
@@ -272,17 +272,17 @@ class IntelligentMigrationSystem {
         // Guardar backup
         try {
             localStorage.setItem('datacrypt-migration-backup', JSON.stringify(backup));
-            console.log('💾 Migration backup created successfully');
+            
         } catch (error) {
-            console.warn('⚠️ Could not create migration backup:', error);
+            
         }
     }
 
     async phaseThemeMigration() {
-        console.log('🎨 Migrating Theme System...');
+        
         
         if (!this.systemComponents.themeSystem.detected) {
-            console.log('ℹ️ No legacy theme system detected, skipping');
+            
             return;
         }
         
@@ -295,7 +295,7 @@ class IntelligentMigrationSystem {
                 // Esperar a que se inicialice
                 await this.waitForSystem(() => window.enhancedThemeSystem.isReady());
                 
-                console.log('✅ Enhanced Theme System initialized');
+                
             } else {
                 throw new Error('Enhanced Theme System not available');
             }
@@ -306,10 +306,10 @@ class IntelligentMigrationSystem {
     }
 
     async phasePWAMigration() {
-        console.log('📱 Migrating PWA Manager...');
+        
         
         if (!this.systemComponents.pwaManager.detected) {
-            console.log('ℹ️ No legacy PWA manager detected, skipping');
+            
             return;
         }
         
@@ -322,7 +322,7 @@ class IntelligentMigrationSystem {
                 // Esperar a que se inicialice
                 await this.waitForSystem(() => window.enhancedPWAManager.isReady());
                 
-                console.log('✅ Enhanced PWA Manager initialized');
+                
             } else {
                 throw new Error('Enhanced PWA Manager not available');
             }
@@ -333,7 +333,7 @@ class IntelligentMigrationSystem {
     }
 
     async phaseIntegrationValidation() {
-        console.log('🔗 Validating system integration...');
+        
         
         // Validar ConfigManager
         if (!window.ConfigManager || !window.ConfigManager.isReady()) {
@@ -358,11 +358,11 @@ class IntelligentMigrationSystem {
             }
         }
         
-        console.log('✅ All systems integrated successfully');
+        
     }
 
     async phaseTesting() {
-        console.log('🧪 Running comprehensive test suite...');
+        
         
         const testResults = {
             total: 0,
@@ -391,10 +391,10 @@ class IntelligentMigrationSystem {
         const migrationTests = await this.runMigrationTests();
         this.aggregateTestResults(testResults, migrationTests, 'Migration Validation');
         
-        console.log(`📊 Test Results: ${testResults.passed}/${testResults.total} passed`);
+        
         
         if (testResults.failed > 0) {
-            console.warn(`⚠️ ${testResults.failed} tests failed during migration`);
+            
             this.migrationReport.warnings.push(`${testResults.failed} tests failed`);
         }
         
@@ -414,7 +414,7 @@ class IntelligentMigrationSystem {
             throw new Error('Current theme lost during migration');
         }
         
-        console.log('✅ Theme System migration validated');
+        
     }
 
     validatePWAMigration() {
@@ -423,7 +423,7 @@ class IntelligentMigrationSystem {
             throw new Error('PWA Manager API compatibility broken');
         }
         
-        console.log('✅ PWA Manager migration validated');
+        
     }
 
     async runMigrationTests() {
@@ -542,15 +542,15 @@ class IntelligentMigrationSystem {
         const totalDuration = new Date(this.migrationReport.completed) - 
                              new Date(this.migrationReport.started);
         
-        console.log(`\n🎉 Migration completed successfully!`);
-        console.log(`⏱️ Total time: ${Math.round(totalDuration)}ms`);
-        console.log(`✅ Phases completed: ${this.migrationReport.phases.length}`);
-        console.log(`⚠️ Warnings: ${this.migrationReport.warnings.length}`);
-        console.log(`❌ Errors: ${this.migrationReport.errors.length}`);
+        
+        
+        
+        
+        
         
         if (this.migrationReport.testResults) {
             const { passed, failed, total } = this.migrationReport.testResults;
-            console.log(`🧪 Tests: ${passed}/${total} passed`);
+            
         }
         
         // Notificar completion
@@ -565,24 +565,24 @@ class IntelligentMigrationSystem {
         this.migrationReport.aborted = new Date().toISOString();
         this.migrationReport.abortReason = error.message;
         
-        console.error('💥 Migration aborted:', error);
+        
         
         // Intentar rollback si es posible
         this.attemptRollback();
     }
 
     attemptRollback() {
-        console.log('🔄 Attempting migration rollback...');
+        
         
         try {
             const backup = localStorage.getItem('datacrypt-migration-backup');
             if (backup) {
                 // Restaurar configuraciones básicas
-                console.log('📦 Restoring from backup...');
+                
                 // Implementar lógica de rollback si es necesario
             }
         } catch (error) {
-            console.error('❌ Rollback failed:', error);
+            
         }
     }
 
@@ -600,7 +600,7 @@ class IntelligentMigrationSystem {
         try {
             localStorage.setItem('datacrypt-migration-report', JSON.stringify(this.migrationReport));
         } catch (error) {
-            console.warn('Could not save migration report:', error);
+            
         }
     }
 

@@ -21,8 +21,8 @@ class DataCryptSecurity {
         this.initializeMonitoring();
         this.setupRateLimiting();
         
-        console.log('🔒 DataCrypt Security System Initialized');
-        console.log(`Security Level: ${this.securityLevel}`);
+        
+        
     }
 
     // Headers de seguridad HTTP
@@ -179,7 +179,7 @@ class DataCryptSecurity {
         localStorage.setItem('datacrypt_security_logs', JSON.stringify(logs));
 
         // Log en consola
-        console.warn(`🚨 Security Event: ${type}`, data);
+        
 
         // Analizar patrones sospechosos
         this.analyzeSecurityPatterns(logs);
@@ -216,7 +216,7 @@ class DataCryptSecurity {
             severity: 'HIGH'
         };
 
-        console.error('🚨 SECURITY ALERT:', alert);
+        
         
         // En producción: enviar al servidor de monitoreo
         // this.sendToSecurityServer(alert);
@@ -260,7 +260,7 @@ class DataCryptSecurity {
         };
 
         localStorage.setItem('datacrypt_security_backup', JSON.stringify(backupData));
-        console.log('✅ Security backup created');
+        
         return true;
     }
 

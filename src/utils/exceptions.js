@@ -29,7 +29,7 @@ class PortfolioException extends Error {
         
         // Logging automático si está habilitado
         if (window.portfolioConfig?.dev?.CONSOLE_LOGS) {
-            console.error(`[${this.name}] ${message}`, this.context);
+            
         }
         
         // Reportar a analytics si está configurado
@@ -338,7 +338,7 @@ export function safeExecute(fallbackValue = null, shouldLogError = true) {
                 return await originalMethod.apply(this, args);
             } catch (error) {
                 if (shouldLogError) {
-                    console.warn(`[SafeExecute] Error en ${propertyKey}:`, error.message);
+                    
                 }
                 
                 return typeof fallbackValue === 'function' 
@@ -407,7 +407,7 @@ class UnhandledPromiseException extends PortfolioException {
 }
 
 function handleGlobalError(error) {
-    console.error('[GlobalErrorHandler]', error);
+    
     
     // Enviar a sistema de monitoreo si está configurado
     if (window.portfolioConfig?.dev?.ERROR_REPORTING) {

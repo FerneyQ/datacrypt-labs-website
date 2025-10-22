@@ -83,7 +83,7 @@ class EnhancedDataWizardGame {
      * 🚀 INICIALIZACIÓN DEL JUEGO
      */
     init() {
-        console.log('🎮 Inicializando Enhanced Data Wizard Game...');
+        
         
         try {
             if (!this.canvas || !this.ctx) {
@@ -108,7 +108,7 @@ class EnhancedDataWizardGame {
             // 6. Mostrar pantalla de inicio
             this.showStartScreen();
             
-            console.log('✅ Enhanced Data Wizard Game inicializado');
+            
             
             // Cargar estadísticas iniciales del backend
             this.loadGameStats();
@@ -125,7 +125,7 @@ class EnhancedDataWizardGame {
             }
             
         } catch (error) {
-            console.error('❌ Error inicializando juego:', error);
+            
             this.handleGameError(error);
         }
     }
@@ -333,7 +333,7 @@ class EnhancedDataWizardGame {
      * 🎮 INICIAR JUEGO
      */
     startGame() {
-        console.log('🎮 Iniciando juego...');
+        
         
         this.isPlaying = true;
         this.isPaused = false;
@@ -1051,7 +1051,7 @@ class EnhancedDataWizardGame {
 
     updateTheme(newTheme) {
         this.theme = newTheme;
-        console.log('🎨 Tema actualizado en juego:', newTheme);
+        
     }
 
     // Implementar métodos restantes...
@@ -1101,7 +1101,7 @@ class EnhancedDataWizardGame {
         this.timeLeft += 30; // Bonus time
         this.createLevelUpEffect();
         
-        console.log(`🎉 Level up! Nivel ${this.level}`);
+        
     }
 
     createLevelUpEffect() {
@@ -1125,7 +1125,7 @@ class EnhancedDataWizardGame {
         
         this.showGameOver();
         
-        console.log('🎯 Juego terminado. Score final:', this.score);
+        
     }
 
     /**
@@ -1144,7 +1144,7 @@ class EnhancedDataWizardGame {
                 time_played: this.timePlayed || 60
             };
 
-            console.log('💾 Enviando score al backend...', scoreData);
+            
 
             const response = await fetch('http://localhost:8000/api/game/score', {
                 method: 'POST',
@@ -1156,7 +1156,7 @@ class EnhancedDataWizardGame {
 
             if (response.ok) {
                 const result = await response.json();
-                console.log('✅ Score guardado exitosamente:', result);
+                
                 
                 // Mostrar ranking si está disponible
                 if (result.rank) {
@@ -1167,11 +1167,11 @@ class EnhancedDataWizardGame {
                 await this.loadLeaderboard();
                 
             } else {
-                console.warn('⚠️ Error guardando score:', response.statusText);
+                
             }
             
         } catch (error) {
-            console.error('❌ Error conectando con backend para guardar score:', error);
+            
             // El juego sigue funcionando sin backend
         }
     }
@@ -1239,7 +1239,7 @@ class EnhancedDataWizardGame {
             }
             
         } catch (error) {
-            console.error('❌ Error cargando leaderboard:', error);
+            
         }
     }
 
@@ -1282,14 +1282,14 @@ class EnhancedDataWizardGame {
             
             if (response.ok) {
                 const data = await response.json();
-                console.log('📊 Estadísticas del juego cargadas:', data.stats);
+                
                 
                 // Mostrar estadísticas en la pantalla de inicio si se desea
                 this.displayGameStats(data.stats);
             }
             
         } catch (error) {
-            console.error('❌ Error cargando estadísticas:', error);
+            
         }
     }
 
@@ -1399,7 +1399,7 @@ class EnhancedDataWizardGame {
 
     togglePause() {
         this.isPaused = !this.isPaused;
-        console.log(this.isPaused ? '⏸️ Juego pausado' : '▶️ Juego reanudado');
+        
     }
 
     handleVisibilityChange() {
@@ -1498,7 +1498,7 @@ class EnhancedDataWizardGame {
     }
 
     handleGameError(error) {
-        console.error('🚨 Error crítico en juego:', error);
+        
         
         // Mostrar mensaje de error amigable
         if (this.gameOverlay) {
@@ -1530,6 +1530,6 @@ window.EnhancedDataWizardGame = EnhancedDataWizardGame;
 
 // 🔄 AUTO-INICIALIZACIÓN
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🎮 Inicializando Enhanced Data Wizard Game...');
+    
     window.enhancedDataWizardGame = new EnhancedDataWizardGame();
 });

@@ -36,7 +36,7 @@ class IntelligentVisualSystem {
      * 🚀 INICIALIZACIÓN DEL SISTEMA
      */
     async init() {
-        console.log('🎨 Inicializando Sistema Visual Inteligente...');
+        
         
         try {
             // 1. Detectar capacidades del navegador
@@ -55,7 +55,7 @@ class IntelligentVisualSystem {
             this.setupResponsiveImages();
             
             this.isInitialized = true;
-            console.log('✅ Sistema Visual Inteligente inicializado');
+            
             
             // Notificar al chatbot
             if (window.dataCryptChatbot) {
@@ -66,7 +66,7 @@ class IntelligentVisualSystem {
             }
             
         } catch (error) {
-            console.error('❌ Error inicializando sistema visual:', error);
+            
             this.handleSystemError(error);
         }
     }
@@ -86,13 +86,6 @@ class IntelligentVisualSystem {
         
         // Detectar conexión de red
         this.detectNetworkConnection();
-        
-        console.log('🔍 Capacidades detectadas:', {
-            webP: this.supportsWebP,
-            nativeLazyLoading: this.supportsNativeLazyLoading,
-            intersectionObserver: this.supportsIntersectionObserver,
-            connection: this.networkInfo
-        });
     }
 
     /**
@@ -199,7 +192,7 @@ class IntelligentVisualSystem {
      */
     async processExistingImages() {
         const images = document.querySelectorAll('img');
-        console.log(`🔄 Procesando ${images.length} imágenes existentes...`);
+        
         
         for (const img of images) {
             await this.processImage(img);
@@ -231,7 +224,7 @@ class IntelligentVisualSystem {
             this.addLoadingEffects(img);
             
         } catch (error) {
-            console.warn('⚠️ Error procesando imagen:', error);
+            
             this.setFallbackImage(img);
         }
     }
@@ -396,12 +389,12 @@ class IntelligentVisualSystem {
             
         } catch (error) {
             if (retryCount < this.config.maxRetries) {
-                console.log(`🔄 Reintentando carga de imagen (${retryCount + 1}/${this.config.maxRetries}):`, src);
+                
                 
                 await new Promise(resolve => setTimeout(resolve, this.config.retryDelay));
                 return this.loadImageWithFallback(img, src, retryCount + 1);
             } else {
-                console.warn('⚠️ Error cargando imagen después de reintentos:', src);
+                
                 this.setFallbackImage(img);
             }
         }
@@ -471,7 +464,7 @@ class IntelligentVisualSystem {
      * 🚨 MANEJAR ERROR DE IMAGEN
      */
     handleImageError(img) {
-        console.warn('⚠️ Error cargando imagen:', img.src);
+        
         this.setFallbackImage(img);
         
         // Reportar al sistema de monitoreo
@@ -488,7 +481,7 @@ class IntelligentVisualSystem {
      * 🔧 MANEJAR ERROR DEL SISTEMA
      */
     handleSystemError(error) {
-        console.error('🚨 Error crítico en sistema visual:', error);
+        
         
         // Fallback a modo básico
         this.enableBasicMode();
@@ -507,7 +500,7 @@ class IntelligentVisualSystem {
      * 🏥 HABILITAR MODO BÁSICO
      */
     enableBasicMode() {
-        console.log('🏥 Activando modo básico para sistema visual...');
+        
         
         // Procesar imágenes de forma básica
         const images = document.querySelectorAll('img');
@@ -530,7 +523,7 @@ class IntelligentVisualSystem {
             await this.loadImageWithFallback(img, newSrc);
             
         } catch (error) {
-            console.warn('⚠️ Error refrescando imagen:', error);
+            
             this.setFallbackImage(img);
         }
     }
@@ -562,19 +555,19 @@ class IntelligentVisualSystem {
      * 🎨 OPTIMIZAR TODAS LAS IMÁGENES
      */
     async optimizeAllImages() {
-        console.log('🎨 Optimizando todas las imágenes...');
+        
         
         const images = document.querySelectorAll('img');
         const promises = Array.from(images).map(img => this.processImage(img));
         
         try {
             await Promise.allSettled(promises);
-            console.log('✅ Optimización de imágenes completada');
+            
             
             return this.getStats();
             
         } catch (error) {
-            console.error('❌ Error en optimización masiva:', error);
+            
             throw error;
         }
     }
@@ -585,6 +578,6 @@ window.IntelligentVisualSystem = IntelligentVisualSystem;
 
 // 🔄 AUTO-INICIALIZACIÓN
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🎨 Inicializando Sistema Visual Inteligente...');
+    
     window.intelligentVisualSystem = new IntelligentVisualSystem();
 });

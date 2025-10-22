@@ -84,7 +84,7 @@ class DataCryptLabsManager {
      */
     async initialize() {
         try {
-            console.log('🚀 Iniciando DataCrypt_Labs Corporate System...');
+            
             
             // Configurar manejo global de errores
             this.setupCorporateErrorHandling();
@@ -110,26 +110,15 @@ class DataCryptLabsManager {
             // Finalizar carga
             this.completeInitialization();
             
-            console.log('✅ DataCrypt_Labs Corporate System initialized successfully');
+            
             
         } catch (error) {
-            console.error('❌ Error initializing DataCrypt_Labs:', error);
+            
             this.handleInitializationError(error);
         }
     }
-            'portfolio',
-            'contact',
-            'chatbot',
-            'footer'
-        ];
-    }
-    
-    /**
-     * Inicialización principal del portafolio
-     */
-    async init() {
         try {
-            console.log('[PortfolioManager] 🚀 Iniciando portafolio con Filosofía Mejora Continua v2.1');
+            
             PerformanceHelper.startMark('portfolio-total-init');
             
             // 1. Setup global error handling
@@ -162,7 +151,7 @@ class DataCryptLabsManager {
             this.isInitialized = true;
             
             const totalTime = PerformanceHelper.endMark('portfolio-total-init');
-            console.log(`[PortfolioManager] ✅ Portafolio inicializado exitosamente en ${totalTime.duration.toFixed(2)}ms`);
+            
             
             // Reportar métricas de performance
             this.reportPerformanceMetrics();
@@ -180,11 +169,11 @@ class DataCryptLabsManager {
         
         // Handler adicional para errores del portfolio
         window.addEventListener('portfolioerror', (event) => {
-            console.error('[PortfolioManager] Error en componente:', event.detail);
+            
             this.handleComponentError(event.detail);
         });
         
-        console.log('[PortfolioManager] 🛡️ Manejo global de errores configurado');
+        
     }
     
     /**
@@ -206,7 +195,7 @@ class DataCryptLabsManager {
             
             return true;
         } catch (error) {
-            console.warn('[PortfolioManager] Error mostrando loading screen:', error);
+            
             return false;
         }
     }
@@ -219,13 +208,13 @@ class DataCryptLabsManager {
         
         try {
             this.config = await getPortfolioConfig();
-            console.log('[PortfolioManager] ⚙️ Configuración cargada exitosamente');
+            
             
             // Aplicar configuración global
             this.applyGlobalConfiguration();
             
         } catch (error) {
-            console.error('[PortfolioManager] Error cargando configuración:', error);
+            
             // Usar configuración por defecto
             this.config = await getPortfolioConfig({});
         } finally {
@@ -243,19 +232,19 @@ class DataCryptLabsManager {
             // Aplicar configuración de development/production
             if (config.isDevelopment) {
                 document.body.classList.add('dev-mode');
-                console.log('[PortfolioManager] 🔧 Modo desarrollo activado');
+                
             }
             
             // Configurar analytics si está habilitado
             if (config.enableAnalytics && window.gtag) {
                 const analyticsConfig = this.config.getModuleConfig('analytics');
                 window.gtag('config', analyticsConfig.GA_TRACKING_ID);
-                console.log('[PortfolioManager] 📊 Analytics configurado');
+                
             }
             
             return true;
         } catch (error) {
-            console.warn('[PortfolioManager] Error aplicando configuración global:', error);
+            
             return false;
         }
     }
@@ -277,9 +266,9 @@ class DataCryptLabsManager {
         });
         
         if (unsupportedFeatures.length > 0) {
-            console.warn('[PortfolioManager] ⚠️ Características no soportadas:', unsupportedFeatures);
+            
         } else {
-            console.log('[PortfolioManager] ✅ Navegador compatible detectado');
+            
         }
     }
     
@@ -287,13 +276,13 @@ class DataCryptLabsManager {
      * Inicializar todos los componentes en orden
      */
     async initializeComponents() {
-        console.log('[PortfolioManager] 🔄 Inicializando componentes modulares...');
+        
         
         for (const componentName of this.initializationOrder) {
             await this.initializeComponent(componentName);
         }
         
-        console.log(`[PortfolioManager] ✅ ${this.components.size} componentes inicializados`);
+        
     }
     
     /**
@@ -339,7 +328,7 @@ class DataCryptLabsManager {
                     break;
                     
                 default:
-                    console.warn(`[PortfolioManager] Componente desconocido: ${componentName}`);
+                    
                     return;
             }
             
@@ -349,7 +338,7 @@ class DataCryptLabsManager {
                 const loadTime = PerformanceHelper.endMark(`component-${componentName}`);
                 this.componentLoadTimes.set(componentName, loadTime.duration);
                 
-                console.log(`[PortfolioManager] ✅ ${componentName} inicializado (${loadTime.duration.toFixed(2)}ms)`);
+                
                 
                 // Actualizar progreso de loading
                 this.updateLoadingProgress(componentName);
@@ -362,7 +351,7 @@ class DataCryptLabsManager {
                 timestamp: new Date().toISOString()
             };
             
-            console.error(`[PortfolioManager] ❌ Error inicializando ${componentName}:`, error);
+            
             
             // Emitir evento de error personalizado
             window.dispatchEvent(new CustomEvent('portfolioerror', { detail: errorDetails }));
@@ -488,7 +477,7 @@ class DataCryptLabsManager {
             }
         });
         
-        console.log('[PortfolioManager] 🌐 Eventos globales configurados');
+        
     }
     
     /**
@@ -506,7 +495,7 @@ class DataCryptLabsManager {
             
             return true;
         } catch (error) {
-            console.warn('[PortfolioManager] Error configurando theme toggle:', error);
+            
             return false;
         }
     }
@@ -530,11 +519,11 @@ class DataCryptLabsManager {
             // Guardar preferencia
             StorageHelper.setItem('theme_preference', newTheme);
             
-            console.log(`[PortfolioManager] 🎨 Tema cambiado a: ${newTheme}`);
+            
             
             return true;
         } catch (error) {
-            console.warn('[PortfolioManager] Error cambiando tema:', error);
+            
             return false;
         }
     }
@@ -602,7 +591,7 @@ class DataCryptLabsManager {
             
             return true;
         } catch (error) {
-            console.warn('[PortfolioManager] Error en animaciones de entrada:', error);
+            
             return false;
         }
     }
@@ -644,7 +633,7 @@ class DataCryptLabsManager {
             
             return true;
         } catch (error) {
-            console.warn('[PortfolioManager] Error en animaciones de contador:', error);
+            
             return false;
         }
     }
@@ -677,7 +666,7 @@ class DataCryptLabsManager {
             
             return true;
         } catch (error) {
-            console.warn('[PortfolioManager] Error en animaciones de skills:', error);
+            
             return false;
         }
     }
@@ -694,7 +683,7 @@ class DataCryptLabsManager {
             timestamp: new Date().toISOString()
         };
         
-        console.log('[PortfolioManager] 📊 Métricas de performance:', metrics);
+        
         
         if (this.config?.analytics?.ANALYTICS_ENABLED && window.gtag) {
             window.gtag('event', 'portfolio_performance', {
@@ -708,7 +697,7 @@ class DataCryptLabsManager {
      * Manejar errores de inicialización
      */
     handleInitializationError(error) {
-        console.error('[PortfolioManager] ❌ Error crítico en inicialización:', error);
+        
         
         this.showErrorMessage('Ocurrió un error al cargar el portafolio. Por favor, recarga la página.');
         
@@ -745,7 +734,7 @@ class DataCryptLabsManager {
             
             return true;
         } catch (error) {
-            console.error('[PortfolioManager] Error mostrando mensaje de error:', error);
+            
             return false;
         }
     }
@@ -754,18 +743,18 @@ class DataCryptLabsManager {
      * Manejar error de componente individual
      */
     handleComponentError(errorDetails) {
-        console.warn(`[PortfolioManager] ⚠️ Error en componente ${errorDetails.component}:`, errorDetails);
+        
     }
     
     /**
      * Handlers para visibilidad de página
      */
     handlePageHidden() {
-        console.log('[PortfolioManager] Página oculta - pausando operaciones no críticas');
+        
     }
     
     handlePageVisible() {
-        console.log('[PortfolioManager] Página visible - reanudando operaciones');
+        // Página visible - reanudando operaciones
     }
     
     /**
@@ -799,12 +788,12 @@ class DataCryptLabsManager {
      * Cleanup del portfolio
      */
     destroy() {
-        console.log('[PortfolioManager] 🧹 Destruyendo portfolio...');
+        
         
         this.components.forEach((component, name) => {
             if (component && typeof component.destroy === 'function') {
                 component.destroy();
-                console.log(`[PortfolioManager] ✅ Componente ${name} destruido`);
+                
             }
         });
         
@@ -812,7 +801,7 @@ class DataCryptLabsManager {
         this.componentLoadTimes.clear();
         this.isInitialized = false;
         
-        console.log('[PortfolioManager] ✅ Portfolio destruido completamente');
+        
     }
 }
 
@@ -827,7 +816,7 @@ function initializePortfolio() {
     
     // Inicializar
     manager.init().catch(error => {
-        console.error('[Portfolio] Error fatal en inicialización:', error);
+        
     });
 }
 

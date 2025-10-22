@@ -27,7 +27,7 @@ class MigrationMonitor {
     }
 
     init() {
-        console.log('🔍 Initializing Migration Monitor...');
+        
         
         // Validación pre-migración
         this.runPreMigrationValidation();
@@ -38,7 +38,7 @@ class MigrationMonitor {
         // Configurar monitoreo continuo
         this.setupContinuousMonitoring();
         
-        console.log('✅ Migration Monitor initialized');
+        
     }
 
     setupEventListeners() {
@@ -70,7 +70,7 @@ class MigrationMonitor {
     }
 
     runPreMigrationValidation() {
-        console.log('📋 Running pre-migration validation...');
+        
         
         const validation = {
             timestamp: new Date().toISOString(),
@@ -91,7 +91,7 @@ class MigrationMonitor {
         
         this.validationResults.preMigration = validation;
         
-        console.log('📊 Pre-migration validation results:', validation);
+        
         
         return validation;
     }
@@ -110,7 +110,7 @@ class MigrationMonitor {
             .map(([name]) => name);
         
         if (missing.length > 0) {
-            console.warn('⚠️ Missing critical dependencies:', missing);
+            
         }
         
         return dependencies;
@@ -423,7 +423,7 @@ class MigrationMonitor {
             healthCheck.overall = 'critical';
         }
         
-        console.log('🔍 Health Check:', healthCheck);
+        
         
         return healthCheck;
     }
@@ -440,7 +440,7 @@ class MigrationMonitor {
         }
         
         if (issues.length > 0) {
-            console.error('🚨 Critical issues detected:', issues);
+            
             this.handleCriticalIssues(issues);
         }
     }
@@ -454,7 +454,7 @@ class MigrationMonitor {
     }
 
     handleMigrationComplete(migrationReport) {
-        console.log('🎉 Migration completed - Running post-migration validation...');
+        
         
         this.isActive = false;
         
@@ -476,7 +476,7 @@ class MigrationMonitor {
         
         this.validationResults.postMigration = validation;
         
-        console.log('📊 Post-migration validation results:', validation);
+        
         
         // Generar reporte final
         this.generateFinalReport();
@@ -517,7 +517,7 @@ class MigrationMonitor {
                 tests.chatbotResponse = window.chatbotIntegration.isReady();
             }
         } catch (error) {
-            console.warn('Functionality test error:', error);
+            
         }
         
         return tests;
@@ -549,7 +549,7 @@ class MigrationMonitor {
                 !!window.pwaManager;
                 
         } catch (error) {
-            console.error('Compatibility validation error:', error);
+            
         }
         
         return compatibility;
@@ -564,15 +564,15 @@ class MigrationMonitor {
             validationResults: this.validationResults
         };
         
-        console.log('\n📋 MIGRATION FINAL REPORT');
-        console.log('========================');
-        console.log(`Success: ${report.migrationSuccess ? '✅' : '❌'}`);
-        console.log(`Summary: ${report.summary}`);
+        
+        
+        
+        
         
         if (report.recommendations.length > 0) {
-            console.log('\n📝 Recommendations:');
+            
             report.recommendations.forEach((rec, i) => {
-                console.log(`${i + 1}. ${rec}`);
+                
             });
         }
         
@@ -580,7 +580,7 @@ class MigrationMonitor {
         try {
             localStorage.setItem('datacrypt-migration-final-report', JSON.stringify(report));
         } catch (error) {
-            console.warn('Could not save final report:', error);
+            
         }
         
         return report;
@@ -637,12 +637,12 @@ class MigrationMonitor {
     }
 
     logSystemStatus(system, status) {
-        console.log(`🔍 ${system}: ${status}`);
+        
     }
 
     handleCriticalError(event) {
         if (this.isActive) {
-            console.error('🚨 Critical error during migration:', event.error);
+            
         }
     }
 

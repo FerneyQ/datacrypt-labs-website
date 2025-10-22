@@ -49,7 +49,7 @@ class ResponsiveDesignSystem {
      */
     async init() {
         try {
-            console.log(`🎨 Inicializando ${this.config.name} v${this.config.version}...`);
+            
 
             await this.detectCapabilities();
             this.setupEventListeners();
@@ -63,14 +63,14 @@ class ResponsiveDesignSystem {
             // Integración con ConfigManager
             if (window.ConfigManager) {
                 window.ConfigManager.set('responsiveSystem', this);
-                console.log('✅ ResponsiveDesignSystem integrado con ConfigManager');
+                
             }
 
-            console.log('✅ ResponsiveDesignSystem inicializado correctamente');
+            
             this.triggerEvent('system:ready', { system: this });
 
         } catch (error) {
-            console.error('❌ Error inicializando ResponsiveDesignSystem:', error);
+            
             if (window.ContinuousMonitoring) {
                 window.ContinuousMonitoring.logError('ResponsiveDesignSystem', 'init', error);
             }
@@ -104,7 +104,7 @@ class ResponsiveDesignSystem {
         this.state.prefersHighContrast = window.matchMedia('(prefers-contrast: high)').matches;
         this.state.prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        console.log('📱 Capacidades detectadas:', this.state);
+        
     }
 
     /**
@@ -736,7 +736,7 @@ class ResponsiveDesignSystem {
                 try {
                     callback(data);
                 } catch (error) {
-                    console.error(`Error en callback de evento ${event}:`, error);
+                    
                 }
             });
         }
@@ -766,7 +766,7 @@ class ResponsiveDesignSystem {
         // Limpiar touches
         this.state.touches.clear();
 
-        console.log('🧹 ResponsiveDesignSystem limpiado');
+        
     }
 }
 

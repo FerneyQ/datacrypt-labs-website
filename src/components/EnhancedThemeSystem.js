@@ -41,13 +41,13 @@ class EnhancedThemeSystem {
             this.setupEventListeners();
             
             this.isInitialized = true;
-            console.log('✅ Enhanced Theme System v2.1 initialized with ConfigManager');
+            
             
             // Notificar que el sistema está listo
             this.dispatchThemeSystemReady();
             
         } catch (error) {
-            console.error('❌ Error initializing Enhanced Theme System:', error);
+            
             // Fallback al sistema original si falla
             this.fallbackToOriginal();
         }
@@ -70,7 +70,7 @@ class EnhancedThemeSystem {
     async migrateExistingThemes() {
         // Verificar si ya existen temas en el sistema anterior
         if (window.themeSystem && window.themeSystem.themes) {
-            console.log('🔄 Migrating existing themes to ConfigManager...');
+            
             
             // Mantener referencia al sistema original
             this.originalAPI = window.themeSystem;
@@ -89,7 +89,7 @@ class EnhancedThemeSystem {
         for (const [key, theme] of Object.entries(originalThemes)) {
             const configKey = this.convertThemeKey(key);
             if (!configThemes.themes[configKey]) {
-                console.log(`📥 Adding missing theme: ${key} -> ${configKey}`);
+                
                 // Agregar tema faltante (esto sería raro, pero por seguridad)
                 configThemes.themes[configKey] = this.convertThemeFormat(theme);
             }
@@ -155,7 +155,7 @@ class EnhancedThemeSystem {
             get: () => this.getLegacyThemes()
         });
 
-        console.log('🔄 Backward compatibility layer established');
+        
     }
 
     getLegacyThemes() {
@@ -218,7 +218,7 @@ class EnhancedThemeSystem {
         const config = this.configManager.getConfig('themes');
         
         if (!config.themes[themeId]) {
-            console.warn(`Theme ${themeId} not found, using default`);
+            
             themeId = 'dark-matrix';
         }
 
@@ -237,7 +237,7 @@ class EnhancedThemeSystem {
         // Notificar cambio
         this.dispatchThemeChange(themeData);
 
-        console.log(`🎨 Theme changed to: ${themeData.name}`);
+        
         return themeData;
     }
 
@@ -248,7 +248,7 @@ class EnhancedThemeSystem {
 
     applyTheme(themeData) {
         if (!themeData || !themeData.colors) {
-            console.warn('Invalid theme data provided');
+            
             return;
         }
 
@@ -332,7 +332,7 @@ class EnhancedThemeSystem {
         try {
             localStorage.setItem('datacrypt-theme-preference', themeId);
         } catch (error) {
-            console.warn('Failed to save theme preference:', error);
+            
         }
     }
 
@@ -350,7 +350,7 @@ class EnhancedThemeSystem {
     }
 
     fallbackToOriginal() {
-        console.warn('⚠️ Falling back to original theme system');
+        
         // Si hay un sistema original, mantenerlo
         if (this.originalAPI) {
             window.themeSystem = this.originalAPI;
@@ -360,7 +360,7 @@ class EnhancedThemeSystem {
     // Testing integration
     runTests() {
         if (!window.TestRunner) {
-            console.warn('TestRunner not available');
+            
             return;
         }
 

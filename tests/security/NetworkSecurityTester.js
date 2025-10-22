@@ -19,8 +19,8 @@ class NetworkSecurityTester {
     }
 
     async runComprehensiveTests() {
-        console.log('🔒 INICIANDO PRUEBAS COMPLETAS DE SEGURIDAD Y CALIDAD');
-        console.log('=' .repeat(60));
+        
+        
         
         // 1. Pruebas de Seguridad de Red
         await this.testNetworkSecurity();
@@ -45,7 +45,7 @@ class NetworkSecurityTester {
     // PRUEBAS DE SEGURIDAD DE RED
     // ==========================================
     async testNetworkSecurity() {
-        console.log('\n🌐 EJECUTANDO PRUEBAS DE SEGURIDAD DE RED...');
+        
         
         const tests = [
             this.testSSLCertificate(),
@@ -56,11 +56,11 @@ class NetworkSecurityTester {
         ];
         
         this.testResults.network = await Promise.allSettled(tests);
-        console.log('✅ Pruebas de red completadas');
+        
     }
 
     async testSSLCertificate() {
-        console.log('  🔐 Verificando certificado SSL...');
+        
         
         try {
             const response = await fetch(this.websiteUrl, { method: 'HEAD' });
@@ -88,7 +88,7 @@ class NetworkSecurityTester {
     }
 
     async testHTTPSRedirection() {
-        console.log('  🔄 Verificando redirección HTTPS...');
+        
         
         try {
             const httpUrl = this.websiteUrl.replace('https://', 'http://');
@@ -121,7 +121,7 @@ class NetworkSecurityTester {
     }
 
     async testDNSConfiguration() {
-        console.log('  🌍 Analizando configuración DNS...');
+        
         
         return {
             test: 'DNS Configuration',
@@ -138,7 +138,7 @@ class NetworkSecurityTester {
     }
 
     async testPortSecurity() {
-        console.log('  🚪 Verificando seguridad de puertos...');
+        
         
         return {
             test: 'Port Security',
@@ -154,7 +154,7 @@ class NetworkSecurityTester {
     }
 
     async testFirewallRules() {
-        console.log('  🛡️ Evaluando reglas de firewall...');
+        
         
         return {
             test: 'Firewall Rules',
@@ -174,7 +174,7 @@ class NetworkSecurityTester {
     // ANÁLISIS DE SEGURIDAD WEB
     // ==========================================
     async testWebSecurity() {
-        console.log('\n🔒 EJECUTANDO ANÁLISIS DE SEGURIDAD WEB...');
+        
         
         const tests = [
             this.testSecurityHeaders(),
@@ -185,11 +185,11 @@ class NetworkSecurityTester {
         ];
         
         this.testResults.web = await Promise.allSettled(tests);
-        console.log('✅ Análisis de seguridad web completado');
+        
     }
 
     async testSecurityHeaders() {
-        console.log('  📋 Verificando headers de seguridad...');
+        
         
         try {
             const response = await fetch(this.websiteUrl);
@@ -229,7 +229,7 @@ class NetworkSecurityTester {
     }
 
     async testContentSecurityPolicy() {
-        console.log('  🛡️ Evaluando Content Security Policy...');
+        
         
         // Verificar si el CSP está implementado en nuestro sistema de seguridad
         const cspImplemented = true; // Sabemos que lo implementamos en DataCryptSecurity.js
@@ -249,7 +249,7 @@ class NetworkSecurityTester {
     }
 
     async testXSSProtection() {
-        console.log('  ⚡ Verificando protección XSS...');
+        
         
         return {
             test: 'XSS Protection',
@@ -265,7 +265,7 @@ class NetworkSecurityTester {
     }
 
     async testClickjackingProtection() {
-        console.log('  🖱️ Evaluando protección contra clickjacking...');
+        
         
         return {
             test: 'Clickjacking Protection',
@@ -281,7 +281,7 @@ class NetworkSecurityTester {
     }
 
     async testDataValidation() {
-        console.log('  ✅ Verificando validación de datos...');
+        
         
         return {
             test: 'Data Validation',
@@ -301,7 +301,7 @@ class NetworkSecurityTester {
     // PRUEBAS DE CALIDAD DEL CHATBOT ALEX
     // ==========================================
     async testChatbotQuality() {
-        console.log('\n🤖 EJECUTANDO PRUEBAS DE CALIDAD DEL CHATBOT ALEX...');
+        
         
         const tests = [
             this.testChatbotInitialization(),
@@ -312,11 +312,11 @@ class NetworkSecurityTester {
         ];
         
         this.testResults.chatbot = await Promise.allSettled(tests);
-        console.log('✅ Pruebas del chatbot completadas');
+        
     }
 
     async testChatbotInitialization() {
-        console.log('  🚀 Verificando inicialización del chatbot...');
+        
         
         return {
             test: 'Chatbot Initialization',
@@ -334,7 +334,7 @@ class NetworkSecurityTester {
     }
 
     async testSecurityIntegration() {
-        console.log('  🔐 Evaluando integración de seguridad...');
+        
         
         return {
             test: 'Security Integration',
@@ -351,7 +351,7 @@ class NetworkSecurityTester {
     }
 
     async testResponseQuality() {
-        console.log('  💬 Analizando calidad de respuestas...');
+        
         
         return {
             test: 'Response Quality',
@@ -368,7 +368,7 @@ class NetworkSecurityTester {
     }
 
     async testUIInteraction() {
-        console.log('  🎨 Verificando interacción de UI...');
+        
         
         return {
             test: 'UI Interaction',
@@ -385,7 +385,7 @@ class NetworkSecurityTester {
     }
 
     async testMobileCompatibility() {
-        console.log('  📱 Evaluando compatibilidad móvil...');
+        
         
         return {
             test: 'Mobile Compatibility',
@@ -405,7 +405,7 @@ class NetworkSecurityTester {
     // MONITOREO DE PERFORMANCE
     // ==========================================
     async testPerformance() {
-        console.log('\n⚡ EJECUTANDO MONITOREO DE PERFORMANCE...');
+        
         
         const tests = [
             this.testLoadSpeed(),
@@ -416,11 +416,11 @@ class NetworkSecurityTester {
         ];
         
         this.testResults.performance = await Promise.allSettled(tests);
-        console.log('✅ Monitoreo de performance completado');
+        
     }
 
     async testLoadSpeed() {
-        console.log('  ⚡ Midiendo velocidad de carga...');
+        
         
         const startTime = performance.now();
         try {
@@ -448,7 +448,7 @@ class NetworkSecurityTester {
     }
 
     async testResourceOptimization() {
-        console.log('  🗜️ Verificando optimización de recursos...');
+        
         
         return {
             test: 'Resource Optimization',
@@ -465,7 +465,7 @@ class NetworkSecurityTester {
     }
 
     async testCoreWebVitals() {
-        console.log('  📊 Evaluando Core Web Vitals...');
+        
         
         return {
             test: 'Core Web Vitals',
@@ -482,7 +482,7 @@ class NetworkSecurityTester {
     }
 
     async testCaching() {
-        console.log('  💾 Analizando estrategia de caché...');
+        
         
         return {
             test: 'Caching Strategy',
@@ -499,7 +499,7 @@ class NetworkSecurityTester {
     }
 
     async testCDNPerformance() {
-        console.log('  🌐 Verificando rendimiento de CDN...');
+        
         
         return {
             test: 'CDN Performance',
@@ -519,7 +519,7 @@ class NetworkSecurityTester {
     // VALIDACIÓN DE INTEGRIDAD DEL SISTEMA
     // ==========================================
     async testSystemIntegrity() {
-        console.log('\n🔍 EJECUTANDO VALIDACIÓN DE INTEGRIDAD DEL SISTEMA...');
+        
         
         const tests = [
             this.testSecuritySystemActive(),
@@ -530,11 +530,11 @@ class NetworkSecurityTester {
         ];
         
         this.testResults.integrity = await Promise.allSettled(tests);
-        console.log('✅ Validación de integridad completada');
+        
     }
 
     async testSecuritySystemActive() {
-        console.log('  🛡️ Verificando sistema de seguridad activo...');
+        
         
         return {
             test: 'Security System Active',
@@ -551,7 +551,7 @@ class NetworkSecurityTester {
     }
 
     async testBackupSystems() {
-        console.log('  💾 Evaluando sistemas de backup...');
+        
         
         return {
             test: 'Backup Systems',
@@ -568,7 +568,7 @@ class NetworkSecurityTester {
     }
 
     async testMonitoringActive() {
-        console.log('  📊 Verificando monitoreo activo...');
+        
         
         return {
             test: 'Monitoring Active',
@@ -585,7 +585,7 @@ class NetworkSecurityTester {
     }
 
     async testErrorHandling() {
-        console.log('  ⚠️ Analizando manejo de errores...');
+        
         
         return {
             test: 'Error Handling',
@@ -602,7 +602,7 @@ class NetworkSecurityTester {
     }
 
     async testDataIntegrity() {
-        console.log('  🔐 Verificando integridad de datos...');
+        
         
         return {
             test: 'Data Integrity',
@@ -622,20 +622,20 @@ class NetworkSecurityTester {
     // GENERACIÓN DE REPORTE FINAL
     // ==========================================
     generateFinalReport() {
-        console.log('\n📊 GENERANDO REPORTE FINAL...');
-        console.log('=' .repeat(60));
+        
+        
         
         // Calcular puntuaciones
         this.calculateScores();
         
         // Reporte detallado
-        console.log('\n🏆 RESULTADOS FINALES DE CALIDAD Y SEGURIDAD');
-        console.log('=' .repeat(60));
         
-        console.log(`\n📊 PUNTUACIÓN GENERAL:`);
-        console.log(`   Seguridad: ${this.securityScore.toFixed(1)}/100`);
-        console.log(`   Calidad: ${this.qualityScore.toFixed(1)}/100`);
-        console.log(`   Promedio: ${((this.securityScore + this.qualityScore) / 2).toFixed(1)}/100`);
+        
+        
+        
+        
+        
+        
         
         this.printCategoryResults('🌐 SEGURIDAD DE RED', this.testResults.network);
         this.printCategoryResults('🔒 SEGURIDAD WEB', this.testResults.web);
@@ -674,36 +674,36 @@ class NetworkSecurityTester {
     }
 
     printCategoryResults(title, results) {
-        console.log(`\n${title}:`);
+        
         results.forEach(result => {
             if (result.status === 'fulfilled') {
                 const test = result.value;
                 const statusIcon = test.status === 'PASS' ? '✅' : test.status === 'WARNING' ? '⚠️' : '❌';
-                console.log(`   ${statusIcon} ${test.test}: ${test.status} (${test.score}/100)`);
+                
             }
         });
     }
 
     printRecommendations() {
-        console.log('\n🎯 RECOMENDACIONES:');
-        console.log('   ✅ Continuar con el monitoreo regular de seguridad');
-        console.log('   ✅ Mantener actualizaciones de dependencias');
-        console.log('   ✅ Expandir las métricas de performance en tiempo real');
-        console.log('   ✅ Implementar alertas proactivas de seguridad');
+        
+        
+        
+        
+        
     }
 
     printSummary() {
         const overallScore = (this.securityScore + this.qualityScore) / 2;
         const level = overallScore >= 95 ? 'EXCELENTE' : overallScore >= 85 ? 'MUY BUENO' : overallScore >= 75 ? 'BUENO' : 'NECESITA MEJORAS';
         
-        console.log('\n🎊 RESUMEN EJECUTIVO:');
-        console.log('=' .repeat(60));
-        console.log(`📈 Nivel de Calidad: ${level} (${overallScore.toFixed(1)}/100)`);
-        console.log('🔒 Sistema de Seguridad: ENTERPRISE GRADE ACTIVO');
-        console.log('🤖 Chatbot Alex: OPERATIVO CON SEGURIDAD INTEGRADA');
-        console.log('⚡ Performance: OPTIMIZADO PARA PRODUCCIÓN');
-        console.log('🛡️ Protección: MULTI-CAPA ACTIVADA');
-        console.log('\n🚀 ¡DATACRYPT_LABS LISTO PARA PRODUCCIÓN!');
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }
 
@@ -715,4 +715,4 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = NetworkSecurityTester;
 }
 
-console.log('🔒 NetworkSecurityTester cargado y listo para ejecutar');
+

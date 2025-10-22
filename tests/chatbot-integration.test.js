@@ -9,13 +9,13 @@
 // Test suite para la integración del chatbot
 function runChatbotIntegrationTests() {
     if (!window.TestRunner) {
-        console.error('❌ TestRunner not available');
+        
         return;
     }
 
     const tests = window.TestRunner.createSuite('ChatbotIntegration');
     
-    console.log('🧪 Running Chatbot Integration Tests...');
+    
 
     tests.describe('Chatbot System Integration', () => {
         
@@ -276,16 +276,16 @@ function runChatbotAccessibilityTests() {
 
 // Ejecutar todas las pruebas del chatbot
 async function runAllChatbotTests() {
-    console.log('🚀 Starting Complete Chatbot Test Suite...');
+    
     
     try {
         const integrationResults = await runChatbotIntegrationTests();
         const performanceResults = await runChatbotPerformanceTests();
         const accessibilityResults = await runChatbotAccessibilityTests();
         
-        console.log('✅ Chatbot Integration Tests:', integrationResults);
-        console.log('⚡ Chatbot Performance Tests:', performanceResults);
-        console.log('♿ Chatbot Accessibility Tests:', accessibilityResults);
+        
+        
+        
         
         const totalPassed = (integrationResults?.passed || 0) + 
                            (performanceResults?.passed || 0) + 
@@ -295,7 +295,7 @@ async function runAllChatbotTests() {
                            (performanceResults?.failed || 0) + 
                            (accessibilityResults?.failed || 0);
         
-        console.log(`\n📊 TOTAL CHATBOT TESTS: ${totalPassed} passed, ${totalFailed} failed`);
+        
         
         return {
             passed: totalPassed,
@@ -306,7 +306,7 @@ async function runAllChatbotTests() {
         };
         
     } catch (error) {
-        console.error('❌ Error running chatbot tests:', error);
+        
         return null;
     }
 }

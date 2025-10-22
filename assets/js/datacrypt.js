@@ -82,7 +82,7 @@ class DataCryptLabsManager {
      */
     async initialize() {
         try {
-            console.log('🚀 Iniciando DataCrypt_Labs Corporate System...');
+            
             
             // Cache elementos DOM
             this.cacheElements();
@@ -108,10 +108,10 @@ class DataCryptLabsManager {
             // Finalizar carga
             this.completeInitialization();
             
-            console.log('✅ DataCrypt_Labs Corporate System initialized successfully');
+            
             
         } catch (error) {
-            console.error('❌ Error initializing DataCrypt_Labs:', error);
+            
             this.handleInitializationError(error);
         }
     }
@@ -143,7 +143,7 @@ class DataCryptLabsManager {
         this.currentTheme = 'dark';
         
         // No hay toggle de tema, solo modo oscuro permanente
-        console.log('🌙 DataCrypt_Labs - Dark Mode inicializado como tema único');
+        
     }
 
     /**
@@ -193,9 +193,9 @@ class DataCryptLabsManager {
                 await component.init();
                 const endTime = performance.now();
                 this.performanceMetrics.componentLoadTimes.set(component.name, endTime - startTime);
-                console.log(`✅ ${component.name} component loaded in ${(endTime - startTime).toFixed(2)}ms`);
+                
             } catch (error) {
-                console.error(`❌ Error loading ${component.name} component:`, error);
+                
             }
         }
     }
@@ -701,7 +701,7 @@ class DataCryptLabsManager {
             });
         });
         
-        console.log('📊 Corporate Analytics initialized:', this.biMetrics);
+        
     }
 
     /**
@@ -717,7 +717,7 @@ class DataCryptLabsManager {
                 ...data
             };
             
-            console.log('📊 Corporate Event:', eventData);
+            
             
             // Aquí se integraría con Google Analytics, Mixpanel, etc.
             // gtag('event', eventName, data);
@@ -780,7 +780,7 @@ class DataCryptLabsManager {
      * Manejar errores de inicialización
      */
     handleInitializationError(error) {
-        console.error('❌ DataCrypt_Labs initialization failed:', error);
+        
         
         // Ocultar loading screen en caso de error
         this.hideLoadingScreen();
@@ -803,7 +803,7 @@ class DataCryptLabsManager {
         this.hideLoadingScreen();
         
         const totalTime = performance.now() - this.performanceMetrics.initStartTime;
-        console.log(`🎉 DataCrypt_Labs loaded in ${totalTime.toFixed(2)}ms`);
+        
         
         // Track successful initialization
         this.trackCorporateEvent('initialization_complete', {
@@ -860,7 +860,7 @@ class PortfolioCarousel {
         this.startAutoPlay();
         this.updateSlidePosition();
         
-        console.log('🎠 Portfolio Carousel initialized with', this.totalSlides, 'slides');
+        
     }
     
     setupEventListeners() {
@@ -1111,7 +1111,7 @@ class DataWizardGame {
             this.draw();
         }
         
-        console.log('🎮 Data Wizard Game initialized');
+        
     }
     
     setupCanvas() {
@@ -1571,7 +1571,7 @@ class TranslationSystem {
         this.updateLanguageDisplay();
         this.translatePage();
         
-        console.log('🌐 Translation System initialized with language:', this.currentLanguage);
+        
     }
     
     setupEventListeners() {
@@ -1682,7 +1682,7 @@ class TranslationSystem {
                 });
             }
             
-            console.log('🌐 Language changed to:', newLanguage);
+            
         }
     }
     
@@ -1787,4 +1787,4 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = DataCryptLabsManager;
 }
 
-console.log('🌱 DataCrypt_Labs Corporate System loaded successfully!');
+

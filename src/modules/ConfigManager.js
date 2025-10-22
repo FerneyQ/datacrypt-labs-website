@@ -253,7 +253,7 @@ class ConfigManager {
             const stored = localStorage.getItem(`datacrypt-config-${key}`);
             return stored ? JSON.parse(stored) : this.getConfig(key);
         } catch (error) {
-            console.warn('Failed to load dynamic config:', key, error);
+            
             return this.getConfig(key);
         }
     }
@@ -267,13 +267,13 @@ class ConfigManager {
             // Validación básica de tipos
             for (const [field, expectedType] of Object.entries(schema)) {
                 if (typeof config[field] !== expectedType) {
-                    console.error(`Config validation failed for ${key}.${field}: expected ${expectedType}, got ${typeof config[field]}`);
+                    
                     return false;
                 }
             }
             return true;
         } catch (error) {
-            console.error('Config validation error:', error);
+            
             return false;
         }
     }
@@ -309,11 +309,11 @@ class ConfigManager {
                 for (const [key, value] of Object.entries(configData.config)) {
                     this.setConfig(key, value);
                 }
-                console.log('Configuration imported successfully');
+                
                 return true;
             }
         } catch (error) {
-            console.error('Failed to import configuration:', error);
+            
             return false;
         }
     }

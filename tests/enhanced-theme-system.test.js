@@ -9,13 +9,13 @@
 // Test suite para Enhanced Theme System
 function runEnhancedThemeSystemTests() {
     if (!window.TestRunner) {
-        console.error('❌ TestRunner not available');
+        
         return;
     }
 
     const tests = window.TestRunner.createSuite('EnhancedThemeSystem');
     
-    console.log('🎨 Running Enhanced Theme System Tests...');
+    
 
     tests.describe('Enhanced Theme System v2.1', () => {
         
@@ -337,16 +337,16 @@ function runThemeSystemAccessibilityTests() {
 
 // Ejecutar todas las pruebas del sistema de temas
 async function runAllThemeSystemTests() {
-    console.log('🚀 Starting Complete Theme System Test Suite...');
+    
     
     try {
         const functionalTests = await runEnhancedThemeSystemTests();
         const performanceTests = await runThemeSystemPerformanceTests();
         const accessibilityTests = await runThemeSystemAccessibilityTests();
         
-        console.log('✅ Theme Functional Tests:', functionalTests);
-        console.log('⚡ Theme Performance Tests:', performanceTests);
-        console.log('♿ Theme Accessibility Tests:', accessibilityTests);
+        
+        
+        
         
         const totalPassed = (functionalTests?.passed || 0) + 
                            (performanceTests?.passed || 0) + 
@@ -356,7 +356,7 @@ async function runAllThemeSystemTests() {
                            (performanceTests?.failed || 0) + 
                            (accessibilityTests?.failed || 0);
         
-        console.log(`\n📊 TOTAL THEME TESTS: ${totalPassed} passed, ${totalFailed} failed`);
+        
         
         return {
             passed: totalPassed,
@@ -367,7 +367,7 @@ async function runAllThemeSystemTests() {
         };
         
     } catch (error) {
-        console.error('❌ Error running theme system tests:', error);
+        
         return null;
     }
 }

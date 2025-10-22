@@ -203,7 +203,7 @@ class TestRunner {
             }
 
         } catch (error) {
-            console.error(`Suite setup/teardown error: ${error.message}`);
+            
         }
 
         suiteResults.duration = performance.now() - startTime;
@@ -218,7 +218,7 @@ class TestRunner {
 
     // Ejecutar todos los tests
     async runAll() {
-        console.log('🧪 Starting test execution...\n');
+        
         
         this.resetStats();
         const allResults = [];
@@ -249,41 +249,41 @@ class TestRunner {
 
     logSuiteResults(suite) {
         const status = suite.failed > 0 ? '❌' : '✅';
-        console.log(`${status} ${suite.name} (${suite.duration.toFixed(2)}ms)`);
+        
         
         suite.tests.forEach(test => {
             const testStatus = test.status === 'passed' ? '  ✅' : 
                               test.status === 'failed' ? '  ❌' : '  ⏸️';
             const duration = `(${test.duration.toFixed(2)}ms)`;
-            console.log(`${testStatus} ${test.name} ${duration}`);
+            
             
             if (test.error) {
-                console.log(`     Error: ${test.error}`);
+                
             }
         });
-        console.log('');
+        
     }
 
     logFinalResults() {
         const totalTime = Array.from(this.results.values())
             .reduce((sum, suite) => sum + suite.duration, 0);
 
-        console.log('📊 Test Results Summary:');
-        console.log(`   Total: ${this.stats.total}`);
-        console.log(`   ✅ Passed: ${this.stats.passed}`);
-        console.log(`   ❌ Failed: ${this.stats.failed}`);
-        console.log(`   ⏸️ Skipped: ${this.stats.skipped}`);
-        console.log(`   ⏱️ Duration: ${totalTime.toFixed(2)}ms\n`);
+        
+        
+        
+        
+        
+        
 
         const successRate = this.stats.total > 0 ? 
             ((this.stats.passed / this.stats.total) * 100).toFixed(1) : 0;
         
-        console.log(`🎯 Success Rate: ${successRate}%`);
+        
         
         if (this.stats.failed > 0) {
-            console.warn('⚠️ Some tests failed. Check the output above for details.');
+            
         } else {
-            console.log('🎉 All tests passed!');
+            
         }
     }
 

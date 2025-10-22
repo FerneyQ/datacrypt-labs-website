@@ -21,14 +21,14 @@ class PythonBackendIntegration {
      * 🚀 INICIALIZACIÓN
      */
     async init() {
-        console.log('🐍 Inicializando integración con Python Backend...');
+        
         
         // GitHub Pages Mode: Usar APIs mock sin mostrar popup
         if (window.location.hostname.includes('github.io')) {
-            console.log('🌐 GitHub Pages detectado - usando APIs mock');
+            
             this.setupEventListeners();
             this.createPythonDashboard();
-            console.log('✅ GitHub Pages Mode con APIs Mock activado');
+            
             return;
         }
         
@@ -36,9 +36,9 @@ class PythonBackendIntegration {
             await this.checkConnection();
             this.setupEventListeners();
             this.createPythonDashboard();
-            console.log('✅ Python Backend Integration activado');
+            
         } catch (error) {
-            console.warn('⚠️ Backend Python no disponible - usando modo mock');
+            
             // NO mostrar popup en GitHub Pages - usar APIs mock silenciosamente
             this.setupEventListeners();
             this.createPythonDashboard();
@@ -51,37 +51,37 @@ class PythonBackendIntegration {
     async checkConnection() {
         // GitHub Pages: usar API mock directamente
         if (window.location.hostname.includes('github.io')) {
-            console.log('🌐 GitHub Pages - usando API mock health check');
+            
             try {
                 const response = await fetch('./api/health.json');
                 if (response.ok) {
                     const data = await response.json();
                     this.isConnected = true;
-                    console.log('✅ API Mock health check exitoso:', data);
+                    
                     return data;
                 }
             } catch (error) {
-                console.log('📡 API Mock aún no disponible - continuando con modo local');
+                
             }
         }
         
-        console.log(`🔍 Intentando conectar a: ${this.baseURL}/health`);
+        
         
         try {
             const response = await fetch(`${this.baseURL}/health`);
-            console.log('📡 Response status:', response.status);
+            
             
             if (response.ok) {
                 const data = await response.json();
                 this.isConnected = true;
-                console.log('✅ Conectado a Python Backend:', data);
+                
                 return data;
             } else {
-                console.error('❌ Response not OK:', response.status, response.statusText);
+                
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
         } catch (error) {
-            console.error('💥 Error de conexión:', error);
+            
             this.isConnected = false;
             throw new Error('Backend no disponible');
         }
@@ -205,7 +205,7 @@ class PythonBackendIntegration {
             }
 
         } catch (error) {
-            console.error('❌ Error generando análisis:', error);
+            
             resultDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
         }
     }
@@ -322,7 +322,7 @@ class PythonBackendIntegration {
             }
 
         } catch (error) {
-            console.error('❌ Error en predicción ML:', error);
+            
             resultDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
         }
     }
@@ -350,7 +350,7 @@ class PythonBackendIntegration {
             }
 
         } catch (error) {
-            console.error('❌ Error obteniendo precios crypto:', error);
+            
             resultDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
         }
     }
@@ -468,7 +468,7 @@ print(f'Desviación estándar: {statistics.stdev(datos):.2f}')</textarea>
             }
 
         } catch (error) {
-            console.error('❌ Error ejecutando código:', error);
+            
             resultDiv.innerHTML = `<div class="error">❌ Error de conexión: ${error.message}</div>`;
         }
     }
@@ -502,7 +502,7 @@ print(f'Desviación estándar: {statistics.stdev(datos):.2f}')</textarea>
             }
 
         } catch (error) {
-            console.error('❌ Error enviando formulario:', error);
+            
             this.showErrorMessage('Error enviando mensaje: ' + error.message);
         }
     }
@@ -521,7 +521,7 @@ print(f'Desviación estándar: {statistics.stdev(datos):.2f}')</textarea>
             this.updateStatElements(stats);
 
         } catch (error) {
-            console.warn('⚠️ Error actualizando estadísticas:', error);
+            
         }
     }
 

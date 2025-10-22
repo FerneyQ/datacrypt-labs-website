@@ -38,7 +38,7 @@ class EnhancedPWAManager {
             
             // Check PWA support
             if (!this.isPWASupported()) {
-                console.warn('PWA features not supported');
+                
                 return;
             }
 
@@ -50,12 +50,12 @@ class EnhancedPWAManager {
             this.createEnhancedPWAUI();
             
             this.isInitialized = true;
-            console.log('✅ Enhanced PWA Manager v2.1 initialized');
+            
             
             this.dispatchPWAReady();
             
         } catch (error) {
-            console.error('❌ Error initializing Enhanced PWA Manager:', error);
+            
             this.fallbackToOriginal();
         }
     }
@@ -77,7 +77,7 @@ class EnhancedPWAManager {
     async migrateExistingPWA() {
         // Mantener referencia al sistema original si existe
         if (window.pwaManager) {
-            console.log('🔄 Migrating existing PWA Manager to ConfigManager...');
+            
             this.originalAPI = window.pwaManager;
         }
     }
@@ -95,7 +95,7 @@ class EnhancedPWAManager {
         window.pwaManager.isOnline = () => this.isOnline;
         window.pwaManager.showInstallPrompt = () => this.showInstallPrompt();
 
-        console.log('🔄 PWA Backward compatibility established');
+        
     }
 
     isPWASupported() {
@@ -110,7 +110,7 @@ class EnhancedPWAManager {
                 scope: config.serviceWorker.scope
             });
 
-            console.log('✅ Service Worker registered:', this.registration.scope);
+            
 
             // Handle updates
             this.registration.addEventListener('updatefound', () => {
@@ -129,7 +129,7 @@ class EnhancedPWAManager {
             });
 
         } catch (error) {
-            console.error('❌ Service Worker registration failed:', error);
+            
         }
     }
 
@@ -139,7 +139,7 @@ class EnhancedPWAManager {
             this.deferredPrompt = e;
             this.showInstallButton();
             
-            console.log('📱 PWA install prompt available');
+            
         });
 
         window.addEventListener('appinstalled', () => {
@@ -249,7 +249,7 @@ class EnhancedPWAManager {
     // API Principal - Métodos mejorados
     async install() {
         if (!this.deferredPrompt) {
-            console.warn('PWA install prompt not available');
+            
             return false;
         }
 
@@ -257,7 +257,7 @@ class EnhancedPWAManager {
             this.deferredPrompt.prompt();
             const { outcome } = await this.deferredPrompt.userChoice;
             
-            console.log(`PWA install result: ${outcome}`);
+            
             
             if (outcome === 'accepted') {
                 this.trackInstallation();
@@ -267,7 +267,7 @@ class EnhancedPWAManager {
             return false;
             
         } catch (error) {
-            console.error('PWA installation error:', error);
+            
             return false;
         } finally {
             this.deferredPrompt = null;
@@ -279,9 +279,9 @@ class EnhancedPWAManager {
 
         try {
             await this.registration.update();
-            console.log('✅ Checked for PWA updates');
+            
         } catch (error) {
-            console.error('❌ Update check failed:', error);
+            
         }
     }
 
@@ -389,13 +389,13 @@ class EnhancedPWAManager {
         
         switch (type) {
             case 'CACHE_UPDATED':
-                console.log('📦 Cache updated:', payload);
+                
                 break;
             case 'OFFLINE_FALLBACK':
-                console.log('📱 Serving offline content');
+                
                 break;
             default:
-                console.log('SW Message:', event.data);
+                
         }
     }
 
@@ -404,9 +404,9 @@ class EnhancedPWAManager {
         if (this.registration && this.registration.sync) {
             try {
                 await this.registration.sync.register('background-sync');
-                console.log('🔄 Background sync registered');
+                
             } catch (error) {
-                console.warn('Background sync not supported');
+                
             }
         }
     }
@@ -417,7 +417,7 @@ class EnhancedPWAManager {
         
         if (config.analytics.enabled) {
             // Track installation event
-            console.log('📊 PWA installation tracked');
+            
             
             // Si hay Google Analytics
             if (typeof gtag !== 'undefined') {
@@ -447,7 +447,7 @@ class EnhancedPWAManager {
 
     // Fallback
     fallbackToOriginal() {
-        console.warn('⚠️ Falling back to original PWA manager');
+        
         if (this.originalAPI) {
             window.pwaManager = this.originalAPI;
         }
@@ -456,7 +456,7 @@ class EnhancedPWAManager {
     // Testing
     runTests() {
         if (!window.TestRunner) {
-            console.warn('TestRunner not available');
+            
             return;
         }
 

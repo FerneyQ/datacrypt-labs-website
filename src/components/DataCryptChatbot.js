@@ -9,9 +9,9 @@
 class DataCryptChatbot {
     constructor(config = {}) {
         // 🔒 CHATBOT COMPLETAMENTE DESACTIVADO POR SEGURIDAD
-        console.error('🚫 ACCESO DENEGADO: Chatbot desactivado por políticas de seguridad');
-        console.warn('🛡️ Sistema de seguridad reforzado - No se permite inicialización de chatbot');
-        console.info('📞 Para consultas, contactar directamente: ferneyquiroga101@gmail.com');
+        
+        
+        
         throw new Error('CHATBOT_DISABLED: Sistema desactivado por seguridad');
         return null;
         
@@ -70,7 +70,7 @@ class DataCryptChatbot {
             setTimeout(() => this.showGreeting(), 2000);
         }
 
-        console.log('🤖 DataCrypt Chatbot initialized');
+        
     }
 
     initializeSecurity() {
@@ -78,13 +78,13 @@ class DataCryptChatbot {
             if (this.config.security && typeof ChatbotSecurity !== 'undefined' && typeof MessageRateLimit !== 'undefined') {
                 this.security = new ChatbotSecurity();
                 this.rateLimiter = new MessageRateLimit();
-                console.log('🔒 Security system initialized');
+                
             } else {
-                console.log('⚠️ Security system disabled or classes not available');
+                
                 this.config.security = false;
             }
         } catch (error) {
-            console.error('❌ Security initialization failed:', error);
+            
             this.config.security = false;
         }
     }
@@ -283,7 +283,7 @@ class DataCryptChatbot {
         try {
             // Prevenir bucles infinitos
             if (this.isProcessingMessage) {
-                console.warn('Mensaje ya en procesamiento, saltando...');
+                
                 return;
             }
             
@@ -352,7 +352,7 @@ class DataCryptChatbot {
         // Limpiar bandera de procesamiento
         this.isProcessingMessage = false;
         } catch (error) {
-            console.error('Error en sendMessage:', error);
+            
             this.isProcessingMessage = false; // Asegurar que se limpia la bandera
             this.addMessage('⚠️ Disculpa, hubo un error procesando tu mensaje. Como Alex, tu consultor de DataCrypt_Labs, puedo ayudarte mejor si reformulas tu consulta comercial.', 'bot');
         }
@@ -420,7 +420,7 @@ class DataCryptChatbot {
         // Respuesta por defecto con enfoque comercial
         return this.getRandomResponse(this.knowledgeBase.default);
         } catch (error) {
-            console.error('Error generando respuesta:', error);
+            
             return "Disculpa, estoy experimentando algunas dificultades técnicas. Como Alex, tu consultor comercial de DataCrypt_Labs, normalmente puedo ayudarte con soluciones empresariales de datos. ¿Podrías intentar reformular tu consulta?";
         }
     }
@@ -612,7 +612,7 @@ class DataCryptChatbot {
         try {
             localStorage.setItem('datacrypt-chat-history', JSON.stringify(this.chatHistory));
         } catch (error) {
-            console.warn('Failed to save chat history:', error);
+            
         }
     }
     
@@ -634,9 +634,9 @@ class DataCryptChatbot {
             // Limpiar instancia estática
             DataCryptChatbot.instance = null;
             
-            console.log('Chatbot destruido correctamente');
+            
         } catch (error) {
-            console.error('Error al destruir chatbot:', error);
+            
         }
     }
 
@@ -651,7 +651,7 @@ class DataCryptChatbot {
                 });
             }
         } catch (error) {
-            console.warn('Failed to load chat history:', error);
+            
         }
     }
 
@@ -791,7 +791,7 @@ class ChatbotSecurity {
             userAgent: navigator.userAgent
         };
         
-        console.warn('🚨 Chatbot Security Event:', event);
+        
         
         // Almacenar en logs de seguridad
         const logs = JSON.parse(localStorage.getItem('datacrypt_security_logs') || '[]');
@@ -870,7 +870,7 @@ if (typeof document !== 'undefined') {
     document.addEventListener('DOMContentLoaded', () => {
         // Prevenir múltiples inicializaciones
         if (window.dataCryptChatbot) {
-            console.log('Chatbot ya inicializado, saltando nueva instancia');
+            
             return;
         }
         

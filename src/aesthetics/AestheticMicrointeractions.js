@@ -56,8 +56,7 @@ class AestheticMicrointeractions {
      */
     async init() {
         try {
-            console.log(`✨ Inicializando ${this.config.name} v${this.config.version}...`);
-
+            // Detectar capacidades del dispositivo
             await this.detectCapabilities();
             this.setupIntersectionObservers();
             this.initializeComponents();
@@ -70,15 +69,12 @@ class AestheticMicrointeractions {
             // Integración con ConfigManager
             if (window.ConfigManager) {
                 window.ConfigManager.set('aestheticSystem', this);
-                console.log('✅ AestheticMicrointeractions integrado con ConfigManager');
             }
 
             this.state.isInitialized = true;
-            console.log('✅ AestheticMicrointeractions inicializado correctamente');
             this.triggerEvent('system:ready');
 
         } catch (error) {
-            console.error('❌ Error inicializando AestheticMicrointeractions:', error);
             if (window.ContinuousMonitoring) {
                 window.ContinuousMonitoring.logError('AestheticMicrointeractions', 'init', error);
             }
@@ -109,8 +105,6 @@ class AestheticMicrointeractions {
                 slower: 1
             };
         }
-
-        console.log('✨ Capacidades detectadas:', this.capabilities);
     }
 
     /**
@@ -963,8 +957,6 @@ class AestheticMicrointeractions {
             }
         });
         this.state.ripples.clear();
-
-        console.log('🧹 AestheticMicrointeractions limpiado');
     }
 }
 

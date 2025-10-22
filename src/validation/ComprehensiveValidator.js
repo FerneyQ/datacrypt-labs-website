@@ -27,7 +27,7 @@ class ComprehensiveValidator {
      * 🧪 EJECUTAR VALIDACIÓN COMPLETA
      */
     async validateComplete() {
-        console.log('🔍 INICIANDO VALIDACIÓN COMPLETA DEL SISTEMA...');
+        
         
         try {
             // 1. Validación de Compatibilidad
@@ -60,7 +60,7 @@ class ComprehensiveValidator {
      * 🔄 VALIDACIÓN DE COMPATIBILIDAD
      */
     async validateCompatibility() {
-        console.log('🔄 Validando compatibilidad...');
+        
         
         const tests = [
             () => this.testBackwardCompatibility(),
@@ -225,7 +225,7 @@ class ComprehensiveValidator {
      * ⚡ VALIDACIÓN DE PERFORMANCE
      */
     async validatePerformance() {
-        console.log('⚡ Validando performance...');
+        
         
         const tests = [
             () => this.testLoadTimes(),
@@ -357,7 +357,7 @@ class ComprehensiveValidator {
      * ♿ VALIDACIÓN DE ACCESIBILIDAD
      */
     async validateAccessibility() {
-        console.log('♿ Validando accesibilidad...');
+        
         
         const tests = [
             () => this.testKeyboardNavigation(),
@@ -475,7 +475,7 @@ class ComprehensiveValidator {
      * 🔒 VALIDACIÓN DE INTEGRIDAD
      */
     async validateIntegrity() {
-        console.log('🔒 Validando integridad...');
+        
         
         const tests = [
             () => this.testDataIntegrity(),
@@ -707,30 +707,30 @@ class ComprehensiveValidator {
      * 📊 Display Report
      */
     displayReport(report) {
-        console.log('📊 REPORTE DE VALIDACIÓN COMPLETA');
-        console.log('='.repeat(50));
-        console.log(`⏱️  Duración: ${report.duration}`);
-        console.log(`📊 Estado General: ${report.overallStatus}`);
-        console.log('');
         
-        console.log('📋 RESUMEN POR CATEGORÍA:');
+        
+        
+        
+        
+        
+        
         Object.entries(report.summary).forEach(([category, summary]) => {
-            console.log(`  ${category}: ${summary.passed}/${summary.total} PASS, ${summary.warnings} WARNING, ${summary.failed} FAIL`);
+            
         });
 
         if (report.errors.length > 0) {
-            console.log('');
-            console.log('❌ ERRORES ENCONTRADOS:');
+            
+            
             report.errors.forEach(error => {
-                console.log(`  - ${error.type}: ${error.message}`);
+                
             });
         }
 
         if (report.recommendations.length > 0) {
-            console.log('');
-            console.log('💡 RECOMENDACIONES:');
+            
+            
             report.recommendations.forEach(rec => {
-                console.log(`  - [${rec.priority}] ${rec.message}`);
+                
             });
         }
     }
@@ -798,7 +798,7 @@ window.ComprehensiveValidator = ComprehensiveValidator;
 
 // 🔄 AUTO-INICIALIZACIÓN SI SE REQUIERE
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('✅ Comprehensive Validator v2.1 cargado y listo');
+    
     
     // Crear instancia global para uso inmediato
     window.validator = new ComprehensiveValidator();

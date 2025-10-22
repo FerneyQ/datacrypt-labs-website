@@ -84,7 +84,7 @@ export class NavigationComponent {
             
             this.isInitialized = true;
             
-            console.log('[Navigation] Componente inicializado exitosamente');
+            
             PerformanceHelper.endMark('navigation-init');
             
         } catch (error) {
@@ -143,11 +143,11 @@ export class NavigationComponent {
                     offset: this.calculateSectionOffset(element)
                 });
             } else {
-                console.warn(`[Navigation] Sección '${section.id}' no encontrada en DOM`);
+                
             }
         });
         
-        console.log(`[Navigation] ${this.sections.size} secciones configuradas`);
+        
     }
     
     /**
@@ -326,7 +326,7 @@ export class NavigationComponent {
         
         this.currentSection = sectionId;
         
-        console.log(`[Navigation] Sección activa: ${sectionId}`);
+        
     }
     
     /**
@@ -370,7 +370,7 @@ export class NavigationComponent {
             sectionData.offset = this.calculateSectionOffset(sectionData.element);
         });
         
-        console.log('[Navigation] Offsets recalculados');
+        
         return true;
     }
     
@@ -445,7 +445,7 @@ export class NavigationComponent {
         this.elements = {};
         this.isInitialized = false;
         
-        console.log('[Navigation] Componente destruido');
+        
     }
 }
 

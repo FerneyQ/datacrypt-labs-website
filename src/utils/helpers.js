@@ -35,7 +35,7 @@ export class DOMHelper {
         
         const element = document.getElementById(id);
         if (!element) {
-            console.warn(`Elemento con ID '${id}' no encontrado`);
+            
         }
         
         return element;
@@ -470,7 +470,7 @@ export class PerformanceHelper {
     static endMark(name, logToConsole = true) {
         const markData = this.performanceMarks.get(name);
         if (!markData) {
-            console.warn(`Performance mark '${name}' no encontrado`);
+            
             return null;
         }
         
@@ -482,12 +482,12 @@ export class PerformanceHelper {
         performance.measure(name, markData.markName, endMarkName);
         
         if (logToConsole) {
-            console.log(`[Performance] ${name}: ${duration.toFixed(2)}ms`);
+            
         }
         
         // Alertar si es muy lento
         if (duration > 1000) {
-            console.warn(`[Performance] Operación lenta detectada: ${name} (${duration.toFixed(2)}ms)`);
+            
         }
         
         this.performanceMarks.delete(name);
@@ -563,7 +563,7 @@ export class StorageHelper {
     @safeExecute(null, false)
     static setItem(key, value, expiration = null) {
         if (!this.isStorageAvailable()) {
-            console.warn('localStorage no disponible');
+            
             return false;
         }
         
@@ -599,7 +599,7 @@ export class StorageHelper {
             
             return item.value;
         } catch (e) {
-            console.warn(`Error parsing localStorage item '${key}':`, e);
+            
             return defaultValue;
         }
     }

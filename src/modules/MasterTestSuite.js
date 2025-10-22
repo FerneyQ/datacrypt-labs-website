@@ -32,7 +32,7 @@ class MasterTestSuite {
     }
 
     init() {
-        console.log('🧪 Initializing Master Test Suite v2.1...');
+        
         
         // Registrar todas las suites de test disponibles
         this.registerTestSuites();
@@ -40,7 +40,7 @@ class MasterTestSuite {
         // Configurar event listeners
         this.setupEventListeners();
         
-        console.log(`✅ Master Test Suite ready with ${this.testSuites.size} test suites`);
+        
     }
 
     registerTestSuites() {
@@ -124,12 +124,12 @@ class MasterTestSuite {
 
     async runAllTests(options = {}) {
         if (this.isRunning) {
-            console.warn('⚠️ Test suite already running');
+            
             return this.executionResults;
         }
 
-        console.log('\n🚀 Starting Complete Test Suite Execution...');
-        console.log('================================================');
+        
+        
         
         this.isRunning = true;
         this.executionResults.startTime = new Date().toISOString();
@@ -143,7 +143,7 @@ class MasterTestSuite {
             // Obtener suites ordenadas por prioridad
             const orderedSuites = this.getOrderedTestSuites(options.filter);
             
-            console.log(`📋 Executing ${orderedSuites.length} test suites...\n`);
+            
             
             // Ejecutar cada suite
             for (const suite of orderedSuites) {
@@ -163,7 +163,7 @@ class MasterTestSuite {
             this.generateFinalReport();
             
         } catch (error) {
-            console.error('💥 Test suite execution failed:', error);
+            
             this.executionResults.errors.push({
                 type: 'execution-failure',
                 message: error.message,
@@ -177,7 +177,7 @@ class MasterTestSuite {
     }
 
     async verifyDependencies() {
-        console.log('🔍 Verifying system dependencies...');
+        
         
         const requiredSystems = [
             'TestRunner', 'ConfigManager', 'EnhancedThemeSystem', 
@@ -214,7 +214,7 @@ class MasterTestSuite {
             }
         }
         
-        console.log('✅ Dependency verification complete');
+        
     }
 
     getOrderedTestSuites(filter = null) {
@@ -234,8 +234,8 @@ class MasterTestSuite {
     }
 
     async executeSuite(suite) {
-        console.log(`\n📦 Executing: ${suite.name}`);
-        console.log(`   ${suite.description}`);
+        
+        
         
         this.currentSuite = suite.name;
         const suiteStartTime = performance.now();
@@ -251,7 +251,7 @@ class MasterTestSuite {
             const suiteDuration = Math.round(suiteEndTime - suiteStartTime);
             
             if (result) {
-                console.log(`✅ ${suite.name} completed: ${result.passed} passed, ${result.failed} failed (${suiteDuration}ms)`);
+                
                 
                 this.executionResults.suites.push({
                     name: suite.name,
@@ -268,7 +268,7 @@ class MasterTestSuite {
                 this.executionResults.summary.failed += result.failed || 0;
                 
             } else {
-                console.warn(`⚠️ ${suite.name} returned no results`);
+                
                 
                 this.executionResults.suites.push({
                     name: suite.name,
@@ -289,7 +289,7 @@ class MasterTestSuite {
             const suiteEndTime = performance.now();
             const suiteDuration = Math.round(suiteEndTime - suiteStartTime);
             
-            console.error(`❌ ${suite.name} failed:`, error.message);
+            
             
             this.executionResults.suites.push({
                 name: suite.name,
@@ -320,7 +320,7 @@ class MasterTestSuite {
     }
 
     async executeIntegrationTests() {
-        console.log('\n🔗 Running Integration Tests...');
+        
         
         const integrationTests = [
             this.testSystemInteroperability,
@@ -333,7 +333,7 @@ class MasterTestSuite {
             try {
                 await test.call(this);
             } catch (error) {
-                console.error('Integration test failed:', error);
+                
                 this.executionResults.errors.push({
                     type: 'integration-test',
                     message: error.message,
@@ -344,7 +344,7 @@ class MasterTestSuite {
     }
 
     async testSystemInteroperability() {
-        console.log('🔄 Testing system interoperability...');
+        
         
         // Test: Cambio de tema debe propagarse a todos los sistemas
         const originalTheme = window.enhancedThemeSystem.getCurrentTheme();
@@ -362,11 +362,11 @@ class MasterTestSuite {
             window.enhancedThemeSystem.setTheme(originalTheme.id);
         }
         
-        console.log('✅ System interoperability test passed');
+        
     }
 
     async testBackwardCompatibility() {
-        console.log('🔄 Testing backward compatibility...');
+        
         
         // Verificar que APIs legadas funcionen
         const legacyAPIs = [
@@ -389,11 +389,11 @@ class MasterTestSuite {
             }
         }
         
-        console.log('✅ Backward compatibility test passed');
+        
     }
 
     async testPerformanceImpact() {
-        console.log('🔄 Testing performance impact...');
+        
         
         const startMemory = performance.memory ? performance.memory.usedJSHeapSize : 0;
         
@@ -417,11 +417,11 @@ class MasterTestSuite {
             });
         }
         
-        console.log('✅ Performance impact test passed');
+        
     }
 
     async testErrorHandling() {
-        console.log('🔄 Testing error handling...');
+        
         
         // Test error scenarios
         const errorTests = [
@@ -439,7 +439,7 @@ class MasterTestSuite {
             }
         }
         
-        console.log('✅ Error handling test passed');
+        
     }
 
     // Tests específicos para sistemas de migración
@@ -509,46 +509,46 @@ class MasterTestSuite {
             this.executionResults.summary.totalTests > 0 ? 
             Math.round((this.executionResults.summary.passed / this.executionResults.summary.totalTests) * 100) : 0;
         
-        console.log('\n📋 FINAL TEST EXECUTION REPORT');
-        console.log('================================');
-        console.log(`⏱️  Total Duration: ${this.executionResults.totalDuration}ms`);
-        console.log(`📦 Test Suites: ${this.executionResults.suites.length}`);
-        console.log(`🧪 Total Tests: ${this.executionResults.summary.totalTests}`);
-        console.log(`✅ Passed: ${this.executionResults.summary.passed}`);
-        console.log(`❌ Failed: ${this.executionResults.summary.failed}`);
-        console.log(`📊 Success Rate: ${this.executionResults.summary.successRate}%`);
-        console.log(`⚠️  Warnings: ${this.executionResults.warnings.length}`);
-        console.log(`💥 Errors: ${this.executionResults.errors.length}`);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         // Detalles por categoría
         const categories = this.groupSuitesByCategory();
-        console.log('\n📂 Results by Category:');
+        
         for (const [category, suites] of Object.entries(categories)) {
             const categoryPassed = suites.reduce((sum, s) => sum + (s.result?.passed || 0), 0);
             const categoryFailed = suites.reduce((sum, s) => sum + (s.result?.failed || 0), 0);
-            console.log(`   ${category}: ${categoryPassed} passed, ${categoryFailed} failed`);
+            
         }
         
         // Mostrar errores si existen
         if (this.executionResults.errors.length > 0) {
-            console.log('\n💥 Errors Details:');
+            
             this.executionResults.errors.forEach((error, i) => {
-                console.log(`   ${i + 1}. [${error.type}] ${error.message}`);
+                
             });
         }
         
         // Mostrar warnings si existen
         if (this.executionResults.warnings.length > 0) {
-            console.log('\n⚠️ Warnings Details:');
+            
             this.executionResults.warnings.slice(0, 5).forEach((warning, i) => {
-                console.log(`   ${i + 1}. [${warning.type}] ${warning.message}`);
+                
             });
             if (this.executionResults.warnings.length > 5) {
-                console.log(`   ... and ${this.executionResults.warnings.length - 5} more warnings`);
+                
             }
         }
         
-        console.log('\n================================\n');
+        
         
         // Guardar reporte
         this.saveTestReport();
@@ -573,9 +573,9 @@ class MasterTestSuite {
     saveTestReport() {
         try {
             localStorage.setItem('datacrypt-test-results', JSON.stringify(this.executionResults));
-            console.log('💾 Test report saved to localStorage');
+            
         } catch (error) {
-            console.warn('⚠️ Could not save test report:', error);
+            
         }
     }
 
@@ -635,7 +635,7 @@ if (typeof window !== 'undefined') {
                 setTimeout(() => {
                     if (window.intelligentMigrationSystem && 
                         window.intelligentMigrationSystem.getReport().completed) {
-                        console.log('🎯 Auto-executing comprehensive test suite...');
+                        
                         window.masterTestSuite.runAllTests({
                             includeIntegration: true
                         });

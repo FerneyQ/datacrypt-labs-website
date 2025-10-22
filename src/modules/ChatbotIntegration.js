@@ -41,10 +41,10 @@ class ChatbotIntegration {
             this.setupEventListeners();
             
             this.isInitialized = true;
-            console.log('✅ Chatbot Integration initialized successfully');
+            
             
         } catch (error) {
-            console.error('❌ Error initializing Chatbot Integration:', error);
+            
         }
     }
 
@@ -82,7 +82,7 @@ class ChatbotIntegration {
             this.updateChatbotConfig(newConfig);
         });
         
-        console.log('🔗 Integrated with ConfigManager');
+        
     }
 
     integrateWithThemeSystem() {
@@ -93,7 +93,7 @@ class ChatbotIntegration {
             this.updateChatbotTheme(event.detail.themeData);
         });
         
-        console.log('🔗 Integrated with Theme System');
+        
     }
 
     integrateWithTranslationSystem() {
@@ -104,14 +104,14 @@ class ChatbotIntegration {
             this.updateChatbotLanguage(event.detail.language);
         });
         
-        console.log('🔗 Integrated with Translation System');
+        
     }
 
     async initializeChatbot() {
         const chatbotConfig = this.configManager.getConfig('chatbot');
         
         if (!chatbotConfig.enabled) {
-            console.log('📱 Chatbot disabled in configuration');
+            
             return;
         }
 
@@ -124,7 +124,7 @@ class ChatbotIntegration {
         // Hacer referencia global para debugging
         window.dataCryptChatbot = this.chatbot;
         
-        console.log('🤖 Chatbot initialized with enhanced configuration');
+        
     }
 
     enhanceChatbotConfig(baseConfig) {
@@ -261,14 +261,14 @@ class ChatbotIntegration {
         if (!this.chatbot) return;
         
         this.chatbot.updateConfig(newConfig);
-        console.log('🔄 Chatbot configuration updated');
+        
     }
 
     updateChatbotTheme(themeData) {
         if (!this.chatbot) return;
         
         this.chatbot.updateTheme(themeData);
-        console.log('🎨 Chatbot theme updated:', themeData.name);
+        
     }
 
     updateChatbotLanguage(language) {
@@ -285,20 +285,20 @@ class ChatbotIntegration {
             quickReplies: localizedQuickReplies
         });
         
-        console.log('🌐 Chatbot language updated:', language);
+        
     }
 
     // Handlers de eventos
     handleThemeChange(themeData) {
-        console.log('🎨 Theme changed in chatbot:', themeData);
+        
     }
 
     handleLanguageChange(language) {
-        console.log('🌐 Language changed in chatbot:', language);
+        
     }
 
     handleConfigChange(config) {
-        console.log('⚙️ Config changed in chatbot:', config);
+        
     }
 
     notifyChatbotGameUpdate(gameState) {
@@ -354,7 +354,7 @@ class ChatbotIntegration {
     // Métodos de testing para TestRunner
     runTests() {
         if (!window.TestRunner) {
-            console.warn('TestRunner not available');
+            
             return;
         }
 

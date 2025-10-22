@@ -30,7 +30,7 @@ class ContinuousMonitoringSystem {
     }
 
     init() {
-        console.log('📊 Initializing Continuous Monitoring System...');
+        
         
         // Configurar monitoreo de sistemas críticos
         this.setupSystemMonitoring();
@@ -44,7 +44,7 @@ class ContinuousMonitoringSystem {
         // Iniciar monitoreo
         this.startMonitoring();
         
-        console.log('✅ Continuous Monitoring System active');
+        
     }
 
     setupSystemMonitoring() {
@@ -148,7 +148,7 @@ class ContinuousMonitoringSystem {
             this.runSystemHealthCheck();
         }, 1000);
         
-        console.log('🔄 Continuous monitoring started');
+        
     }
 
     stopMonitoring() {
@@ -166,7 +166,7 @@ class ContinuousMonitoringSystem {
             this.performanceInterval = null;
         }
         
-        console.log('⏹️ Continuous monitoring stopped');
+        
     }
 
     async runSystemHealthCheck() {
@@ -228,7 +228,7 @@ class ContinuousMonitoringSystem {
             this.systemMetrics.delete(oldestKey);
         }
         
-        console.log(`📊 Health Check: ${healthReport.overall} (${Object.keys(healthReport.systems).length} systems)`);
+        
         
         return healthReport;
     }
@@ -465,7 +465,7 @@ class ContinuousMonitoringSystem {
         
         // Log en consola
         const config = this.alertLevels[level];
-        console.log(`${config.emoji} [${level}] ${message}`);
+        
         
         // Notificar suscriptores
         this.notifyAlertSubscribers(alert);
@@ -527,7 +527,7 @@ class ContinuousMonitoringSystem {
             try {
                 subscriber(alert);
             } catch (error) {
-                console.warn('Alert subscriber error:', error);
+                
             }
         }
     }

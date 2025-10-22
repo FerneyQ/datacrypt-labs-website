@@ -17,7 +17,7 @@ class PWAManager {
     async init() {
         // Check PWA support
         if (!this.isPWASupported()) {
-            console.warn('PWA features not supported');
+            
             return;
         }
 
@@ -27,7 +27,7 @@ class PWAManager {
         this.setupOnlineStatus();
         this.createPWAUI();
         
-        console.log('📱 PWA Manager initialized');
+        
     }
 
     isPWASupported() {
@@ -40,7 +40,7 @@ class PWAManager {
                 scope: '/'
             });
 
-            console.log('✅ Service Worker registered:', this.registration.scope);
+            
 
             // Handle updates
             this.registration.addEventListener('updatefound', () => {
@@ -54,7 +54,7 @@ class PWAManager {
             });
 
         } catch (error) {
-            console.error('❌ Service Worker registration failed:', error);
+            
         }
     }
 
@@ -66,7 +66,7 @@ class PWAManager {
         });
 
         window.addEventListener('appinstalled', () => {
-            console.log('📱 PWA installed successfully');
+            
             this.hideInstallButton();
             this.showInstalledMessage();
         });
@@ -157,9 +157,9 @@ class PWAManager {
         const result = await this.deferredPrompt.userChoice;
         
         if (result.outcome === 'accepted') {
-            console.log('📱 User accepted the install prompt');
+            
         } else {
-            console.log('📱 User dismissed the install prompt');
+            
         }
         
         this.deferredPrompt = null;
@@ -232,10 +232,10 @@ class PWAManager {
         if (navigator.share) {
             try {
                 await navigator.share(shareData);
-                console.log('📤 Content shared successfully');
+                
             } catch (error) {
                 if (error.name !== 'AbortError') {
-                    console.error('❌ Share failed:', error);
+                    
                     this.fallbackShare(shareData);
                 }
             }
@@ -292,7 +292,7 @@ class PWAManager {
         if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
             const registration = await navigator.serviceWorker.ready;
             await registration.sync.register(tag);
-            console.log('🔄 Background sync registered:', tag);
+            
         }
     }
 

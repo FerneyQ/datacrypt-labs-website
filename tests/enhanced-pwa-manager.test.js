@@ -9,13 +9,13 @@
 // Test suite para Enhanced PWA Manager
 function runEnhancedPWAManagerTests() {
     if (!window.TestRunner) {
-        console.error('❌ TestRunner not available');
+        
         return;
     }
 
     const tests = window.TestRunner.createSuite('EnhancedPWAManager');
     
-    console.log('📱 Running Enhanced PWA Manager Tests...');
+    
 
     tests.describe('Enhanced PWA Manager v2.1', () => {
         
@@ -339,16 +339,16 @@ function runPWAOfflineFunctionalityTests() {
 
 // Ejecutar todas las pruebas del PWA Manager
 async function runAllPWAManagerTests() {
-    console.log('🚀 Starting Complete PWA Manager Test Suite...');
+    
     
     try {
         const functionalTests = await runEnhancedPWAManagerTests();
         const performanceTests = await runPWAManagerPerformanceTests();
         const offlineTests = await runPWAOfflineFunctionalityTests();
         
-        console.log('✅ PWA Functional Tests:', functionalTests);
-        console.log('⚡ PWA Performance Tests:', performanceTests);
-        console.log('📱 PWA Offline Tests:', offlineTests);
+        
+        
+        
         
         const totalPassed = (functionalTests?.passed || 0) + 
                            (performanceTests?.passed || 0) + 
@@ -358,7 +358,7 @@ async function runAllPWAManagerTests() {
                            (performanceTests?.failed || 0) + 
                            (offlineTests?.failed || 0);
         
-        console.log(`\n📊 TOTAL PWA TESTS: ${totalPassed} passed, ${totalFailed} failed`);
+        
         
         return {
             passed: totalPassed,
@@ -369,7 +369,7 @@ async function runAllPWAManagerTests() {
         };
         
     } catch (error) {
-        console.error('❌ Error running PWA Manager tests:', error);
+        
         return null;
     }
 }
