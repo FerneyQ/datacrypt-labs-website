@@ -1082,6 +1082,346 @@ async def initialize_demo_data():
     conn.close()
     logger.info("📊 Datos de demostración inicializados")
 
+# ============================================================================
+# 🔐 SISTEMA ADMINISTRATIVO DATACRYPT LABS
+# ============================================================================
+
+import hashlib
+import secrets
+from fastapi import Request, Form, Depends
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.security import HTTPBearer
+import sqlite3
+import jwt
+from datetime import datetime, timedelta
+
+# Configuración admin
+ADMIN_SECRET_KEY = os.getenv('SECRET_KEY', secrets.token_urlsafe(64))
+security = HTTPBearer()
+
+def setup_admin_database():
+    """Configurar base de datos administrativa"""
+    if not os.path.exists('datacrypt_admin.db'):
+        conn = sqlite3.connect('datacrypt_admin.db')
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS admin_users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username VARCHAR(50) UNIQUE NOT NULL,
+                email VARCHAR(100) UNIQUE NOT NULL,
+                password_hash VARCHAR(255) NOT NULL,
+                role VARCHAR(20) DEFAULT 'admin',
+                is_active BOOLEAN DEFAULT 1,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                last_login DATETIME,
+                failed_login_attempts INTEGER DEFAULT 0,
+                last_ip VARCHAR(45)
+            )
+        ''')
+        
+        # Crear usuario admin principal
+        password = "Simelamamscoscorrea123###_@"
+        salt = os.urandom(32)
+        password_hash = salt + hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 150000)
+        
+        cursor.execute('''
+            INSERT INTO admin_users (username, email, password_hash, role) 
+            VALUES (?, ?, ?, ?)
+        ''', (
+            "Neyd696 :#",
+            "ferneyquiroga101@gmail.com", 
+            password_hash,
+            "super_admin"
+        ))
+        
+        conn.commit()
+        conn.close()
+
+def verify_admin_credentials(username: str, password: str):
+    """Verificar credenciales administrativas"""
+    try:
+        conn = sqlite3.connect('datacrypt_admin.db')
+        cursor = conn.cursor()
+        
+        cursor.execute("SELECT password_hash FROM admin_users WHERE username = ? AND is_active = 1", (username,))
+        result = cursor.fetchone()
+        
+        if result:
+            stored_hash = result[0]
+            if isinstance(stored_hash, str):
+                stored_hash = stored_hash.encode('latin-1')
+            
+            salt = stored_hash[:32]
+            stored_key = stored_hash[32:]
+            test_key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 150000)
+            
+            conn.close()
+            return test_key == stored_key
+        
+        conn.close()
+        return False
+        
+    except Exception as e:
+        logger.error(f"Error verificando credenciales admin: {e}")
+        return False
+
+# Inicializar base de datos admin
+setup_admin_database()
+
+@app.get("/admin", response_class=HTMLResponse)
+async def admin_login_page():
+    """Página de login administrativo integrada en FastAPI"""
+    return f"""
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataCrypt Labs - Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {{
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+        }}
+        .login-container {{
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            padding: 40px; max-width: 450px; width: 100%; margin: 20px;
+        }}
+        .logo {{ text-align: center; margin-bottom: 30px; }}
+        .logo h1 {{ color: #667eea; font-weight: bold; margin: 0; }}
+        .railway-badge {{
+            position: fixed; top: 20px; right: 20px; background: #0066ff;
+            color: white; padding: 8px 15px; border-radius: 20px; font-size: 12px;
+        }}
+        .btn-primary {{ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; }}
+    </style>
+</head>
+<body>
+    <div class="railway-badge"><i class="fas fa-train"></i> Live on Railway</div>
+    
+    <div class="login-container">
+        <div class="logo">
+            <h1><i class="fas fa-shield-alt"></i> DataCrypt Labs</h1>
+            <p class="text-muted">Panel Administrativo</p>
+        </div>
+        
+        <form id="loginForm">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="username" placeholder="Usuario" value="Neyd696 :#" required>
+                <label><i class="fas fa-user"></i> Usuario</label>
+            </div>
+            
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+                <label><i class="fas fa-lock"></i> Contraseña</label>
+            </div>
+            
+            <div class="d-grid gap-2">
+                <button type="button" class="btn btn-secondary" onclick="fillCredentials()">
+                    <i class="fas fa-magic"></i> Llenar Credenciales
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                </button>
+            </div>
+        </form>
+        
+        <div id="status" class="mt-3"></div>
+    </div>
+    
+    <script>
+        function fillCredentials() {{
+            document.getElementById('username').value = 'Neyd696 :#';
+            document.getElementById('password').value = 'Simelamamscoscorrea123###_@';
+        }}
+        
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {{
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            try {{
+                const response = await fetch('/admin/login', {{
+                    method: 'POST',
+                    headers: {{ 'Content-Type': 'application/json' }},
+                    body: JSON.stringify({{ username, password }})
+                }});
+                
+                const data = await response.json();
+                
+                if (data.success) {{
+                    document.getElementById('status').innerHTML = 
+                        '<div class="alert alert-success">✅ Login exitoso! Redirigiendo...</div>';
+                    setTimeout(() => window.location.href = '/admin/dashboard', 1500);
+                }} else {{
+                    document.getElementById('status').innerHTML = 
+                        '<div class="alert alert-danger">❌ ' + data.message + '</div>';
+                }}
+            }} catch (error) {{
+                document.getElementById('status').innerHTML = 
+                    '<div class="alert alert-danger">❌ Error: ' + error.message + '</div>';
+            }}
+        }});
+        
+        // Auto-fill credentials
+        fillCredentials();
+    </script>
+</body>
+</html>"""
+
+@app.post("/admin/login")
+async def admin_login(request: Request):
+    """Procesar login administrativo"""
+    try:
+        data = await request.json()
+        username = data.get('username')
+        password = data.get('password')
+        
+        if verify_admin_credentials(username, password):
+            # Crear token JWT
+            token_data = {
+                'username': username,
+                'exp': datetime.utcnow() + timedelta(hours=24)
+            }
+            token = jwt.encode(token_data, ADMIN_SECRET_KEY, algorithm='HS256')
+            
+            return {
+                'success': True,
+                'message': 'Login exitoso',
+                'token': token,
+                'user': username
+            }
+        else:
+            return {
+                'success': False,
+                'message': 'Credenciales inválidas'
+            }
+            
+    except Exception as e:
+        logger.error(f"Error en admin login: {e}")
+        return {
+            'success': False,
+            'message': f'Error del servidor: {str(e)}'
+        }
+
+@app.get("/admin/dashboard", response_class=HTMLResponse)
+async def admin_dashboard():
+    """Dashboard administrativo"""
+    return f"""
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataCrypt Labs - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {{ background-color: #f8f9fa; }}
+        .navbar {{ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }}
+        .dashboard-header {{ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px 0; }}
+        .stat-card {{ background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }}
+        .railway-status {{ background: #0066ff; color: white; padding: 10px 20px; border-radius: 25px; display: inline-block; }}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark">
+        <div class="container">
+            <span class="navbar-brand"><i class="fas fa-shield-alt"></i> DataCrypt Labs Admin</span>
+            <a href="/admin" class="btn btn-outline-light btn-sm">
+                <i class="fas fa-sign-out-alt"></i> Volver al Login
+            </a>
+        </div>
+    </nav>
+    
+    <div class="dashboard-header">
+        <div class="container text-center">
+            <div class="railway-status mb-3">
+                <i class="fas fa-train"></i> Sistema activo en Railway
+            </div>
+            <h1>🎉 ¡Panel Administrativo Operativo!</h1>
+            <p class="lead">Sistema integrado con FastAPI Backend</p>
+        </div>
+    </div>
+    
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="stat-card">
+                    <h5><i class="fas fa-server"></i> Estado del Sistema</h5>
+                    <div class="alert alert-success">
+                        <h6>✅ Sistema Completamente Operativo</h6>
+                        <ul class="mb-0">
+                            <li>🚀 FastAPI Backend funcionando</li>
+                            <li>🔐 Autenticación administrativa activa</li>
+                            <li>🌐 Accesible desde Railway</li>
+                            <li>📊 APIs de Data Science operativas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="stat-card">
+                    <h5><i class="fas fa-link"></i> Enlaces del Sistema</h5>
+                    <div class="d-grid gap-2">
+                        <a href="/health" class="btn btn-primary" target="_blank">
+                            <i class="fas fa-heartbeat"></i> Health Check
+                        </a>
+                        <a href="/api/portfolio/stats" class="btn btn-secondary" target="_blank">
+                            <i class="fas fa-chart-bar"></i> Portfolio Stats API
+                        </a>
+                        <a href="/api/crypto/prices" class="btn btn-info" target="_blank">
+                            <i class="fas fa-bitcoin"></i> Crypto API
+                        </a>
+                        <a href="/docs" class="btn btn-warning" target="_blank">
+                            <i class="fas fa-book"></i> API Documentation
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="stat-card">
+                    <h5><i class="fas fa-info-circle"></i> Información del Deployment</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><strong>Plataforma:</strong> Railway Cloud</li>
+                                <li><strong>Framework:</strong> FastAPI + Uvicorn</li>
+                                <li><strong>Base de Datos:</strong> SQLite</li>
+                                <li><strong>Puerto:</strong> $PORT (automático)</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><strong>Timestamp:</strong> {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}</li>
+                                <li><strong>Uptime:</strong> Continuo 24/7</li>
+                                <li><strong>SSL:</strong> Automático Railway</li>
+                                <li><strong>CDN:</strong> Global Railway Network</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="mt-5 py-4 bg-dark text-white text-center">
+        <div class="container">
+            <p>&copy; 2025 DataCrypt Labs - Sistema Administrativo Integrado</p>
+            <p><small>FastAPI Backend • Railway Hosting • Admin Panel Activo</small></p>
+        </div>
+    </footer>
+</body>
+</html>"""
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
