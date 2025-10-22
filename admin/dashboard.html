@@ -248,9 +248,11 @@
             <p style="text-align: center; margin-top: 0.5rem; opacity: 0.8;">
                 Control Total del Sistema | Status: <span id="systemStatus">OPERATIVO</span>
             </p>
-            <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; border-radius: 5px; padding: 0.5rem; margin-top: 0.5rem; text-align: center;">
-                <span style="color: #ffc107;">🔒 MODO LOCALHOST-ONLY</span> - 
-                <span style="color: #00ff41; font-size: 0.9rem;">Servidor Local: <span id="localServerStatus">VERIFICANDO...</span></span>
+            <div
+                style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; border-radius: 5px; padding: 0.5rem; margin-top: 0.5rem; text-align: center;">
+                <span style="color: #ffc107;">🔒 MODO LOCALHOST-ONLY</span> -
+                <span style="color: #00ff41; font-size: 0.9rem;">Servidor Local: <span
+                        id="localServerStatus">VERIFICANDO...</span></span>
             </div>
         </div>
 
@@ -664,13 +666,13 @@
                 try {
                     statusElement.textContent = 'CONNECTING...';
                     statusElement.style.color = '#ffaa00';
-                    
+
                     // Deshabilitar botones mientras se verifica
                     adminBtn.style.background = '#666';
                     adminBtn.style.color = '#999';
                     adminBtn.style.pointerEvents = 'none';
                     adminBtn.textContent = '🔄 VERIFICANDO...';
-                    
+
                     dashboardBtn.style.background = '#666';
                     dashboardBtn.style.color = '#999';
                     dashboardBtn.style.pointerEvents = 'none';
@@ -688,7 +690,7 @@
                         adminBtn.style.color = '#000';
                         adminBtn.style.pointerEvents = 'auto';
                         adminBtn.textContent = '🚀 ADMIN PANEL';
-                        
+
                         dashboardBtn.style.background = '#0066ff';
                         dashboardBtn.style.color = 'white';
                         dashboardBtn.style.pointerEvents = 'auto';
@@ -711,7 +713,7 @@
                     adminBtn.style.color = '#fff';
                     adminBtn.style.pointerEvents = 'none';
                     adminBtn.textContent = '❌ ADMIN OFFLINE';
-                    
+
                     dashboardBtn.style.background = '#ff4444';
                     dashboardBtn.style.color = '#fff';
                     dashboardBtn.style.pointerEvents = 'none';
@@ -1220,7 +1222,7 @@
                         addLog('   1️⃣ Navega a: C:\\mis_scripts_seguros\\DataCrypt_Labs\\Web-Portfolio', 'info');
                         addLog('   2️⃣ Ejecuta: python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000', 'info');
                         addLog('   3️⃣ Abre: http://localhost:8000/admin', 'info');
-                        
+
                         if (voiceEnabled) {
                             speakText('Atención: Servidor local no disponible. La consola admin requiere el servidor localhost para funcionar.');
                         }
