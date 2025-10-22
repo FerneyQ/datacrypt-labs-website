@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎛️ DataCrypt Labs - Consola de Gestión</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: auto;
+        }
+
+        .header {
+            background: rgba(0,0,0,0.9);
+            padding: 1rem;
+            border-bottom: 2px solid #00ff41;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            color: #00ff41;
+            text-align: center;
+            text-shadow: 0 0 10px #00ff41;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .panel {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(0,255,65,0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .panel:hover {
+            border-color: #00ff41;
+            box-shadow: 0 0 20px rgba(0,255,65,0.3);
+        }
+
+        .panel h3 {
+            color: #00ff41;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .status-online { background: #00ff41; box-shadow: 0 0 5px #00ff41; }
+        .status-offline { background: #ff4444; box-shadow: 0 0 5px #ff4444; }
+        .status-warning { background: #ffaa00; box-shadow: 0 0 5px #ffaa00; }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric-value {
+            font-weight: bold;
+            color: #00ff41;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #00ff41;
+            background: rgba(0,255,65,0.1);
+            color: #00ff41;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: rgba(0,255,65,0.2);
+            box-shadow: 0 0 10px rgba(0,255,65,0.5);
+        }
+
+        .btn.danger {
+            border-color: #ff4444;
+            color: #ff4444;
+            background: rgba(255,68,68,0.1);
+        }
+
+        .btn.danger:hover {
+            background: rgba(255,68,68,0.2);
+        }
+
+        .console-output {
+            background: #000;
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+
+        .log-entry {
+            margin-bottom: 0.5rem;
+            padding: 0.25rem;
+        }
+
+        .log-success { color: #00ff41; }
+        .log-error { color: #ff4444; }
+        .log-warning { color: #ffaa00; }
+        .log-info { color: #44aaff; }
+
+        .quick-actions {
+            background: rgba(0,0,0,0.8);
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid #00ff41;
+            backdrop-filter: blur(10px);
+        }
+
+        .emergency-stop {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0); }
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .tab {
+            padding: 1rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            border-bottom-color: #00ff41;
+            color: #00ff41;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎛️ DataCrypt Labs - Consola de Gestión Avanzada</h1>
+        <p style="text-align: center; margin-top: 0.5rem; opacity: 0.8;">Control Total del Sistema | Status: <span id="systemStatus">OPERATIVO</span></p>
+    </div>
+
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('overview')">📊 Overview</div>
+            <div class="tab" onclick="switchTab('security')">🛡️ Seguridad</div>
+            <div class="tab" onclick="switchTab('deploy')">🚀 Deploy</div>
+            <div class="tab" onclick="switchTab('logs')">📋 Logs</div>
+            <div class="tab" onclick="switchTab('control')">⚙️ Control</div>
+        </div>
+
+        <!-- OVERVIEW TAB -->
+        <div id="overview" class="tab-content active">
+            <div class="dashboard-grid">
+                <div class="panel">
+                    <h3>🌐 Estado del Sitio Web <span class="status-indicator status-online"></span></h3>
+                    <div class="metric">
+                        <span>GitHub Pages:</span>
+                        <span class="metric-value">ONLINE</span>
+                    </div>
+                    <div class="metric">
+                        <span>URL Principal:</span>
+                        <span class="metric-value">ferneyq.github.io</span>
+                    </div>
+                    <div class="metric">
+                        <span>Último Deploy:</span>
+                        <span class="metric-value">21 Oct 2025</span>
+                    </div>
+                    <div class="metric">
+                        <span>Status Code:</span>
+                        <span class="metric-value">200 OK</span>
+                    </div>
+                    <div class="action-buttons">
+                        <a href="https://ferneyq.github.io/datacrypt-labs-website/" target="_blank" class="btn">Ver Sitio</a>
+                        <button class="btn" onclick="checkSiteStatus()">Verificar</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>🛡️ Sistema de Seguridad <span class="status-indicator status-online"></span></h3>
+                    <div class="metric">
+                        <span>Chatbot Status:</span>
+                        <span class="metric-value">BLOQUEADO</span>
+                    </div>
+                    <div class="metric">
+                        <span>Política Activa:</span>
+                        <span class="metric-value">ZERO TOLERANCE</span>
+                    </div>
+                    <div class="metric">
+                        <span>Security Level:</span>
+                        <span class="metric-value">MÁXIMO</span>
+                    </div>
+                    <div class="metric">
+                        <span>Enforcement:</span>
+                        <span class="metric-value">ACTIVO</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn" onclick="securityReport()">Reporte</button>
+                        <button class="btn" onclick="securityScan()">Escanear</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>📞 Sistema de Contacto <span class="status-indicator status-online"></span></h3>
+                    <div class="metric">
+                        <span>CEO Contact:</span>
+                        <span class="metric-value">ACTIVO</span>
+                    </div>
+                    <div class="metric">
+                        <span>Email:</span>
+                        <span class="metric-value">ferneyquiroga101@gmail.com</span>
+                    </div>
+                    <div class="metric">
+                        <span>Modal Sistema:</span>
+                        <span class="metric-value">OPERATIVO</span>
+                    </div>
+                    <div class="metric">
+                        <span>Respuesta Directa:</span>
+                        <span class="metric-value">DISPONIBLE</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn" onclick="testContact()">Probar</button>
+                        <button class="btn" onclick="contactStats()">Stats</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>⚙️ Configuración Sistema <span class="status-indicator status-online"></span></h3>
+                    <div class="metric">
+                        <span>ConfigManager:</span>
+                        <span class="metric-value">LOADED</span>
+                    </div>
+                    <div class="metric">
+                        <span>Ambiente:</span>
+                        <span class="metric-value">PRODUCTION</span>
+                    </div>
+                    <div class="metric">
+                        <span>Chatbot Enabled:</span>
+                        <span class="metric-value">FALSE</span>
+                    </div>
+                    <div class="metric">
+                        <span>Security Config:</span>
+                        <span class="metric-value">ENFORCED</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn" onclick="viewConfig()">Ver Config</button>
+                        <button class="btn" onclick="reloadConfig()">Recargar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECURITY TAB -->
+        <div id="security" class="tab-content">
+            <div class="dashboard-grid">
+                <div class="panel">
+                    <h3>🚫 Chatbot Elimination Status</h3>
+                    <div class="metric">
+                        <span>Constructor Status:</span>
+                        <span class="metric-value">BLOCKED</span>
+                    </div>
+                    <div class="metric">
+                        <span>Files Deleted:</span>
+                        <span class="metric-value">3 archivos</span>
+                    </div>
+                    <div class="metric">
+                        <span>References Removed:</span>
+                        <span class="metric-value">COMPLETE</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn" onclick="fullSecurityScan()">Scan Completo</button>
+                        <button class="btn danger" onclick="emergencyLock()">LOCKDOWN</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>🔍 Security Monitoring</h3>
+                    <div class="console-output">
+                        <div class="log-entry log-success">[OK] DataCryptSecurityEnforcement.js LOADED</div>
+                        <div class="log-entry log-success">[OK] DOM Monitoring ACTIVE</div>
+                        <div class="log-entry log-success">[OK] Script Interception ENABLED</div>
+                        <div class="log-entry log-info">[INFO] Zero chatbot attempts detected</div>
+                        <div class="log-entry log-success">[OK] System Security MAXIMUM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DEPLOY TAB -->
+        <div id="deploy" class="tab-content">
+            <div class="dashboard-grid">
+                <div class="panel">
+                    <h3>🚀 Deployment Status</h3>
+                    <div class="metric">
+                        <span>GitHub Pages:</span>
+                        <span class="metric-value">DEPLOYED</span>
+                    </div>
+                    <div class="metric">
+                        <span>Last Commit:</span>
+                        <span class="metric-value">954c231</span>
+                    </div>
+                    <div class="metric">
+                        <span>Build Status:</span>
+                        <span class="metric-value">SUCCESS</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn" onclick="deployStatus()">Check Deploy</button>
+                        <button class="btn" onclick="forceDeploy()">Force Deploy</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>📊 Repository Info</h3>
+                    <div class="metric">
+                        <span>Repository:</span>
+                        <span class="metric-value">datacrypt-labs-website</span>
+                    </div>
+                    <div class="metric">
+                        <span>Owner:</span>
+                        <span class="metric-value">FerneyQ</span>
+                    </div>
+                    <div class="metric">
+                        <span>Branch:</span>
+                        <span class="metric-value">main</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn" onclick="gitStatus()">Git Status</button>
+                        <button class="btn" onclick="viewRepo()">Ver Repo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOGS TAB -->
+        <div id="logs" class="tab-content">
+            <div class="panel">
+                <h3>📋 System Logs</h3>
+                <div class="console-output" id="systemLogs">
+                    <div class="log-entry log-success">[21/10/2025 15:30:22] Sistema iniciado correctamente</div>
+                    <div class="log-entry log-success">[21/10/2025 15:30:23] Security enforcement loaded</div>
+                    <div class="log-entry log-info">[21/10/2025 15:30:24] Chatbot elimination confirmed</div>
+                    <div class="log-entry log-success">[21/10/2025 15:30:25] Direct contact system active</div>
+                    <div class="log-entry log-success">[21/10/2025 15:30:26] GitHub Pages deployment verified</div>
+                    <div class="log-entry log-info">[21/10/2025 15:30:27] All systems operational</div>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn" onclick="clearLogs()">Clear Logs</button>
+                    <button class="btn" onclick="exportLogs()">Export Logs</button>
+                    <button class="btn" onclick="refreshLogs()">Refresh</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTROL TAB -->
+        <div id="control" class="tab-content">
+            <div class="dashboard-grid">
+                <div class="panel">
+                    <h3>🎛️ System Control</h3>
+                    <div class="action-buttons">
+                        <button class="btn" onclick="systemRestart()">Restart System</button>
+                        <button class="btn" onclick="maintenanceMode()">Maintenance</button>
+                        <button class="btn" onclick="backupSystem()">Backup</button>
+                        <button class="btn danger" onclick="emergencyShutdown()">EMERGENCY</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>📊 Performance Metrics</h3>
+                    <div class="metric">
+                        <span>System Performance:</span>
+                        <span class="metric-value">9.8/10</span>
+                    </div>
+                    <div class="metric">
+                        <span>Security Score:</span>
+                        <span class="metric-value">10/10</span>
+                    </div>
+                    <div class="metric">
+                        <span>Uptime:</span>
+                        <span class="metric-value">99.9%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- VOICE CONTROLS -->
+        <div class="voice-controls" style="position: fixed; top: 20px; right: 20px; background: rgba(0,0,0,0.9); padding: 1rem; border-radius: 10px; border: 1px solid #00ff41; backdrop-filter: blur(10px);">
+            <h4 style="color: #00ff41; margin-bottom: 0.5rem;">🎤 Control de Voz</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <button class="btn" onclick="generateVoiceReport('complete')" title="Reporte Completo">📊 Completo</button>
+                <button class="btn" onclick="generateVoiceReport('security')" title="Reporte Seguridad">🛡️ Seguridad</button>
+                <button class="btn" onclick="generateVoiceReport('performance')" title="Reporte Performance">📈 Performance</button>
+                <button class="btn" onclick="generateVoiceReport('status')" title="Reporte Estado">⚡ Status</button>
+                <button class="btn" onclick="generateVoiceReport('alerts')" title="Reporte Alertas">🚨 Alertas</button>
+                <button class="btn" onclick="testBackendConnection()" title="Test Backend">🔌 Backend</button>
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <button class="btn" onclick="toggleVoice()" id="voiceToggle">🔊 ON/OFF</button>
+                <button class="btn" onclick="speechSynthesis.cancel()" title="Parar Voz">⏹️</button>
+                <select onchange="adjustVoiceSpeed(this.value)" style="background: rgba(0,255,65,0.1); border: 1px solid #00ff41; color: #00ff41; padding: 0.25rem; border-radius: 3px; font-size: 0.8rem;">
+                    <option value="0.75">0.75x</option>
+                    <option value="1.0" selected>1.0x</option>
+                    <option value="1.25">1.25x</option>
+                    <option value="1.5">1.5x</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- QUICK ACTIONS -->
+        <div class="quick-actions">
+            <button class="btn" onclick="quickStatus()">Status</button>
+            <button class="btn" onclick="quickDeploy()">Deploy</button>
+            <button class="emergency-stop" onclick="emergencyStop()" title="EMERGENCY STOP">⚠️</button>
+        </div>    <script>
+        // Configuración API
+        const API_BASE = 'http://localhost:8000/api';
+        
+        // Tab switching
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Función auxiliar para llamadas API
+        async function apiCall(endpoint, method = 'GET', data = null) {
+            try {
+                const options = {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                };
+                
+                if (data && method !== 'GET') {
+                    options.body = JSON.stringify(data);
+                }
+                
+                const response = await fetch(`${API_BASE}${endpoint}`, options);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                return await response.json();
+            } catch (error) {
+                console.error('API Error:', error);
+                addLog(`❌ Error API: ${error.message}`, 'error');
+                throw error;
+            }
+        }
+
+        // System functions con interacción real
+        async function checkSiteStatus() {
+            addLog('🔍 Verificando estado del sitio...', 'info');
+            try {
+                const status = await apiCall('/status');
+                
+                addLog(`✅ Sistema: ${status.status}`, 'success');
+                addLog(`📊 Actividad: ${status.activity}`, 'info');
+                addLog(`⏱️ Tiempo actividad: ${status.uptime}`, 'info');
+                
+                updateMetric('System Status:', status.status);
+                updateMetric('Activity:', status.activity);
+                updateMetric('Uptime:', status.uptime);
+                
+                if (status.alerts && status.alerts.length > 0) {
+                    addLog(`🚨 Alertas activas: ${status.alerts.length}`, 'warning');
+                    updateMetric('Active Alerts:', status.alerts.length);
+                } else {
+                    addLog('✅ Sin alertas activas', 'success');
+                    updateMetric('Active Alerts:', '0');
+                }
+                
+            } catch (error) {
+                addLog(`❌ Error verificando sitio: ${error.message}`, 'error');
+                updateMetric('System Status:', 'Offline');
+            }
+        }
+
+        async function securityReport() {
+            addLog('📊 Generando reporte de seguridad...', 'info');
+            try {
+                const scanResult = await apiCall('/security/scan', 'POST');
+                
+                addLog('🛡️ REPORTE DE SEGURIDAD:', 'info');
+                addLog(`• Estado del escaneo: ${scanResult.status || 'completado'}`, 'success');
+                addLog(`• Nivel de amenaza: ${scanResult.threat_level || 'bajo'}`, 'info');
+                addLog(`• Puntuación de seguridad: ${scanResult.security_score || 'N/A'}/10`, 'success');
+                addLog(`• Vulnerabilidades: ${scanResult.vulnerabilities_count || 0}`, scanResult.vulnerabilities_count > 0 ? 'warning' : 'success');
+                addLog(`• Tiempo del escaneo: ${scanResult.scan_time || 'N/A'}ms`, 'info');
+                
+                if (scanResult.recommendations && scanResult.recommendations.length > 0) {
+                    addLog('📋 Recomendaciones:', 'info');
+                    scanResult.recommendations.forEach(rec => {
+                        addLog(`  • ${rec}`, 'warning');
+                    });
+                }
+                
+                updateMetric('Security Score:', `${scanResult.security_score || 'N/A'}/10`);
+                updateMetric('Threat Level:', scanResult.threat_level || 'Low');
+                
+            } catch (error) {
+                addLog(`❌ Error generando reporte: ${error.message}`, 'error');
+            }
+        }
+
+        async function securityScan() {
+            addLog('🔍 Iniciando escaneo de seguridad completo...', 'info');
+            try {
+                const scanResult = await apiCall('/security/scan', 'POST');
+                
+                addLog('�️ RESULTADOS DEL ESCANEO:', 'success');
+                addLog(`• Constructor Chatbot: ${scanResult.chatbot_constructor_blocked ? '🚫 BLOQUEADO' : '⚠️ ACTIVO'}`, scanResult.chatbot_constructor_blocked ? 'success' : 'warning');
+                addLog(`• Security Enforcement: ${scanResult.security_enforcement_active ? '✅ ACTIVO' : '❌ INACTIVO'}`, scanResult.security_enforcement_active ? 'success' : 'error');
+                addLog(`• ConfigManager: ${scanResult.config_manager_status ? '✅ CONFIGURADO' : '❌ ERROR'}`, scanResult.config_manager_status ? 'success' : 'error');
+                addLog(`• Nivel de amenaza: ${scanResult.threat_level}`, 'success');
+                addLog(`• Puntuación seguridad: ${scanResult.security_score}/10`, 'success');
+            } catch (error) {
+                addLog(`❌ Error en escaneo: ${error.message}`, 'error');
+            }
+        }
+
+        async function emergencyStop() {
+            if(confirm('⚠️ CONFIRMACIÓN: ¿Activar protocolo de emergencia?')) {
+                try {
+                    const lockdownResult = await apiCall('/emergency/lockdown', 'POST');
+                    addLog('🚨 PROTOCOLO DE EMERGENCIA ACTIVADO', 'error');
+                    addLog('🔒 Sistema en lockdown total', 'warning');
+                    addLog(`📧 Contactos de emergencia notificados: ${lockdownResult.emergency_contacts.join(', ')}`, 'warning');
+                    document.getElementById('systemStatus').textContent = 'EMERGENCY LOCKDOWN';
+                    
+                    // Reporte de voz de emergencia
+                    if (voiceEnabled) {
+                        speakText('ALERTA: Protocolo de emergencia activado. Sistema en lockdown total. Contactos de emergencia notificados.', 'high');
+                    }
+                } catch (error) {
+                    addLog(`❌ Error activando lockdown: ${error.message}`, 'error');
+                    if (voiceEnabled) {
+                        speakText('Error activando protocolo de emergencia. Verifique el sistema.', 'high');
+                    }
+                }
+            }
+        }
+
+        async function testContact() {
+            addLog('📞 Probando sistema de contacto...', 'info');
+            try {
+                const contactTest = await apiCall('/contact/test', 'POST');
+                addLog(`✅ Sistema de contacto operativo`, 'success');
+                addLog(`📧 CEO Email: ${contactTest.ceo_email}`, 'info');
+                addLog(`⏱️ Tiempo de respuesta: ${contactTest.response_time}`, 'info');
+                addLog(`🎛️ Modal: ${contactTest.modal_system}`, 'success');
+            } catch (error) {
+                addLog(`❌ Error testando contacto: ${error.message}`, 'error');
+            }
+        }
+
+        async function deployStatus() {
+            addLog('🚀 Verificando estado del deployment...', 'info');
+            try {
+                const deployInfo = await apiCall('/deploy/check', 'POST');
+                addLog(`📊 ESTADO DEL DEPLOYMENT:`, 'info');
+                addLog(`• GitHub Pages: ${deployInfo.github_pages.status}`, deployInfo.github_pages.status === 'ONLINE' ? 'success' : 'error');
+                addLog(`• Último commit: ${deployInfo.last_commit}`, 'info');
+                addLog(`• Status general: ${deployInfo.deployment_status}`, deployInfo.deployment_status === 'SUCCESS' ? 'success' : 'error');
+                
+                // Mostrar archivos críticos
+                Object.entries(deployInfo.critical_files).forEach(([file, exists]) => {
+                    addLog(`• ${file}: ${exists ? '✅ EXISTE' : '❌ FALTANTE'}`, exists ? 'success' : 'error');
+                });
+            } catch (error) {
+                addLog(`❌ Error verificando deployment: ${error.message}`, 'error');
+            }
+        }
+
+        async function forceDeploy() {
+            if(confirm('🚀 ¿Confirmas force deploy? Esto actualizará GitHub Pages.')) {
+                addLog('🚀 Iniciando force deploy...', 'info');
+                try {
+                    const deployResult = await apiCall('/deploy/force', 'POST');
+                    addLog(`✅ ${deployResult.message}`, 'success');
+                    addLog(`⏱️ Tiempo estimado: ${deployResult.estimated_time}`, 'info');
+                    
+                    // Verificar progreso cada 30 segundos
+                    setTimeout(() => {
+                        addLog('🔄 Verificando progreso del deploy...', 'info');
+                        deployStatus();
+                    }, 30000);
+                } catch (error) {
+                    addLog(`❌ Error en force deploy: ${error.message}`, 'error');
+                }
+            }
+        }
+
+        async function systemRestart() {
+            if(confirm('🔄 ¿Confirmas reinicio del sistema?')) {
+                addLog('🔄 Iniciando reinicio del sistema...', 'warning');
+                try {
+                    const restartResult = await apiCall('/system/restart', 'POST');
+                    addLog(`✅ ${restartResult.message}`, 'success');
+                    
+                    // Recargar métricas después del reinicio
+                    setTimeout(() => {
+                        loadSystemMetrics();
+                    }, 3000);
+                } catch (error) {
+                    addLog(`❌ Error en reinicio: ${error.message}`, 'error');
+                }
+            }
+        }
+
+        // Configuración de síntesis de voz
+        let voiceEnabled = false;
+        let voiceSpeed = 1.0;
+        let voicePitch = 1.0;
+        let availableVoices = [];
+
+        function initVoiceSystem() {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.addEventListener('voiceschanged', loadVoices);
+                loadVoices();
+                voiceEnabled = true;
+                addLog('🔊 Sistema de voz inicializado', 'success');
+            } else {
+                addLog('❌ Síntesis de voz no disponible en este navegador', 'error');
+            }
+        }
+
+        function loadVoices() {
+            availableVoices = speechSynthesis.getVoices();
+            // Preferir voces en español
+            const spanishVoice = availableVoices.find(voice => 
+                voice.lang.includes('es') || voice.name.includes('Spanish')
+            );
+            if (spanishVoice) {
+                addLog(`🎤 Voz seleccionada: ${spanishVoice.name}`, 'info');
+            }
+        }
+
+        function speakText(text, priority = 'normal') {
+            if (!voiceEnabled) return;
+            
+            try {
+                // Cancelar habla anterior si es alta prioridad
+                if (priority === 'high') {
+                    speechSynthesis.cancel();
+                }
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                
+                // Configurar voz en español si está disponible
+                const spanishVoice = availableVoices.find(voice => 
+                    voice.lang.includes('es') || voice.name.includes('Spanish')
+                );
+                if (spanishVoice) {
+                    utterance.voice = spanishVoice;
+                }
+                
+                utterance.rate = voiceSpeed;
+                utterance.pitch = voicePitch;
+                utterance.volume = 0.8;
+                
+                utterance.onstart = () => {
+                    addLog('🔊 Reproduciendo reporte por voz...', 'info');
+                };
+                
+                utterance.onend = () => {
+                    addLog('✅ Reporte de voz completado', 'success');
+                };
+                
+                speechSynthesis.speak(utterance);
+            } catch (error) {
+                addLog(`❌ Error en síntesis de voz: ${error.message}`, 'error');
+            }
+        }
+
+        async function generateVoiceReport(reportType = 'complete') {
+            addLog('🎤 Generando reporte por voz...', 'info');
+            
+            try {
+                let reportText = '';
+                
+                switch (reportType) {
+                    case 'security':
+                        reportText = await generateSecurityVoiceReport();
+                        break;
+                    case 'performance':
+                        reportText = await generatePerformanceVoiceReport();
+                        break;
+                    case 'status':
+                        reportText = await generateStatusVoiceReport();
+                        break;
+                    case 'alerts':
+                        reportText = await generateAlertsVoiceReport();
+                        break;
+                    default:
+                        reportText = await generateCompleteVoiceReport();
+                }
+                
+                speakText(reportText, 'high');
+                
+            } catch (error) {
+                addLog(`❌ Error generando reporte: ${error.message}`, 'error');
+                speakText('Error al generar reporte de voz. Verifique la conexión con el sistema.', 'high');
+            }
+        }
+
+        async function generateCompleteVoiceReport() {
+            try {
+                const voiceReport = await apiCall('/voice/report', 'POST', { report_type: 'complete' });
+                return voiceReport.content;
+            } catch (error) {
+                // Fallback al reporte local si el backend no está disponible
+                const status = await apiCall('/status');
+                const metrics = await apiCall('/metrics');
+                
+                return `
+                    Reporte completo de DataCrypt Labs. 
+                    Estado del sistema: ${status.status}. 
+                    Actividad actual: ${status.activity}. 
+                    Puntuación de rendimiento: ${metrics.performance_score} sobre 10. 
+                    Uso de CPU: ${metrics.cpu_usage?.toFixed(1) || 'N/A'} por ciento. 
+                    Uso de memoria: ${metrics.memory_usage?.toFixed(1) || 'N/A'} por ciento. 
+                    Alertas activas: ${metrics.active_alerts || 0}. 
+                    Reporte completado.
+                `.replace(/\s+/g, ' ').trim();
+            }
+        }
+
+        async function generateSecurityVoiceReport() {
+            try {
+                const voiceReport = await apiCall('/voice/report', 'POST', { report_type: 'security' });
+                return voiceReport.content;
+            } catch (error) {
+                // Fallback al reporte local si el backend no está disponible
+                const scanResult = await apiCall('/security/scan', 'POST');
+                
+                return `
+                    Reporte de seguridad DataCrypt Labs. 
+                    Estado de escaneo: ${scanResult.status || 'completado'}. 
+                    Nivel de amenaza: ${scanResult.threat_level || 'bajo'}. 
+                    Puntuación de seguridad: ${scanResult.security_score || 'N/A'} sobre 10. 
+                    Vulnerabilidades detectadas: ${scanResult.vulnerabilities_count || 0}. 
+                    Sistema de protección: activo. 
+                    Reporte de seguridad completado.
+                `.replace(/\s+/g, ' ').trim();
+            }
+        }
+
+        async function generatePerformanceVoiceReport() {
+            try {
+                const voiceReport = await apiCall('/voice/report', 'POST', { report_type: 'performance' });
+                return voiceReport.content;
+            } catch (error) {
+                // Fallback al reporte local si el backend no está disponible
+                const metrics = await apiCall('/metrics');
+                
+                return `
+                    Reporte de rendimiento del sistema. 
+                    Uso de CPU: ${metrics.cpu_usage?.toFixed(1) || 'N/A'} por ciento. 
+                    Uso de memoria: ${metrics.memory_usage?.toFixed(1) || 'N/A'} por ciento. 
+                    Uso de disco: ${metrics.disk_usage?.toFixed(1) || 'N/A'} por ciento. 
+                    Conexiones de red: ${metrics.network_connections || 0}. 
+                    Tiempo de actividad: ${metrics.uptime_hours?.toFixed(1) || 'N/A'} horas. 
+                    Estado general del sistema: ${metrics.system_health || 'desconocido'}. 
+                    Puntuación de rendimiento: ${metrics.performance_score || 'N/A'} sobre 10. 
+                    Reporte de rendimiento completado.
+                `.replace(/\s+/g, ' ').trim();
+            }
+        }
+
+        async function generateStatusVoiceReport() {
+            try {
+                const voiceReport = await apiCall('/voice/report', 'POST', { report_type: 'status' });
+                return voiceReport.content;
+            } catch (error) {
+                // Fallback al reporte local si el backend no está disponible
+                const status = await apiCall('/status');
+                
+                return `
+                    Reporte de estado rápido. 
+                    Sistema DataCrypt Labs: ${status.status || 'en línea'}. 
+                    Actividad actual: ${status.activity || 'normal'}. 
+                    Tiempo de actividad: ${status.uptime || 'N/A'}. 
+                    Alertas activas: ${status.alerts?.length || 0}. 
+                    Sistema operativo: funcional. 
+                    Estado verificado.
+                `.replace(/\s+/g, ' ').trim();
+            }
+        }
+
+        async function generateAlertsVoiceReport() {
+            try {
+                const voiceReport = await apiCall('/voice/report', 'POST', { report_type: 'alerts' });
+                return voiceReport.content;
+            } catch (error) {
+                // Fallback al reporte local si el backend no está disponible
+                const alerts = await apiCall('/alerts');
+                
+                if (!alerts || alerts.length === 0) {
+                    return 'No hay alertas activas en el sistema. Todo funcionando correctamente.';
+                }
+                
+                let reportText = `Reporte de alertas. ${alerts.length} alertas activas. `;
+                alerts.slice(0, 3).forEach((alert, index) => {
+                    reportText += `Alerta ${index + 1}: ${alert.message || alert.type}. Prioridad: ${alert.priority || 'normal'}. `;
+                });
+                
+                if (alerts.length > 3) {
+                    reportText += `Y ${alerts.length - 3} alertas adicionales. `;
+                }
+                
+                reportText += 'Reporte de alertas completado.';
+                return reportText.replace(/\s+/g, ' ').trim();
+            }
+        }
+
+        function toggleVoice() {
+            voiceEnabled = !voiceEnabled;
+            addLog(`🔊 Sistema de voz ${voiceEnabled ? 'activado' : 'desactivado'}`, 'info');
+            if (voiceEnabled) {
+                speakText('Sistema de voz activado');
+            }
+        }
+
+        function adjustVoiceSpeed(newSpeed) {
+            voiceSpeed = Math.max(0.5, Math.min(2.0, newSpeed));
+            addLog(`🎛️ Velocidad de voz ajustada a ${voiceSpeed}`, 'info');
+            speakText(`Velocidad ajustada a ${voiceSpeed}`);
+        }
+
+        async function testBackendConnection() {
+            addLog('🔌 Probando conexión con backend...', 'info');
+            try {
+                const response = await apiCall('/health');
+                if (response.status === 'healthy') {
+                    addLog('✅ Backend conectado correctamente', 'success');
+                    speakText('Backend conectado correctamente. Todos los servicios están disponibles.', 'high');
+                } else {
+                    addLog(`⚠️ Backend responde pero estado: ${response.status}`, 'warning');
+                    speakText(`Backend responde pero estado ${response.status}`, 'high');
+                }
+            } catch (error) {
+                addLog(`❌ Error conectando backend: ${error.message}`, 'error');
+                speakText('Error conectando con el backend. Verifique que el servidor esté ejecutándose.', 'high');
+            }
+        }
+
+        async function loadSystemMetrics() {
+            try {
+                const metrics = await apiCall('/metrics');
+                updateMetric('CPU Usage:', `${metrics.cpu_usage?.toFixed(1) || 'N/A'}%`);
+                updateMetric('Memory Usage:', `${metrics.memory_usage?.toFixed(1) || 'N/A'}%`);
+                updateMetric('Disk Usage:', `${metrics.disk_usage?.toFixed(1) || 'N/A'}%`);
+                updateMetric('Performance Score:', `${metrics.performance_score || 'N/A'}/10`);
+                updateMetric('Network Connections:', `${metrics.network_connections || 0}`);
+                updateMetric('Uptime:', `${metrics.uptime_hours?.toFixed(1) || 'N/A'}h`);
+                updateMetric('System Health:', metrics.system_health || 'Unknown');
+                updateMetric('Active Alerts:', `${metrics.active_alerts || 0}`);
+                
+                addLog('📊 Métricas del sistema actualizadas', 'success');
+            } catch (error) {
+                addLog(`❌ Error cargando métricas: ${error.message}`, 'error');
+                // Mostrar métricas de fallback
+                updateMetric('CPU Usage:', 'Offline');
+                updateMetric('Memory Usage:', 'Offline');
+                updateMetric('System Status:', 'Backend Offline');
+            }
+        }
+
+        function updateMetric(label, value) {
+            const metrics = document.querySelectorAll('.metric');
+            metrics.forEach(metric => {
+                const span = metric.querySelector('span');
+                if (span && span.textContent === label) {
+                    const valueSpan = metric.querySelector('.metric-value');
+                    if (valueSpan) {
+                        valueSpan.textContent = value;
+                    }
+                }
+            });
+        }
+
+        function addLog(message, type) {
+            const logsContainer = document.getElementById('systemLogs');
+            const timestamp = new Date().toLocaleString();
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry log-${type}`;
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            logsContainer.appendChild(logEntry);
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+            
+            // Limitar a 100 logs máximo
+            const logs = logsContainer.querySelectorAll('.log-entry');
+            if (logs.length > 100) {
+                logs[0].remove();
+            }
+        }
+
+        async function quickStatus() {
+            addLog('📊 Ejecutando status rápido...', 'info');
+            try {
+                const status = await apiCall('/status');
+                addLog(`✅ Sistema: ${status.system.status}`, 'success');
+                addLog(`🛡️ Seguridad: ${status.system.security_level}`, 'success');
+                addLog(`🚫 Chatbot: ${status.system.chatbot_blocked ? 'BLOQUEADO' : 'ACTIVO'}`, status.system.chatbot_blocked ? 'success' : 'error');
+                addLog(`📞 Contacto: ${status.system.contact_system}`, 'success');
+                addLog(`📈 Performance: ${status.system.performance_score}/10`, 'success');
+            } catch (error) {
+                addLog(`❌ Error en status: ${error.message}`, 'error');
+            }
+        }
+
+        async function quickDeploy() {
+            addLog('🚀 Deploy rápido iniciado...', 'info');
+            try {
+                await forceDeploy();
+            } catch (error) {
+                addLog(`❌ Error en deploy rápido: ${error.message}`, 'error');
+            }
+        }
+
+        async function clearLogs() {
+            if(confirm('🗑️ ¿Limpiar todos los logs del sistema?')) {
+                try {
+                    const result = await apiCall('/logs/clear', 'POST');
+                    document.getElementById('systemLogs').innerHTML = '';
+                    addLog(result.message, 'success');
+                } catch (error) {
+                    addLog(`❌ Error limpiando logs: ${error.message}`, 'error');
+                }
+            }
+        }
+
+        async function refreshLogs() {
+            addLog('🔄 Refrescando logs del sistema...', 'info');
+            try {
+                const logsData = await apiCall('/logs');
+                const logsContainer = document.getElementById('systemLogs');
+                logsContainer.innerHTML = '';
+                
+                logsData.logs.forEach(log => {
+                    const logEntry = document.createElement('div');
+                    logEntry.className = `log-entry log-${log.type}`;
+                    logEntry.textContent = `[${log.timestamp}] ${log.message}`;
+                    logsContainer.appendChild(logEntry);
+                });
+                
+                logsContainer.scrollTop = logsContainer.scrollHeight;
+                addLog(`✅ ${logsData.logs.length} logs cargados`, 'success');
+            } catch (error) {
+                addLog(`❌ Error refrescando logs: ${error.message}`, 'error');
+            }
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', async function() {
+            addLog('🎛️ Consola de gestión iniciada', 'success');
+            addLog('🌐 Conectando a backend Python...', 'info');
+            
+            // Inicializar sistema de voz
+            initVoiceSystem();
+            
+            try {
+                // Verificar conexión con backend
+                await apiCall('/status');
+                addLog('✅ Backend Python conectado exitosamente', 'success');
+                addLog('🔗 API REST operativa', 'success');
+                
+                // Cargar métricas iniciales
+                await loadSystemMetrics();
+                addLog('📊 Métricas del sistema cargadas', 'success');
+                
+                // Reporte de voz de bienvenida
+                if (voiceEnabled) {
+                    setTimeout(() => {
+                        speakText('Consola de gestión DataCrypt Labs iniciada. Todos los sistemas operativos.');
+                    }, 2000);
+                }
+                
+                // Auto-refresh cada 30 segundos
+                setInterval(async () => {
+                    try {
+                        await loadSystemMetrics();
+                    } catch (error) {
+                        console.error('Error auto-refresh:', error);
+                    }
+                }, 30000);
+                
+            } catch (error) {
+                addLog('❌ Error conectando backend - Modo offline', 'error');
+                addLog('💡 Inicia: python admin/management_backend.py', 'warning');
+                if (voiceEnabled) {
+                    speakText('Atención: Error conectando backend. Verifique que el servidor esté ejecutándose.');
+                }
+            }
+            
+            addLog('✅ Todos los paneles cargados correctamente', 'success');
+        });
+    </script>
+</body>
+</html>

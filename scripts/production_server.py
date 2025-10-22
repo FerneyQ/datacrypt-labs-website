@@ -36,10 +36,18 @@ def main():
     
     # Import the FastAPI app
     try:
+        import sys
+        import os
+        # Añadir el directorio backend al path
+        backend_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'backend')
+        if backend_path not in sys.path:
+            sys.path.insert(0, backend_path)
+        
         from main import app
         print("✅ Aplicación FastAPI cargada correctamente")
     except ImportError as e:
         print(f"❌ Error importando la aplicación: {e}")
+        print(f"📍 Verificar que existe: backend/main.py")
         sys.exit(1)
     
     # Server configuration for production
