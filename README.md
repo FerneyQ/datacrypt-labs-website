@@ -1,199 +1,187 @@
-# 🌱 DataCrypt_Labs - Sitio Web Corporativo
+# 🚀 DataCrypt Labs - Sitio Web Corporativo & Sistema Administrativo
 
-> Sitio web profesional para empresa de Business Intelligence & Data Science
+> Portfolio empresarial moderno con backend Python integrado y sistema de administración localhost-only
 
 ![DataCrypt_Labs](Material%20visual/Identidad.JPG)
 
-## 🚀 Sobre DataCrypt_Labs
+## 🎯 Sistema Actual - Octubre 2025
 
-**DataCrypt_Labs** es una empresa especializada en automatización de soluciones de **Business Intelligence**, **Machine Learning** y **Data Science** para empresas líderes.
+### 🏗️ **Arquitectura Híbrida**
+- **Frontend**: GitHub Pages (Static Website)
+- **Backend**: FastAPI Python (localhost:8000)
+- **Admin Panel**: Integración localhost-only
+- **Base de Datos**: SQLite con 15 tablas optimizadas
 
-### 📞 Contacto
-- **Teléfono:** 3232066197
-- **Servicios:** BI, ML, Big Data, Visualización, Consultoría, Georreferenciación
-- **Ubicación:** Colombia
-
----
-
-## 🎯 Servicios Especializados
-
-1. **Business Intelligence** - Dashboards y reportes automatizados
-2. **Machine Learning** - Modelos predictivos e IA
-3. **Big Data** - Procesamiento de grandes volúmenes de datos
-4. **Data Visualization** - Visualizaciones interactivas
-5. **Consultoría en Datos** - Estrategia y governance
-6. **Georreferenciación** - Análisis geoespacial
+### 🔒 **Seguridad localhost-only**
+- ✅ Admin panel solo funciona en servidor local
+- ✅ Verificación automática de servidor cada 30 segundos
+- ✅ Botones auto-deshabilitados sin conexión local
+- ✅ Mensajes claros de restricción
 
 ---
 
-## 🛠️ Tecnologías del Sitio Web
+## 🌐 **URLs del Sistema**
 
-### Frontend
-- **HTML5** - Estructura semántica optimizada para SEO
-- **CSS3** - Diseño corporativo responsivo
-- **JavaScript ES6+** - Funcionalidades interactivas
-- **Font Awesome** - Iconografía profesional
+### 📱 **Sitio Web Público**
+- **GitHub Pages**: https://ferneyq.github.io/datacrypt-labs-website/
+- **Estado**: ✅ LIVE - Actualización automática
 
-### Características
-- ✅ **Responsive Design** - Adaptable a todos los dispositivos
-- ✅ **SEO Optimizado** - Meta tags, Schema markup, Sitemap
-- ✅ **Performance** - Carga rápida y optimizada
-- ✅ **Analytics** - Tracking B2B integrado
-- ✅ **Formularios** - Contacto empresarial funcional
-- ✅ **Chatbot** - Asistente virtual corporativo
+### 🎛️ **Panel Administrativo (localhost-only)**
+- **Consola Estática**: `admin/dashboard.html` (GitHub Pages)
+- **Admin Backend**: http://localhost:8000/admin
+- **API Docs**: http://localhost:8000/docs
+- **Estado**: 🔒 Solo funciona con servidor local
 
 ---
 
-## 📁 Estructura del Proyecto
+## 🛠️ **Inicio Rápido**
 
-```
-datacrypt-labs/
-├── 📄 index.html              # Página principal corporativa
-├── 📂 assets/
-│   ├── 📂 css/
-│   │   └── 📄 main.css        # Estilos corporativos
-│   └── 📂 js/
-│       └── 📄 datacrypt.js    # JavaScript principal
-├── 📂 Material visual/
-│   ├── 🖼️ Identidad.JPG       # Logo corporativo
-│   └── 📂 Portafolio/         # Imágenes de proyectos
-├── 📄 sitemap.xml             # Mapa del sitio
-├── 📄 robots.txt              # Configuración SEO
-└── 📄 README.md               # Documentación
-```
-
----
-
-## 🚀 Despliegue
-
-### Opción 1: Netlify (Recomendado)
-1. Ir a [netlify.com](https://netlify.com)
-2. Arrastrar carpeta del proyecto
-3. ¡Sitio live en 30 segundos!
-
-### Opción 2: GitHub Pages
-1. Subir código a repositorio GitHub
-2. Activar Pages en Settings
-3. Sitio disponible en GitHub.io
-
-### Opción 3: Hosting Tradicional
-1. Subir archivos vía FTP
-2. Configurar dominio
-3. Activar SSL
-
----
-
-## 🔧 Desarrollo Local
-
-### Prerrequisitos
-- Navegador web moderno
-- Servidor HTTP local (opcional)
-
-### Ejecutar localmente
+### 1️⃣ **Iniciar Servidor Local**
 ```bash
-# Opción 1: Servidor Python
-python -m http.server 8000
-
-# Opción 2: Servidor Node.js
-npx serve .
-
-# Opción 3: Live Server (VS Code)
-# Instalar extensión Live Server
+cd C:\mis_scripts_seguros\DataCrypt_Labs\Web-Portfolio
+python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000
 ```
 
-### Acceder al sitio
+### 2️⃣ **Acceder al Admin**
+- Abrir: `admin/dashboard.html` (desde GitHub Pages)
+- El sistema verificará automáticamente localhost:8000
+- Los botones se habilitarán solo si el servidor está activo
+
+### 3️⃣ **Credenciales Admin**
+- **Usuario**: `Neyd696 :#`
+- **Contraseña**: `Str0ng_P@ssw0rd_2025!`
+
+---
+
+## 📊 **Funcionalidades del Sistema**
+
+### 🎯 **Sitio Web Corporativo**
+- ✅ Diseño responsive y profesional
+- ✅ SEO optimizado para BI/Data Science
+- ✅ Formularios de contacto funcionales
+- ✅ Certificaciones y servicios destacados
+- ✅ Performance optimizado
+
+### 🔧 **Backend Python (FastAPI)**
+- ✅ API REST completa con 50+ endpoints
+- ✅ Data Science endpoints funcionales
+- ✅ Machine Learning integrado
+- ✅ Sistema de métricas en tiempo real
+- ✅ Análisis de datos automatizado
+
+### 🎛️ **Panel Administrativo**
+- ✅ Dashboard interactivo con métricas live
+- ✅ Sistema de voz integrado
+- ✅ Monitoreo de seguridad
+- ✅ Reportes automatizados
+- ✅ Control total del sistema
+
+---
+
+## 🏗️ **Estructura del Proyecto (Limpiado)**
+
 ```
-http://localhost:8000
+📁 DataCrypt_Labs/
+├── 🌐 Frontend (GitHub Pages)
+│   ├── index.html              # Sitio principal
+│   ├── admin/dashboard.html    # Consola administrativa
+│   ├── assets/                 # Recursos estáticos
+│   └── src/                    # JavaScript modular
+│
+├── 🐍 Backend (FastAPI)
+│   ├── backend/main.py         # Servidor principal (puerto 8000)
+│   ├── datacrypt_admin.db      # Base de datos SQLite
+│   └── requirements.txt        # Dependencias Python
+│
+├── 📁 Backups
+│   └── obsolete_flask_system/  # Sistema Flask obsoleto (puerto 5000)
+│
+├── 🔧 Scripts Utilitarios
+│   ├── start_system.py         # Iniciador principal
+│   ├── railway_start.py        # Deploy Railway
+│   └── cleanup_obsolete.py     # Limpieza automática
+│
+└── 📚 Documentación
+    ├── README.md               # Este archivo
+    ├── requirements.txt        # Dependencias actuales
+    └── *.md                    # Reportes y guías
 ```
 
 ---
 
-## 📊 SEO y Analytics
+## 🔄 **Workflow de Desarrollo**
 
-### Optimizaciones implementadas:
-- ✅ **Meta tags** optimizados para BI/Data Science
-- ✅ **JSON-LD Schema** para Google
-- ✅ **Open Graph** para redes sociales
-- ✅ **Sitemap XML** completo
-- ✅ **Robots.txt** configurado
-- ✅ **Keywords** específicos de la industria
+### 🎯 **Desarrollo Normal**
+1. Modificar código frontend/backend
+2. Commit a GitHub → Deploy automático a GitHub Pages
+3. Testing con servidor local (puerto 8000)
 
-### Métricas B2B:
-- Page views empresariales
-- Clicks en servicios
-- Formularios de contacto
-- Visualizaciones del portafolio
+### 🎛️ **Admin Tasks**
+1. Iniciar servidor local: `python -m uvicorn backend.main:app --port 8000`
+2. Abrir consola admin desde GitHub Pages
+3. Verificación automática de localhost
+4. Funcionalidad habilitada solo con servidor activo
 
----
-
-## 🎨 Diseño Corporativo
-
-### Paleta de Colores
-- **Primary Blue:** `#2563eb` - Confianza empresarial
-- **Secondary Blue:** `#1e40af` - Profesionalismo
-- **Data Orange:** `#f59e0b` - Innovación en datos
-- **Success Green:** `#10b981` - Crecimiento y resultados
-
-### Tipografía
-- **Inter** - Texto corporativo legible
-- **Poppins** - Títulos modernos y profesionales
-- **Fira Code** - Elementos técnicos
+### 🧹 **Mantenimiento**
+- Archivos obsoletos → `backups/obsolete_flask_system/`
+- Logs de seguridad → `security_*.log`
+- Base de datos → `datacrypt_admin.db`
 
 ---
 
-## 📈 Performance
+## 📈 **Estado del Sistema - Octubre 2025**
 
-### Métricas objetivo:
-- ⚡ **First Contentful Paint:** < 1.5s
-- ⚡ **Largest Contentful Paint:** < 2.5s
-- ⚡ **Cumulative Layout Shift:** < 0.1
-- ⚡ **First Input Delay:** < 100ms
+### ✅ **Completado**
+- [x] Sitio web corporativo LIVE en GitHub Pages
+- [x] Backend FastAPI funcional con APIs completas
+- [x] Sistema admin con autenticación JWT
+- [x] Integración localhost-only security
+- [x] Limpieza de archivos obsoletos (24 archivos Flask → backup)
+- [x] Base de datos SQLite con 15 tablas optimizadas
 
-### Optimizaciones:
-- Compresión de imágenes
-- Minificación de CSS/JS
-- Lazy loading
-- CDN para recursos externos
-
----
-
-## 🔐 Seguridad
-
-- ✅ **HTTPS** obligatorio
-- ✅ **CSP Headers** implementados
-- ✅ **XSS Protection** activada
-- ✅ **CSRF** tokens en formularios
-- ✅ **Data sanitization** en inputs
+### 🎯 **Sistema Actual**
+- **Frontend**: GitHub Pages (automático)
+- **Backend**: localhost:8000 (FastAPI)
+- **Admin**: Híbrido (estático + dinámico)
+- **Seguridad**: localhost-only restriction
 
 ---
 
-## 📞 Soporte
+## 🧹 **Limpieza Reciente (22 Oct 2025)**
 
-Para soporte técnico o consultas sobre el desarrollo del sitio web:
+**Archivos Flask obsoletos movidos a backup:**
+- `servidor_ultra_seguro.py` → Puerto 5000 (obsoleto)
+- `admin_dashboard.py` → Flask admin (obsoleto)
+- 22 archivos adicionales del sistema anterior
 
-- **Email técnico:** soporte@datacrypt-labs.com
-- **Teléfono empresarial:** 3232066197
-- **Documentación:** Ver [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
-
----
-
-## 📄 Licencia
-
-© 2025 DataCrypt_Labs. Todos los derechos reservados.
-
-Este sitio web es propiedad exclusiva de DataCrypt_Labs y está protegido por derechos de autor.
+**Inventario completo**: `backups/obsolete_flask_system/INVENTORY.md`
 
 ---
 
-## 🏆 Desarrollado con Filosofía "La Mejora Continua"
+## 📞 **DataCrypt Labs - Contacto**
 
-Este proyecto fue desarrollado siguiendo la metodología **"La Mejora Continua v2.1"** y patrones probados del **Pescador Bot 2.0**, garantizando:
-
-- ✅ **Código limpio y mantenible**
-- ✅ **Performance optimizado**
-- ✅ **Escalabilidad empresarial**
-- ✅ **Robustez y confiabilidad**
+- **Empresa**: DataCrypt Labs
+- **Servicios**: Business Intelligence, Machine Learning, Data Science
+- **Teléfono**: 3232066197
+- **Ubicación**: Colombia
+- **Web**: https://ferneyq.github.io/datacrypt-labs-website/
 
 ---
 
-**🚀 DataCrypt_Labs - Automatizamos Soluciones**
+## 📝 **Notas Técnicas**
+
+### 🔒 **Seguridad localhost-only**
+El sistema admin está diseñado para funcionar exclusivamente en servidor local. La consola estática (GitHub Pages) actúa como interfaz que verifica la disponibilidad del servidor localhost:8000 antes de habilitar cualquier funcionalidad.
+
+### 🎯 **Sistema Limpio**
+Después de la limpieza del 22 Oct 2025, el proyecto mantiene solo los archivos activos y funcionales. Todo el sistema Flask anterior está preservado en `backups/` por si se necesitan referencias.
+
+### 📊 **Performance**
+- Sitio web: Optimizado para GitHub Pages
+- Backend: FastAPI con respuestas sub-segundo
+- Admin: Verificación automática cada 30 segundos
+- Base datos: SQLite optimizada con índices
+
+---
+
+**🎉 Sistema completamente operativo y optimizado - Octubre 2025**
