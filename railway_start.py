@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-🚀 DataCrypt Labs - Railway Deployment Starter
-Filosofía Mejora Continua - Inicio optimizado para Railway.app
+🚀 DataCrypt Labs - Railway Deployment Starter con Admin Panel
+Filosofía Mejora Continua - Backend FastAPI con sistema administrativo
 """
 
 import os
@@ -14,7 +14,15 @@ backend_path = Path(__file__).parent / "backend"
 sys.path.insert(0, str(backend_path))
 
 def main():
-    """Ejecutar servidor optimizado para Railway"""
+    """Ejecutar servidor FastAPI con admin panel integrado"""
+    
+    print("🔐 Iniciando DataCrypt Labs con Sistema Administrativo")
+    print("📊 Backend FastAPI + Panel Admin integrado")
+    print("🌐 Rutas disponibles:")
+    print("   - /health (Health check)")
+    print("   - /admin (Panel administrativo)")
+    print("   - /admin/dashboard (Dashboard)")
+    print("   - /api/* (APIs existentes)")
     
     # Railway provides PORT environment variable - CRITICAL for Railway deployment
     # Railway REQUIRES the app to listen on the exact port provided
@@ -52,9 +60,11 @@ def main():
         "date_header": False,
     }
     
-    print(f"🚀 DataCrypt Labs Railway Deploy v2.1 - Starting on port {port}")
+    print(f"🚀 DataCrypt Labs Railway Deploy v3.0 - Admin Panel Integrado - Port {port}")
     print("📍 Available endpoints:")
     print(f"   • Main: https://your-app.railway.app/")
+    print(f"   • 🔐 Admin Panel: https://your-app.railway.app/admin")
+    print(f"   • 📊 Admin Dashboard: https://your-app.railway.app/admin/dashboard")
     print(f"   • API Docs: https://your-app.railway.app/docs")
     print(f"   • Health: https://your-app.railway.app/health")
     print(f"   • Game: https://your-app.railway.app/game.html")
