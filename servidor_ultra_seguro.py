@@ -141,21 +141,28 @@ class UltraSecureFlaskServer:
                     security_enforcer.register_failed_attempt(client_ip, f"Missing header: {header}")
                     abort(400, description="Bad request - Missing required headers")
             
-            # 3. Detectar User-Agent sospechoso
+            # 3. Detectar User-Agent sospechoso (pero permitir VS Code)
             user_agent = request.headers.get('User-Agent', '').lower()
-            suspicious_patterns = [
-                'bot', 'crawler', 'scanner', 'sqlmap', 'nikto', 'nmap',
-                'wget', 'curl', 'python-requests', 'masscan', 'zap'
+            
+            # Permitir explícitamente VS Code y navegadores legítimos
+            legitimate_agents = ['vscode', 'electron', 'chrome', 'firefox', 'safari', 'edge']
+            is_legitimate = any(agent in user_agent for agent in legitimate_agents)
+            
+            # Solo bloquear patrones claramente maliciosos
+            malicious_patterns = [
+                'sqlmap', 'nikto', 'nmap', 'masscan', 'zap', 'gobuster',
+                'dirb', 'wfuzz', 'burp', 'metasploit'
             ]
             
-            for pattern in suspicious_patterns:
-                if pattern in user_agent and 'legitimate' not in user_agent:
-                    security_enforcer.register_failed_attempt(
-                        client_ip, 
-                        f"Suspicious User-Agent: {user_agent}"
-                    )
-                    self.attack_logger.warning(f"Suspicious User-Agent from {client_ip}: {user_agent}")
-                    abort(403, description="Access denied - Suspicious client")
+            is_malicious = any(pattern in user_agent for pattern in malicious_patterns)
+            
+            if is_malicious and not is_legitimate:
+                security_enforcer.register_failed_attempt(
+                    client_ip, 
+                    f"Malicious User-Agent: {user_agent}"
+                )
+                self.attack_logger.warning(f"Malicious User-Agent from {client_ip}: {user_agent}")
+                abort(403, description="Access denied - Malicious client")
             
             # 4. Validar tamaño de request
             if request.content_length and request.content_length > self.app.config['MAX_CONTENT_LENGTH']:
