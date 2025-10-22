@@ -32,6 +32,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY backend/ ./backend/
 COPY src/ ./src/
 COPY assets/ ./assets/
+COPY datacrypt_admin.db ./
 COPY *.html ./
 COPY *.js ./
 COPY *.json ./
@@ -59,5 +60,5 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=30s --start-period=10s --retries=3 \
     CMD curl -f http://localhost:${PORT:-8000}/health || exit 1
 
-# Run the application
-CMD ["python", "railway_start.py"]
+# Run the application with integrated admin
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "${PORT:-8000}"]
