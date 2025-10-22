@@ -1,36 +1,40 @@
 {
     "version": 2,
-    "name": "datacrypt-labs-admin",
+    "name": "datacrypt-labs-website",
     "builds": [
         {
-            "src": "backend/main.py",
+            "src": "api/main.py",
             "use": "@vercel/python"
         }
     ],
     "routes": [
         {
             "src": "/admin(.*)",
-            "dest": "backend/main.py"
+            "dest": "api/main.py"
         },
         {
             "src": "/api/(.*)",
-            "dest": "backend/main.py"
+            "dest": "api/main.py"
         },
         {
             "src": "/health",
-            "dest": "backend/main.py"
+            "dest": "api/main.py"
+        },
+        {
+            "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg))",
+            "dest": "/$1"
         },
         {
             "src": "/(.*)",
-            "dest": "backend/main.py"
+            "dest": "api/main.py"
         }
     ],
     "env": {
-        "PYTHONPATH": ".",
+        "PYTHONPATH": "./",
         "PRODUCTION": "true"
     },
     "functions": {
-        "backend/main.py": {
+        "api/main.py": {
             "maxDuration": 30
         }
     }
