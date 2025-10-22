@@ -20,6 +20,7 @@ from backend.core import (
     generic_exception_handler
 )
 from backend.api import api_router
+from backend.admin_panel import admin_router
 
 # Configuración
 settings = get_settings()
@@ -61,6 +62,9 @@ app.add_exception_handler(Exception, generic_exception_handler)
 
 # Include API router
 app.include_router(api_router)
+
+# Include Admin Panel router
+app.include_router(admin_router)
 
 # ===== STATIC FILES =====
 
