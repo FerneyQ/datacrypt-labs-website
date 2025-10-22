@@ -8,6 +8,12 @@
 
 class DataCryptChatbot {
     constructor(config = {}) {
+        // Prevenir múltiples instancias
+        if (DataCryptChatbot.instance) {
+            console.warn('Ya existe una instancia de DataCryptChatbot');
+            return DataCryptChatbot.instance;
+        }
+        
         this.config = {
             // Configuración GitHub Copilot - DataCrypt_Labs
             container: document.body,
@@ -28,13 +34,17 @@ class DataCryptChatbot {
 
         this.isOpen = false;
         this.isTyping = false;
+        this.isProcessingMessage = false;
         this.chatHistory = [];
-        
-        // Inicializar sistema de seguridad
-        this.security = new ChatbotSecurity();
-        this.rateLimiter = new MessageRateLimit();
         this.currentTheme = 'dark';
         this.knowledgeBase = this.initializeKnowledgeBase();
+        
+        // Inicializar sistema de seguridad después
+        this.security = null;
+        this.rateLimiter = null;
+        
+        // Asignar instancia estática
+        DataCryptChatbot.instance = this;
         
         this.init();
     }
@@ -43,6 +53,9 @@ class DataCryptChatbot {
         this.createChatbotUI();
         this.setupEventListeners();
         this.loadChatHistory();
+        
+        // Inicializar seguridad después de que todo esté listo
+        this.initializeSecurity();
         
         // Integración con sistema de temas
         if (window.themeSystem) {
@@ -56,6 +69,22 @@ class DataCryptChatbot {
         }
 
         console.log('🤖 DataCrypt Chatbot initialized');
+    }
+
+    initializeSecurity() {
+        try {
+            if (this.config.security && typeof ChatbotSecurity !== 'undefined' && typeof MessageRateLimit !== 'undefined') {
+                this.security = new ChatbotSecurity();
+                this.rateLimiter = new MessageRateLimit();
+                console.log('🔒 Security system initialized');
+            } else {
+                console.log('⚠️ Security system disabled or classes not available');
+                this.config.security = false;
+            }
+        } catch (error) {
+            console.error('❌ Security initialization failed:', error);
+            this.config.security = false;
+        }
     }
 
     createChatbotUI() {
@@ -249,11 +278,21 @@ class DataCryptChatbot {
     }
 
     async sendMessage(text = null) {
-        const message = text || this.chatInput.value.trim();
-        if (!message) return;
+        try {
+            // Prevenir bucles infinitos
+            if (this.isProcessingMessage) {
+                console.warn('Mensaje ya en procesamiento, saltando...');
+                return;
+            }
+            
+            const message = text || this.chatInput.value.trim();
+            if (!message) return;
+            
+            // Marcar como procesando
+            this.isProcessingMessage = true;
 
         // 🔒 VALIDACIONES DE SEGURIDAD
-        if (this.config.security) {
+        if (this.config.security && this.security && this.rateLimiter) {
             // Verificar rate limiting
             const rateLimitCheck = this.rateLimiter.checkRateLimit();
             if (!rateLimitCheck.allowed) {
@@ -307,15 +346,24 @@ class DataCryptChatbot {
         
         // Guardar historial
         this.saveChatHistory();
+        
+        // Limpiar bandera de procesamiento
+        this.isProcessingMessage = false;
+        } catch (error) {
+            console.error('Error en sendMessage:', error);
+            this.isProcessingMessage = false; // Asegurar que se limpia la bandera
+            this.addMessage('⚠️ Disculpa, hubo un error procesando tu mensaje. Como GitHub Copilot, puedo ayudarte mejor si reformulas tu consulta.', 'bot');
+        }
     }
 
     generateResponse(message) {
-        const lowerMessage = message.toLowerCase();
-        
-        // Saludos
-        if (this.matchesKeywords(lowerMessage, ['hola', 'hello', 'hi', 'buenos', 'saludos', 'buenas'])) {
-            return this.getRandomResponse(this.knowledgeBase.greetings);
-        }
+        try {
+            const lowerMessage = message.toLowerCase();
+            
+            // Saludos
+            if (this.matchesKeywords(lowerMessage, ['hola', 'hello', 'hi', 'buenos', 'saludos', 'buenas'])) {
+                return this.getRandomResponse(this.knowledgeBase.greetings);
+            }
 
         // Urgencia - PRIORIDAD ALTA
         if (this.matchesKeywords(lowerMessage, this.knowledgeBase.urgency.keywords)) {
@@ -369,6 +417,10 @@ class DataCryptChatbot {
 
         // Respuesta por defecto con enfoque comercial
         return this.getRandomResponse(this.knowledgeBase.default);
+        } catch (error) {
+            console.error('Error generando respuesta:', error);
+            return "Disculpa, estoy experimentando algunas dificultades técnicas. Como GitHub Copilot, normalmente puedo ayudarte con desarrollo y arquitectura de software. ¿Podrías intentar reformular tu pregunta?";
+        }
     }
 
     matchesKeywords(message, keywords) {
@@ -429,7 +481,7 @@ class DataCryptChatbot {
             const timeGreeting = currentHour < 12 ? 'Buenos días' : 
                                 currentHour < 18 ? 'Buenas tardes' : 'Buenas noches';
             
-            const personalizedGreeting = `${timeGreeting}! 👋 Soy **Alex**, tu consultor especializado de DataCrypt_Labs.\n\n🚀 **OFERTA ESPECIAL:** Consulta gratuita incluye análisis completo de tu infraestructura de datos y proyección de ROI personalizada.\n\n¿En qué puedo transformar tu empresa hoy? 💼`;
+            const personalizedGreeting = `${timeGreeting}! 👋 Soy **GitHub Copilot**, tu arquitecto de soluciones técnicas para DataCrypt_Labs.\n\n🤖 **MI ESPECIALIDAD:** Diseño e implementación de sistemas de datos empresariales escalables y seguros.\n\n¿Qué desafío técnico necesitas resolver? ⚡`;
             
             setTimeout(() => {
                 this.addMessage(personalizedGreeting, 'bot');
@@ -559,6 +611,30 @@ class DataCryptChatbot {
             localStorage.setItem('datacrypt-chat-history', JSON.stringify(this.chatHistory));
         } catch (error) {
             console.warn('Failed to save chat history:', error);
+        }
+    }
+    
+    destroy() {
+        // Limpiar event listeners para prevenir memory leaks
+        try {
+            if (this.chatButton) {
+                this.chatButton.replaceWith(this.chatButton.cloneNode(true));
+            }
+            if (this.sendButton) {
+                this.sendButton.replaceWith(this.sendButton.cloneNode(true));
+            }
+            
+            // Remover elemento del DOM
+            if (this.chatContainer && this.chatContainer.parentNode) {
+                this.chatContainer.parentNode.removeChild(this.chatContainer);
+            }
+            
+            // Limpiar instancia estática
+            DataCryptChatbot.instance = null;
+            
+            console.log('Chatbot destruido correctamente');
+        } catch (error) {
+            console.error('Error al destruir chatbot:', error);
         }
     }
 
@@ -790,6 +866,12 @@ class MessageRateLimit {
 if (typeof document !== 'undefined') {
     // Inicializar automáticamente si hay configuración
     document.addEventListener('DOMContentLoaded', () => {
+        // Prevenir múltiples inicializaciones
+        if (window.dataCryptChatbot) {
+            console.log('Chatbot ya inicializado, saltando nueva instancia');
+            return;
+        }
+        
         if (window.ConfigManager) {
             const chatbotConfig = window.ConfigManager.getConfig('chatbot');
             if (chatbotConfig && chatbotConfig.enabled) {

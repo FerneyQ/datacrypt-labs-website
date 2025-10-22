@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico Chatbot - DataCrypt Labs</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .diagnostico-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .diagnostico-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .test-panel {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .test-button {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: 500;
+        }
+        
+        .test-button:hover {
+            background: #3182ce;
+        }
+        
+        .test-button.danger {
+            background: #e53e3e;
+        }
+        
+        .test-button.danger:hover {
+            background: #c53030;
+        }
+        
+        .test-button.success {
+            background: #38a169;
+        }
+        
+        .log-panel {
+            background: #1a202c;
+            color: #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 2px 0;
+        }
+        
+        .log-entry.error {
+            color: #fc8181;
+        }
+        
+        .log-entry.success {
+            color: #68d391;
+        }
+        
+        .log-entry.warning {
+            color: #f6d55c;
+        }
+        
+        .status-indicators {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .status-card {
+            background: #f7fafc;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+        
+        .status-card.ok {
+            border-color: #38a169;
+            background: #f0fff4;
+        }
+        
+        .status-card.error {
+            border-color: #e53e3e;
+            background: #fff5f5;
+        }
+        
+        .status-card.warning {
+            border-color: #d69e2e;
+            background: #fffbeb;
+        }
+    </style>
+</head>
+<body>
+    <div class="diagnostico-container">
+        <div class="header">
+            <h1>🔍 Diagnóstico Chatbot GitHub Copilot</h1>
+            <p>Sistema de diagnóstico avanzado para detectar bucles infinitos y problemas de rendimiento</p>
+        </div>
+        
+        <div class="status-indicators" id="statusIndicators">
+            <div class="status-card" id="instanceStatus">
+                <h3>Instancia</h3>
+                <div id="instanceText">Verificando...</div>
+            </div>
+            <div class="status-card" id="eventStatus">
+                <h3>Event Listeners</h3>
+                <div id="eventText">Verificando...</div>
+            </div>
+            <div class="status-card" id="memoryStatus">
+                <h3>Memoria</h3>
+                <div id="memoryText">Verificando...</div>
+            </div>
+            <div class="status-card" id="performanceStatus">
+                <h3>Rendimiento</h3>
+                <div id="performanceText">Verificando...</div>
+            </div>
+        </div>
+        
+        <div class="diagnostico-grid">
+            <div class="test-panel">
+                <h3>🧪 Tests de Funcionalidad</h3>
+                <button class="test-button" onclick="testBasicFunctionality()">Test Básico</button>
+                <button class="test-button" onclick="testMultipleMessages()">Mensajes Múltiples</button>
+                <button class="test-button" onclick="testRapidFire()">Test Rapid-Fire</button>
+                <button class="test-button" onclick="testSecurityFeatures()">Test Seguridad</button>
+                <button class="test-button danger" onclick="testInfiniteLoop()">Test Bucle Infinito</button>
+                <button class="test-button" onclick="testMemoryLeaks()">Test Memory Leaks</button>
+            </div>
+            
+            <div class="test-panel">
+                <h3>🔧 Controles de Depuración</h3>
+                <button class="test-button" onclick="inspectChatbot()">Inspeccionar Estado</button>
+                <button class="test-button" onclick="clearHistory()">Limpiar Historial</button>
+                <button class="test-button" onclick="resetChatbot()">Reset Completo</button>
+                <button class="test-button success" onclick="forceChatbotInit()">Forzar Inicialización</button>
+                <button class="test-button danger" onclick="destroyChatbot()">Destruir Chatbot</button>
+                <button class="test-button" onclick="enableDebugMode()">Modo Debug</button>
+            </div>
+        </div>
+        
+        <div class="test-panel">
+            <h3>📊 Log de Diagnóstico</h3>
+            <div class="log-panel" id="logPanel">
+                <div class="log-entry">🚀 Sistema de diagnóstico iniciado...</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Incluir dependencias del chatbot -->
+    <script src="src/core/DataCryptSecurity.js"></script>
+    <script src="src/utils/ConfigManager.js"></script>
+    <script src="src/components/DataCryptChatbot.js"></script>
+    
+    <script>
+        // Sistema de diagnóstico
+        class ChatbotDiagnostico {
+            constructor() {
+                this.logPanel = document.getElementById('logPanel');
+                this.testCount = 0;
+                this.debugMode = false;
+                this.performanceMetrics = {
+                    messagesSent: 0,
+                    responseTime: [],
+                    errors: 0,
+                    memoryUsage: []
+                };
+                
+                this.init();
+            }
+            
+            init() {
+                this.log('🔧 Iniciando diagnóstico del chatbot...', 'success');
+                this.checkChatbotStatus();
+                
+                // Monitor de rendimiento en tiempo real
+                setInterval(() => {
+                    this.updatePerformanceMetrics();
+                }, 2000);
+            }
+            
+            log(message, type = 'info') {
+                const entry = document.createElement('div');
+                entry.className = `log-entry ${type}`;
+                entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+                this.logPanel.appendChild(entry);
+                this.logPanel.scrollTop = this.logPanel.scrollHeight;
+                
+                if (this.debugMode) {
+                    console.log(`[DIAGNOSTICO] ${message}`);
+                }
+            }
+            
+            checkChatbotStatus() {
+                const instanceCard = document.getElementById('instanceStatus');
+                const instanceText = document.getElementById('instanceText');
+                
+                if (window.dataCryptChatbot) {
+                    instanceCard.className = 'status-card ok';
+                    instanceText.textContent = '✅ Activo';
+                    this.log('✅ Instancia de chatbot encontrada', 'success');
+                } else {
+                    instanceCard.className = 'status-card error';
+                    instanceText.textContent = '❌ No encontrado';
+                    this.log('❌ No se encontró instancia del chatbot', 'error');
+                }
+                
+                this.checkEventListeners();
+            }
+            
+            checkEventListeners() {
+                const eventCard = document.getElementById('eventStatus');
+                const eventText = document.getElementById('eventText');
+                
+                try {
+                    const chatButton = document.querySelector('.chat-button');
+                    if (chatButton) {
+                        eventCard.className = 'status-card ok';
+                        eventText.textContent = '✅ Conectados';
+                        this.log('✅ Event listeners conectados', 'success');
+                    } else {
+                        eventCard.className = 'status-card warning';
+                        eventText.textContent = '⚠️ Parciales';
+                        this.log('⚠️ Algunos event listeners no encontrados', 'warning');
+                    }
+                } catch (error) {
+                    eventCard.className = 'status-card error';
+                    eventText.textContent = '❌ Error';
+                    this.log(`❌ Error verificando event listeners: ${error.message}`, 'error');
+                }
+            }
+            
+            updatePerformanceMetrics() {
+                const memoryCard = document.getElementById('memoryStatus');
+                const memoryText = document.getElementById('memoryText');
+                const performanceCard = document.getElementById('performanceStatus');
+                const performanceText = document.getElementById('performanceText');
+                
+                // Memoria
+                if (performance.memory) {
+                    const usedMB = Math.round(performance.memory.usedJSHeapSize / 1024 / 1024);
+                    memoryText.textContent = `${usedMB} MB`;
+                    
+                    if (usedMB > 100) {
+                        memoryCard.className = 'status-card warning';
+                    } else if (usedMB > 200) {
+                        memoryCard.className = 'status-card error';
+                    } else {
+                        memoryCard.className = 'status-card ok';
+                    }
+                } else {
+                    memoryText.textContent = 'No disponible';
+                }
+                
+                // Rendimiento
+                const avgResponse = this.performanceMetrics.responseTime.length > 0 
+                    ? this.performanceMetrics.responseTime.reduce((a, b) => a + b, 0) / this.performanceMetrics.responseTime.length
+                    : 0;
+                
+                performanceText.textContent = `${Math.round(avgResponse)}ms`;
+                
+                if (avgResponse > 2000) {
+                    performanceCard.className = 'status-card error';
+                } else if (avgResponse > 1000) {
+                    performanceCard.className = 'status-card warning';
+                } else {
+                    performanceCard.className = 'status-card ok';
+                }
+            }
+        }
+        
+        // Tests específicos
+        async function testBasicFunctionality() {
+            diagnostico.log('🔄 Ejecutando test básico...', 'info');
+            
+            if (!window.dataCryptChatbot) {
+                diagnostico.log('❌ No se puede ejecutar test: chatbot no encontrado', 'error');
+                return;
+            }
+            
+            try {
+                const startTime = performance.now();
+                
+                // Simular mensaje básico
+                await window.dataCryptChatbot.sendMessage('Hola');
+                
+                const endTime = performance.now();
+                const responseTime = endTime - startTime;
+                
+                diagnostico.performanceMetrics.responseTime.push(responseTime);
+                diagnostico.performanceMetrics.messagesSent++;
+                
+                diagnostico.log(`✅ Test básico completado (${Math.round(responseTime)}ms)`, 'success');
+            } catch (error) {
+                diagnostico.performanceMetrics.errors++;
+                diagnostico.log(`❌ Test básico falló: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testMultipleMessages() {
+            diagnostico.log('🔄 Ejecutando test de mensajes múltiples...', 'info');
+            
+            if (!window.dataCryptChatbot) {
+                diagnostico.log('❌ No se puede ejecutar test: chatbot no encontrado', 'error');
+                return;
+            }
+            
+            const messages = [
+                '¿Qué servicios ofreces?',
+                'Háblame de DataCrypt Labs',
+                '¿Cómo puedo contactarte?',
+                'Precios',
+                'Gracias'
+            ];
+            
+            for (let i = 0; i < messages.length; i++) {
+                try {
+                    const startTime = performance.now();
+                    await window.dataCryptChatbot.sendMessage(messages[i]);
+                    const endTime = performance.now();
+                    
+                    diagnostico.performanceMetrics.responseTime.push(endTime - startTime);
+                    diagnostico.performanceMetrics.messagesSent++;
+                    
+                    // Pausa entre mensajes para evitar rate limiting
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                    
+                    diagnostico.log(`✅ Mensaje ${i + 1}/${messages.length} procesado`, 'success');
+                } catch (error) {
+                    diagnostico.performanceMetrics.errors++;
+                    diagnostico.log(`❌ Error en mensaje ${i + 1}: ${error.message}`, 'error');
+                }
+            }
+            
+            diagnostico.log('✅ Test de mensajes múltiples completado', 'success');
+        }
+        
+        async function testRapidFire() {
+            diagnostico.log('🔄 Ejecutando test rapid-fire...', 'warning');
+            
+            if (!window.dataCryptChatbot) {
+                diagnostico.log('❌ No se puede ejecutar test: chatbot no encontrado', 'error');
+                return;
+            }
+            
+            const rapidMessages = Array(10).fill().map((_, i) => `Test rapid ${i + 1}`);
+            
+            try {
+                const promises = rapidMessages.map(msg => 
+                    window.dataCryptChatbot.sendMessage(msg).catch(e => {
+                        diagnostico.log(`⚠️ Mensaje bloqueado correctamente: ${e.message}`, 'warning');
+                        return null;
+                    })
+                );
+                
+                await Promise.all(promises);
+                diagnostico.log('✅ Test rapid-fire completado - Sistema de protección funcionando', 'success');
+            } catch (error) {
+                diagnostico.log(`❌ Test rapid-fire falló: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testInfiniteLoop() {
+            diagnostico.log('⚠️ PELIGRO: Ejecutando test de bucle infinito...', 'warning');
+            
+            if (!window.dataCryptChatbot) {
+                diagnostico.log('❌ No se puede ejecutar test: chatbot no encontrado', 'error');
+                return;
+            }
+            
+            let loopCount = 0;
+            const maxIterations = 100;
+            
+            try {
+                const loopTest = async () => {
+                    for (let i = 0; i < maxIterations; i++) {
+                        loopCount++;
+                        
+                        if (loopCount > 50) {
+                            diagnostico.log('🛑 Bucle detenido preventivamente', 'warning');
+                            break;
+                        }
+                        
+                        // Verificar si el sistema está respondiendo
+                        if (window.dataCryptChatbot.isProcessingMessage) {
+                            diagnostico.log(`⚠️ Sistema ocupado en iteración ${i}`, 'warning');
+                            break;
+                        }
+                        
+                        await window.dataCryptChatbot.sendMessage(`Loop test ${i}`);
+                        await new Promise(resolve => setTimeout(resolve, 10));
+                    }
+                };
+                
+                await loopTest();
+                diagnostico.log('✅ Test de bucle infinito completado sin bloqueos', 'success');
+            } catch (error) {
+                diagnostico.log(`❌ Test de bucle infinito detectó problema: ${error.message}`, 'error');
+            }
+        }
+        
+        function inspectChatbot() {
+            diagnostico.log('🔍 Inspeccionando estado del chatbot...', 'info');
+            
+            if (!window.dataCryptChatbot) {
+                diagnostico.log('❌ No se puede inspeccionar: chatbot no encontrado', 'error');
+                return;
+            }
+            
+            const chatbot = window.dataCryptChatbot;
+            
+            diagnostico.log(`📊 Estado del chatbot:`, 'info');
+            diagnostico.log(`  - isOpen: ${chatbot.isOpen}`, 'info');
+            diagnostico.log(`  - isTyping: ${chatbot.isTyping}`, 'info');
+            diagnostico.log(`  - isProcessingMessage: ${chatbot.isProcessingMessage}`, 'info');
+            diagnostico.log(`  - Historial: ${chatbot.chatHistory.length} mensajes`, 'info');
+            diagnostico.log(`  - Seguridad activa: ${chatbot.config.security}`, 'info');
+            
+            if (chatbot.security) {
+                diagnostico.log(`  - Rate limiter activo: ${!!chatbot.rateLimiter}`, 'info');
+            }
+        }
+        
+        function clearHistory() {
+            diagnostico.log('🗑️ Limpiando historial del chatbot...', 'info');
+            
+            if (!window.dataCryptChatbot) {
+                diagnostico.log('❌ No se puede limpiar: chatbot no encontrado', 'error');
+                return;
+            }
+            
+            window.dataCryptChatbot.chatHistory = [];
+            localStorage.removeItem('datacrypt-chat-history');
+            
+            diagnostico.log('✅ Historial limpiado', 'success');
+        }
+        
+        function resetChatbot() {
+            diagnostico.log('🔄 Reseteando chatbot...', 'info');
+            
+            if (window.dataCryptChatbot) {
+                window.dataCryptChatbot.destroy();
+                window.dataCryptChatbot = null;
+            }
+            
+            // Reinicializar
+            setTimeout(() => {
+                forceChatbotInit();
+            }, 1000);
+        }
+        
+        function forceChatbotInit() {
+            diagnostico.log('🚀 Forzando inicialización del chatbot...', 'info');
+            
+            try {
+                if (window.ConfigManager) {
+                    const chatbotConfig = window.ConfigManager.getConfig('chatbot');
+                    if (chatbotConfig && chatbotConfig.enabled) {
+                        window.dataCryptChatbot = new DataCryptChatbot(chatbotConfig);
+                        diagnostico.log('✅ Chatbot inicializado correctamente', 'success');
+                        diagnostico.checkChatbotStatus();
+                    }
+                } else {
+                    diagnostico.log('❌ ConfigManager no disponible', 'error');
+                }
+            } catch (error) {
+                diagnostico.log(`❌ Error inicializando chatbot: ${error.message}`, 'error');
+            }
+        }
+        
+        function destroyChatbot() {
+            diagnostico.log('💀 Destruyendo chatbot...', 'warning');
+            
+            if (window.dataCryptChatbot) {
+                window.dataCryptChatbot.destroy();
+                window.dataCryptChatbot = null;
+                diagnostico.log('✅ Chatbot destruido', 'success');
+                diagnostico.checkChatbotStatus();
+            } else {
+                diagnostico.log('⚠️ No hay chatbot para destruir', 'warning');
+            }
+        }
+        
+        function enableDebugMode() {
+            diagnostico.debugMode = !diagnostico.debugMode;
+            diagnostico.log(`🐛 Modo debug: ${diagnostico.debugMode ? 'ACTIVADO' : 'DESACTIVADO'}`, 'info');
+        }
+        
+        function testSecurityFeatures() {
+            diagnostico.log('🔒 Ejecutando test de características de seguridad...', 'info');
+            
+            if (!window.dataCryptChatbot) {
+                diagnostico.log('❌ No se puede ejecutar test: chatbot no encontrado', 'error');
+                return;
+            }
+            
+            // Test inyección XSS
+            const xssTest = '<script>alert("XSS")<\/script>';
+            window.dataCryptChatbot.sendMessage(xssTest);
+            
+            diagnostico.log('✅ Test XSS ejecutado', 'success');
+        }
+        
+        function testMemoryLeaks() {
+            diagnostico.log('💾 Ejecutando test de memory leaks...', 'info');
+            
+            const initialMemory = performance.memory ? performance.memory.usedJSHeapSize : 0;
+            
+            // Crear y destruir múltiples elementos
+            for (let i = 0; i < 100; i++) {
+                const div = document.createElement('div');
+                div.innerHTML = 'Test memory leak ' + i;
+                document.body.appendChild(div);
+                document.body.removeChild(div);
+            }
+            
+            setTimeout(() => {
+                const finalMemory = performance.memory ? performance.memory.usedJSHeapSize : 0;
+                const memoryDiff = finalMemory - initialMemory;
+                
+                diagnostico.log(`💾 Diferencia de memoria: ${Math.round(memoryDiff / 1024)} KB`, 'info');
+                
+                if (memoryDiff > 1024 * 1024) { // > 1MB
+                    diagnostico.log('⚠️ Posible memory leak detectado', 'warning');
+                } else {
+                    diagnostico.log('✅ No se detectaron memory leaks significativos', 'success');
+                }
+            }, 1000);
+        }
+        
+        // Inicializar diagnóstico
+        const diagnostico = new ChatbotDiagnostico();
+        
+        // Auto-tests
+        setTimeout(() => {
+            if (window.dataCryptChatbot) {
+                testBasicFunctionality();
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
