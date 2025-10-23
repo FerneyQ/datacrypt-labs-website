@@ -153,23 +153,28 @@
 
 /* Layer Positioning */
 .academic-layer {
-    top: 50px;
-    left: 100px;
+    top: 20px;
+    left: 50px;
 }
 
 .professional-layer {
-    top: 50px;
-    right: 100px;
+    top: 20px;
+    right: 50px;
+}
+
+.fundamentals-layer {
+    top: 350px;
+    left: 200px;
 }
 
 .technical-layer {
-    bottom: 150px;
-    left: 100px;
+    bottom: 200px;
+    left: 50px;
 }
 
-.advanced-layer {
-    bottom: 150px;
-    right: 100px;
+.skills-layer {
+    bottom: 200px;
+    right: 50px;
 }
 
 /* Certification Nodes */

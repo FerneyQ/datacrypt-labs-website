@@ -405,15 +405,15 @@
                         <div class="central-knowledge-hub">
                             <div class="hub-core">
                                 <i class="fas fa-brain"></i>
-                                <h3>DataCrypt AI</h3>
-                                <p>Knowledge Network</p>
+                                <h3>DataCrypt</h3>
+                                <p>Knowledge Hub</p>
                             </div>
                             <div class="knowledge-pulse"></div>
                         </div>
 
                         <!-- Neural Network Connections -->
                         <svg class="neural-connections" viewBox="0 0 1200 800">
-                            <!-- Connection paths will be drawn dynamically -->
+                            <!-- Connection paths between nodes -->
                             <defs>
                                 <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                                     <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0" />
@@ -421,6 +421,10 @@
                                     <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:0" />
                                 </linearGradient>
                             </defs>
+                            <!-- Dynamic connections will be drawn here -->
+                            <path d="M 300,200 Q 600,150 900,200" stroke="url(#connectionGradient)" stroke-width="2" fill="none" class="connection-path" />
+                            <path d="M 200,300 Q 600,200 800,400" stroke="url(#connectionGradient)" stroke-width="2" fill="none" class="connection-path" />
+                            <path d="M 400,500 Q 600,400 800,300" stroke="url(#connectionGradient)" stroke-width="2" fill="none" class="connection-path" />
                         </svg>
 
                         <!-- Certification Nodes Network -->
@@ -444,8 +448,8 @@
                                             <p class="node-year">2018-2022</p>
                                             <div class="node-skills">
                                                 <span class="skill-neuron">Statistics</span>
-                                                <span class="skill-neuron">ML</span>
-                                                <span class="skill-neuron">DB Design</span>
+                                                <span class="skill-neuron">Machine Learning</span>
+                                                <span class="skill-neuron">Database Design</span>
                                             </div>
                                         </div>
                                     </div>
@@ -458,12 +462,13 @@
                                             <i class="fas fa-chart-bar"></i>
                                         </div>
                                         <div class="node-content">
-                                            <h4>Especialización BI</h4>
-                                            <p class="node-institution">Instituto de Análisis</p>
+                                            <h4>Especialización Business Intelligence</h4>
+                                            <p class="node-institution">Instituto de Análisis de Datos</p>
                                             <p class="node-year">2022-2023</p>
                                             <div class="node-skills">
                                                 <span class="skill-neuron">Power BI</span>
                                                 <span class="skill-neuron">Tableau</span>
+                                                <span class="skill-neuron">Data Warehousing</span>
                                             </div>
                                         </div>
                                     </div>
@@ -471,11 +476,11 @@
                                 </div>
                             </div>
 
-                            <!-- Professional Layer -->
+                            <!-- Professional DataCamp Layer -->
                             <div class="neural-layer professional-layer" data-layer="2">
                                 <div class="layer-label">
                                     <i class="fas fa-certificate"></i>
-                                    <span>Certificaciones DataCamp</span>
+                                    <span>Certificaciones DataCamp Profesionales</span>
                                 </div>
 
                                 <div class="cert-node featured-node" data-node="prof-1">
@@ -484,12 +489,13 @@
                                             <i class="fas fa-database"></i>
                                         </div>
                                         <div class="node-content">
-                                            <h4>Associate Data Scientist</h4>
+                                            <h4>Associate Data Scientist in Python</h4>
                                             <p class="node-institution">DataCamp</p>
                                             <p class="node-year">2024</p>
                                             <div class="node-skills">
                                                 <span class="skill-neuron">Python</span>
-                                                <span class="skill-neuron">ML</span>
+                                                <span class="skill-neuron">Data Science</span>
+                                                <span class="skill-neuron">Machine Learning</span>
                                             </div>
                                         </div>
                                         <div class="verification-pulse">
@@ -507,11 +513,12 @@
                                             <i class="fas fa-chart-line"></i>
                                         </div>
                                         <div class="node-content">
-                                            <h4>Data Analyst Python</h4>
+                                            <h4>Data Analyst in Python</h4>
                                             <p class="node-institution">DataCamp</p>
                                             <p class="node-year">2024</p>
                                             <div class="node-skills">
                                                 <span class="skill-neuron">Python</span>
+                                                <span class="skill-neuron">Data Analysis</span>
                                                 <span class="skill-neuron">Pandas</span>
                                             </div>
                                         </div>
@@ -530,12 +537,13 @@
                                             <i class="fas fa-table"></i>
                                         </div>
                                         <div class="node-content">
-                                            <h4>Associate Data Analyst SQL</h4>
+                                            <h4>Associate Data Analyst in SQL</h4>
                                             <p class="node-institution">DataCamp</p>
                                             <p class="node-year">2024</p>
                                             <div class="node-skills">
                                                 <span class="skill-neuron">SQL</span>
-                                                <span class="skill-neuron">Analytics</span>
+                                                <span class="skill-neuron">Data Analysis</span>
+                                                <span class="skill-neuron">Database Queries</span>
                                             </div>
                                         </div>
                                         <div class="verification-pulse">
@@ -548,24 +556,105 @@
                                 </div>
                             </div>
 
-                            <!-- Technical Layer -->
-                            <div class="neural-layer technical-layer" data-layer="3">
+                            <!-- DataCamp Fundamentals Layer -->
+                            <div class="neural-layer fundamentals-layer" data-layer="3">
+                                <div class="layer-label">
+                                    <i class="fas fa-code"></i>
+                                    <span>DataCamp Fundamentals</span>
+                                </div>
+
+                                <div class="cert-node secondary-node" data-node="fund-1">
+                                    <div class="node-core">
+                                        <div class="node-badge verified">
+                                            <i class="fas fa-server"></i>
+                                        </div>
+                                        <div class="node-content">
+                                            <h4>SQL Fundamentals</h4>
+                                            <p class="node-institution">DataCamp</p>
+                                            <p class="node-year">2024</p>
+                                            <div class="node-skills">
+                                                <span class="skill-neuron">SQL</span>
+                                                <span class="skill-neuron">Database Design</span>
+                                                <span class="skill-neuron">Query Optimization</span>
+                                            </div>
+                                        </div>
+                                        <div class="verification-pulse">
+                                            <a href="Certificaciones/SQL Fundamentals.pdf" target="_blank">
+                                                <i class="fas fa-download"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="node-synapses"></div>
+                                </div>
+
+                                <div class="cert-node secondary-node" data-node="fund-2">
+                                    <div class="node-core">
+                                        <div class="node-badge verified">
+                                            <i class="fab fa-python"></i>
+                                        </div>
+                                        <div class="node-content">
+                                            <h4>Python Essentials</h4>
+                                            <p class="node-institution">DataCamp</p>
+                                            <p class="node-year">2024</p>
+                                            <div class="node-skills">
+                                                <span class="skill-neuron">Python Programming</span>
+                                                <span class="skill-neuron">Data Structures</span>
+                                                <span class="skill-neuron">Algorithms</span>
+                                            </div>
+                                        </div>
+                                        <div class="verification-pulse">
+                                            <a href="Certificaciones/Python_Essentials.pdf" target="_blank">
+                                                <i class="fas fa-download"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="node-synapses"></div>
+                                </div>
+
+                                <div class="cert-node secondary-node" data-node="fund-3">
+                                    <div class="node-core">
+                                        <div class="node-badge verified">
+                                            <i class="fas fa-chart-bar"></i>
+                                        </div>
+                                        <div class="node-content">
+                                            <h4>Data Analytics Essentials</h4>
+                                            <p class="node-institution">DataCamp</p>
+                                            <p class="node-year">2024</p>
+                                            <div class="node-skills">
+                                                <span class="skill-neuron">Analytics</span>
+                                                <span class="skill-neuron">Data Visualization</span>
+                                                <span class="skill-neuron">Statistical Analysis</span>
+                                            </div>
+                                        </div>
+                                        <div class="verification-pulse">
+                                            <a href="Certificaciones/Data_Analytics_Essentials.pdf" target="_blank">
+                                                <i class="fas fa-download"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="node-synapses"></div>
+                                </div>
+                            </div>
+
+                            <!-- Technical Specialized Layer -->
+                            <div class="neural-layer technical-layer" data-layer="4">
                                 <div class="layer-label">
                                     <i class="fas fa-tools"></i>
-                                    <span>Certificaciones Técnicas</span>
+                                    <span>Certificaciones Técnicas Especializadas</span>
                                 </div>
 
                                 <div class="cert-node technical-node" data-node="tech-1">
                                     <div class="node-core">
-                                        <div class="node-icon">
+                                        <div class="node-badge verified">
                                             <i class="fas fa-database"></i>
                                         </div>
                                         <div class="node-content">
-                                            <h4>MySQL Database</h4>
-                                            <p class="node-institution">Institucional</p>
+                                            <h4>Construcción Bases de Datos MySQL</h4>
+                                            <p class="node-institution">Institución Académica</p>
                                             <p class="node-year">2024</p>
                                             <div class="node-skills">
                                                 <span class="skill-neuron">MySQL</span>
+                                                <span class="skill-neuron">Database Design</span>
                                                 <span class="skill-neuron">SQL</span>
                                             </div>
                                         </div>
@@ -580,20 +669,69 @@
 
                                 <div class="cert-node technical-node" data-node="tech-2">
                                     <div class="node-core">
-                                        <div class="node-icon">
+                                        <div class="node-badge verified">
                                             <i class="fas fa-leaf"></i>
                                         </div>
                                         <div class="node-content">
-                                            <h4>NoSQL MongoDB</h4>
-                                            <p class="node-institution">Institucional</p>
+                                            <h4>Implementación Bases de Datos NoSQL</h4>
+                                            <p class="node-institution">Institución Académica</p>
                                             <p class="node-year">2024</p>
                                             <div class="node-skills">
-                                                <span class="skill-neuron">MongoDB</span>
                                                 <span class="skill-neuron">NoSQL</span>
+                                                <span class="skill-neuron">MongoDB</span>
+                                                <span class="skill-neuron">Big Data</span>
                                             </div>
                                         </div>
                                         <div class="verification-pulse">
-                                            <a href="Certificaciones/Certificado MongoDB.pdf" target="_blank">
+                                            <a href="Certificaciones/Certificado Implementación de bases de datos NoSQL.pdf" target="_blank">
+                                                <i class="fas fa-download"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="node-synapses"></div>
+                                </div>
+
+                                <div class="cert-node technical-node" data-node="tech-3">
+                                    <div class="node-core">
+                                        <div class="node-badge verified">
+                                            <i class="fab fa-python"></i>
+                                        </div>
+                                        <div class="node-content">
+                                            <h4>Variables y Estructuras Control Python</h4>
+                                            <p class="node-institution">Institución Académica</p>
+                                            <p class="node-year">2024</p>
+                                            <div class="node-skills">
+                                                <span class="skill-neuron">Python</span>
+                                                <span class="skill-neuron">Programming Logic</span>
+                                                <span class="skill-neuron">Control Structures</span>
+                                            </div>
+                                        </div>
+                                        <div class="verification-pulse">
+                                            <a href="Certificaciones/Certificado Variables y estructuras de control en Python.pdf" target="_blank">
+                                                <i class="fas fa-download"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="node-synapses"></div>
+                                </div>
+
+                                <div class="cert-node technical-node" data-node="tech-4">
+                                    <div class="node-core">
+                                        <div class="node-badge verified">
+                                            <i class="fas fa-shield-alt"></i>
+                                        </div>
+                                        <div class="node-content">
+                                            <h4>Procesos de Calidad Software</h4>
+                                            <p class="node-institution">Institución Académica</p>
+                                            <p class="node-year">2024</p>
+                                            <div class="node-skills">
+                                                <span class="skill-neuron">Quality Assurance</span>
+                                                <span class="skill-neuron">Software Testing</span>
+                                                <span class="skill-neuron">Process Improvement</span>
+                                            </div>
+                                        </div>
+                                        <div class="verification-pulse">
+                                            <a href="Certificaciones/Certificado procesos de calidad software.pdf" target="_blank">
                                                 <i class="fas fa-download"></i>
                                             </a>
                                         </div>
@@ -602,11 +740,11 @@
                                 </div>
                             </div>
 
-                            <!-- Advanced Skills Layer -->
-                            <div class="neural-layer advanced-layer" data-layer="4">
+                            <!-- Skills Assessment Layer -->
+                            <div class="neural-layer skills-layer" data-layer="5">
                                 <div class="layer-label">
                                     <i class="fas fa-rocket"></i>
-                                    <span>Habilidades Avanzadas</span>
+                                    <span>Evaluaciones de Habilidades</span>
                                 </div>
 
                                 <div class="cert-node skill-node" data-node="skill-1">
@@ -615,10 +753,10 @@
                                             <i class="fab fa-python"></i>
                                         </div>
                                         <div class="node-content">
-                                            <h4>Python Expert</h4>
+                                            <h4>Python Programming</h4>
                                             <div class="skill-level">
                                                 <div class="level-bar" data-level="95"></div>
-                                                <span>95%</span>
+                                                <span>95% Expertise</span>
                                             </div>
                                         </div>
                                     </div>
@@ -628,13 +766,13 @@
                                 <div class="cert-node skill-node" data-node="skill-2">
                                     <div class="node-core">
                                         <div class="node-icon">
-                                            <i class="fas fa-chart-bar"></i>
+                                            <i class="fas fa-database"></i>
                                         </div>
                                         <div class="node-content">
-                                            <h4>Data Viz</h4>
+                                            <h4>SQL & Databases</h4>
                                             <div class="skill-level">
-                                                <div class="level-bar" data-level="90"></div>
-                                                <span>90%</span>
+                                                <div class="level-bar" data-level="92"></div>
+                                                <span>92% Expertise</span>
                                             </div>
                                         </div>
                                     </div>
@@ -644,13 +782,29 @@
                                 <div class="cert-node skill-node" data-node="skill-3">
                                     <div class="node-core">
                                         <div class="node-icon">
+                                            <i class="fas fa-chart-bar"></i>
+                                        </div>
+                                        <div class="node-content">
+                                            <h4>Data Visualization</h4>
+                                            <div class="skill-level">
+                                                <div class="level-bar" data-level="90"></div>
+                                                <span>90% Expertise</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="node-synapses"></div>
+                                </div>
+
+                                <div class="cert-node skill-node" data-node="skill-4">
+                                    <div class="node-core">
+                                        <div class="node-icon">
                                             <i class="fas fa-brain"></i>
                                         </div>
                                         <div class="node-content">
                                             <h4>Machine Learning</h4>
                                             <div class="skill-level">
                                                 <div class="level-bar" data-level="88"></div>
-                                                <span>88%</span>
+                                                <span>88% Expertise</span>
                                             </div>
                                         </div>
                                     </div>
@@ -662,7 +816,7 @@
                         <!-- Network Statistics -->
                         <div class="network-stats">
                             <div class="stat-node">
-                                <span class="stat-number">10+</span>
+                                <span class="stat-number">12+</span>
                                 <span class="stat-label">Certificaciones</span>
                             </div>
                             <div class="stat-node">
@@ -673,11 +827,15 @@
                                 <span class="stat-number">2024</span>
                                 <span class="stat-label">Actualizadas</span>
                             </div>
+                            <div class="stat-node">
+                                <span class="stat-number">5</span>
+                                <span class="stat-label">Áreas Expertise</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Legacy Grid for Remaining Content -->
-                    <div class="legacy-certifications-container" style="display: none;">
+                    <!-- Legacy Grid for Remaining Content (Hidden - Using Neural Network Design Above) -->
+                    <div class="legacy-certifications-container" style="display: none;"
                         <div class="cert-category">
                             <h3 class="cert-category-title">
                                 <i class="fas fa-graduation-cap"></i>
