@@ -267,6 +267,44 @@
         ]
     }
     </script>
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX'); // Reemplaza con tu ID GA4
+    </script>
+    <!-- End Google Analytics 4 -->
+    <!-- Facebook Pixel -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'XXXXXXXXXXXXXXX'); // Reemplaza con tu Pixel ID
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXX&ev=PageView&noscript=1"/></noscript>
+    <!-- End Facebook Pixel -->
+    <!-- Hotjar Tracking Code (Heatmaps & Session Recordings) -->
+    <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:1234567,hjsv:6}; // Reemplaza 1234567 por tu ID de Hotjar
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+    <!-- End Hotjar Tracking Code -->
+
     </head>
 
     <body>
@@ -296,6 +334,9 @@
                     </div>
 
                     <ul class="nav-menu" id="nav-menu">
+                        <button class="close-mobile-menu" id="close-mobile-menu" aria-label="Cerrar menú" style="display:none;">
+                            <i class="fas fa-times"></i>
+                        </button>
                         <li class="nav-item nav-page">
                             <a href="#inicio" class="nav-link active" data-translate="nav.home">Inicio</a>
                         </li>
@@ -304,6 +345,9 @@
                         </li>
                         <li class="nav-item nav-page">
                             <a href="portafolio.html" class="nav-link" data-translate="nav.portfolio">Portafolio</a>
+                        </li>
+                        <li class="nav-item nav-page">
+                            <a href="metrics-dashboard.html" class="nav-link">Dashboard</a>
                         </li>
                         <li class="nav-item nav-page">
                             <a href="certificaciones.html" class="nav-link"
@@ -1035,6 +1079,36 @@
 
         <!-- Fix para bugs visuales -->
         <script src="src/fixes/visual-bugs-fix.js"></script>
+
+        <!-- --- Universal Mobile Menu Close Button --- -->
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var navMenu = document.getElementById('nav-menu');
+            var closeBtn = document.getElementById('close-mobile-menu');
+            var navToggle = document.getElementById('nav-toggle');
+            if (closeBtn && navMenu) {
+                // Mostrar el botón solo en móvil
+                function toggleCloseBtn() {
+                    if (window.innerWidth <= 991) {
+                        closeBtn.style.display = navMenu.classList.contains('active') ? 'block' : 'none';
+                    } else {
+                        closeBtn.style.display = 'none';
+                    }
+                }
+                navToggle && navToggle.addEventListener('click', function() {
+                    setTimeout(toggleCloseBtn, 200);
+                });
+                closeBtn.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    closeBtn.style.display = 'none';
+                });
+                window.addEventListener('resize', toggleCloseBtn);
+                // Si el menú se cierra por otro medio
+                var observer = new MutationObserver(toggleCloseBtn);
+                observer.observe(navMenu, { attributes: true, attributeFilter: ['class'] });
+            }
+        });
+        </script>
     </body>
 
 </html>

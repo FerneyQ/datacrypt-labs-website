@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Georreferenciación Inteligente DataCrypt_Labs - Soluciones avanzadas de análisis geoespacial y visualización de datos para empresas. Optimiza rutas, identifica oportunidades y toma decisiones estratégicas con datos espaciales.">
+    <meta name="keywords" content="georreferenciación, análisis geoespacial, mapas interactivos, optimización de rutas, inteligencia de localización, GIS, visualización de datos geográficos, data science, Colombia">
+    <meta name="author" content="DataCrypt_Labs">
+    <meta property="og:title" content="Georreferenciación Inteligente - DataCrypt_Labs | Decisiones con Datos Espaciales">
+    <meta property="og:description" content="Soluciones de georreferenciación y análisis espacial para empresas. Visualiza, analiza y optimiza tu negocio con datos geográficos.">
+    <meta property="og:image" content="../Material%20visual/Portafolio/geo.jpg">
+    <meta property="og:url" content="https://datacrypt-labs.com/services/georreferenciacion.html">
+    <title>Georreferenciación Inteligente - DataCrypt_Labs</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/commercial-optimization.css">
+    <link rel="stylesheet" href="../assets/css/services-mejora-continua.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX'); // Reemplaza con tu ID GA4
+    </script>
+    <!-- End Google Analytics 4 -->
+    <!-- Facebook Pixel -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'XXXXXXXXXXXXXXX'); // Reemplaza con tu Pixel ID
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXX&ev=PageView&noscript=1"/></noscript>
+    <!-- End Facebook Pixel -->
+    <!-- Hotjar Tracking Code (Heatmaps & Session Recordings) -->
+    <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:1234567,hjsv:6}; // Reemplaza 1234567 por tu ID de Hotjar
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+    <!-- End Hotjar Tracking Code -->
+</head>
+<body class="service-landing-page">
+    <!-- Header/Navigation universal -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <div class="logo-container">
+                        <img src="../Material%20visual/Identidad.JPG" alt="DataCrypt_Labs Logo" class="logo critical" loading="eager">
+                    </div>
+                    <div class="brand-info">
+                        <span class="brand-text">DataCrypt_Labs</span>
+                        <span class="brand-tagline">Data Intelligence Solutions</span>
+                    </div>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <button class="close-mobile-menu" id="close-mobile-menu" aria-label="Cerrar menú" style="display:none;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <li class="nav-item nav-page"><a href="../index.html" class="nav-link">Inicio</a></li>
+                    <li class="nav-item nav-page"><a href="../servicios.html" class="nav-link">Servicios</a></li>
+                    <li class="nav-item nav-page"><a href="../portafolio.html" class="nav-link">Portafolio</a></li>
+                    <li class="nav-item nav-page"><a href="../metrics-dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li class="nav-item nav-page"><a href="../certificaciones.html" class="nav-link">Certificaciones</a></li>
+                    <li class="nav-item nav-page"><a href="../index.html#conecta" class="nav-link">Contacto</a></li>
+                    <li class="nav-item nav-control">
+                        <div class="language-selector" role="menu" aria-label="Selector de idioma">
+                            <button id="language-toggle" class="language-toggle" aria-label="Cambiar idioma" aria-expanded="false" aria-haspopup="true">
+                                <i class="fas fa-globe" aria-hidden="true"></i>
+                                <span id="current-lang">ES</span>
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </button>
+                            <div class="language-dropdown" id="language-dropdown" role="menu" aria-labelledby="language-toggle">
+                                <a href="#" class="lang-option" data-lang="es" role="menuitem" aria-label="Cambiar a Español">
+                                    <img src="https://flagcdn.com/w20/es.png" alt="Bandera de España" width="24" height="auto" loading="lazy">
+                                    <span>Español</span>
+                                    <i class="fas fa-check lang-check" aria-hidden="true" style="display: none;"></i>
+                                </a>
+                                <a href="#" class="lang-option" data-lang="en" role="menuitem" aria-label="Change to English">
+                                    <img src="https://flagcdn.com/w20/us.png" alt="United States Flag" width="24" height="auto" loading="lazy">
+                                    <span>English</span>
+                                    <i class="fas fa-check lang-check" aria-hidden="true" style="display: none;"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="service-hero-section geo-hero">
+            <div class="hero-background">
+                <div class="data-visualization-bg">
+                    <div class="floating-charts">
+                        <div class="chart-element chart-1"></div>
+                        <div class="chart-element chart-2"></div>
+                        <div class="chart-element chart-3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="service-hero-content">
+                    <div class="service-badge">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Georreferenciación Empresarial</span>
+                    </div>
+                    <h1 class="service-hero-title">Georreferenciación Inteligente<br><span class="highlight-commercial">Decisiones con Datos Espaciales</span></h1>
+                    <p class="service-hero-subtitle">Visualiza, analiza y optimiza tu negocio con soluciones geoespaciales avanzadas.</p>
+                    <div class="service-benefits">
+                        <div class="benefit-item"><i class="fas fa-check-circle"></i><span>Mapas interactivos y análisis en tiempo real</span></div>
+                        <div class="benefit-item"><i class="fas fa-check-circle"></i><span>Optimización de rutas y recursos</span></div>
+                        <div class="benefit-item"><i class="fas fa-check-circle"></i><span>Identificación de zonas de alto potencial</span></div>
+                        <div class="benefit-item"><i class="fas fa-check-circle"></i><span>Integración con IoT y datos externos</span></div>
+                    </div>
+                    <div class="service-hero-cta">
+                        <a href="#demo-request" class="btn-service-primary"><i class="fas fa-play"></i>Ver Demo en Vivo</a>
+                        <a href="#contacto" class="btn-service-secondary"><i class="fas fa-map"></i>Solicitar Consultoría</a>
+                    </div>
+                    <div class="urgency-indicator-service">
+                        <i class="fas fa-fire"></i>
+                        <span>🔥 <strong>Oferta limitada:</strong> Solo 2 proyectos disponibles en octubre 2025</span>
+                    </div>
+                </div>
+                <div class="service-hero-visual">
+                    <div class="dashboard-mockup">
+                        <img src="../Material visual/Portafolio/geo.jpg" alt="Dashboard Georreferenciación DataCrypt_Labs" class="dashboard-image">
+                        <div class="dashboard-overlay">
+                            <div class="play-button"><i class="fas fa-play"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="success-stories-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Casos de Éxito Geoespaciales</h2>
+                    <p>Resultados reales de empresas que optimizaron operaciones con georreferenciación</p>
+                </div>
+                <div class="success-stories-grid">
+                    <div class="success-story-card">
+                        <div class="story-metrics">
+                            <div class="metric-large"><span class="metric-number">-25%</span><span class="metric-label">Costos Logísticos</span></div>
+                            <div class="metric-small"><span class="metric-number">+3</span><span class="metric-label">Nuevas Sucursales</span></div>
+                        </div>
+                        <div class="story-content">
+                            <h3>Optimización de Rutas</h3>
+                            <p class="story-description">Reducción de costos y tiempos de entrega para empresa de distribución nacional.</p>
+                            <div class="story-tags"><span class="tag">Logística</span><span class="tag">Rutas</span></div>
+                        </div>
+                    </div>
+                    <div class="success-story-card">
+                        <div class="story-metrics">
+                            <div class="metric-large"><span class="metric-number">+40%</span><span class="metric-label">Ventas Zona Norte</span></div>
+                            <div class="metric-small"><span class="metric-number">2x</span><span class="metric-label">Cobertura</span></div>
+                        </div>
+                        <div class="story-content">
+                            <h3>Expansión Comercial</h3>
+                            <p class="story-description">Identificación de zonas de alto potencial para nuevas sucursales de retail.</p>
+                            <div class="story-tags"><span class="tag">Retail</span><span class="tag">Expansión</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="service-contact" id="contacto">
+            <div class="container">
+                <h2>¿Listo para transformar tu negocio?</h2>
+                <p>Solicita una consultoría gratuita y descubre el potencial de la georreferenciación.</p>
+                <a href="../index.html#contacto" class="cta-btn">Contactar ahora</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <!-- ...existing code... (universal footer) -->
+    </footer>
+    <script src="../assets/js/datacrypt.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var navMenu = document.getElementById('nav-menu');
+        var closeBtn = document.getElementById('close-mobile-menu');
+        var navToggle = document.getElementById('nav-toggle');
+        if (closeBtn && navMenu) {
+            function toggleCloseBtn() {
+                if (window.innerWidth <= 991) {
+                    closeBtn.style.display = navMenu.classList.contains('active') ? 'block' : 'none';
+                } else {
+                    closeBtn.style.display = 'none';
+                }
+            }
+            navToggle && navToggle.addEventListener('click', function() {
+                setTimeout(toggleCloseBtn, 200);
+            });
+            closeBtn.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                closeBtn.style.display = 'none';
+            });
+            window.addEventListener('resize', toggleCloseBtn);
+            var observer = new MutationObserver(toggleCloseBtn);
+            observer.observe(navMenu, { attributes: true, attributeFilter: ['class'] });
+        }
+    });
+    </script>
+</body>
+</html>
