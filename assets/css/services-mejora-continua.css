@@ -990,3 +990,336 @@
         font-size: 1.2rem;
     }
 }
+
+/* ==========================================
+   ENHANCED SERVICES SECTION STYLES
+   ========================================== */
+
+/* Services Grid Enhanced */
+.services-grid-enhanced {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+    padding: 0 1rem;
+}
+
+/* Enhanced Service Cards */
+.service-card-enhanced {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.08),
+        0 1px 4px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: fit-content;
+}
+
+.service-card-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #00d4ff, #0099cc);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.service-card-enhanced:hover::before {
+    transform: scaleX(1);
+}
+
+.service-card-enhanced:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 20px 40px rgba(0, 212, 255, 0.15),
+        0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 212, 255, 0.3);
+}
+
+/* Premium Tier Styling */
+.service-card-enhanced.premium {
+    background: linear-gradient(145deg, #fff7ed 0%, #fed7aa 100%);
+    border-color: #f59e0b;
+    position: relative;
+}
+
+.service-card-enhanced.premium::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #f59e0b, #d97706);
+    border-radius: 22px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.service-card-enhanced.premium:hover::after {
+    opacity: 0.3;
+}
+
+/* Enterprise Tier Styling */
+.service-card-enhanced.enterprise {
+    background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%);
+    border-color: #0ea5e9;
+}
+
+/* Professional Tier Styling */
+.service-card-enhanced.professional {
+    background: linear-gradient(145deg, #f0fdf4 0%, #dcfce7 100%);
+    border-color: #22c55e;
+}
+
+/* Service Badges Enhanced */
+.service-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.premium-badge {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: white;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.enterprise-badge {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.professional-badge {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.standard-badge {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Service Header Enhanced */
+.service-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.service-icon-enhanced {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #00d4ff, #0099cc);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+}
+
+.service-info {
+    flex: 1;
+}
+
+.service-title-enhanced {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+}
+
+.service-price-enhanced {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #00d4ff;
+    margin: 0;
+}
+
+/* Service Description Enhanced */
+.service-description-enhanced {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #475569;
+    margin-bottom: 1.5rem;
+}
+
+/* Service Features Enhanced */
+.service-features-enhanced {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+}
+
+.service-features-enhanced li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    color: #334155;
+}
+
+.service-features-enhanced i {
+    color: #00d4ff;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+/* Service Testimonials Enhanced */
+.service-testimonial-enhanced {
+    background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #00d4ff;
+}
+
+.testimonial-content i.fa-quote-left {
+    color: #00d4ff;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.testimonial-content p {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #475569;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.5;
+}
+
+.testimonial-content span {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+/* Service CTA Enhanced */
+.service-cta-enhanced {
+    margin-top: auto;
+}
+
+.btn-service-enhanced {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    border: 2px solid transparent;
+}
+
+.btn-service-enhanced.primary {
+    background: linear-gradient(135deg, #00d4ff, #0099cc);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+}
+
+.btn-service-enhanced.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+}
+
+.btn-service-enhanced.secondary {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-service-enhanced.secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+}
+
+.btn-service-enhanced.accent {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-service-enhanced.accent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+}
+
+.btn-service-enhanced.outline {
+    background: transparent;
+    color: #00d4ff;
+    border-color: #00d4ff;
+}
+
+.btn-service-enhanced.outline:hover {
+    background: #00d4ff;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .services-grid-enhanced {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-grid-enhanced {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0;
+    }
+    
+    .service-card-enhanced {
+        padding: 1.5rem;
+        margin: 0;
+    }
+    
+    .service-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .service-title-enhanced {
+        font-size: 1.2rem;
+    }
+    
+    .service-icon-enhanced {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+}
