@@ -1,0 +1,399 @@
+/* 🚀 DATACRYPT LABS - ESTILOS COMERCIALES OPTIMIZADOS */
+
+/* ==========================================
+   PALETA COMERCIAL UNIFICADA
+   ========================================== */
+:root {
+    /* Colores Comerciales de Alto Impacto */
+    --trust-blue: #0066cc;        /* Confianza corporativa */
+    --success-green: #00cc66;     /* Resultados positivos */
+    --premium-gold: #ffcc00;      /* Valor premium */
+    --urgency-orange: #ff6600;    /* Llamadas a acción */
+    --data-purple: #6600cc;       /* Innovación IA */
+    --conversion-red: #ff3366;    /* Urgencia de conversión */
+    
+    /* Gradientes Comerciales */
+    --gradient-commercial: linear-gradient(135deg, var(--trust-blue), var(--data-purple));
+    --gradient-cta: linear-gradient(135deg, var(--urgency-orange), var(--premium-gold));
+    --gradient-success: linear-gradient(135deg, var(--success-green), #00aa55);
+    
+    /* Sombras Comerciales */
+    --shadow-commercial: 0 8px 32px rgba(0, 102, 204, 0.3);
+    --shadow-cta: 0 8px 32px rgba(255, 102, 0, 0.3);
+    --shadow-success: 0 8px 32px rgba(0, 204, 102, 0.3);
+}
+
+/* ==========================================
+   HERO SECTION COMERCIAL
+   ========================================== */
+
+.hero-commercial {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Banner de Estadísticas Superior */
+.hero-stats-banner {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, rgba(0, 102, 204, 0.95), rgba(102, 0, 204, 0.95));
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--premium-gold);
+    z-index: 10;
+    padding: 12px 0;
+    animation: slideInFromTop 1s ease-out;
+}
+
+@keyframes slideInFromTop {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.stats-scroll {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    animation: statsGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes statsGlow {
+    0% { text-shadow: 0 0 10px rgba(255, 204, 0, 0.5); }
+    100% { text-shadow: 0 0 20px rgba(255, 204, 0, 0.8); }
+}
+
+.stat-item {
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.stat-divider {
+    color: var(--premium-gold);
+    font-weight: 300;
+    opacity: 0.7;
+}
+
+/* Título de Impacto Comercial */
+.hero-title-impact {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    background: var(--gradient-commercial);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    animation: titlePulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes titlePulse {
+    0% { 
+        filter: brightness(1); 
+        transform: scale(1);
+    }
+    100% { 
+        filter: brightness(1.2); 
+        transform: scale(1.02);
+    }
+}
+
+.highlight-commercial {
+    background: var(--gradient-cta);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    display: inline-block;
+}
+
+.highlight-commercial::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-cta);
+    border-radius: 2px;
+    animation: underlineGrow 2s ease-out 0.5s both;
+}
+
+@keyframes underlineGrow {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
+
+/* Subtítulo Comercial */
+.hero-subtitle-commercial {
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.hero-subtitle-commercial strong {
+    color: var(--success-green);
+    font-weight: 800;
+    text-shadow: 0 0 10px rgba(0, 204, 102, 0.3);
+}
+
+.hero-description-enhanced {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+/* Indicadores de Confianza */
+.trust-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 2rem;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--premium-gold);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.trust-item i {
+    font-size: 1.1rem;
+    color: var(--success-green);
+}
+
+/* Stack de CTAs Comerciales */
+.hero-cta-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 2rem;
+}
+
+.btn-commercial-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    background: var(--gradient-cta);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: var(--shadow-cta);
+    transform: scale(1);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    overflow: hidden;
+    animation: ctaPulse 3s ease-in-out infinite;
+}
+
+@keyframes ctaPulse {
+    0%, 100% { box-shadow: var(--shadow-cta); }
+    50% { box-shadow: 0 12px 40px rgba(255, 102, 0, 0.5); }
+}
+
+.btn-commercial-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-commercial-primary:hover {
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 0 15px 50px rgba(255, 102, 0, 0.6);
+}
+
+.btn-commercial-primary:hover::before {
+    left: 100%;
+}
+
+.cta-secondary-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-commercial-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: rgba(0, 102, 204, 0.2);
+    color: var(--trust-blue);
+    text-decoration: none;
+    border-radius: 25px;
+    border: 2px solid var(--trust-blue);
+    transition: all 0.3s ease;
+}
+
+.btn-commercial-secondary:hover {
+    background: var(--trust-blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-commercial);
+}
+
+.btn-commercial-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: transparent;
+    color: var(--success-green);
+    text-decoration: none;
+    border-radius: 25px;
+    border: 2px solid var(--success-green);
+    transition: all 0.3s ease;
+}
+
+.btn-commercial-outline:hover {
+    background: var(--success-green);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-success);
+}
+
+/* Indicador de Urgencia */
+.urgency-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: rgba(255, 51, 102, 0.1);
+    border: 1px solid var(--conversion-red);
+    border-radius: 25px;
+    color: var(--conversion-red);
+    font-size: 0.95rem;
+    animation: urgencyBlink 2s ease-in-out infinite;
+}
+
+@keyframes urgencyBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.urgency-indicator i {
+    animation: clockTick 1s ease-in-out infinite;
+}
+
+@keyframes clockTick {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(15deg); }
+}
+
+/* ==========================================
+   RESPONSIVE COMERCIAL
+   ========================================== */
+
+@media (max-width: 768px) {
+    .hero-stats-banner {
+        position: relative;
+        top: 0;
+        margin-bottom: 2rem;
+    }
+    
+    .stats-scroll {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .stat-item {
+        font-size: 0.8rem;
+    }
+    
+    .hero-title-impact {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle-commercial {
+        font-size: 1.1rem;
+    }
+    
+    .trust-bar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 15px;
+    }
+    
+    .cta-secondary-row {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn-commercial-secondary,
+    .btn-commercial-outline {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .hero-cta-stack {
+        position: sticky;
+        bottom: 20px;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 20px;
+        margin: 0 -20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-stats-banner {
+        padding: 8px 0;
+    }
+    
+    .btn-commercial-primary {
+        font-size: 1rem;
+        padding: 16px 30px;
+    }
+    
+    .urgency-indicator {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+}
