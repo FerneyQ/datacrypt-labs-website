@@ -107,6 +107,9 @@
                 <!-- Portfolio CSS -->
         <link rel="stylesheet" href="assets/css/portfolio-cert-mejoras.css">
         
+        <!-- Portfolio Mejora Continua CSS -->
+        <link rel="stylesheet" href="assets/css/portfolio-mejora-continua.css">
+        
         <!-- Universal Footer CSS -->
         <link rel="stylesheet" href="assets/css/universal-footer.css">
 
@@ -366,222 +369,442 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Portfolio Section -->
-            <section id="portafolio" class="portfolio">
+            <!-- Portfolio Section Enhanced -->
+            <section id="portafolio" class="portfolio-enhanced">
                 <div class="container">
-                    <div class="section-header">
-                        <div class="portfolio-stats">
-                            <div class="stat-item">
-                                <span class="stat-number">340%</span>
-                                <span class="stat-label">ROI Promedio</span>
+                    <div class="portfolio-header-enhanced">
+                        <div class="portfolio-stats-enhanced">
+                            <div class="portfolio-stat-enhanced">
+                                <span class="portfolio-stat-number">340%</span>
+                                <span class="portfolio-stat-label">ROI Promedio</span>
                             </div>
-                            <div class="stat-item">
-                                <span class="stat-number">15+</span>
-                                <span class="stat-label">Industrias</span>
+                            <div class="portfolio-stat-enhanced">
+                                <span class="portfolio-stat-number">15+</span>
+                                <span class="portfolio-stat-label">Industrias</span>
                             </div>
-                            <div class="stat-item">
-                                <span class="stat-number">96%</span>
-                                <span class="stat-label">Precisión IA</span>
+                            <div class="portfolio-stat-enhanced">
+                                <span class="portfolio-stat-number">96%</span>
+                                <span class="portfolio-stat-label">Precisión IA</span>
                             </div>
-                            <div class="stat-item">
-                                <span class="stat-number">50+</span>
-                                <span class="stat-label">Empresas</span>
+                            <div class="portfolio-stat-enhanced">
+                                <span class="portfolio-stat-number">7</span>
+                                <span class="portfolio-stat-label">Proyectos Destacados</span>
                             </div>
                         </div>
-                        <h1 class="section-title fade-in">🏆 Casos de Éxito Comprobados</h1>
-                        <p class="section-description fade-in" data-delay="200">
-                            <strong>Resultados medibles y transformación real.</strong> Proyectos implementados bajo
-                            metodología PDCA
-                            con certificaciones DataCamp y métricas de éxito verificables en empresas líderes.
+                        <h1 class="portfolio-title-enhanced fade-in">🏆 Portfolio de Transformación Digital</h1>
+                        <p class="portfolio-description-enhanced fade-in" data-delay="200">
+                            <strong>Casos de éxito reales con resultados medibles.</strong> Cada proyecto implementado bajo la filosofía de mejora continua PDCA, 
+                            con certificaciones DataCamp y métricas verificables que demuestran el impacto transformador de nuestras soluciones.
                         </p>
-                        <div class="portfolio-filters">
-                            <button class="filter-btn active" data-filter="all">Todos los Proyectos</button>
-                            <button class="filter-btn" data-filter="bi">Business Intelligence</button>
-                            <button class="filter-btn" data-filter="ml">Machine Learning</button>
-                            <button class="filter-btn" data-filter="bigdata">Big Data</button>
+                        <div class="portfolio-filters-enhanced">
+                            <button class="portfolio-filter-btn active" data-filter="all">
+                                <i class="fas fa-th"></i> Todos los Proyectos
+                            </button>
+                            <button class="portfolio-filter-btn" data-filter="bi">
+                                <i class="fas fa-chart-line"></i> Business Intelligence
+                            </button>
+                            <button class="portfolio-filter-btn" data-filter="ml">
+                                <i class="fas fa-brain"></i> Machine Learning
+                            </button>
+                            <button class="portfolio-filter-btn" data-filter="bigdata">
+                                <i class="fas fa-database"></i> Big Data
+                            </button>
                         </div>
                     </div>
 
-                    <div class="portfolio-carousel-container">
-                        <div class="portfolio-carousel" id="portfolioCarousel">
-                            <div class="portfolio-slide active">
-                                <div class="portfolio-item">
-                                    <div class="portfolio-image-container">
-                                        <img src="Material%20visual/Portafolio/1.jpg"
-                                            alt="Dashboard Ejecutivo Business Intelligence - DataCrypt_Labs"
-                                            class="portfolio-image" data-portfolio="1" loading="lazy" decoding="async">
-                                        <div class="portfolio-overlay">
-                                            <div class="portfolio-content">
-                                                <div class="portfolio-icon">
-                                                    <i class="fas fa-chart-line"></i>
-                                                </div>
-                                                <h3>Dashboard Ejecutivo BI</h3>
-                                                <p>Solución integral de Business Intelligence para empresa multinacional
-                                                    con KPIs en tiempo real</p>
-                                                <div class="portfolio-tags">
-                                                    <span class="tag">Power BI</span>
-                                                    <span class="tag">SQL Server</span>
-                                                    <span class="tag">Python</span>
-                                                </div>
-                                                <div class="portfolio-cta">
-                                                    <button class="btn btn-secondary btn-sm">Ver Detalles</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <!-- Portfolio Grid Enhanced -->
+                    <div class="portfolio-grid-enhanced">
+                        <!-- Proyecto 1: Business Intelligence Dashboard -->
+                        <div class="portfolio-project-enhanced" data-category="bi">
+                            <img src="Material visual/Portafolio/1.jpg" alt="Dashboard Ejecutivo Business Intelligence - DataCrypt_Labs" class="portfolio-project-image" loading="lazy">
+                            <div class="portfolio-project-overlay">
+                                <div class="portfolio-overlay-content">
+                                    <i class="fas fa-chart-line portfolio-overlay-icon"></i>
+                                    <h3 class="portfolio-overlay-title">Dashboard Ejecutivo BI</h3>
+                                    <p class="portfolio-overlay-description">Solución integral de Business Intelligence para empresa multinacional con KPIs en tiempo real</p>
                                 </div>
                             </div>
-
-                            <div class="portfolio-slide">
-                                <div class="portfolio-item">
-                                    <div class="portfolio-image-container">
-                                        <img src="Material%20visual/Portafolio/2.jpg" alt="Proyecto de Machine Learning"
-                                            class="portfolio-image" data-portfolio="2" loading="lazy" decoding="async">
-                                        <div class="portfolio-overlay">
-                                            <div class="portfolio-content">
-                                                <div class="portfolio-icon">
-                                                    <i class="fas fa-brain"></i>
-                                                </div>
-                                                <h3>Modelo Predictivo ML</h3>
-                                                <p>Sistema de predicción de demanda con 95% de precisión</p>
-                                                <div class="portfolio-tags">
-                                                    <span class="tag">Machine Learning</span>
-                                                    <span class="tag">TensorFlow</span>
-                                                    <span class="tag">AWS</span>
-                                                </div>
-                                                <div class="portfolio-cta">
-                                                    <button class="btn btn-secondary btn-sm">Ver Detalles</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="portfolio-project-content">
+                                <div class="portfolio-project-category">Business Intelligence</div>
+                                <h3 class="portfolio-project-title">Dashboard Ejecutivo BI</h3>
+                                <p class="portfolio-project-description">
+                                    Transformación digital completa para multinacional del sector retail. Implementación de dashboards ejecutivos 
+                                    con KPIs en tiempo real, reducción del 60% en tiempo de análisis y aumento del 340% en ROI.
+                                </p>
+                                <div class="portfolio-project-metrics">
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">340%</span>
+                                        <span class="portfolio-metric-label">ROI</span>
+                                    </div>
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">60%</span>
+                                        <span class="portfolio-metric-label">Tiempo Reducido</span>
+                                    </div>
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">15</span>
+                                        <span class="portfolio-metric-label">Usuarios</span>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="portfolio-slide">
-                                <div class="portfolio-item">
-                                    <div class="portfolio-image-container">
-                                        <img src="Material%20visual/Portafolio/3.jpg" alt="Proyecto de Big Data"
-                                            class="portfolio-image" data-portfolio="3" loading="lazy" decoding="async">
-                                        <div class="portfolio-overlay">
-                                            <div class="portfolio-content">
-                                                <div class="portfolio-icon">
-                                                    <i class="fas fa-database"></i>
-                                                </div>
-                                                <h3>Arquitectura Big Data</h3>
-                                                <p>Pipeline de datos en tiempo real para análisis de IoT</p>
-                                                <div class="portfolio-tags">
-                                                    <span class="tag">Apache Spark</span>
-                                                    <span class="tag">Kafka</span>
-                                                    <span class="tag">Azure</span>
-                                                </div>
-                                                <div class="portfolio-cta">
-                                                    <button class="btn btn-secondary btn-sm">Ver Detalles</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="portfolio-project-tags">
+                                    <span class="portfolio-tag">Power BI</span>
+                                    <span class="portfolio-tag">SQL Server</span>
+                                    <span class="portfolio-tag">Python</span>
+                                    <span class="portfolio-tag">Azure</span>
+                                </div>
+                                <div class="portfolio-testimonial-enhanced">
+                                    <div class="portfolio-testimonial-content">
+                                        <i class="fas fa-quote-left"></i>
+                                        <p>"La visibilidad en tiempo real transformó nuestra toma de decisiones"</p>
+                                        <span class="portfolio-testimonial-author">- CEO, RetailCorp</span>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="portfolio-slide">
-                                <div class="portfolio-item">
-                                    <div class="portfolio-image-container">
-                                        <img src="Material%20visual/Portafolio/4.jpg"
-                                            alt="Proyecto de Data Visualization" class="portfolio-image"
-                                            data-portfolio="4" loading="lazy" decoding="async">
-                                        <div class="portfolio-overlay">
-                                            <div class="portfolio-content">
-                                                <div class="portfolio-icon">
-                                                    <i class="fas fa-chart-pie"></i>
-                                                </div>
-                                                <h3>Dashboard Analytics</h3>
-                                                <p>Visualización interactiva de métricas de rendimiento</p>
-                                                <div class="portfolio-tags">
-                                                    <span class="tag">Tableau</span>
-                                                    <span class="tag">D3.js</span>
-                                                    <span class="tag">React</span>
-                                                </div>
-                                                <div class="portfolio-cta">
-                                                    <button class="btn btn-secondary btn-sm">Ver Detalles</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="portfolio-slide">
-                                <div class="portfolio-item">
-                                    <div class="portfolio-image-container">
-                                        <img src="Material%20visual/Portafolio/5.jpg" alt="Proyecto de ETL"
-                                            class="portfolio-image" data-portfolio="5" loading="lazy" decoding="async">
-                                        <div class="portfolio-overlay">
-                                            <div class="portfolio-content">
-                                                <div class="portfolio-icon">
-                                                    <i class="fas fa-cogs"></i>
-                                                </div>
-                                                <h3>Pipeline ETL Avanzado</h3>
-                                                <p>Automatización de procesos de extracción y transformación</p>
-                                                <div class="portfolio-tags">
-                                                    <span class="tag">Apache Airflow</span>
-                                                    <span class="tag">Docker</span>
-                                                    <span class="tag">PostgreSQL</span>
-                                                </div>
-                                                <div class="portfolio-cta">
-                                                    <button class="btn btn-secondary btn-sm">Ver Detalles</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="portfolio-slide">
-                                <div class="portfolio-item">
-                                    <div class="portfolio-image-container">
-                                        <img src="Material%20visual/Portafolio/6.jpg" alt="Proyecto de AI Analytics"
-                                            class="portfolio-image" data-portfolio="6" loading="lazy" decoding="async">
-                                        <div class="portfolio-overlay">
-                                            <div class="portfolio-content">
-                                                <div class="portfolio-icon">
-                                                    <i class="fas fa-robot"></i>
-                                                </div>
-                                                <h3>IA para Análisis Predictivo</h3>
-                                                <p>Sistema inteligente de análisis de comportamiento de clientes</p>
-                                                <div class="portfolio-tags">
-                                                    <span class="tag">Deep Learning</span>
-                                                    <span class="tag">PyTorch</span>
-                                                    <span class="tag">Google Cloud</span>
-                                                </div>
-                                                <div class="portfolio-cta">
-                                                    <button class="btn btn-secondary btn-sm">Ver Detalles</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="portfolio-project-cta">
+                                    <a href="#contact" class="portfolio-btn-primary">
+                                        <i class="fas fa-eye"></i> Ver Caso Completo
+                                    </a>
+                                    <a href="servicios.html" class="portfolio-btn-secondary">
+                                        <i class="fas fa-arrow-right"></i> Solicitar Similar
+                                    </a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Controles del carousel -->
-                        <div class="carousel-controls">
-                            <button class="carousel-btn prev-btn" id="prevBtn">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button class="carousel-btn next-btn" id="nextBtn">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
+                        <!-- Proyecto 2: Machine Learning Predictivo -->
+                        <div class="portfolio-project-enhanced" data-category="ml">
+                            <img src="Material visual/Portafolio/2.jpg" alt="Modelo Predictivo Machine Learning - DataCrypt_Labs" class="portfolio-project-image" loading="lazy">
+                            <div class="portfolio-project-overlay">
+                                <div class="portfolio-overlay-content">
+                                    <i class="fas fa-brain portfolio-overlay-icon"></i>
+                                    <h3 class="portfolio-overlay-title">Modelo Predictivo ML</h3>
+                                    <p class="portfolio-overlay-description">Sistema de predicción de demanda con 96% de precisión para optimización de inventarios</p>
+                                </div>
+                            </div>
+                            <div class="portfolio-project-content">
+                                <div class="portfolio-success-indicator">
+                                    <i class="fas fa-award"></i>
+                                    <span>Proyecto Galardonado 2024</span>
+                                </div>
+                                <div class="portfolio-project-category">Machine Learning</div>
+                                <h3 class="portfolio-project-title">Sistema Predictivo de Demanda</h3>
+                                <p class="portfolio-project-description">
+                                    Modelo de Machine Learning para predicción de demanda en empresa manufacturera. 
+                                    Algoritmos avanzados de Deep Learning que redujeron el desperdicio en 45% y optimizaron inventarios.
+                                </p>
+                                <div class="portfolio-project-metrics">
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">96%</span>
+                                        <span class="portfolio-metric-label">Precisión</span>
+                                    </div>
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">45%</span>
+                                        <span class="portfolio-metric-label">Desperdicio Reducido</span>
+                                    </div>
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">$2M</span>
+                                        <span class="portfolio-metric-label">Ahorro Anual</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-project-tags">
+                                    <span class="portfolio-tag">TensorFlow</span>
+                                    <span class="portfolio-tag">Python</span>
+                                    <span class="portfolio-tag">AWS SageMaker</span>
+                                    <span class="portfolio-tag">Docker</span>
+                                </div>
+                                <div class="portfolio-testimonial-enhanced">
+                                    <div class="portfolio-testimonial-content">
+                                        <i class="fas fa-quote-left"></i>
+                                        <p>"El modelo superó todas nuestras expectativas de precisión"</p>
+                                        <span class="portfolio-testimonial-author">- CTO, ManufactureTech</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-project-cta">
+                                    <a href="#contact" class="portfolio-btn-primary">
+                                        <i class="fas fa-eye"></i> Ver Caso Completo
+                                    </a>
+                                    <a href="servicios.html" class="portfolio-btn-secondary">
+                                        <i class="fas fa-arrow-right"></i> Solicitar Similar
+                                    </a>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Indicadores del carousel -->
-                        <div class="carousel-indicators">
-                            <span class="indicator active" data-slide="0"></span>
-                            <span class="indicator" data-slide="1"></span>
-                            <span class="indicator" data-slide="2"></span>
-                            <span class="indicator" data-slide="3"></span>
-                            <span class="indicator" data-slide="4"></span>
-                            <span class="indicator" data-slide="5"></span>
+                        <!-- Proyecto 3: Big Data Architecture -->
+                        <div class="portfolio-project-enhanced" data-category="bigdata">
+                            <img src="Material visual/Portafolio/3.jpg" alt="Arquitectura Big Data - DataCrypt_Labs" class="portfolio-project-image" loading="lazy">
+                            <div class="portfolio-project-overlay">
+                                <div class="portfolio-overlay-content">
+                                    <i class="fas fa-database portfolio-overlay-icon"></i>
+                                    <h3 class="portfolio-overlay-title">Arquitectura Big Data</h3>
+                                    <p class="portfolio-overlay-description">Pipeline de datos en tiempo real para análisis de IoT con procesamiento de 1TB/día</p>
+                                </div>
+                            </div>
+                            <div class="portfolio-project-content">
+                                <div class="portfolio-project-category">Big Data</div>
+                                <h3 class="portfolio-project-title">Pipeline Big Data IoT</h3>
+                                <p class="portfolio-project-description">
+                                    Arquitectura escalable de Big Data para empresa de IoT. Procesamiento en tiempo real de sensores, 
+                                    análisis predictivo de fallos y dashboard de monitoreo 24/7 con Apache Spark y Kafka.
+                                </p>
+                                <div class="portfolio-project-metrics">
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">1TB</span>
+                                        <span class="portfolio-metric-label">Datos Diarios</span>
+                                    </div>
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">99.9%</span>
+                                        <span class="portfolio-metric-label">Uptime</span>
+                                    </div>
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">50K</span>
+                                        <span class="portfolio-metric-label">Sensores</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-project-tags">
+                                    <span class="portfolio-tag">Apache Spark</span>
+                                    <span class="portfolio-tag">Kafka</span>
+                                    <span class="portfolio-tag">Azure Data Lake</span>
+                                    <span class="portfolio-tag">Elasticsearch</span>
+                                </div>
+                                <div class="portfolio-testimonial-enhanced">
+                                    <div class="portfolio-testimonial-content">
+                                        <i class="fas fa-quote-left"></i>
+                                        <p>"La arquitectura maneja nuestro crecimiento exponencial sin problemas"</p>
+                                        <span class="portfolio-testimonial-author">- Head of Data, IoTSolutions</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-project-cta">
+                                    <a href="#contact" class="portfolio-btn-primary">
+                                        <i class="fas fa-eye"></i> Ver Caso Completo
+                                    </a>
+                                    <a href="servicios.html" class="portfolio-btn-secondary">
+                                        <i class="fas fa-arrow-right"></i> Solicitar Similar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto 4: Dashboard Analytics -->
+                        <div class="portfolio-project-enhanced" data-category="bi">
+                            <img src="Material visual/Portafolio/4.jpg" alt="Dashboard Analytics - DataCrypt_Labs" class="portfolio-project-image" loading="lazy">
+                            <div class="portfolio-project-overlay">
+                                <div class="portfolio-overlay-content">
+                                    <i class="fas fa-chart-pie portfolio-overlay-icon"></i>
+                                    <h3 class="portfolio-overlay-title">Dashboard Analytics</h3>
+                                    <p class="portfolio-overlay-description">Visualización interactiva de métricas de rendimiento con D3.js y React</p>
+                                </div>
+                            </div>
+                            <div class="portfolio-project-content">
+                                <div class="portfolio-project-category">Data Visualization</div>
+                                <h3 class="portfolio-project-title">Dashboard Interactivo Avanzado</h3>
+                                <p class="portfolio-project-description">
+                                    Dashboard de alta interactividad para startup fintech. Visualizaciones personalizadas con D3.js, 
+                                    métricas en tiempo real y análisis de comportamiento de usuarios que aumentaron engagement 85%.
+                                </p>
+                                <div class="portfolio-project-metrics">
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">85%</span>
+                                        <span class="portfolio-metric-label">+ Engagement</span>
+                                    </div>
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">12</span>
+                                        <span class="portfolio-metric-label">Visualizaciones</span>
+                                    </div>
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">5K</span>
+                                        <span class="portfolio-metric-label">Usuarios Activos</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-project-tags">
+                                    <span class="portfolio-tag">D3.js</span>
+                                    <span class="portfolio-tag">React</span>
+                                    <span class="portfolio-tag">Tableau</span>
+                                    <span class="portfolio-tag">Node.js</span>
+                                </div>
+                                <div class="portfolio-testimonial-enhanced">
+                                    <div class="portfolio-testimonial-content">
+                                        <i class="fas fa-quote-left"></i>
+                                        <p>"Las visualizaciones superaron nuestras expectativas más ambiciosas"</p>
+                                        <span class="portfolio-testimonial-author">- Product Manager, FinTech Innovations</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-project-cta">
+                                    <a href="#contact" class="portfolio-btn-primary">
+                                        <i class="fas fa-eye"></i> Ver Caso Completo
+                                    </a>
+                                    <a href="servicios.html" class="portfolio-btn-secondary">
+                                        <i class="fas fa-arrow-right"></i> Solicitar Similar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto 5: Pipeline ETL -->
+                        <div class="portfolio-project-enhanced" data-category="bigdata">
+                            <img src="Material visual/Portafolio/5.jpg" alt="Pipeline ETL Avanzado - DataCrypt_Labs" class="portfolio-project-image" loading="lazy">
+                            <div class="portfolio-project-overlay">
+                                <div class="portfolio-overlay-content">
+                                    <i class="fas fa-cogs portfolio-overlay-icon"></i>
+                                    <h3 class="portfolio-overlay-title">Pipeline ETL Avanzado</h3>
+                                    <p class="portfolio-overlay-description">Automatización de procesos ETL con Apache Airflow y Docker</p>
+                                </div>
+                            </div>
+                            <div class="portfolio-project-content">
+                                <div class="portfolio-project-category">Data Engineering</div>
+                                <h3 class="portfolio-project-title">Sistema ETL Automatizado</h3>
+                                <p class="portfolio-project-description">
+                                    Modernización completa de procesos ETL para empresa de telecomunicaciones. 
+                                    Migración de procesos manuales a arquitectura automatizada que redujo errores 92% y tiempo de procesamiento 78%.
+                                </p>
+                                <div class="portfolio-project-metrics">
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">92%</span>
+                                        <span class="portfolio-metric-label">Errores Reducidos</span>
+                                    </div>
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">78%</span>
+                                        <span class="portfolio-metric-label">Tiempo Ahorrado</span>
+                                    </div>
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">24/7</span>
+                                        <span class="portfolio-metric-label">Monitoreo</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-project-tags">
+                                    <span class="portfolio-tag">Apache Airflow</span>
+                                    <span class="portfolio-tag">Docker</span>
+                                    <span class="portfolio-tag">PostgreSQL</span>
+                                    <span class="portfolio-tag">Redis</span>
+                                </div>
+                                <div class="portfolio-testimonial-enhanced">
+                                    <div class="portfolio-testimonial-content">
+                                        <i class="fas fa-quote-left"></i>
+                                        <p>"La automatización liberó a nuestro equipo para tareas estratégicas"</p>
+                                        <span class="portfolio-testimonial-author">- Data Lead, TelecomGiant</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-project-cta">
+                                    <a href="#contact" class="portfolio-btn-primary">
+                                        <i class="fas fa-eye"></i> Ver Caso Completo
+                                    </a>
+                                    <a href="servicios.html" class="portfolio-btn-secondary">
+                                        <i class="fas fa-arrow-right"></i> Solicitar Similar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto 6: AI Analytics -->
+                        <div class="portfolio-project-enhanced" data-category="ml">
+                            <img src="Material visual/Portafolio/6.jpg" alt="IA Analytics Predictivo - DataCrypt_Labs" class="portfolio-project-image" loading="lazy">
+                            <div class="portfolio-project-overlay">
+                                <div class="portfolio-overlay-content">
+                                    <i class="fas fa-robot portfolio-overlay-icon"></i>
+                                    <h3 class="portfolio-overlay-title">IA Analytics Predictivo</h3>
+                                    <p class="portfolio-overlay-description">Sistema inteligente de análisis predictivo con Deep Learning</p>
+                                </div>
+                            </div>
+                            <div class="portfolio-project-content">
+                                <div class="portfolio-success-indicator">
+                                    <i class="fas fa-trophy"></i>
+                                    <span>Innovación del Año</span>
+                                </div>
+                                <div class="portfolio-project-category">Artificial Intelligence</div>
+                                <h3 class="portfolio-project-title">Motor IA Comportamental</h3>
+                                <p class="portfolio-project-description">
+                                    Sistema de IA para análisis predictivo de comportamiento de clientes en e-commerce. 
+                                    Algoritmos de Deep Learning que aumentaron conversiones 67% y personalización 89%.
+                                </p>
+                                <div class="portfolio-project-metrics">
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">67%</span>
+                                        <span class="portfolio-metric-label">+ Conversiones</span>
+                                    </div>
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">89%</span>
+                                        <span class="portfolio-metric-label">Personalización</span>
+                                    </div>
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">1M+</span>
+                                        <span class="portfolio-metric-label">Predicciones/día</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-project-tags">
+                                    <span class="portfolio-tag">PyTorch</span>
+                                    <span class="portfolio-tag">Deep Learning</span>
+                                    <span class="portfolio-tag">Google Cloud</span>
+                                    <span class="portfolio-tag">Kubernetes</span>
+                                </div>
+                                <div class="portfolio-testimonial-enhanced">
+                                    <div class="portfolio-testimonial-content">
+                                        <i class="fas fa-quote-left"></i>
+                                        <p>"La IA cambió completamente cómo entendemos a nuestros clientes"</p>
+                                        <span class="portfolio-testimonial-author">- CMO, E-commerce Leader</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-project-cta">
+                                    <a href="#contact" class="portfolio-btn-primary">
+                                        <i class="fas fa-eye"></i> Ver Caso Completo
+                                    </a>
+                                    <a href="servicios.html" class="portfolio-btn-secondary">
+                                        <i class="fas fa-arrow-right"></i> Solicitar Similar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto 7: Georreferenciación -->
+                        <div class="portfolio-project-enhanced" data-category="bi">
+                            <img src="Material visual/Portafolio/7.jpg" alt="Sistema de Georreferenciación - DataCrypt_Labs" class="portfolio-project-image" loading="lazy">
+                            <div class="portfolio-project-overlay">
+                                <div class="portfolio-overlay-content">
+                                    <i class="fas fa-map-marked-alt portfolio-overlay-icon"></i>
+                                    <h3 class="portfolio-overlay-title">Georreferenciación Avanzada</h3>
+                                    <p class="portfolio-overlay-description">Sistema GIS para optimización de rutas y análisis territorial</p>
+                                </div>
+                            </div>
+                            <div class="portfolio-project-content">
+                                <div class="portfolio-project-category">Geospatial Analytics</div>
+                                <h3 class="portfolio-project-title">Plataforma GIS Empresarial</h3>
+                                <p class="portfolio-project-description">
+                                    Sistema de georreferenciación para optimización logística de empresa de delivery. 
+                                    Análisis territorial inteligente que redujo costos operativos 35% y mejoró tiempos de entrega 50%.
+                                </p>
+                                <div class="portfolio-project-metrics">
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">35%</span>
+                                        <span class="portfolio-metric-label">Costos Reducidos</span>
+                                    </div>
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">50%</span>
+                                        <span class="portfolio-metric-label">Mejora Tiempos</span>
+                                    </div>
+                                    <div class="portfolio-metric">
+                                        <span class="portfolio-metric-value">500+</span>
+                                        <span class="portfolio-metric-label">Rutas Optimizadas</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-project-tags">
+                                    <span class="portfolio-tag">QGIS</span>
+                                    <span class="portfolio-tag">PostGIS</span>
+                                    <span class="portfolio-tag">Leaflet</span>
+                                    <span class="portfolio-tag">Python</span>
+                                </div>
+                                <div class="portfolio-testimonial-enhanced">
+                                    <div class="portfolio-testimonial-content">
+                                        <i class="fas fa-quote-left"></i>
+                                        <p>"La optimización geográfica revolucionó nuestra operación"</p>
+                                        <span class="portfolio-testimonial-author">- COO, DeliveryFast</span>
+                                    </div>
+                                </div>
+                                <div class="portfolio-project-cta">
+                                    <a href="#contact" class="portfolio-btn-primary">
+                                        <i class="fas fa-eye"></i> Ver Caso Completo
+                                    </a>
+                                    <a href="servicios.html" class="portfolio-btn-secondary">
+                                        <i class="fas fa-arrow-right"></i> Solicitar Similar
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

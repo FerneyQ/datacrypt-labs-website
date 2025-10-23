@@ -1323,3 +1323,237 @@
         font-size: 1.2rem;
     }
 }
+
+/* ==========================================
+   PDCA METHODOLOGY SHOWCASE
+   ========================================== */
+
+/* PDCA Methodology Showcase */
+.pdca-methodology-showcase {
+    background: rgba(0, 212, 255, 0.05);
+    border: 2px solid rgba(0, 212, 255, 0.2);
+    border-radius: 30px;
+    padding: 50px 40px;
+    margin: 50px auto;
+    max-width: 1200px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.pdca-methodology-showcase::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.pdca-methodology-showcase h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #00d4ff;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.pdca-cycle-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.pdca-step {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.pdca-step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 150, 200, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.pdca-step:hover::before {
+    opacity: 1;
+}
+
+.pdca-step:hover {
+    transform: translateY(-10px);
+    border-color: #00d4ff;
+    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+}
+
+.step-icon {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.plan-icon {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+}
+
+.do-icon {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+    color: white;
+}
+
+.check-icon {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    color: white;
+}
+
+.act-icon {
+    background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+    color: white;
+}
+
+.step-letter {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.step-content h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.step-content p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.pdca-benefits {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #00d4ff;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.benefit-item i {
+    font-size: 1.2rem;
+}
+
+/* PDCA Animation Effects */
+@keyframes pdcaPulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.7);
+    }
+    50% { 
+        transform: scale(1.02);
+        box-shadow: 0 0 0 10px rgba(0, 212, 255, 0);
+    }
+}
+
+.pdca-step:nth-child(1) .step-icon { animation-delay: 0.1s; }
+.pdca-step:nth-child(2) .step-icon { animation-delay: 0.3s; }
+.pdca-step:nth-child(3) .step-icon { animation-delay: 0.5s; }
+.pdca-step:nth-child(4) .step-icon { animation-delay: 0.7s; }
+
+.pdca-step:hover .step-icon {
+    animation: pdcaPulse 2s ease-in-out infinite;
+}
+
+/* PDCA Responsive Design */
+@media (max-width: 768px) {
+    .pdca-methodology-showcase {
+        padding: 40px 20px;
+        margin: 40px auto;
+    }
+    
+    .pdca-methodology-showcase h3 {
+        font-size: 1.8rem;
+    }
+    
+    .pdca-cycle-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .step-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.2rem;
+    }
+    
+    .step-content h4 {
+        font-size: 1.1rem;
+    }
+    
+    .pdca-benefits {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pdca-cycle-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .pdca-methodology-showcase h3 {
+        font-size: 1.5rem;
+    }
+    
+    .step-content h4 {
+        font-size: 1rem;
+    }
+}
