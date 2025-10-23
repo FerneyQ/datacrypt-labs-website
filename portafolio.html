@@ -104,7 +104,11 @@
         </noscript>
 
         <!-- Portfolio Mejoras CSS -->
+                <!-- Portfolio CSS -->
         <link rel="stylesheet" href="assets/css/portfolio-cert-mejoras.css">
+        
+        <!-- Universal Footer CSS -->
+        <link rel="stylesheet" href="assets/css/universal-footer.css">
 
         <!-- JSON-LD Schema Markup para SEO Empresarial -->
         <script type="application/ld+json">
@@ -659,45 +663,149 @@
             </section>
         </main>
 
-        <!-- Footer -->
-        <footer class="footer">
+        <!-- Universal Interactive Footer -->
+        <footer class="universal-footer">
+            <div class="footer-neural-bg">
+                <div class="neural-particle"></div>
+                <div class="neural-particle"></div>
+                <div class="neural-particle"></div>
+                <div class="neural-particle"></div>
+            </div>
+            
             <div class="container">
-                <div class="footer-content">
-                    <div class="footer-section">
-                        <div class="footer-brand">
-                            <img src="Material%20visual/Identidad.JPG" alt="DataCrypt_Labs" class="footer-logo">
-                            <h3>DataCrypt_Labs</h3>
-                            <p>Automatizamos soluciones para empresas con inteligencia de datos</p>
+                <!-- Main Footer Content -->
+                <div class="footer-main">
+                    <div class="footer-brand-universal">
+                        <div class="brand-logo-container">
+                            <div class="logo-neural-ring">
+                                <img src="Material%20visual/Identidad.JPG" alt="DataCrypt_Labs" class="footer-logo-enhanced">
+                                <div class="logo-pulse-ring"></div>
+                            </div>
+                        </div>
+                        <div class="brand-content">
+                            <h2 class="brand-title">
+                                <span class="gradient-text">DataCrypt</span>
+                                <span class="accent-text">_Labs</span>
+                            </h2>
+                            <p class="brand-tagline">Transformamos datos en insights estratégicos que impulsan el crecimiento empresarial</p>
                         </div>
                     </div>
 
-                    <div class="footer-section">
-                        <h4>Servicios</h4>
-                        <ul>
-                            <li><a href="servicios.html">Business Intelligence</a></li>
-                            <li><a href="servicios.html">Machine Learning</a></li>
-                            <li><a href="servicios.html">Big Data</a></li>
-                            <li><a href="servicios.html">Georreferenciación</a></li>
-                        </ul>
+                    <div class="footer-sections-grid">
+                        <div class="footer-section-universal services-section">
+                            <div class="section-header">
+                                <i class="fas fa-cogs section-icon"></i>
+                                <h4>Servicios Especializados</h4>
+                            </div>
+                            <ul class="universal-nav-list">
+                                <li><a href="servicios.html" class="nav-link-universal"><i class="fas fa-chart-line"></i>Business Intelligence</a></li>
+                                <li><a href="servicios.html" class="nav-link-universal"><i class="fas fa-robot"></i>Machine Learning</a></li>
+                                <li><a href="servicios.html" class="nav-link-universal"><i class="fas fa-database"></i>Big Data Analytics</a></li>
+                                <li><a href="servicios.html" class="nav-link-universal"><i class="fas fa-map-marked-alt"></i>Georreferenciación</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="footer-section-universal company-section">
+                            <div class="section-header">
+                                <i class="fas fa-building section-icon"></i>
+                                <h4>Empresa</h4>
+                            </div>
+                            <ul class="universal-nav-list">
+                                <li><a href="index.html" class="nav-link-universal"><i class="fas fa-home"></i>Inicio</a></li>
+                                <li><a href="portafolio.html" class="nav-link-universal"><i class="fas fa-briefcase"></i>Portafolio</a></li>
+                                <li><a href="certificaciones.html" class="nav-link-universal"><i class="fas fa-certificate"></i>Certificaciones</a></li>
+                                <li><a href="index.html#contacto" class="nav-link-universal"><i class="fas fa-envelope"></i>Contacto</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="footer-section-universal tech-section">
+                            <div class="section-header">
+                                <i class="fas fa-code section-icon"></i>
+                                <h4>Tecnologías</h4>
+                            </div>
+                            <div class="tech-stack">
+                                <div class="tech-category">
+                                    <span class="tech-label">Data Science:</span>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">Python</span>
+                                        <span class="tech-tag">R</span>
+                                        <span class="tech-tag">SQL</span>
+                                    </div>
+                                </div>
+                                <div class="tech-category">
+                                    <span class="tech-label">Cloud:</span>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">Azure</span>
+                                        <span class="tech-tag">AWS</span>
+                                        <span class="tech-tag">GCP</span>
+                                    </div>
+                                </div>
+                                <div class="tech-category">
+                                    <span class="tech-label">BI Tools:</span>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">Power BI</span>
+                                        <span class="tech-tag">Tableau</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="footer-section-universal contact-section">
+                            <div class="section-header">
+                                <i class="fas fa-phone section-icon"></i>
+                                <h4>Conecta con Nosotros</h4>
+                            </div>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-phone-alt"></i>
+                                    <span>+57 323 206 6197</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>info@datacrypt-labs.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Colombia</span>
+                                </div>
+                            </div>
+                            <div class="social-networks">
+                                <a href="#" class="social-link linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="social-link github"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-link twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-link youtube"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="footer-section">
-                        <h4>Empresa</h4>
-                        <ul>
-                            <li><a href="portafolio.html">Portafolio</a></li>
-                            <li><a href="certificaciones.html">Certificaciones</a></li>
-                            <li><a href="index.html#contacto">Contacto</a></li>
-                        </ul>
-                    </div>
-
-
                 </div>
 
-                <div class="footer-bottom">
-                    <p>&copy; 2024 DataCrypt_Labs. Todos los derechos reservados.</p>
-                    <div class="footer-links">
-                        <a href="#" class="footer-link">Política de Privacidad</a>
-                        <a href="#" class="footer-link">Términos de Servicio</a>
+                <!-- Footer Bottom Universal -->
+                <div class="footer-bottom-universal">
+                    <div class="footer-separator">
+                        <div class="separator-line"></div>
+                        <div class="separator-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="separator-line"></div>
+                    </div>
+                    
+                    <div class="footer-bottom-content">
+                        <div class="copyright-section">
+                            <p>&copy; DataCrypt_Labs. Todos los derechos reservados.</p>
+                            <p class="build-info">Construido con <i class="fas fa-heart pulse"></i> y tecnología de vanguardia</p>
+                        </div>
+                        
+                        <div class="footer-actions">
+                            <div class="legal-links">
+                                <a href="#" class="legal-link">Política de Privacidad</a>
+                                <a href="#" class="legal-link">Términos de Servicio</a>
+                                <a href="#" class="legal-link">Cookies</a>
+                            </div>
+                            <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                                <i class="fas fa-rocket"></i>
+                                <span>Ir Arriba</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -747,6 +855,75 @@
 
         <!-- DataCrypt_Labs Corporate JavaScript -->
         <script src="assets/js/datacrypt.js"></script>
+
+        <!-- Universal Footer Interactions -->
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Enhanced hover effects for tech tags
+            const techTags = document.querySelectorAll('.tech-tag');
+            techTags.forEach(tag => {
+                tag.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.1) rotate(5deg)';
+                });
+                
+                tag.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+            
+            // Neural particles enhanced movement
+            const particles = document.querySelectorAll('.neural-particle');
+            particles.forEach((particle, index) => {
+                setInterval(() => {
+                    const randomX = Math.random() * 100;
+                    const randomY = Math.random() * 100;
+                    particle.style.left = randomX + '%';
+                    particle.style.top = randomY + '%';
+                }, 5000 + (index * 1000));
+            });
+            
+            // Social link enhanced effects
+            const socialLinks = document.querySelectorAll('.social-link');
+            socialLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.15) rotate(360deg)';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1) rotate(0deg)';
+                });
+            });
+            
+            // Intersection Observer for footer animations
+            const footerObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add entrance animations
+                        const sections = entry.target.querySelectorAll('.footer-section-universal');
+                        sections.forEach((section, index) => {
+                            setTimeout(() => {
+                                section.style.opacity = '1';
+                                section.style.transform = 'translateY(0)';
+                            }, index * 200);
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            const footer = document.querySelector('.universal-footer');
+            if (footer) {
+                // Set initial state for sections
+                const sections = footer.querySelectorAll('.footer-section-universal');
+                sections.forEach(section => {
+                    section.style.opacity = '0';
+                    section.style.transform = 'translateY(30px)';
+                    section.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+                
+                footerObserver.observe(footer);
+            }
+        });
+        </script>
 
         <!-- Validation Suite (solo en desarrollo) -->
         <script src="assets/js/validation.js"></script>
