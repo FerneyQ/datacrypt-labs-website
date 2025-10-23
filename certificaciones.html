@@ -413,18 +413,62 @@
 
                         <!-- Neural Network Connections -->
                         <svg class="neural-connections" viewBox="0 0 1200 800">
-                            <!-- Connection paths between nodes -->
+                            <!-- Advanced connection gradients and effects -->
                             <defs>
-                                <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <linearGradient id="connectionGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
                                     <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0" />
-                                    <stop offset="50%" style="stop-color:#00d4ff;stop-opacity:0.8" />
+                                    <stop offset="30%" style="stop-color:#00d4ff;stop-opacity:0.4" />
+                                    <stop offset="50%" style="stop-color:#8a2be2;stop-opacity:0.9" />
+                                    <stop offset="70%" style="stop-color:#ff1493;stop-opacity:0.6" />
                                     <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:0" />
+                                    <animateTransform attributeName="gradientTransform" type="translate" values="0,0;100,0;0,0" dur="4s" repeatCount="indefinite"/>
                                 </linearGradient>
+                                
+                                <linearGradient id="connectionGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#8a2be2;stop-opacity:0" />
+                                    <stop offset="50%" style="stop-color:#00d4ff;stop-opacity:0.8" />
+                                    <stop offset="100%" style="stop-color:#ff1493;stop-opacity:0" />
+                                    <animateTransform attributeName="gradientTransform" type="translate" values="0,0;-50,0;0,0" dur="3s" repeatCount="indefinite"/>
+                                </linearGradient>
+                                
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                    <feMerge> 
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
                             </defs>
-                            <!-- Dynamic connections will be drawn here -->
-                            <path d="M 300,200 Q 600,150 900,200" stroke="url(#connectionGradient)" stroke-width="2" fill="none" class="connection-path" />
-                            <path d="M 200,300 Q 600,200 800,400" stroke="url(#connectionGradient)" stroke-width="2" fill="none" class="connection-path" />
-                            <path d="M 400,500 Q 600,400 800,300" stroke="url(#connectionGradient)" stroke-width="2" fill="none" class="connection-path" />
+                            
+                            <!-- Dynamic multi-layered connections -->
+                            <g class="connection-layer-1">
+                                <path d="M 150,180 Q 600,100 1050,180" stroke="url(#connectionGradient1)" stroke-width="2" fill="none" class="connection-path pulse-1" filter="url(#glow)">
+                                    <animate attributeName="stroke-dasharray" values="0,1000;1000,0;0,1000" dur="5s" repeatCount="indefinite"/>
+                                </path>
+                                <path d="M 100,300 Q 600,200 1100,320" stroke="url(#connectionGradient2)" stroke-width="3" fill="none" class="connection-path pulse-2" filter="url(#glow)">
+                                    <animate attributeName="stroke-dasharray" values="0,800;800,0;0,800" dur="4s" repeatCount="indefinite"/>
+                                </path>
+                            </g>
+                            
+                            <g class="connection-layer-2">
+                                <path d="M 200,500 Q 600,350 900,480" stroke="url(#connectionGradient1)" stroke-width="2" fill="none" class="connection-path pulse-3" filter="url(#glow)">
+                                    <animate attributeName="stroke-dasharray" values="0,600;600,0;0,600" dur="6s" repeatCount="indefinite"/>
+                                </path>
+                                <path d="M 400,650 Q 600,550 800,680" stroke="url(#connectionGradient2)" stroke-width="2" fill="none" class="connection-path pulse-4" filter="url(#glow)">
+                                    <animate attributeName="stroke-dasharray" values="0,400;400,0;0,400" dur="3.5s" repeatCount="indefinite"/>
+                                </path>
+                            </g>
+                            
+                            <!-- Central hub connections -->
+                            <g class="hub-connections">
+                                <circle cx="600" cy="400" r="3" fill="#00d4ff" opacity="0.8">
+                                    <animate attributeName="r" values="3;8;3" dur="2s" repeatCount="indefinite"/>
+                                    <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s" repeatCount="indefinite"/>
+                                </circle>
+                                <circle cx="600" cy="400" r="120" fill="none" stroke="rgba(0,212,255,0.2)" stroke-width="1" stroke-dasharray="5,5">
+                                    <animateTransform attributeName="transform" type="rotate" values="0 600 400;360 600 400" dur="12s" repeatCount="indefinite"/>
+                                </circle>
+                            </g>
                         </svg>
 
                         <!-- Certification Nodes Network -->
@@ -1258,45 +1302,163 @@
             </section>
         </main>
 
-        <!-- Footer -->
-        <footer class="footer">
+        <!-- Advanced Interactive Footer -->
+        <footer class="advanced-footer">
+            <div class="footer-neural-bg">
+                <div class="neural-particle"></div>
+                <div class="neural-particle"></div>
+                <div class="neural-particle"></div>
+                <div class="neural-particle"></div>
+            </div>
+            
             <div class="container">
-                <div class="footer-content">
-                    <div class="footer-section">
-                        <div class="footer-brand">
-                            <img src="Material%20visual/Identidad.JPG" alt="DataCrypt_Labs" class="footer-logo">
-                            <h3>DataCrypt_Labs</h3>
-                            <p>Automatizamos soluciones para empresas con inteligencia de datos</p>
+                <!-- Main Footer Content -->
+                <div class="footer-main">
+                    <div class="footer-brand-advanced">
+                        <div class="brand-logo-container">
+                            <div class="logo-neural-ring">
+                                <img src="Material%20visual/Identidad.JPG" alt="DataCrypt_Labs" class="footer-logo-enhanced">
+                                <div class="logo-pulse-ring"></div>
+                            </div>
+                        </div>
+                        <div class="brand-content">
+                            <h2 class="brand-title">
+                                <span class="gradient-text">DataCrypt</span>
+                                <span class="accent-text">_Labs</span>
+                            </h2>
+                            <p class="brand-tagline">Automatizamos soluciones empresariales con inteligencia de datos avanzada</p>
+                            <div class="brand-stats">
+                                <div class="stat-item">
+                                    <div class="stat-number" data-count="100">0</div>
+                                    <div class="stat-label">Proyectos</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number" data-count="15">0</div>
+                                    <div class="stat-label">Certificaciones</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number" data-count="5">0</div>
+                                    <div class="stat-label">Años Exp.</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="footer-section">
-                        <h4>Servicios</h4>
-                        <ul>
-                            <li><a href="servicios.html">Business Intelligence</a></li>
-                            <li><a href="servicios.html">Machine Learning</a></li>
-                            <li><a href="servicios.html">Big Data</a></li>
-                            <li><a href="servicios.html">Georreferenciación</a></li>
-                        </ul>
+                    <div class="footer-sections-grid">
+                        <div class="footer-section-enhanced services-section">
+                            <div class="section-header">
+                                <i class="fas fa-cogs section-icon"></i>
+                                <h4>Servicios Especializados</h4>
+                            </div>
+                            <ul class="enhanced-nav-list">
+                                <li><a href="servicios.html" class="nav-link-enhanced"><i class="fas fa-chart-line"></i>Business Intelligence</a></li>
+                                <li><a href="servicios.html" class="nav-link-enhanced"><i class="fas fa-robot"></i>Machine Learning</a></li>
+                                <li><a href="servicios.html" class="nav-link-enhanced"><i class="fas fa-database"></i>Big Data Analytics</a></li>
+                                <li><a href="servicios.html" class="nav-link-enhanced"><i class="fas fa-map-marked-alt"></i>Georreferenciación</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="footer-section-enhanced company-section">
+                            <div class="section-header">
+                                <i class="fas fa-building section-icon"></i>
+                                <h4>Empresa</h4>
+                            </div>
+                            <ul class="enhanced-nav-list">
+                                <li><a href="portafolio.html" class="nav-link-enhanced"><i class="fas fa-briefcase"></i>Portafolio</a></li>
+                                <li><a href="certificaciones.html" class="nav-link-enhanced"><i class="fas fa-certificate"></i>Certificaciones</a></li>
+                                <li><a href="index.html#contacto" class="nav-link-enhanced"><i class="fas fa-envelope"></i>Contacto</a></li>
+                                <li><a href="#" class="nav-link-enhanced"><i class="fas fa-users"></i>Sobre Nosotros</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="footer-section-enhanced tech-section">
+                            <div class="section-header">
+                                <i class="fas fa-code section-icon"></i>
+                                <h4>Tecnologías</h4>
+                            </div>
+                            <div class="tech-stack">
+                                <div class="tech-category">
+                                    <span class="tech-label">Data Science:</span>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">Python</span>
+                                        <span class="tech-tag">R</span>
+                                        <span class="tech-tag">SQL</span>
+                                    </div>
+                                </div>
+                                <div class="tech-category">
+                                    <span class="tech-label">Cloud:</span>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">Azure</span>
+                                        <span class="tech-tag">AWS</span>
+                                        <span class="tech-tag">GCP</span>
+                                    </div>
+                                </div>
+                                <div class="tech-category">
+                                    <span class="tech-label">BI Tools:</span>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">Power BI</span>
+                                        <span class="tech-tag">Tableau</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="footer-section-enhanced contact-section">
+                            <div class="section-header">
+                                <i class="fas fa-phone section-icon"></i>
+                                <h4>Conecta con Nosotros</h4>
+                            </div>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-phone-alt"></i>
+                                    <span>+57 323 206 6197</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>info@datacrypt-labs.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Colombia</span>
+                                </div>
+                            </div>
+                            <div class="social-networks">
+                                <a href="#" class="social-link linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="social-link github"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-link twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-link youtube"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="footer-section">
-                        <h4>Empresa</h4>
-                        <ul>
-                            <li><a href="portafolio.html">Portafolio</a></li>
-                            <li><a href="certificaciones.html">Certificaciones</a></li>
-                            <li><a href="index.html#contacto">Contacto</a></li>
-                        </ul>
-                    </div>
-
-
                 </div>
 
-                <div class="footer-bottom">
-                    <p>&copy; 2024 DataCrypt_Labs. Todos los derechos reservados.</p>
-                    <div class="footer-links">
-                        <a href="#" class="footer-link">Política de Privacidad</a>
-                        <a href="#" class="footer-link">Términos de Servicio</a>
+                <!-- Footer Bottom Enhanced -->
+                <div class="footer-bottom-enhanced">
+                    <div class="footer-separator">
+                        <div class="separator-line"></div>
+                        <div class="separator-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="separator-line"></div>
+                    </div>
+                    
+                    <div class="footer-bottom-content">
+                        <div class="copyright-section">
+                            <p>&copy; 2024 DataCrypt_Labs. Todos los derechos reservados.</p>
+                            <p class="build-info">Construido con <i class="fas fa-heart pulse"></i> y tecnología de vanguardia</p>
+                        </div>
+                        
+                        <div class="footer-actions">
+                            <div class="legal-links">
+                                <a href="#" class="legal-link">Política de Privacidad</a>
+                                <a href="#" class="legal-link">Términos de Servicio</a>
+                                <a href="#" class="legal-link">Cookies</a>
+                            </div>
+                            <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                                <i class="fas fa-rocket"></i>
+                                <span>Ir Arriba</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1318,6 +1480,106 @@
         <!-- Layout & Animation: Diseño y animaciones -->
         <script src="src/layout/ProfessionalLayout.js"></script>
         <script src="src/animations/ModernAnimations.js"></script>
+        
+        <!-- Advanced Footer Interactions -->
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animated Counter for Stats
+            function animateCounter(element, target, duration = 2000) {
+                const start = 0;
+                const startTime = performance.now();
+                
+                function updateCounter(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.floor(start + (target - start) * easeOutCubic);
+                    
+                    element.textContent = current;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        element.textContent = target;
+                    }
+                }
+                
+                requestAnimationFrame(updateCounter);
+            }
+            
+            // Intersection Observer for footer animations
+            const footerObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Animate stat counters
+                        const statNumbers = entry.target.querySelectorAll('.stat-number[data-count]');
+                        statNumbers.forEach(stat => {
+                            const target = parseInt(stat.dataset.count);
+                            animateCounter(stat, target);
+                        });
+                        
+                        // Add entrance animations
+                        const sections = entry.target.querySelectorAll('.footer-section-enhanced');
+                        sections.forEach((section, index) => {
+                            setTimeout(() => {
+                                section.style.opacity = '1';
+                                section.style.transform = 'translateY(0)';
+                            }, index * 200);
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            const footer = document.querySelector('.advanced-footer');
+            if (footer) {
+                // Set initial state for sections
+                const sections = footer.querySelectorAll('.footer-section-enhanced');
+                sections.forEach(section => {
+                    section.style.opacity = '0';
+                    section.style.transform = 'translateY(30px)';
+                    section.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+                
+                footerObserver.observe(footer);
+            }
+            
+            // Enhanced hover effects for tech tags
+            const techTags = document.querySelectorAll('.tech-tag');
+            techTags.forEach(tag => {
+                tag.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.1) rotate(5deg)';
+                });
+                
+                tag.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+            
+            // Neural particles enhanced movement
+            const particles = document.querySelectorAll('.neural-particle');
+            particles.forEach((particle, index) => {
+                setInterval(() => {
+                    const randomX = Math.random() * 100;
+                    const randomY = Math.random() * 100;
+                    particle.style.left = randomX + '%';
+                    particle.style.top = randomY + '%';
+                }, 5000 + (index * 1000));
+            });
+            
+            // Social link enhanced effects
+            const socialLinks = document.querySelectorAll('.social-link');
+            socialLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.15) rotate(360deg)';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1) rotate(0deg)';
+                });
+            });
+        });
+        </script>
 
         <!-- Validation Systems: Sistemas de validación -->
         <script src="src/validation/ComprehensiveValidator.js"></script>
