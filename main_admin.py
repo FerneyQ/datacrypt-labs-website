@@ -24,13 +24,14 @@ app = FastAPI(
     redoc_url="/api/redoc"
 )
 
-# Configurar CORS
+# Configurar CORS de forma segura
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,  # Solo dominios específicos
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE"],  # Métodos específicos
+    allow_headers=["Accept", "Authorization", "Content-Type"],  # Headers específicos
 )
 
 # Seguridad básica para admin
@@ -38,8 +39,13 @@ security = HTTPBasic()
 
 def verify_admin_credentials(credentials: HTTPBasicCredentials = Depends(security)):
     """Verificar credenciales del administrador"""
-    correct_username = secrets.compare_digest(credentials.username, "admin")
-    correct_password = secrets.compare_digest(credentials.password, "datacrypt2025")
+    # TODO: CONFIGURAR CREDENCIALES SEGURAS EN VARIABLES DE ENTORNO
+    # Las credenciales deben estar en .env por seguridad
+    admin_username = os.getenv("ADMIN_USERNAME", "admin")
+    admin_password = os.getenv("ADMIN_PASSWORD", "CHANGE_ME_SECURITY_RISK")
+    
+    correct_username = secrets.compare_digest(credentials.username, admin_username)
+    correct_password = secrets.compare_digest(credentials.password, admin_password)
     if not (correct_username and correct_password):
         raise HTTPException(
             status_code=401,

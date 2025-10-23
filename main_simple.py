@@ -21,13 +21,14 @@ app = FastAPI(
     redoc_url="/api/redoc"
 )
 
-# Configurar CORS
+# Configurar CORS de forma segura
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,  # Solo dominios específicos
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST"],  # Solo métodos necesarios
+    allow_headers=["Accept", "Content-Type"],  # Headers específicos
 )
 
 # Servir archivos estáticos del frontend

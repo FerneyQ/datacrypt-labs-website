@@ -7,10 +7,13 @@
 .DS_Store
 Thumbs.db
 
-# Configuraciones locales
+# Configuraciones locales y SECRETOS
 .env
 .env.local
+.env.production
 config/local.js
+secrets.json
+credentials.json
 
 # Cache y temporales
 node_modules/
@@ -20,6 +23,7 @@ build/
 
 # Archivos de editor
 .vscode/
+.vs/
 .idea/
 *.swp
 *.swo
@@ -31,6 +35,16 @@ build/
 
 # Archivos específicos de desarrollo
 IMPLEMENTATION_SUCCESS.js
+
+# ARCHIVOS DE LOG Y DOCUMENTACIÓN TEMPORAL
+*_COMPLETADA.md
+*_EXITOSO*.md
+*_DEPLOYMENT.md
+*_READY*.md
+*SISTEMA_*.md
+*SMOKE_*.md
+*CHECKLIST*.md
+*DIAGNOSTICO*.md
 
 # Python Backend
 __pycache__/
