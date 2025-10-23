@@ -1,0 +1,877 @@
+/* ==========================================
+   NEURAL NETWORK CERTIFICATIONS DESIGN
+   ========================================== */
+
+/* Neural Network Container */
+.neural-network-container {
+    position: relative;
+    padding: 100px 0;
+    background: 
+        linear-gradient(135deg, #0a0f1c 0%, #1a1f35 25%, #0d1321 50%, #1a1f35 75%, #0a0f1c 100%),
+        radial-gradient(circle at 20% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+    overflow: hidden;
+    min-height: 800px;
+}
+
+/* Central Knowledge Hub */
+.central-knowledge-hub {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 180px;
+    z-index: 100;
+}
+
+.hub-core {
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at center, rgba(0, 212, 255, 0.2) 0%, rgba(0, 212, 255, 0.1) 40%, transparent 70%),
+        linear-gradient(135deg, #1a1f35, #2a2f45);
+    border: 3px solid #00d4ff;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    box-shadow: 
+        0 0 40px rgba(0, 212, 255, 0.4),
+        inset 0 0 40px rgba(0, 212, 255, 0.1);
+    animation: hubPulse 4s ease-in-out infinite;
+}
+
+@keyframes hubPulse {
+    0%, 100% { 
+        box-shadow: 
+            0 0 40px rgba(0, 212, 255, 0.4),
+            inset 0 0 40px rgba(0, 212, 255, 0.1);
+        transform: scale(1);
+    }
+    50% { 
+        box-shadow: 
+            0 0 60px rgba(0, 212, 255, 0.8),
+            inset 0 0 60px rgba(0, 212, 255, 0.2);
+        transform: scale(1.05);
+    }
+}
+
+.hub-core i {
+    font-size: 3rem;
+    color: #00d4ff;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.8));
+}
+
+.hub-core h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: white;
+    margin: 0 0 5px 0;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.hub-core p {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+.knowledge-pulse {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: 50%;
+    animation: pulseBorder 3s ease-in-out infinite;
+}
+
+@keyframes pulseBorder {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% { 
+        transform: scale(1.2);
+        opacity: 0.6;
+    }
+}
+
+/* Neural Connections SVG */
+.neural-connections {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Certification Nodes Network */
+.certification-nodes {
+    position: relative;
+    width: 100%;
+    height: 800px;
+    z-index: 50;
+}
+
+/* Neural Layers */
+.neural-layer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.layer-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.layer-label i {
+    color: #00d4ff;
+    font-size: 1.1rem;
+}
+
+/* Layer Positioning */
+.academic-layer {
+    top: 50px;
+    left: 100px;
+}
+
+.professional-layer {
+    top: 50px;
+    right: 100px;
+}
+
+.technical-layer {
+    bottom: 150px;
+    left: 100px;
+}
+
+.advanced-layer {
+    bottom: 150px;
+    right: 100px;
+}
+
+/* Certification Nodes */
+.cert-node {
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.node-core {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    min-width: 220px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.node-core::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--node-color, #00d4ff), transparent);
+    transition: all 0.3s ease;
+}
+
+/* Node Types */
+.primary-node { --node-color: #ff6b6b; }
+.secondary-node { --node-color: #4ecdc4; }
+.featured-node { --node-color: #00d4ff; }
+.technical-node { --node-color: #96ceb4; }
+.skill-node { --node-color: #feca57; }
+
+.cert-node:hover {
+    transform: translateY(-10px) scale(1.05);
+}
+
+.cert-node:hover .node-core {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    border-color: var(--node-color);
+}
+
+.cert-node:hover .node-core::before {
+    background: var(--node-color);
+}
+
+/* Node Icons and Badges */
+.node-icon, .node-badge {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: white;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.node-icon {
+    background: linear-gradient(135deg, var(--node-color), rgba(255, 255, 255, 0.1));
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.node-badge.verified {
+    background: linear-gradient(135deg, #00d4ff, #0099cc);
+    animation: verifiedPulse 2s ease-in-out infinite;
+}
+
+@keyframes verifiedPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
+    50% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.8); }
+}
+
+/* Node Content */
+.node-content h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+}
+
+.node-institution {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 4px 0;
+}
+
+.node-year {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 12px 0;
+}
+
+/* Node Skills */
+.node-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.skill-neuron {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+}
+
+.skill-neuron:hover {
+    background: var(--node-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Skill Levels for Advanced Nodes */
+.skill-level {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.level-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.level-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #00d4ff, #0099cc);
+    border-radius: 3px;
+    width: var(--level, 0%);
+    transition: width 1s ease-out;
+    animation: levelFill 2s ease-out;
+}
+
+.level-bar[data-level="95"]::after { width: 95%; }
+.level-bar[data-level="90"]::after { width: 90%; }
+.level-bar[data-level="88"]::after { width: 88%; }
+
+@keyframes levelFill {
+    0% { width: 0%; }
+    100% { width: var(--level, 0%); }
+}
+
+.skill-level span {
+    font-size: 0.8rem;
+    color: #00d4ff;
+    font-weight: 600;
+    min-width: 35px;
+}
+
+/* Verification Pulse */
+.verification-pulse {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(40, 167, 69, 0.6);
+    animation: verificationPulse 3s ease-in-out infinite;
+}
+
+.verification-pulse a {
+    color: white;
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.verification-pulse:hover a {
+    transform: scale(1.2);
+}
+
+@keyframes verificationPulse {
+    0%, 100% { 
+        box-shadow: 0 0 15px rgba(40, 167, 69, 0.6);
+        transform: scale(1);
+    }
+    50% { 
+        box-shadow: 0 0 25px rgba(40, 167, 69, 0.9);
+        transform: scale(1.1);
+    }
+}
+
+/* Node Synapses */
+.node-synapses {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    pointer-events: none;
+}
+
+.node-synapses::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: synapseRing 4s linear infinite;
+}
+
+@keyframes synapseRing {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
+/* Network Statistics */
+.network-stats {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 30px;
+    z-index: 60;
+}
+
+.stat-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 20px;
+    border-radius: 15px;
+    min-width: 100px;
+}
+
+.stat-number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #00d4ff;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 5px;
+    text-align: center;
+}
+
+/* Neural CTA Section */
+.neural-cta-section {
+    position: relative;
+    margin-top: 80px;
+    padding: 60px 40px;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.cta-network-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+}
+
+.network-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(0, 212, 255, 0.3), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(0, 212, 255, 0.2), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(0, 212, 255, 0.4), transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(0, 212, 255, 0.3), transparent);
+    background-repeat: repeat;
+    background-size: 150px 100px;
+    animation: particleFloat 20s linear infinite;
+}
+
+@keyframes particleFloat {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-150px, -100px); }
+}
+
+.cta-content {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #00d4ff, #0099cc);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px;
+    font-size: 2rem;
+    color: white;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+    animation: ctaIconPulse 3s ease-in-out infinite;
+}
+
+@keyframes ctaIconPulse {
+    0%, 100% { 
+        box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+        transform: scale(1);
+    }
+    50% { 
+        box-shadow: 0 0 50px rgba(0, 212, 255, 0.8);
+        transform: scale(1.05);
+    }
+}
+
+.neural-cta-section h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.neural-cta-section p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Neural CTA Buttons */
+.neural-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.neural-btn {
+    position: relative;
+    padding: 18px 35px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 220px;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.neural-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.neural-btn:hover::before {
+    left: 100%;
+}
+
+.primary-neural {
+    background: linear-gradient(135deg, #00d4ff, #0099cc);
+    color: white;
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+}
+
+.primary-neural:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 212, 255, 0.6);
+    background: linear-gradient(135deg, #0099cc, #00d4ff);
+}
+
+.secondary-neural {
+    background: transparent;
+    color: #00d4ff;
+    border-color: #00d4ff;
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.1);
+}
+
+.secondary-neural:hover {
+    background: #00d4ff;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 212, 255, 0.4);
+}
+
+.btn-neurons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 30%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.neural-btn:hover .btn-neurons {
+    opacity: 1;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN FOR NEURAL NETWORK
+   ========================================== */
+
+/* Tablet Landscape */
+@media (max-width: 1024px) {
+    .neural-network-container {
+        padding: 80px 0;
+        min-height: 700px;
+    }
+    
+    .certification-nodes {
+        height: 700px;
+    }
+    
+    .central-knowledge-hub {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .hub-core i {
+        font-size: 2.5rem;
+    }
+    
+    .hub-core h3 {
+        font-size: 1rem;
+    }
+    
+    .academic-layer, .professional-layer {
+        top: 80px;
+    }
+    
+    .technical-layer, .advanced-layer {
+        bottom: 120px;
+    }
+    
+    .academic-layer, .technical-layer {
+        left: 50px;
+    }
+    
+    .professional-layer, .advanced-layer {
+        right: 50px;
+    }
+    
+    .node-core {
+        min-width: 180px;
+        padding: 15px;
+    }
+}
+
+/* Tablet Portrait */
+@media (max-width: 768px) {
+    .neural-network-container {
+        padding: 60px 0;
+        min-height: auto;
+    }
+    
+    .central-knowledge-hub {
+        position: static;
+        transform: none;
+        margin: 0 auto 50px;
+        width: 120px;
+        height: 120px;
+    }
+    
+    .hub-core i {
+        font-size: 2rem;
+    }
+    
+    .hub-core h3 {
+        font-size: 0.9rem;
+    }
+    
+    .neural-connections {
+        display: none;
+    }
+    
+    .certification-nodes {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .neural-layer {
+        position: static;
+        width: 100%;
+        align-items: center;
+    }
+    
+    .cert-node {
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .node-core {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .network-stats {
+        position: static;
+        transform: none;
+        margin-top: 40px;
+        justify-content: center;
+    }
+    
+    .neural-cta-section {
+        margin-top: 50px;
+        padding: 40px 20px;
+        border-radius: 20px;
+    }
+    
+    .neural-cta-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .neural-btn {
+        width: 100%;
+        max-width: 300px;
+        min-width: auto;
+    }
+}
+
+/* Mobile Landscape */
+@media (max-width: 480px) {
+    .neural-network-container {
+        padding: 40px 0;
+    }
+    
+    .central-knowledge-hub {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 30px;
+    }
+    
+    .hub-core i {
+        font-size: 1.5rem;
+    }
+    
+    .hub-core h3 {
+        font-size: 0.8rem;
+    }
+    
+    .hub-core p {
+        font-size: 0.7rem;
+    }
+    
+    .layer-label {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .node-core {
+        padding: 15px 12px;
+    }
+    
+    .node-content h4 {
+        font-size: 1rem;
+    }
+    
+    .node-institution {
+        font-size: 0.8rem;
+    }
+    
+    .skill-neuron {
+        font-size: 0.65rem;
+        padding: 2px 6px;
+    }
+    
+    .network-stats {
+        gap: 15px;
+    }
+    
+    .stat-node {
+        padding: 12px 15px;
+        min-width: 80px;
+    }
+    
+    .stat-number {
+        font-size: 1.4rem;
+    }
+    
+    .stat-label {
+        font-size: 0.7rem;
+    }
+    
+    .neural-cta-section {
+        padding: 30px 15px;
+    }
+    
+    .neural-cta-section h2 {
+        font-size: 1.6rem;
+    }
+    
+    .neural-cta-section p {
+        font-size: 1rem;
+    }
+    
+    .cta-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .neural-btn {
+        padding: 15px 25px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Mobile Portrait Small */
+@media (max-width: 360px) {
+    .central-knowledge-hub {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .hub-core i {
+        font-size: 1.2rem;
+    }
+    
+    .hub-core h3 {
+        font-size: 0.7rem;
+    }
+    
+    .node-core {
+        padding: 12px 10px;
+    }
+    
+    .node-content h4 {
+        font-size: 0.9rem;
+    }
+    
+    .neural-cta-section h2 {
+        font-size: 1.4rem;
+    }
+    
+    .neural-btn {
+        padding: 12px 20px;
+        font-size: 0.8rem;
+        gap: 8px;
+    }
+}
