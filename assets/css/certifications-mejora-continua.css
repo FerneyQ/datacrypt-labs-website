@@ -23,12 +23,14 @@
     --cert-neural-glow: rgba(0, 212, 255, 0.6);
 }
 
-/* Certifications Section Enhanced */
+/* Certifications Section Enhanced - Fixed Overlapping */
 .certifications-enhanced {
     padding: 120px 0;
     background: var(--cert-dark);
     position: relative;
     overflow: hidden;
+    clear: both;
+    isolation: isolate;
 }
 
 .certifications-enhanced::before {
@@ -44,6 +46,7 @@
         radial-gradient(circle at 50% 50%, rgba(102, 126, 234, 0.05) 0%, transparent 50%);
     pointer-events: none;
     animation: certBackgroundPulse 8s ease-in-out infinite;
+    z-index: -1;
 }
 
 @keyframes certBackgroundPulse {
@@ -51,12 +54,14 @@
     50% { opacity: 0.7; }
 }
 
-/* Certifications Header Enhanced */
+/* Certifications Header Enhanced - Fixed Alignment */
 .cert-header-enhanced {
     text-align: center;
     margin-bottom: 80px;
     position: relative;
-    z-index: 2;
+    z-index: 1;
+    clear: both;
+    width: 100%;
 }
 
 .cert-stats-enhanced {
@@ -167,15 +172,16 @@
     font-weight: 500;
 }
 
-/* Neural Network Container Enhanced */
+/* Neural Network Enhanced - Fixed Layout */
 .neural-network-enhanced {
     position: relative;
     max-width: 1400px;
-    margin: 80px auto;
-    height: 800px;
+    margin: 80px auto 60px;
+    height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
+    clear: both;
 }
 
 .central-hub-enhanced {
@@ -183,17 +189,18 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
+    width: 160px;
+    height: 160px;
     background: var(--cert-gradient-primary);
     border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    z-index: 5;
     box-shadow: var(--cert-shadow-hover);
     animation: centralPulse 3s ease-in-out infinite;
+    text-align: center;
 }
 
 @keyframes centralPulse {
@@ -226,11 +233,11 @@
     margin: 5px 0 0 0;
 }
 
-/* Certification Nodes Enhanced */
+/* Certification Nodes Enhanced - Fixed Positioning */
 .cert-node-enhanced {
     position: absolute;
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     background: var(--cert-dark-light);
     border: 3px solid var(--cert-primary);
     border-radius: 20px;
@@ -241,7 +248,8 @@
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
-    z-index: 5;
+    z-index: 3;
+    text-align: center;
 }
 
 .cert-node-enhanced::before {
@@ -293,17 +301,17 @@
     color: white;
 }
 
-/* Positioning for 10 certifications in circular layout */
-.cert-node-enhanced:nth-child(1) { top: 10%; left: 50%; transform: translateX(-50%); }
-.cert-node-enhanced:nth-child(2) { top: 25%; right: 15%; }
-.cert-node-enhanced:nth-child(3) { top: 50%; right: 5%; transform: translateY(-50%); }
-.cert-node-enhanced:nth-child(4) { bottom: 25%; right: 15%; }
-.cert-node-enhanced:nth-child(5) { bottom: 10%; left: 65%; }
-.cert-node-enhanced:nth-child(6) { bottom: 10%; left: 35%; }
-.cert-node-enhanced:nth-child(7) { bottom: 25%; left: 15%; }
-.cert-node-enhanced:nth-child(8) { top: 50%; left: 5%; transform: translateY(-50%); }
-.cert-node-enhanced:nth-child(9) { top: 25%; left: 15%; }
-.cert-node-enhanced:nth-child(10) { top: 35%; right: 25%; }
+/* Positioning for 10 certifications - Fixed Layout */
+.cert-node-enhanced:nth-child(1) { top: 15%; left: 50%; transform: translateX(-50%); }
+.cert-node-enhanced:nth-child(2) { top: 30%; right: 20%; }
+.cert-node-enhanced:nth-child(3) { top: 50%; right: 10%; transform: translateY(-50%); }
+.cert-node-enhanced:nth-child(4) { bottom: 30%; right: 20%; }
+.cert-node-enhanced:nth-child(5) { bottom: 15%; left: 60%; }
+.cert-node-enhanced:nth-child(6) { bottom: 15%; left: 40%; }
+.cert-node-enhanced:nth-child(7) { bottom: 30%; left: 20%; }
+.cert-node-enhanced:nth-child(8) { top: 50%; left: 10%; transform: translateY(-50%); }
+.cert-node-enhanced:nth-child(9) { top: 30%; left: 20%; }
+.cert-node-enhanced:nth-child(10) { top: 40%; right: 30%; }
 
 /* Neural Connections */
 .neural-connections-enhanced {
@@ -328,12 +336,15 @@
     100% { stroke-dashoffset: 20; }
 }
 
-/* Certification Grid Enhanced */
+/* Certifications Grid Enhanced - Fixed Spacing */
 .cert-grid-enhanced {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 30px;
-    margin-top: 80px;
+    margin-top: 100px;
+    clear: both;
+    position: relative;
+    z-index: 1;
 }
 
 .cert-card-enhanced {
@@ -577,26 +588,34 @@
     }
     
     .neural-network-enhanced {
-        height: 600px;
-        margin: 60px auto;
+        height: 400px;
+        margin: 60px auto 80px;
+        display: block;
     }
     
     .central-hub-enhanced {
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
+        position: static;
+        transform: none;
+        margin: 20px auto 40px;
     }
     
     .cert-node-enhanced {
+        position: static;
         width: 80px;
         height: 80px;
+        margin: 10px;
+        display: inline-flex;
     }
     
     .cert-node-enhanced i {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
     
     .cert-node-enhanced span {
         font-size: 0.7rem;
+        text-align: center;
     }
     
     .cert-grid-enhanced {
