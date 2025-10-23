@@ -1,80 +1,91 @@
 <!-- ROI CALCULATOR WIDGET COMERCIAL -->
-<section id="roi-calculator" class="roi-calculator-section">
+<section id="roi-calculator" class="roi-calculator-section" aria-labelledby="roi-title">
     <div class="container">
         <div class="roi-calculator-header">
-            <h2 class="calculator-title">
-                <i class="fas fa-calculator"></i>
+            <h2 id="roi-title" class="calculator-title">
+                <i class="fas fa-calculator" aria-hidden="true"></i>
                 Calculadora de ROI DataCrypt_Labs
             </h2>
             <p class="calculator-subtitle">
-                Descubre cuánto puedes ahorrar y ganar con nuestras soluciones de BI
+                Descubre de forma rápida y accesible el impacto económico potencial de nuestras soluciones.
             </p>
         </div>
-        
-        <div class="roi-calculator-widget">
-            <div class="calculator-inputs">
+
+        <div class="roi-calculator-widget" role="region" aria-describedby="roi-desc">
+            <p id="roi-desc" class="visually-hidden">Introduce tus datos en los controles siguientes. Los resultados se mostrarán abajo con un resumen anualizado y periodo de retorno.</p>
+
+            <div class="calculator-inputs improved">
+                <!-- Monthly Revenue -->
                 <div class="input-group">
                     <label for="monthlyRevenue">Ingresos Mensuales (USD)</label>
-                    <div class="input-wrapper">
+                    <div class="input-wrapper range-wrapper">
                         <span class="input-prefix">$</span>
-                        <input 
-                            type="number" 
-                            id="monthlyRevenue" 
-                            min="10000" 
-                            max="10000000" 
-                            step="1000" 
+                        <input
+                            type="number"
+                            id="monthlyRevenue"
+                            class="num-input"
+                            min="10000"
+                            max="2000000"
+                            step="1000"
                             value="100000"
-                            placeholder="100,000"
-                        >
+                            aria-label="Ingresos mensuales en dólares"
+                        />
                     </div>
+                    <input type="range" id="monthlyRevenueRange" min="10000" max="2000000" step="1000" value="100000" aria-hidden="true">
                 </div>
-                
+
+                <!-- Data Processing Hours -->
                 <div class="input-group">
                     <label for="dataProcessingHours">Horas semanales procesando datos</label>
-                    <div class="input-wrapper">
-                        <input 
-                            type="number" 
-                            id="dataProcessingHours" 
-                            min="1" 
-                            max="168" 
-                            step="1" 
+                    <div class="input-wrapper range-wrapper">
+                        <input
+                            type="number"
+                            id="dataProcessingHours"
+                            class="num-input"
+                            min="1"
+                            max="168"
+                            step="1"
                             value="20"
-                            placeholder="20"
-                        >
+                            aria-label="Horas semanales que tu equipo dedica a procesar datos"
+                        />
                         <span class="input-suffix">hrs</span>
                     </div>
+                    <input type="range" id="dataProcessingHoursRange" min="1" max="168" step="1" value="20" aria-hidden="true">
                 </div>
-                
+
+                <!-- Team Size -->
                 <div class="input-group">
                     <label for="teamSize">Tamaño del equipo</label>
-                    <div class="input-wrapper">
-                        <input 
-                            type="number" 
-                            id="teamSize" 
-                            min="1" 
-                            max="500" 
-                            step="1" 
+                    <div class="input-wrapper range-wrapper">
+                        <input
+                            type="number"
+                            id="teamSize"
+                            class="num-input"
+                            min="1"
+                            max="200"
+                            step="1"
                             value="5"
-                            placeholder="5"
-                        >
+                            aria-label="Número de personas en el equipo"
+                        />
                         <span class="input-suffix">personas</span>
                     </div>
+                    <input type="range" id="teamSizeRange" min="1" max="200" step="1" value="5" aria-hidden="true">
                 </div>
-                
-                <button id="calculateROI" class="btn-calculate">
-                    <i class="fas fa-chart-line"></i>
+
+                <button id="calculateROI" class="btn-calculate" aria-controls="calculatorResults">
+                    <i class="fas fa-chart-line" aria-hidden="true"></i>
                     Calcular Mi ROI
                 </button>
             </div>
-            
-            <div class="calculator-results" id="calculatorResults">
+
+            <div class="calculator-results" id="calculatorResults" aria-live="polite">
                 <div class="results-header">
                     <h3>Tu ROI Proyectado con DataCrypt_Labs</h3>
                 </div>
-                
+
                 <div class="results-grid">
                     <div class="result-card savings">
-                        <div class="result-icon">
+                        <div class="result-icon" aria-hidden="true">
                             <i class="fas fa-piggy-bank"></i>
                         </div>
                         <div class="result-content">
@@ -83,9 +94,9 @@
                             <span class="result-detail">Por automatización de procesos</span>
                         </div>
                     </div>
-                    
+
                     <div class="result-card revenue">
-                        <div class="result-icon">
+                        <div class="result-icon" aria-hidden="true">
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <div class="result-content">
@@ -94,9 +105,9 @@
                             <span class="result-detail">Por mejores decisiones</span>
                         </div>
                     </div>
-                    
+
                     <div class="result-card roi">
-                        <div class="result-icon">
+                        <div class="result-icon" aria-hidden="true">
                             <i class="fas fa-trophy"></i>
                         </div>
                         <div class="result-content">
@@ -105,300 +116,83 @@
                             <span class="result-detail">En el primer año</span>
                         </div>
                     </div>
-                    
+
                     <div class="result-card payback">
-                        <div class="result-icon">
+                        <div class="result-icon" aria-hidden="true">
                             <i class="fas fa-clock"></i>
                         </div>
                         <div class="result-content">
                             <span class="result-label">Periodo de Retorno</span>
-                            <span class="result-value" id="paybackPeriod">0</span>
+                            <span class="result-value" id="paybackPeriod">0 meses</span>
                             <span class="result-detail">Meses para recuperar inversión</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="results-cta">
                     <p class="cta-text">
                         <strong>¿Quieres hacer realidad estos resultados?</strong>
                         Agenda una consulta gratuita para validar estos números.
                     </p>
-                    <a href="#conecta" class="btn-results-cta">
-                        <i class="fas fa-calendar-check"></i>
+                    <a href="#conecta" id="bookConsult" class="btn-results-cta">
+                        <i class="fas fa-calendar-check" aria-hidden="true"></i>
                         Agendar Consulta Gratuita
                     </a>
                 </div>
             </div>
         </div>
-        
+
         <div class="calculator-disclaimer">
             <p>
-                <i class="fas fa-info-circle"></i>
-                <strong>Nota:</strong> Los cálculos se basan en datos promedio de nuestros clientes. 
-                Los resultados reales pueden variar según la industria y complejidad del proyecto.
+                <i class="fas fa-info-circle" aria-hidden="true"></i>
+                <strong>Nota:</strong> Los cálculos son estimaciones. Resultados reales pueden variar según la industria y complejidad del proyecto.
             </p>
         </div>
     </div>
 </section>
 
 <style>
-/* ROI CALCULATOR STYLES */
+/* ROI CALCULATOR STYLES - Improved */
 .roi-calculator-section {
-    background: linear-gradient(135deg, #0a0f1c 0%, #1a1f35 50%, #0a0f1c 100%);
-    padding: 80px 0;
+    background: linear-gradient(135deg, #071025 0%, #0f172a 60%);
+    padding: 60px 0;
     position: relative;
-    overflow: hidden;
 }
 
-.roi-calculator-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="calcGrid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="%2300d4ff" stroke-width="0.3" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23calcGrid)"/></svg>');
-    animation: gridMove 20s linear infinite;
-}
+.visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
 
-@keyframes gridMove {
-    0% { transform: translateX(0) translateY(0); }
-    100% { transform: translateX(50px) translateY(50px); }
-}
+.roi-calculator-header { text-align: center; margin-bottom: 36px; }
+.calculator-title { font-size: 2rem; background: linear-gradient(90deg,#00d4ff,#7c3aed); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.calculator-subtitle { color: #cbd5e1; max-width: 700px; margin: 0.5rem auto 0; }
 
-.roi-calculator-header {
-    text-align: center;
-    margin-bottom: 60px;
-    position: relative;
-    z-index: 2;
-}
+.roi-calculator-widget { background: rgba(255,255,255,0.03); padding: 28px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.03); }
 
-.calculator-title {
-    font-size: 2.5rem;
-    color: #ffffff;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #00d4ff, #0066cc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
+.calculator-inputs.improved { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: end; }
+.calculator-inputs.improved .input-group { display:flex; flex-direction:column; }
 
-.calculator-subtitle {
-    font-size: 1.2rem;
-    color: #e5e7eb;
-    max-width: 600px;
-    margin: 0 auto;
-}
+.input-wrapper { position: relative; }
+.range-wrapper .num-input { width: 100%; padding: 12px 16px; border-radius: 10px; border:1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); color:#fff; font-weight:600 }
+.input-prefix, .input-suffix { position:absolute; top:50%; transform:translateY(-50%); color:#60a5fa; font-weight:700 }
+.input-prefix { left:12px }
+.input-suffix { right:12px }
 
-.roi-calculator-widget {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 40px;
-    position: relative;
-    z-index: 2;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
+input[type=range] { width:100%; margin-top:10px; accent-color: #00d4ff }
 
-.calculator-inputs {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-bottom: 40px;
-}
+.btn-calculate { grid-column: 1 / -1; padding: 12px 20px; background: linear-gradient(90deg,#ff7a00,#ffcc00); color:#07203a; border-radius:999px; font-weight:700; border:none; cursor:pointer }
 
-.input-group {
-    display: flex;
-    flex-direction: column;
-}
+.calculator-results { display:none; margin-top:20px; }
+.calculator-results.show { display:block }
+.results-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:12px }
+.result-card { padding:18px; border-radius:10px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); text-align:left }
+.result-label { color:#cbd5e1; font-size:0.85rem }
+.result-value { color:#fff; font-size:1.4rem; font-weight:800 }
+.result-detail { color:#9aa4b2; font-size:0.78rem }
 
-.input-group label {
-    color: #ffffff;
-    font-weight: 600;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-}
+.results-cta { margin-top:14px; padding:12px; border-radius:10px; display:flex; gap:12px; align-items:center; justify-content:space-between; background: rgba(0,0,0,0.25) }
+.btn-results-cta { padding:10px 16px; background: linear-gradient(90deg,#0066cc,#7c3aed); color:#fff; border-radius:8px; text-decoration:none }
 
-.input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.input-wrapper input {
-    width: 100%;
-    padding: 15px 20px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    color: #ffffff;
-    font-size: 1.1rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.input-wrapper input:focus {
-    outline: none;
-    border-color: #00d4ff;
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-}
-
-.input-prefix, .input-suffix {
-    position: absolute;
-    color: #00d4ff;
-    font-weight: 600;
-    font-size: 1.1rem;
-}
-
-.input-prefix {
-    left: 15px;
-}
-
-.input-suffix {
-    right: 15px;
-}
-
-.input-wrapper input[type="number"] {
-    padding-left: 35px;
-    padding-right: 50px;
-}
-
-.btn-calculate {
-    grid-column: 1 / -1;
-    padding: 18px 40px;
-    background: linear-gradient(135deg, #ff6600, #ffcc00);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    font-size: 1.2rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: 0 8px 32px rgba(255, 102, 0, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.btn-calculate:hover {
-    transform: scale(1.05) translateY(-3px);
-    box-shadow: 0 15px 50px rgba(255, 102, 0, 0.5);
-}
-
-.calculator-results {
-    display: none;
-    animation: fadeInUp 0.8s ease-out;
-}
-
-.calculator-results.show {
-    display: block;
-}
-
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.results-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.results-header h3 {
-    color: #ffffff;
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-}
-
-.results-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-bottom: 40px;
-}
-
-.result-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
-    padding: 25px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.result-card:hover {
-    transform: translateY(-5px);
-}
-
-.result-card.savings {
-    border-left: 4px solid #00cc66;
-}
-
-.result-card.revenue {
-    border-left: 4px solid #00d4ff;
-}
-
-.result-card.roi {
-    border-left: 4px solid #ffcc00;
-}
-
-.result-card.payback {
-    border-left: 4px solid #ff6600;
-}
-
-.result-icon {
-    font-size: 2rem;
-    margin-bottom: 15px;
-}
-
-.result-card.savings .result-icon { color: #00cc66; }
-.result-card.revenue .result-icon { color: #00d4ff; }
-.result-card.roi .result-icon { color: #ffcc00; }
-.result-card.payback .result-icon { color: #ff6600; }
-
-.result-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.result-label {
-    color: #e5e7eb;
-    font-size: 0.9rem;
-    margin-bottom: 8px;
-}
-
-.result-value {
-    color: #ffffff;
-    font-size: 1.8rem;
-    font-weight: 900;
-    margin-bottom: 5px;
-}
-
-.result-detail {
-    color: #9ca3af;
-    font-size: 0.8rem;
-}
-
-.results-cta {
-    background: rgba(0, 102, 204, 0.1);
-    border-radius: 15px;
-    padding: 30px;
-    text-align: center;
-    border: 1px solid rgba(0, 102, 204, 0.3);
-}
-
-.cta-text {
-    color: #e5e7eb;
-    font-size: 1.1rem;
-    margin-bottom: 20px;
+@media (max-width: 800px) { .calculator-inputs.improved { grid-template-columns: 1fr } .results-grid { grid-template-columns: 1fr } }
+</style>
 }
 
 .btn-results-cta {
@@ -456,92 +250,127 @@
 </style>
 
 <script>
-// ROI CALCULATOR LOGIC
+// Enhanced ROI CALCULATOR LOGIC with sliders, animated counters and safe analytics hooks
 document.addEventListener('DOMContentLoaded', function() {
+    // Inputs (number + range)
+    const monthlyNumber = document.getElementById('monthlyRevenue');
+    const monthlyRange = document.getElementById('monthlyRevenueRange');
+    const hoursNumber = document.getElementById('dataProcessingHours');
+    const hoursRange = document.getElementById('dataProcessingHoursRange');
+    const teamNumber = document.getElementById('teamSize');
+    const teamRange = document.getElementById('teamSizeRange');
+
     const calculateButton = document.getElementById('calculateROI');
     const resultsSection = document.getElementById('calculatorResults');
-    
-    // Input elements
-    const monthlyRevenueInput = document.getElementById('monthlyRevenue');
-    const dataProcessingHoursInput = document.getElementById('dataProcessingHours');
-    const teamSizeInput = document.getElementById('teamSize');
-    
-    // Result elements
+
     const annualSavingsElement = document.getElementById('annualSavings');
     const additionalRevenueElement = document.getElementById('additionalRevenue');
     const totalROIElement = document.getElementById('totalROI');
     const paybackPeriodElement = document.getElementById('paybackPeriod');
-    
-    calculateButton.addEventListener('click', function() {
-        const monthlyRevenue = parseFloat(monthlyRevenueInput.value) || 0;
-        const dataProcessingHours = parseFloat(dataProcessingHoursInput.value) || 0;
-        const teamSize = parseFloat(teamSizeInput.value) || 0;
-        
-        // ROI Calculation Logic (based on DataCrypt_Labs metrics)
-        const hourlyRate = 50; // Average hourly rate for data professionals
-        const efficiencyGain = 0.70; // 70% efficiency improvement
-        const revenueIncrease = 0.15; // 15% revenue increase from better decisions
-        const investmentCost = 25000; // Average project cost
-        
-        // Calculate savings
+    const bookConsult = document.getElementById('bookConsult');
+
+    // Sync helpers
+    function syncInputWithRange(numEl, rangeEl) {
+        numEl.addEventListener('input', () => { rangeEl.value = numEl.value; });
+        rangeEl.addEventListener('input', () => { numEl.value = rangeEl.value; });
+    }
+    syncInputWithRange(monthlyNumber, monthlyRange);
+    syncInputWithRange(hoursNumber, hoursRange);
+    syncInputWithRange(teamNumber, teamRange);
+
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(amount);
+    }
+
+    // Animate numeric change
+    function animateValue(el, start, end, duration = 800, formatter = v => v) {
+        const range = end - start;
+        let startTime = null;
+        function step(ts) {
+            if (!startTime) startTime = ts;
+            const progress = Math.min((ts - startTime) / duration, 1);
+            const value = Math.round(start + range * progress);
+            el.textContent = formatter(value);
+            if (progress < 1) window.requestAnimationFrame(step);
+        }
+        window.requestAnimationFrame(step);
+    }
+
+    function safeGtagEvent(name, params) {
+        if (typeof gtag === 'function') {
+            try { gtag('event', name, params); } catch (e) { /* ignore */ }
+        }
+    }
+
+    function safeFbqEvent(name, params) {
+        if (typeof fbq === 'function') {
+            try { fbq('trackCustom', name, params); } catch (e) { /* ignore */ }
+        }
+    }
+
+    function computeAndShow() {
+        const monthlyRevenue = Number(monthlyNumber.value) || 0;
+        const dataProcessingHours = Number(hoursNumber.value) || 0;
+        const teamSize = Number(teamNumber.value) || 0;
+
+        const hourlyRate = 50; // configurable baseline
+        const efficiencyGain = 0.7; // 70% efficiency gain
+        const revenueIncrease = 0.15; // 15% rev increase
+        const investmentCost = 25000; // baseline project cost
+
         const weeklyTimeSaved = dataProcessingHours * efficiencyGain;
         const weeklySavings = weeklyTimeSaved * teamSize * hourlyRate;
-        const annualSavings = weeklySavings * 52;
-        
-        // Calculate additional revenue
-        const additionalRevenue = monthlyRevenue * revenueIncrease * 12;
-        
-        // Calculate total benefits and ROI
+        const annualSavings = Math.round(weeklySavings * 52);
+
+        const additionalRevenue = Math.round(monthlyRevenue * revenueIncrease * 12);
+
         const totalBenefits = annualSavings + additionalRevenue;
-        const roi = ((totalBenefits - investmentCost) / investmentCost) * 100;
-        
-        // Calculate payback period
+        const roi = Math.round(((totalBenefits - investmentCost) / Math.max(investmentCost,1)) * 100);
+
         const monthlyBenefits = totalBenefits / 12;
-        const paybackMonths = Math.ceil(investmentCost / monthlyBenefits);
-        
-        // Display results with animation
-        setTimeout(() => {
-            annualSavingsElement.textContent = formatCurrency(annualSavings);
-            additionalRevenueElement.textContent = formatCurrency(additionalRevenue);
-            totalROIElement.textContent = Math.round(roi) + '%';
-            paybackPeriodElement.textContent = paybackMonths + ' meses';
-            
-            resultsSection.classList.add('show');
-            
-            // Smooth scroll to results
-            resultsSection.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'center' 
-            });
-        }, 500);
-        
-        // Animate button
-        calculateButton.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            calculateButton.style.transform = 'scale(1)';
-        }, 150);
-    });
-    
-    function formatCurrency(amount) {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0,
-        }).format(amount);
+        const paybackMonths = monthlyBenefits > 0 ? Math.ceil(investmentCost / monthlyBenefits) : '—';
+
+        // Animate values
+        animateValue(annualSavingsElement, Number(annualSavingsElement.textContent.replace(/[^0-9]/g,'')) || 0, annualSavings, 900, v => formatCurrency(v));
+        animateValue(additionalRevenueElement, Number(additionalRevenueElement.textContent.replace(/[^0-9]/g,'')) || 0, additionalRevenue, 900, v => formatCurrency(v));
+        animateValue(totalROIElement, Number(totalROIElement.textContent.replace(/[^0-9]/g,'')) || 0, roi, 800, v => v + '%');
+        animateValue(paybackPeriodElement, parseInt(paybackPeriodElement.textContent) || 0, (typeof paybackMonths === 'number' ? paybackMonths : 0), 800, v => (paybackMonths === '—' ? '—' : v + ' meses'));
+
+        resultsSection.classList.add('show');
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Analytics hooks (safe)
+        safeGtagEvent('calculate_roi', { monthly_revenue: monthlyRevenue, hours: dataProcessingHours, team_size: teamSize, roi: roi });
+        safeFbqEvent('CalculateROI', { monthly_revenue: monthlyRevenue, hours: dataProcessingHours, team_size: teamSize, roi: roi });
+
+        // Return values for tests
+        return { annualSavings, additionalRevenue, roi, paybackMonths };
     }
-    
-    // Auto-calculate on input changes (debounced)
-    let calculationTimeout;
-    [monthlyRevenueInput, dataProcessingHoursInput, teamSizeInput].forEach(input => {
-        input.addEventListener('input', function() {
-            clearTimeout(calculationTimeout);
-            calculationTimeout = setTimeout(() => {
-                if (monthlyRevenueInput.value && dataProcessingHoursInput.value && teamSizeInput.value) {
-                    calculateButton.click();
-                }
-            }, 1000);
+
+    // Click handler
+    calculateButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        // small UI feedback
+        calculateButton.setAttribute('aria-pressed', 'true');
+        setTimeout(() => calculateButton.removeAttribute('aria-pressed'), 250);
+        computeAndShow();
+    });
+
+    // Auto-calc on input (debounced)
+    let debounce;
+    [monthlyNumber, hoursNumber, teamNumber, monthlyRange, hoursRange, teamRange].forEach(el => {
+        el.addEventListener('input', () => {
+            clearTimeout(debounce);
+            debounce = setTimeout(() => computeAndShow(), 700);
         });
     });
+
+    // Booking CTA analytics
+    if (bookConsult) {
+        bookConsult.addEventListener('click', function() {
+            safeGtagEvent('click_book_consult', {});
+            safeFbqEvent('ClickBookConsult', {});
+        });
+    }
 });
 </script>
